@@ -60,7 +60,7 @@ class Registration extends CI_Controller {
     public function ajax_edit($id)
     {
         $data = $this->users->get_by_id($id);
-        $data->dob = ($data->dob == '0000-00-00') ? '' : $data->dob; // if 0000-00-00 set tu empty for datepicker compatibility
+       // $data->dob = ($data->dob == '0000-00-00') ? '' : $data->dob; // if 0000-00-00 set tu empty for datepicker compatibility
         echo json_encode($data);
     }
  
@@ -72,7 +72,7 @@ class Registration extends CI_Controller {
                 'user_lname' => $this->input->post('user_lname'),
                 'user_mname' => $this->input->post('user_mname'),
                 'user_username' => $this->input->post('user_username'),
-                'user_password' => $this->input->post('user_password'),
+                'user_password' => md5($this->input->post('user_password')),
                 'user_email' => $this->input->post('user_email'),
                 'user_rights' => $this->input->post('permission'),
                 // 'dob' => $this->input->post('dob'),
@@ -83,15 +83,17 @@ class Registration extends CI_Controller {
  
     public function ajax_update()
     {
-        $this->_validate();
+        //$this->_validate();
         $data = array(
-                'firstName' => $this->input->post('firstName'),
-                'lastName' => $this->input->post('lastName'),
-                'gender' => $this->input->post('gender'),
-                'address' => $this->input->post('address'),
-                'dob' => $this->input->post('dob'),
+                'user_fname' => $this->input->post('user_fname'),
+                'user_lname' => $this->input->post('user_lname'),
+                'user_mname' => $this->input->post('user_mname'),
+                'user_username' => $this->input->post('user_username'),
+                'user_password' => ($this->input->post('user_password') == "") ? "" : md5($this->input->post('user_password')),
+                'user_email' => $this->input->post('user_email'),
+                'user_rights' => $this->input->post('permission'),
             );
-        $this->users->update(array('id' => $this->input->post('id')), $data);
+        $this->users->update(array('user_id' => $this->input->post('id')), $data);
         echo json_encode(array("status" => TRUE));
     }
  

@@ -131,16 +131,16 @@
                     <div class="row">
                         <div class="form-group has-error">
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission" value="J1" >J1
+                              <input type="checkbox" name="permission" class="permission1" value="J1" >J1
                             </label>
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission" value="Nursing">Nursing
+                              <input type="checkbox" name="permission" class="permission2" value="Nursing">Nursing
                             </label>
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission" value="KBL">KBL
+                              <input type="checkbox" name="permission" class="permission3" value="KBL">KBL
                             </label>
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission" value="Admin">As Admin
+                              <input type="checkbox" name="permission" class="permission4" value="Admin">As Admin
                             </label>
                             <span class="help-block"></span>
                         </div>

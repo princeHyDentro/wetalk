@@ -80,13 +80,26 @@ function edit_person(id)
         dataType: "JSON",
         success: function(data)
         {
- 
-            $('[name="id"]').val(data.id);
-            $('[name="firstName"]').val(data.firstName);
-            $('[name="lastName"]').val(data.lastName);
-            $('[name="gender"]').val(data.gender);
-            $('[name="address"]').val(data.address);
-            $('[name="dob"]').datepicker('update',data.dob);
+            
+          
+            if( data.user_rights == "J1") {
+                $( ".permission1" ).prop( "checked", true );
+            }else if(data.user_rights == "Nursing"){
+                $( ".permission2" ).prop( "checked", true );
+            }else if(data.user_rights == "KBL"){
+                $( ".permission3" ).prop( "checked", true );
+            }else if(data.user_rights == "Admin"){
+                $( ".permission4" ).prop( "checked", true );
+            }
+
+            $('[name="id"]').val(data.user_id);
+            $('[name="user_fname"]').val(data.user_fname);
+            $('[name="user_lname"]').val(data.user_lname);
+            $('[name="user_mname"]').val(data.user_mname);
+            $('[name="user_username"]').val(data.user_username);
+            $('[name="user_email"]').val(data.user_email);
+            
+            
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
  
