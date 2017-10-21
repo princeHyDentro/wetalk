@@ -15,7 +15,14 @@ $(document).ready(function() {
         // Load data for the table's content from an Ajax source
         "ajax": {
             "url": "ajax_list_data",
-            "type": "POST"
+            "type": "POST",
+            "data":{
+                search: 'search'
+            },
+            "data": function (data) {
+                console.log(data) 
+            }
+
         },
  
         //Set column definition initialisation properties.
@@ -25,7 +32,14 @@ $(document).ready(function() {
             "orderable": false, //set not orderable
         },
         ],
+
  
+    });
+    $('#admin_search_privilege').on('change' , function(){
+        table.search( this.value ).draw();
+    });
+    $('#search_register_account_by_name').on('keyup' , function(){
+        table.search( this.value ).draw();
     });
  
     //datepicker

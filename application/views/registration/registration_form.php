@@ -13,19 +13,17 @@
             <div class="row custom-search-padding">
                     <div class="col-md-4">
                         <span class="label-custom custom-font">Search (Name) : </span>                                               
-                        <input type='search' class="form-control form-control-new custom-fon" id="search_register_account_by_name" placeholder="Enter user name" /> 
+                        <input type='search' class="form-control form-control-new custom-fon" id="search_register_account_by_name" placeholder="Enter user name"  aria-controls="person1-table"/> 
                     </div>
                     <div class="col-md-4">
-                        <span class="label-custom custom-font" for="age">View By :</span>
-                        <select name="myTable_length" id="kbl_search_status" style="height: calc(2.22rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
+                        <span class="label-custom custom-font" for="age">View By Privilege :</span>
+                        <select name="myTable_length" id="admin_search_privilege" style="height: calc(2.22rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
                             <option value="">Select</option>
                             <option value="">All</option>
-                            <option value="Enrolled">Enrolled</option>
-                            <option value="Inquire">Inquire</option>
-                            <option value="Passed">Passed</option>
-                            <option value="Retake">Retake</option>
-                            <option value="Departed">Departed</option>
-                            <option value="Cancelled">Cancelled</option>
+                            <option value="Admin">Admin</option>
+                            <option value="KBL">KBL</option>
+                            <option value="J1">J1</option>
+                            <option value="Nursing">Nursing</option>
                         </select>
                     </div>
                 </div>

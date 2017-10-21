@@ -5,7 +5,7 @@ class Registration_model extends CI_Model {
  
     var $table = 'users';
     var $column_order = array('user_id','user_fname','user_lname','user_mname','user_username','user_email','user_rights','user_datecreated','user_updateddate',null,null); //set column field database for datatable orderable
-    var $column_search = array('user_fname','user_lname','user_username'); //set column field database for datatable searchable just firstname , lastname , address are searchable
+    var $column_search = array('user_username','user_rights'); //set column field database for datatable searchable just firstname , lastname , address are searchable
     var $order = array('user_id' => 'desc'); // default order 
  
     public function __construct()
@@ -28,6 +28,7 @@ class Registration_model extends CI_Model {
      
         foreach ($this->column_search as $item) // loop column 
         {
+
             if($_POST['search']['value']) // if datatable send POST for search
             {
                  

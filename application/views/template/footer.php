@@ -71,7 +71,11 @@ $(document).ready(function() {
     });
 } );
 
-
+// Tawk_API = Tawk_API || {};
+// Tawk_API.onLoad = function(){
+//     //place your code here
+//     alert(1)
+// };
 </script>
 
 </html>
