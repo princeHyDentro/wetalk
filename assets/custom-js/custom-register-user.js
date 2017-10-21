@@ -16,12 +16,6 @@ $(document).ready(function() {
         "ajax": {
             "url": "ajax_list_data",
             "type": "POST",
-            "data":{
-                search: 'search'
-            },
-            "data": function (data) {
-                console.log(data) 
-            }
 
         },
  

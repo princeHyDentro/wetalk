@@ -65,13 +65,31 @@ div.dataTables_wrapper div.dataTables_paginate {
     line-height: 0;
 }
 .has-error .form-control {
-    border-color: #a94442;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.form-control-new {
+    font-size: 1em;
+    color: #080808;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+}
+.has-error1 {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
 }
 .help-block{
   font-style: italic;
-  color: #a94442;
+  color: #8a6d3b;
+  border-color: #faebcc;
+}
+.help-block-new{
+  font-style: italic;
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
 }
 @media (min-width: 576px){
   .modal-dialog {
