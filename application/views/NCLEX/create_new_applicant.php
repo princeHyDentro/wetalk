@@ -7,7 +7,7 @@
 			<!-- Breadcrumbs-->
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a href="index.html">Dashboard</a>
+					<a href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
 				</li>
 				<li class="breadcrumb-item active">NCLEX Applicant's Entry</li>
 				<li class="breadcrumb-item active">Create New Applicant</li>

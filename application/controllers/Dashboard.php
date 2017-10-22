@@ -43,7 +43,7 @@ class Dashboard extends CI_Controller {
 
         if($result){
         	$this->email->from('no-reply@tlcwetalk.com', 'TLCWETALK');
-			$this->email->to('b.caranoo@outlook.com');
+			$this->email->to($emailTo);
 			$this->email->subject('Change Password');
 			$this->email->message($template);
 			if($this->email->send()){
@@ -58,10 +58,7 @@ class Dashboard extends CI_Controller {
 	    
 	}
 	public function confirm(){
-		$data = array(
-               
-                'flag' => 0
-            );
+		$data = array('flag' => 0);
 		$userID = base64_decode($_GET['key']);
 		
         $this->users->update(array('user_id' => $userID), $data);

@@ -1,4 +1,5 @@
 <!-- Navigation-->
+<?php $is_logged_in = $this->session->userdata('is_logged_in');?>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 	<a class="navbar-brand" href="index.html">TLC Wetalk INC</a>
 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,13 +13,12 @@
 			<span class="nav-link-text">Dashboard</span>
 		  </a>
 		</li>
+		<?php if($is_logged_in['user_rights'] == 'J1' || $is_logged_in['user_rights'] == 'Admin'): ?>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
 			<i class="fa fa-fw fa-exchange"></i>
 			<span class="nav-link-text">J-1 Culture Exchange</span>
 		  </a>
-		  
-
 		  <ul class="sidenav-second-level collapse" id="collapseComponents">
 			<li>    
 			  <a href="<?php echo base_url('J1_exchange_culture/create_new_applicant'); ?>"><i class="fa fa-fw fa-users"></i> Create New Applicant</a>
@@ -31,6 +31,8 @@
 			</li>
 		  </ul>
 		</li>
+	<?php endif; ?>
+		<?php if($is_logged_in['user_rights'] == 'KBL' || $is_logged_in['user_rights'] == 'Admin'): ?>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
 			<i class="fa fa-fw fa-file"></i>
@@ -49,7 +51,10 @@
 			</li>
 		  </ul>
 		</li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+	<?php endif ?>
+
+		<?php if($is_logged_in['user_rights'] == 'Nursing' || $is_logged_in['user_rights'] == 'Admin'): ?>
+		<li class="nav-item"  data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
 			<i class="fa fa-fw fa-sitemap"></i>
 			<span class="nav-link-text">NCLEX</span>
@@ -67,6 +72,7 @@
 			</li>
 		  </ul>
 		</li>
+	<?php endif; ?>
 		<!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti1" data-parent="#exampleReg">
 			<i class="fa fa-fw fa-registered"></i>
@@ -84,12 +90,14 @@
 			</li>
 		  </ul>
 		</li> -->
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+		<?php if($is_logged_in['user_rights'] == 'Admin'): ?>
+		<li class="nav-item"  data-toggle="tooltip" data-placement="right" title="Link">
 		  <a class="nav-link" href="<?php  echo base_url('registration/employee_registration_form'); ?>">
 			<i class="fa fa-fw fa-registered"></i>
 			<span class="nav-link-text">Registration</span>
 		  </a>
 		</li>
+	<?php endif; ?>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
 		  <a class="nav-link" data-toggle="modal" data-target="#resetPassword" href="#">
 			<i class="fa fa-fw fa-link"></i>
@@ -97,6 +105,7 @@
 		  </a>
 		</li>
 	  </ul>
+	
 	  <ul class="navbar-nav sidenav-toggler">
 		<li class="nav-item">
 		  <a class="nav-link text-center" id="sidenavToggler">

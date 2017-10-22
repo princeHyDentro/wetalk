@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
+                <a href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
               </li>
                <li class="breadcrumb-item active">NCLEX</li>
               <li class="breadcrumb-item active">View Applicants</li>
