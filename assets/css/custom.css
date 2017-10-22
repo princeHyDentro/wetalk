@@ -80,6 +80,9 @@ div.dataTables_wrapper div.dataTables_paginate {
     background-color: #fcf8e3;
     border-color: #faebcc;
 }
+.card-header{
+  padding: 0px;
+}
 .help-block{
   font-style: italic;
   color: #8a6d3b;

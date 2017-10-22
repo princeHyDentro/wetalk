@@ -7,32 +7,34 @@ $(document).ready(function() {
 	});
 	$("#change-password").click(function(event){
 		event.preventDefault();
-		
+		$(this).text('Sending..');
+		$('.error-same-pass').hide();
+
 		var confirm_password = $('#confirm_password').val();
         var new_password	 = $('#new_password').val();
         var userEmail		 = $('#userEmail').val();
         var userID			 = $('#userID').val();
        
 
-  //       if(new_password == "" && confirm_password == ""){
-		// 	$('#new_password').addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-  //       	$('#new_password').next().text("Password is required!"); //select span he
-		// 	$('#confirm_password').addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-  //       	$('#confirm_password').next().text("Confirm password is required!"); //select span he
-		// 	return false;
-		// }else if(confirm_password == ""){
-		// 	$('#confirm_password').addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-  //       	$('#confirm_password').next().text("Confirm password is required!"); //select span he
-		// 	return false;
-		// }
-		// if(new_password != confirm_password){
-		// 	$('#confirm_password').addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-  //       	$('#confirm_password').next().text("Password does not match !");
-  //       	return false;
-		// }else {
-			//clear_form();
+        if(new_password == "" && confirm_password == ""){
+			$('#new_password').addClass('has-error');
+        	$('#new_password').next().text("Password is required!");
+			$('#confirm_password').addClass('has-error');
+        	$('#confirm_password').next().text("Confirm password is required!");
+			return false;
+		}else if(confirm_password == ""){
+			$('#confirm_password').addClass('has-error');
+        	$('#confirm_password').next().text("Confirm password is required!");
+			return false;
+		}
+		if(new_password != confirm_password){
+			$('#confirm_password').addClass('has-error');
+        	$('#confirm_password').next().text("Password does not match !");
+        	return false;
+		}else {
+
 			var base_url = window.location.origin;
-			var host = window.location.host;
+			var host 	 = window.location.host;
 			$.ajax({
 				 url    : base_url+"/wetalk/dashboard/password_reset",
 				 method : "post",
@@ -43,22 +45,35 @@ $(document).ready(function() {
 					userID			  : userID
 				 },
 				 success : function (data) {
-				 	alert(data)
-				 // 	if(data != 'succeeded') {
-				 // 		alert(data);
-				 // 		return false;
-				 // 	} else {
-					// 	window.location.href = "dashboard";
-					// }
+				 	
+				 	if(data == 'Message has been sent') {
+				 		//clear_form();
+				 		$('#close-form').text('Close');		
+				 		$('#change-password').css({'display' : 'none'});
+				 		$('.hide-form').css({'display' : 'none'});
+				 		$('.success-text').show();
+				 		$('.success-text').html('<div class="alert alert-success"><strong>Password has been updated!</strong></div> <br> <strong><em>Note :</em></strong><p>  For security purposes, you need to check your email and confirm the changes that you made for your password. Otherwise, you will not be allowed to login if you don\'t confirm this change. Thanks.</p>')				 		
+				 	} else {
+				 		$('.error-same-pass').show();
+				 		$('#change-password').text("Send");
+				 		$('.error-same-pass').text(data);
+				 		//alert(data);	
+					}
 				 }
 			});
-		// }
+		}
 		
 	});
 });
 function clear_form(){
+	$('.form-group').show();
+	$('.success-text').hide();
+	$('#change-password').show();
+	$('#change-password').text("Send");
+	$('#close-form').text('Cancel');
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
+    $('.form-group').show();
     $('#confirm_password').val("");
     $('#new_password').val("");
     $('.help-block').empty(); // clear error string
@@ -75,7 +90,8 @@ function login_auth(user_name,user_password){
 		 success : function (data) {
 		 	//alert(data)
 		 	if(data != 'succeeded') {
-		 		alert(data);
+		 		//alert(data);
+		 		$('.failed-login').show();
 		 		return false;
 		 	} else {
 				window.location.href = "dashboard";

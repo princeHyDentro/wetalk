@@ -51,7 +51,7 @@ class Login extends CI_Controller {
 			}
 			echo "succeeded";
 		}else{
-			echo "asdfsadf0";
+			echo "failed";
 		}
 	}
 	public function logout(){
