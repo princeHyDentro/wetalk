@@ -40,7 +40,7 @@
 										</div>
 										<div class="form-group">
 											<label for ="Address"> Complete Address</label>
-											<textarea  class="form-control" id="address" placeholder="Enter Your Address"></textarea>
+											<textarea  class="form-control materialize-textarea" id="address" placeholder="Enter Your Address"></textarea>
 										</div>									
 										
 										<div class="form-group">
@@ -112,7 +112,7 @@
 										</div>	
 										<div class="form-group">
 											<label for ="description"> Remarks</label>
-											<textarea  class="form-control" id="description" placeholder="Enter Your Message"></textarea>
+											<textarea  class="form-control materialize-textarea" id="description" placeholder="Enter Your Message"></textarea>
 										</div>
 										<div class="form-group">
 											<label for ="form #"> Form #</label>

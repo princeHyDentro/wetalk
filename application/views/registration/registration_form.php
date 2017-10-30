@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-md-4">
                         <span class="label-custom custom-font" for="age">View By Privilege :</span>
-                        <select name="myTable_length" id="admin_search_privilege" style="height: calc(2.22rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
+                        <select name="myTable_length" id="admin_search_privilege" style="height: calc(3rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
                             <option value="">Select</option>
                             <option value="">All</option>
                             <option value="Admin">Admin</option>
@@ -129,16 +129,16 @@
                     <div class="row">
                         <div class="form-group has-error">
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission1" value="J1" >J1
+                              <input type="radio" name="permission" class="permission1" value="J1" >J1
                             </label>
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission2" value="Nursing">Nursing
+                              <input type="radio" name="permission" class="permission2" value="Nursing">Nursing
                             </label>
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission3" value="KBL">KBL
+                              <input type="radio" name="permission" class="permission3" value="KBL">KBL
                             </label>
                             <label class="checkbox-inline col-sm-5">
-                              <input type="checkbox" name="permission" class="permission4" value="Admin">As Admin
+                              <input type="radio" name="permission" class="permission4" value="Admin">As Admin
                             </label>
                             <span class="help-block"></span>
                         </div>

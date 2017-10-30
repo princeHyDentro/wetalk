@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="col-md-4">
                         <span class="label-custom custom-font" for="age">View By :</span>
-                        <select name="myTable_length" id="kbl_search_status" style="height: calc(2.22rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
+                        <select name="myTable_length" id="kbl_search_status" style="height: calc(3rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
                             <option value="">Select</option>
                             <option value="">All</option>
                             <option value="Enrolled">Enrolled</option>

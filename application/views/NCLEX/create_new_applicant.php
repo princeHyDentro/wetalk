@@ -40,7 +40,7 @@
 										</div>
 										<div class="form-group">
 											<label for ="Address"> Message</label>
-											<textarea  class="form-control" id="address" placeholder="Enter your address"></textarea>
+											<textarea  class="form-control materialize-textarea" id="address" placeholder="Enter your address"></textarea>
 										</div>										
 										<div class="form-group">
 											<label for="telephone">Contact No.</label>
@@ -148,7 +148,7 @@
 									    </div>
 										<div class="form-group">
 											<label for ="description"> Message</label>
-											<textarea  class="form-control" id="description" placeholder="Enter your message"></textarea>
+											<textarea  class="materialize-textarea form-control" id="description" placeholder="Enter your message"></textarea>
 										</div>
 										<div class="form-group">
 											<label for ="form #"> Form #</label>

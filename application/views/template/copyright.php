@@ -29,6 +29,7 @@
 		</div>
 	</div>
 </div>
+
 <!--update password -->
 <div class="modal fade" id="resetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

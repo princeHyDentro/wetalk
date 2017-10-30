@@ -20,9 +20,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-comments"></i>
               </div>
-              <div class="mr-5">26 New Messages!</div>
+              <div class="mr-5"><?php echo $count_msgs; ?> New Messages!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('pm'); ?>">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

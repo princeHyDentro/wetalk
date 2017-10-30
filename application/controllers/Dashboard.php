@@ -7,21 +7,41 @@ class Dashboard extends CI_Controller {
 	public function __construct(){
 	    parent::__construct();
 	    $this->load->model('registration_model','users');
+        $this->load->model('dashboard_model','privmsgs');
 	}
 
 	public function index()
 	{
-		
+		$data = array();
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		if (!isset($is_logged_in) || $is_logged_in != true) {
 			redirect('login', 'refresh');
 			die();
 		}else{
+           
+            $new_message   = $this->privmsgs->new_message($is_logged_in['user_id']);
+            $data['count_msgs'] = $new_message;
+
 			$this->load->view('template/header');
-        	$this->load->view('dashboard/dashboard');
-       		$this->load->view('template/footer');
+            $this->load->view('dashboard/dashboard',$data);
+            $this->load->view('template/footer');
 		}	
 	}
+  
+  public function chat()
+  {
+    
+    $is_logged_in = $this->session->userdata('is_logged_in');
+    if (!isset($is_logged_in) || $is_logged_in != true) {
+      redirect('login', 'refresh');
+      die();
+    }else{
+        $this->load->view('template/header');
+        $this->load->view('dashboard/chat');
+        $this->load->view('template/footer');
+    } 
+  }
+  
 	public function password_reset(){
 		$this->load->library('email');
 		// $config = array('protocol' => 'smtp',
@@ -42,16 +62,16 @@ class Dashboard extends CI_Controller {
         $result = $this->users->update(array('user_id' => $userID), $data);
 
         if($result){
-        	$this->email->from('no-reply@tlcwetalk.com', 'TLCWETALK');
-			$this->email->to($emailTo);
-			$this->email->subject('Change Password');
-			$this->email->message($template);
-			if($this->email->send()){
-		    	echo 'Message has been sent';
-		    }else{
-		    	//echo $this->email->print_debugger();
-		    	echo 'Message could not be sent.';
-		    }
+          	$this->email->from('no-reply@tlcwetalk.com', 'TLCWETALK');
+      			$this->email->to($emailTo);
+      			$this->email->subject('Change Password');
+      			$this->email->message($template);
+			    if($this->email->send()){
+		    	    echo 'Message has been sent';
+		      }else{
+    		    	//echo $this->email->print_debugger();
+    		    	echo 'Message could not be sent.';
+		      }
         }else{
         	echo 'You enter the same password as before.';
         }
