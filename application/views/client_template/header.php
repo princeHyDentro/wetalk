@@ -68,19 +68,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 						<p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
 						
 						<hr>
-						<p class="w3-large" >
+						<p class="w3-large" style="cursor: default;">
 							<i class="fa fa-inbox fa-fw w3-margin-right w3-large w3-text-teal"></i>Inbox
 						</p>
-						<p class="w3-large" >
+						<p class="w3-large" style="cursor: default;">
 							<i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Unread
 						</p>
-						<p class="w3-large" >
+						<p class="w3-large" style="cursor: default;">
 							<i class="fa fa-paper-plane fa-fw w3-margin-right w3-large w3-text-teal"></i>Sent
 						</p>
-						<p class="w3-large" >
+						<p class="w3-large" style="cursor: default;">
 							<i class="fa fa-trash-o fa-fw w3-margin-right w3-large w3-text-teal"></i>Trashed
 						</p>
-						<p class="w3-large" >
+						<p class="w3-large" style="cursor: default;">
 							<i class="fa fa-pencil-square-o fa-fw w3-margin-right w3-large w3-text-teal"></i>Compose
 						</p>
 						<hr>
