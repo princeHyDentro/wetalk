@@ -114,6 +114,23 @@
 		</li>
 	  </ul>
 	  <ul class="navbar-nav ml-auto">
+	  	<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-envelope"></i>
+            <span class="d-lg-none">Messages
+              <span class="badge badge-pill badge-primary">12 New</span>
+            </span>
+            <span class="indicator text-primary d-none d-lg-block">
+              <i class="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header">New Messages:</h6>
+            <div class="data-msgs"></div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item small" href="#">View all messages</a>
+          </div>
+        </li>
 		<li class="nav-item">
 		  <form class="form-inline my-2 my-lg-0 mr-lg-2">
 			<div class="input-group">
@@ -132,7 +149,6 @@
 			<i class="fa fa-fw fa-user-circle-o"></i>
 			<?php 
 				$is_logged_in = $this->session->userdata('is_logged_in');
-
 				if($is_logged_in['user_rights'] == "Admin"){
 					echo "Logged as: Administrator";
 				}else{
@@ -141,6 +157,7 @@
 			?>
 			  	</span>
 		</li>
+
 		<li class="nav-item breadcrumb-item">
 		  <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
 			<i class="fa fa-fw fa-sign-out"></i>Logout</a>

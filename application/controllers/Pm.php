@@ -67,7 +67,65 @@ class Pm extends CI_Controller {
        	$this->load->view('template/footer');
 	
 	}
+	public function ajax_messages($type = 0)
+	{
+		// echo $_POST['MSG_NONDELETED'];
+		// exit;
+		//$type = $_POST['MSG_NONDELETED'];
+		// Get & pass to view the messages view type (e.g. MSG_SENT)
+		$is_logged_in = $this->session->userdata('is_logged_in');
+		$user_id      = $is_logged_in['user_id'];
 
+		$data = array();
+		$data['type'] = $type;
+		$messages = $this->pm_model->get_messages($type , $user_id);
+		
+	
+		if($messages)
+		{
+				
+			// Get recipients & get usernames instead of user ids
+			// for recipients and author & render message body correctly
+			$i = 0;
+			foreach ($messages as $message)
+			{
+				
+				// $old_date = date($message['privmsg_date']);            // works
+				// $middle = strtotime($old_date);             // returns bool(false)
+
+				// $message['privmsg_date'] = date("F j, Y - g:i A", $middle); 
+				// //
+
+				$messages[$i][TF_PM_BODY] 		= $this->render($messages[$i][TF_PM_BODY]);
+				$messages[$i][TF_PM_AUTHOR] 	= $this->user_model->get_username($message[TF_PM_AUTHOR]);
+				$messages[$i][PM_RECIPIENTS] 	= $this->pm_model->get_recipients($messages[$i][TF_PM_ID]);
+				$j = 0;
+				foreach ($messages[$i][PM_RECIPIENTS] as $recipient)
+				{
+					$id = $recipient[TF_PMTO_RECIPIENT];
+					$messages[$i][PM_RECIPIENTS][$j] = $this->user_model->get_username($id);
+					$j++;
+				}
+				$i++;
+			}
+			$x = 0;
+			foreach ($messages as $key => $msg_id) {				
+				$messages[$x]['read_unread'] = $this->user_model->get_read_unread($msg_id['privmsg_id']);
+				$x++;
+				// $dae = $this->user_model->get_read_unread($msg_id['privmsg_id'],$user_id);
+				// echo  "<pre>"; print_r($dae); echo "</pre>";
+			}
+			
+			
+		//	print_r($messages);
+			$data['messages'] = $messages;
+		}
+		else $data['messages'] = array();
+			//print_r(json_encode($data));
+		echo 	json_encode($data);
+		exit;
+		
+	}
 
 	function messages($type = MSG_NONDELETED)
 	{

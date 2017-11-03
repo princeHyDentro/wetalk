@@ -638,7 +638,15 @@ textarea.form-control {
 
 
 /*materialize*/
-
+li.user-details {
+    background: url(../images/user-bg.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin-bottom: 15px;
+    padding: 15px 0 0 15px;
+}
 select:focus {
   outline: 1px solid #c9f3ef;
 }
