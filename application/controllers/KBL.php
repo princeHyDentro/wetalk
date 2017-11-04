@@ -108,5 +108,4 @@ class KBL extends CI_Controller {
 			header("Location:/wetalk/kbl/view_all_applicant");
 		}
 	}
-	
 }

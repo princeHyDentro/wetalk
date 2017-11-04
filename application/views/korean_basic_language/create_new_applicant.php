@@ -8,7 +8,7 @@
 			<!-- Breadcrumbs-->
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a href="index.html">Dashboard</a>
+					<a href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
 				</li>
 				<li class="breadcrumb-item active">KBL Applicant's Entry</li>
 				<li class="breadcrumb-item active">Create New Applicant</li>
@@ -58,7 +58,7 @@
 										</div>  
 										<div class="form-group">
 											<div class="input-group">	
-												<span class="label-custom input-group-addon-new">BirthDate</span>								                
+												<span class="label-custom input-group-addon-new">BirthDate</span>
 								                <input type='text' class="form-control datepicker form-control-new" id="datepicker" value="<?php if ($this->uri->segment(3) != ""){echo $kbl[0]->client_birthdate;}?>" />						                  
 											    <span class="label-custom input-group-addon-new" for="age">Age</span>
 												<input type="text" class="form-control form-control-new" id="age" placeholder=" Enter your age" value="<?php if ($this->uri->segment(3) != ""){echo $kbl[0]->client_age;}?>">

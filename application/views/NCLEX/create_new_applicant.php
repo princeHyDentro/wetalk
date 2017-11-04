@@ -53,7 +53,7 @@
 										</div>  
 										<div class="form-group">
 											<div class="input-group">	
-												<span class="label-custom input-group-addon-new">BirthDate</span>								                
+												<span class="label-custom input-group-addon-new">BirthDate</span>
 								                <input type='text' class="form-control datepicker form-control-new" id="birthdate" value="<?php if ($this->uri->segment(3) != "") {echo $nclex[0]->client_birthdate;}?>"/>						                  
 											    <span class="label-custom input-group-addon-new" for="age">Age</span>
 												<input type="text" class="form-control form-control-new" id="age" placeholder=" Enter your age" value="<?php if ($this->uri->segment(3) != "") {echo $nclex[0]->client_age;}?>">

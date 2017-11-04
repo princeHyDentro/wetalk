@@ -21,6 +21,7 @@ class NCLEX extends CI_Controller {
 	public function view_all_applicant()
 	{
 		$this->load->model("NCLEX_model");
+
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		if (!isset($is_logged_in) || $is_logged_in != true) {
 			redirect('login', 'refresh');

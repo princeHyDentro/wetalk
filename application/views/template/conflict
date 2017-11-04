@@ -1,0 +1,53 @@
+Auto-merging assets/custom-js/login-and-registration.js
+CONFLICT (add/add): Merge conflict in assets/custom-js/login-and-registration.js
+Auto-merging assets/css/custom.css
+CONFLICT (add/add): Merge conflict in assets/css/custom.css
+Auto-merging application/views/template/nav.php
+CONFLICT (add/add): Merge conflict in application/views/template/nav.php
+Auto-merging application/views/template/header.php
+CONFLICT (add/add): Merge conflict in application/views/template/header.php
+Auto-merging application/views/template/footer.php
+CONFLICT (add/add): Merge conflict in application/views/template/footer.php
+Auto-merging application/views/template/copyright.php
+CONFLICT (add/add): Merge conflict in application/views/template/copyright.php
+Auto-merging application/views/registration/registration_form.php
+CONFLICT (add/add): Merge conflict in application/views/registration/registration_form.php
+Auto-merging application/views/login.php
+CONFLICT (add/add): Merge conflict in application/views/login.php
+Auto-merging application/views/korean_basic_language/view_applicant.php
+CONFLICT (add/add): Merge conflict in application/views/korean_basic_language/view_applicant.php
+Auto-merging application/views/korean_basic_language/create_new_applicant.php
+CONFLICT (add/add): Merge conflict in application/views/korean_basic_language/create_new_applicant.php
+Auto-merging application/views/j1_exchange_culture/view_applicant.php
+CONFLICT (add/add): Merge conflict in application/views/j1_exchange_culture/view_applicant.php
+Auto-merging application/views/j1_exchange_culture/create_new_applicant.php
+CONFLICT (add/add): Merge conflict in application/views/j1_exchange_culture/create_new_applicant.php
+Auto-merging application/views/dashboard/dashboard.php
+CONFLICT (add/add): Merge conflict in application/views/dashboard/dashboard.php
+Auto-merging application/views/NCLEX/view_applicant.php
+CONFLICT (add/add): Merge conflict in application/views/NCLEX/view_applicant.php
+Auto-merging application/views/NCLEX/create_new_applicant.php
+CONFLICT (add/add): Merge conflict in application/views/NCLEX/create_new_applicant.php
+Auto-merging application/models/Registration_model.php
+CONFLICT (add/add): Merge conflict in application/models/Registration_model.php
+Auto-merging application/controllers/Registration.php
+CONFLICT (add/add): Merge conflict in application/controllers/Registration.php
+Auto-merging application/controllers/NCLEX.php
+CONFLICT (add/add): Merge conflict in application/controllers/NCLEX.php
+Auto-merging application/controllers/Login.php
+CONFLICT (add/add): Merge conflict in application/controllers/Login.php
+Auto-merging application/controllers/KBL.php
+CONFLICT (add/add): Merge conflict in application/controllers/KBL.php
+Auto-merging application/controllers/J1_exchange_culture.php
+CONFLICT (add/add): Merge conflict in application/controllers/J1_exchange_culture.php
+Auto-merging application/controllers/Dashboard.php
+CONFLICT (add/add): Merge conflict in application/controllers/Dashboard.php
+Auto-merging application/config/database.php
+CONFLICT (add/add): Merge conflict in application/config/database.php
+Auto-merging application/config/constants.php
+CONFLICT (add/add): Merge conflict in application/config/constants.php
+
+
+Auto-merging README.md
+CONFLICT (add/add): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.

@@ -7,13 +7,12 @@
 	   $id = $this->uri->segment(3);
 	   
 	?>
-
 	<div class="content-wrapper">
 		<div class="container-fluid">
 			<!-- Breadcrumbs-->
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a href="index.html">Dashboard</a>
+					<a href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
 				</li>
 				<li class="breadcrumb-item active">J-1 Applicant's Entry</li>
 				<li class="breadcrumb-item active">Create New Applicant</li>
@@ -62,9 +61,9 @@
 										</div>  
 										<div class="form-group">
 											<div class="input-group">	
-												<span class="label-custom input-group-addon-new">BirthDate</span>								                
-								                <input type='text' class="form-control datepicker form-control-new" id="birthdate" value='<?php if($id != "") {echo $client[0]->client_birthdate;}?>' />						                  
-											    <span class="label-custom input-group-addon-new" for="age">Age</span>
+												<span class="label-custom input-group-addon-new">BirthDate</span>
+								                <input type='text' class="form-control datepicker form-control-new" id="birthdate" value='<?php if($id != "") {echo $client[0]->client_birthdate;}?>' />
+								                <span class="label-custom input-group-addon-new" for="age">Age</span>
 												<input type="text" class="form-control form-control-new" id="age" placeholder=" Enter age" value='<?php if($id != "") {echo $client[0]->client_age;}?>'>
 							            	</div>
 										</div>											
@@ -198,7 +197,6 @@
 									        </div>
 									    </div>
 										<div class="form-group">
-											<label for ="description"> Message</label>
 											<textarea  class="form-control" id="message" placeholder="Enter Your Message"><?php if($id != "") {echo $client[0]->client_remarks;}?></textarea>
 										</div>
 										<div class="form-group">
