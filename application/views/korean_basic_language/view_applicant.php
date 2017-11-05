@@ -15,10 +15,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="breadcrumb-item active">View Applicants</li>
       </ol><!-- Example DataTables Card-->
 
-      
-      <div class="container-fluid">
-       
-        <div class="row custom-search-padding">
+        <div class="container-fluid">
+          <div class="row custom-search-padding">
           <div class="col-md-4">
             <span class="label-custom custom-font">Search (Name) : </span>                                               
             <input type='text' class="form-control form-control-new custom-fon" id="search_by_name" placeholder="Enter client name here" /> 
@@ -38,71 +36,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
         </div>
         <br/>
-        
-        
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-table "></i><span class="custom-font"> View Applicants</span></div>
-            <div class="card-body">
-
-              <div class="table-responsive">                
-                <table class="table table-bordered table-striped" id="view_applicant_table" width="100%" cellpadding="0">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Address</th>
-                      <th>Contact#</th>                                 
-                      <th>Date Visited</th>                                 
-                      <th>Status</th>                                 
-                      <th>Date Created</th>                                 
-                      <th>Form No.</th>                                 
-                      <th>Update Client</th>                                 
-                      <th>Delete Client</th>                                 
-                    </tr>
-                  </thead>
-                  <tbody>
-                   <?php
-                   foreach ($kbl_data as $data) {
-                    ?>
-                    <tr>
-                     <td><?php echo $data->name;?></td>
-                     <td><?php echo $data->client_address;?></td>
-                     <td><?php echo $data->client_contactno;?></td>
-                     <td><?php echo $data->client_datevisited;?></td>
-                     <td><?php echo $status[$data->status_id-1]; ?></td>
-                     <td><?php echo $data->client_datevisited; ?></td>
-                     <td><?php echo $data->client_formno; ?></td>
-                     <th style="text-align: center;"><a href="kbl_update_client/<?php echo $data->client_id; ?>" class="btn btn-success">Update</a></th>
-                     <th style="text-align: center;"><a href="kbl_delete_client/<?php echo $data->client_id; ?>" class="btn btn-danger">Delete</a></th>
-                   </tr>
-                   <?php 
-                 }											 
-                 ?>
-               </tbody>
-               <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Address</th>
-                  <th>Mobile#</th>
-                  <th>Geneder</th>
-                  <th>Educational Attainment</th>
-                  <th>Purpose In Enrollment</th>
-                  <th>Application Status</th>
-                  <th>Date Created</th>
-                  <th>Form #</th>
-                  <th>Created By #</th>
-                  <th>Update Client</th>
-                  <th>Delete Client</th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-      </div>
-    </div>
-
-  </div>
-
-  <?php require_once(APPPATH."views/template/copyright.php"); ?>
-</body>
+         <div class="table-responsive">                
+          <table class="table table-bordered table-striped" id="view_applicant_table" width="100%" cellpadding="0">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Mobile#</th>
+                <th>Geneder</th>
+                <th>Educational Attainment</th>
+                <th>Purpose In Enrollment</th>
+                <th>Application Status</th>
+                <th>Date Created</th>
+                <th>Form #</th>
+                <th>Created By #</th>
+                <th>Update Client</th>
+                <th>Delete Client</th>                             
+              </tr>
+            </thead>
+            <tbody>
+             <?php if(isset($kbl_data)){ 
+              foreach ($kbl_data as $data) { ?>
+              <tr>
+               <td><?php echo $data->name;?></td>
+               <td><?php echo $data->client_address;?></td>
+               <td><?php echo $data->client_contactno;?></td>
+               <td><?php echo $data->client_datevisited;?></td>
+               <td><?php echo $status[$data->status_id-1]; ?></td>
+               <td><?php echo $data->client_datevisited; ?></td>
+               <td><?php echo $data->client_formno; ?></td>
+               <th style="text-align: center;"><a href="kbl_update_client/<?php echo $data->client_id; ?>" class="btn btn-success">Update</a></th>
+               <th style="text-align: center;"><a href="kbl_delete_client/<?php echo $data->client_id; ?>" class="btn btn-danger">Delete</a></th>
+             </tr>
+             <?php } } ?>
+           </tbody>
+         </table>
+       </div>
+     </div>
+   <?php require_once(APPPATH."views/template/copyright.php"); ?>
+ </body>

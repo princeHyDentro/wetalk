@@ -95,10 +95,7 @@
 										<div class="form-group">
 											<label for="exampleInputEmail">Date Visited</label>
 							                <div class='input-group date'>
-							                    <input type='text' class="form-control" id='date_visited' value='<?php if($id != "") {echo $client[0]->client_datevisited;}?>'/>
-							                    <span class="input-group-addon">
-							                        <span class="glyphicon glyphicon-calendar"></span>
-							                    </span>
+							                    <input type='text' class="form-control  datepicker" id='date_visited' value='<?php if($id != "") {echo $client[0]->client_datevisited;}?>'/>
 							                </div>
 										</div>
 										<div class="form-group">

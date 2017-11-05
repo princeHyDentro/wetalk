@@ -456,8 +456,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
     /*  background: linear-gradient(to left, #285222 , #292526);*/
 }
 .custom-search-padding{
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 10px;
 }
 .custom-font{
   font-family: 'Teko', sans-serif;
@@ -714,7 +713,7 @@ textarea.materialize-textarea {
   border-radius: 0;
   outline: none;
   height: 3rem;
-  width: 100%;
+/*  width: 100%;*/
   font-size: 1rem;
   margin: 0 0 20px 0;
   padding: 0;

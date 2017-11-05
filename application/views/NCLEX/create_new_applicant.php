@@ -87,10 +87,7 @@
 										<div class="form-group">
 											<label for="exampleInputEmail">Date Visited</label>
 							                <div class='input-group date' id='datetimepicker1'>
-							                    <input type='text' class="form-control" id="date_visited" value="<?php if ($this->uri->segment(3) != "") {echo $nclex[0]->client_datevisited;}?>"/>
-							                    <span class="input-group-addon">
-							                        <span class="glyphicon glyphicon-calendar"></span>
-							                    </span>
+							                    <input type='text' class="form-control  datepicker" id="date_visited" value="<?php if ($this->uri->segment(3) != "") {echo $nclex[0]->client_datevisited;}?>"/>
 							                </div>
 										</div>
 										<div class="form-group">

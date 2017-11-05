@@ -75,7 +75,7 @@
 			</li>
 		  </ul>
 		</li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+		<!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti1" data-parent="#exampleReg">
 			<i class="fa fa-fw fa-registered"></i>
 			<span class="nav-link-text">Employee</span>
@@ -91,7 +91,7 @@
 			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
-		</li>
+		</li> -->
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2" data-parent="#exampleAccordion">
 			<i class="fa fa-fw fa-link"></i>
