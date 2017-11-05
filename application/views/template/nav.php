@@ -16,7 +16,7 @@
 		<?php if($is_logged_in['user_rights'] == 'J1' || $is_logged_in['user_rights'] == 'Admin'): ?>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-			<i class="fa fa-fw fa-exchange"></i>
+			<i class="flag-icon flag-icon-us"></i>
 			<span class="nav-link-text">J-1 Culture Exchange</span>
 		  </a>
 		  <ul class="sidenav-second-level collapse" id="collapseComponents">
@@ -37,7 +37,7 @@
 
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-			<i class="fa fa-fw fa-file"></i>
+			<i class="flag-icon flag-icon-kr"></i>
 			<span class="nav-link-text">Korean Basic Language</span>
 		  </a>
 		  <ul class="sidenav-second-level collapse" id="collapseExamplePages">
@@ -59,7 +59,7 @@
 	<?php if($is_logged_in['user_rights'] == 'Nursing' || $is_logged_in['user_rights'] == 'Admin'): ?>
 		<li class="nav-item"  data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-			<i class="fa fa-fw fa-sitemap"></i>
+			<i class="flag-icon flag-icon-us"></i>
 			<span class="nav-link-text">NCLEX</span>
 		  </a>
 		  <ul class="sidenav-second-level collapse" id="collapseMulti">
