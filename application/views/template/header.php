@@ -14,6 +14,7 @@
   <link href="<?php echo base_url('assets/vendor/bootstrap/css/bootstrap-glyphicons.css'); ?>" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url('assets/vendor/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
+  
   <link  href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link  href="<?php echo base_url('assets/css/googlefont.css'); ?>" rel="stylesheet">
   <link  href="<?php echo base_url('assets/css/googletekofont.css'); ?>" rel="stylesheet">

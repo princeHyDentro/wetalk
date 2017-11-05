@@ -111,8 +111,8 @@
 		</li>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti3" data-parent="#exampleAccordion">
-			<i class="fa fa-fw fa-link"></i>
-			<span class="nav-link-text">Messenger</span>
+			<i class="fa fa-share"></i>
+			<span class="nav-link-text">Mail</span>
 		  </a>
 		  <ul class="sidenav-second-level collapse" id="collapseMulti3">
 			<li>
@@ -135,7 +135,7 @@
 	<?php if($is_logged_in['user_rights'] == 'Admin'): ?>
 		<li class="nav-item"  data-toggle="tooltip" data-placement="right" title="Link">
 		  <a class="nav-link" href="<?php  echo base_url('registration/employee_registration_form'); ?>">
-			<i class="fa fa-fw fa-registered"></i>
+			<i class="fa fa-fw fa-users"></i>
 			<span class="nav-link-text">Registration</span>
 		  </a>
 		</li>
@@ -143,7 +143,7 @@
 
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
 		  <a class="nav-link" data-toggle="modal" data-target="#resetPassword" href="#">
-			<i class="fa fa-fw fa-link"></i>
+			<i class="fa fa-unlock-alt"></i>
 			<span class="nav-link-text">Change Password</span>
 		  </a>
 		</li>

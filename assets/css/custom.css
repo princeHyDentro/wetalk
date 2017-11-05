@@ -452,6 +452,21 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 .selectpicker {
   color: #777 !important;
 }
+table{
+  color: #000!important;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+
+}
+#mainNav{
+  color: #000!important;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.panel.panel-default{
+      padding: 0.01em 16px;
+    color: #000!important;
+    background-color: #fff!important;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
 .bg-dark{
     /*  background: linear-gradient(to left, #285222 , #292526);*/
 }
