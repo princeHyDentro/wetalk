@@ -69,9 +69,6 @@ class Pm extends CI_Controller {
 	}
 	public function ajax_messages($type = 0)
 	{
-		// echo $_POST['MSG_NONDELETED'];
-		// exit;
-		//$type = $_POST['MSG_NONDELETED'];
 		// Get & pass to view the messages view type (e.g. MSG_SENT)
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		$user_id      = $is_logged_in['user_id'];

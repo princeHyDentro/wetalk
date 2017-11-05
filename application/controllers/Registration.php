@@ -81,7 +81,6 @@ public function ajax_add()
         'user_password' => md5($this->input->post('user_password')),
         'user_email' => $this->input->post('user_email'),
         'user_rights' => $this->input->post('permission'),
-                // 'dob' => $this->input->post('dob'),
     );
     $insert = $this->users->save($data);
     echo json_encode(array("status" => TRUE));
@@ -90,6 +89,7 @@ public function ajax_add()
 public function ajax_update()
 {
         //$this->_validate();
+  
     $data = array(
         'user_fname' => $this->input->post('user_fname'),
         'user_lname' => $this->input->post('user_lname'),
@@ -98,6 +98,7 @@ public function ajax_update()
         'user_password' => ($this->input->post('user_password') == "") ? "" : md5($this->input->post('user_password')),
         'user_email' => $this->input->post('user_email'),
         'user_rights' => $this->input->post('permission'),
+        'user_updateddate' => date("Y-m-d h:i:sa")
     );
     $this->users->update(array('user_id' => $this->input->post('id')), $data);
     echo json_encode(array("status" => TRUE));
