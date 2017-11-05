@@ -7,7 +7,7 @@
 	        	<li class="breadcrumb-item">
 	          	<a href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
 	        	</li>
-	        	<li  class="breadcrumb-item active">My Message Box</li>
+	        	<li  class="breadcrumb-item active">Compose New Message</li>
 	      	</ol>
 	      	<section id="contact" class="" style="padding-top: 0px;">
 				<div class="section-content">
@@ -21,40 +21,6 @@
 								<div class="panel panel-default">
 									
 									<div class="panel-body" style="text-align: left;">
-										
-										<span class="btn-group">
-										 	<!-- <button class="btn btn-default"> -->
-										 		<a class="breadcrumb-item btn btn-default" href="<?php echo base_url("pm");?>"><i class="fa fa-inbox" aria-hidden="true"></i> Inbox</a>
-										 	<!-- </button>	 -->
-										</span>
-
-										<span class="btn-group">
-										  	<!-- <button class="btn btn-default"> -->
-										 		<a  class="btn btn-default" href="<?php echo base_url("pm/messages")."/".MSG_UNREAD?>"><i class="fa fa-envelope" aria-hidden="true"></i> Unread</a>
-										 	<!-- </button> -->
-										</span>
-
-										<span class="btn-group">
-											<!-- <button class="btn btn-default"> -->
-										 		<a  class="btn btn-default" href="<?php echo base_url("pm/messages")."/".MSG_SENT?>"><i class="fa fa-paper-plane" aria-hidden="true"></i> Sent</a>
-										 	<!-- </button> -->
-										</span>
-
-										<span class="btn-group">
-											<!-- <button class="btn btn-default"> -->
-										 		<a  class="btn btn-default" href="<?php echo base_url("pm/messages")."/".MSG_DELETED?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Trashed</a>
-										 	</button>
-										</span>
-										<span class="btn-group">
-											<!-- <button class="btn btn-default"> -->
-										 		<a class="btn btn-default" href="<?php echo base_url("pm/send")."/"?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Compose</a>
-										 	<!-- </button>  -->
-										</span>
-
-										<span class="btn-group pull-right">
-										  	<button class="btn btn-default"><span class="fa fa-chevron-left"></span></button>
-										  	<button class="btn btn-default"><span class="fa fa-chevron-right"></span></button>
-										</span>
 
 										<div class="messages-list">
 											<div class="panel-body message">

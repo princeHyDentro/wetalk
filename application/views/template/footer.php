@@ -1,7 +1,7 @@
 <!-- Bootstrap core JavaScript-->
 
 <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
-<!-- <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script> -->
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script src="<?php echo base_url('assets/vendor/popper/popper.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
 <!-- Core plugin JavaScript-->

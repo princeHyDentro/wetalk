@@ -116,10 +116,16 @@
 		  </a>
 		  <ul class="sidenav-second-level collapse" id="collapseMulti3">
 			<li>
-			  <a href="cards.html"><i class="fa fa-fw fa-users"></i> Inbox</a>
+			  <a href="<?php echo base_url('pm'); ?>"><i class="fa fa-inbox"></i> Inbox</a>
 			</li>
 			<li>
-			  <a href="cards.html"><i class="fa fa-fw fa-eye"></i> Archive</a>
+			  <a href="<?php echo base_url('pm/messages/3'); ?>"><i class="fa fa-envelope"></i> Unread</a>
+			</li>
+			<li>
+			  <a href="<?php echo base_url('pm/messages/2'); ?>"><i class="fa fa-paper-plane"></i> Sent</a>
+			</li>
+			<li>
+			  <a href="<?php echo  base_url('pm/send');?>"><i class="fa fa-pencil-square-o"></i> Compose</a>
 			</li>
 		  </ul>
 		</li>
