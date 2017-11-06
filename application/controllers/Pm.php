@@ -172,9 +172,34 @@ class Pm extends CI_Controller {
 		$this->load->view('inbox', $data);
 		$this->load->view('template/footer');
 	}
+	public function sendme($post){
+		$result = array();
+		if(!empty($post)){
+			if( $post['recipients']  == "Nursing" || $post['recipients']  == "J1" 
+				|| $post['recipients']  == "KBL"){
+				
+				$data = $this->user_model->getUser($post['recipients']);
 
+				foreach ($data as $key => $value) {
+					$result[] = $value['user_email'];
+
+				}
+				return $result;
+
+			}else{
+				return array($post['recipients']);
+			}
+		}
+		
+		//$data = $this->user_model->getUser();
+	}
 	function send($recipients = NULL, $subject = NULL, $body = NULL)
 	{
+
+		
+		$recipients = $this->sendme($_POST);
+		
+		// print_r($recipients);
 		$rules = $this->config->item('pm_form', 'form_validation');
 		$this->form_validation->set_rules($rules);
 
@@ -193,9 +218,10 @@ class Pm extends CI_Controller {
 			$message[TF_PM_SUBJECT] = $this->input->post(TF_PM_SUBJECT, TRUE);
 			$message[TF_PM_BODY] 	= $this->input->post(TF_PM_BODY, TRUE);
 			// Lets operate on copies of POST input to preserve orig vals in case of failure
-			$recipients 			= explode(";", $this->input->post(PM_RECIPIENTS, TRUE));
+			$recipients 			=  $recipients;//explode(";", $this->input->post(PM_RECIPIENTS, TRUE));
 			$subject 				= $this->input->post(TF_PM_SUBJECT, TRUE);
 			$body 					= $this->input->post(TF_PM_BODY, TRUE);
+
 
 			$recipient_ids 			= array();
 			// Get user ids of recipients - if not found, get usernames of suggestions
@@ -203,6 +229,8 @@ class Pm extends CI_Controller {
 			{
 				$result = $this->user_model->get_userids(trim($recipient));
 				array_push($recipient_ids, reset($result));
+
+				//print_r($result);
 				// Try non-exact search if none found to have suggestions - in this case $data['suggestions']
 				// will contain an array with original strings as keys & arrays with suggestions as values.
 
@@ -246,6 +274,8 @@ class Pm extends CI_Controller {
 			$this->session->set_flashdata('status', $status);
 		}
 		$data['message'] = $message;
+		$data['employee_type'] = $this->user_model->getTypeEmployee();
+
 		$this->load->view('template/header');
 		$this->load->view('compose', $data);
 		$this->load->view('template/footer');

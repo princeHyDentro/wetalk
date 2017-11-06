@@ -181,9 +181,10 @@ class Pm_model extends CI_Model {
 	function send_message($recipients, $subject, $body, $notify = TRUE)
 	{
 		// Check notify
-		$is_logged_in = $this->session->userdata('is_logged_in');
-		$user_id      = $is_logged_in['user_id'];
-		$client_from = $is_logged_in['user_fname'].' '.$is_logged_in['user_lname'];
+		$is_logged_in 	= $this->session->userdata('is_logged_in');
+		$user_id      	= $is_logged_in['user_id'];
+		$user_email      	= $is_logged_in['user_email'];
+		$client_from 	= $is_logged_in['user_fname'].' '.$is_logged_in['user_lname'];
 
 		// exit;
 		$failed = FALSE; // if sth. fails here, more complex cleanup is required
@@ -213,12 +214,14 @@ class Pm_model extends CI_Model {
 
 				$msg_id = $this->table1->insert_id;
 
+
 		// insert links to it for recipients in privmsgs_to
 		
 		foreach ($recipients as $recipient)
 		{
+
 			// Do not allow sending messages to oneself!
-			if($recipient != $user_id)
+			if($recipient != $user_email)
 			{
 
 				$this->db->set(TF_PMTO_MESSAGE, $msg_id);

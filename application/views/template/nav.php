@@ -75,23 +75,7 @@
 			</li>
 		  </ul>
 		</li>
-		<!-- <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti1" data-parent="#exampleReg">
-			<i class="fa fa-fw fa-registered"></i>
-			<span class="nav-link-text">Employee</span>
-		  </a>
-		  <ul class="sidenav-second-level collapse" id="collapseMulti1">
-			<li>
-			  <a href="cards.html"><i class="fa fa-fw fa-users"></i> Add new employee</a>
-			</li>
-			<li>
-			  <a href="cards.html"><i class="fa fa-fw fa-eye"></i> View employees</a>
-			</li>
-			<li>
-			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
-			</li>
-		  </ul>
-		</li> -->
+	<?php endif; ?>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2" data-parent="#exampleAccordion">
 			<i class="fa fa-fw fa-link"></i>
@@ -109,6 +93,7 @@
 			</li>
 		  </ul>
 		</li>
+
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti3" data-parent="#exampleAccordion">
 			<i class="fa fa-share"></i>
@@ -130,7 +115,6 @@
 		  </ul>
 		</li>
 	 
-	<?php endif; ?>
 
 	<?php if($is_logged_in['user_rights'] == 'Admin'): ?>
 		<li class="nav-item"  data-toggle="tooltip" data-placement="right" title="Link">

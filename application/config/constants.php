@@ -81,7 +81,7 @@ define('TF_PMTO_DDATE', 'pmto_ddate');
 define('TF_PMTO_ALLOWNOTIFY', 'pmto_allownotify');
 // User table fields
 define('TF_USER_ID', 'user_id');
-define('TF_USER_NAME', 'user_username');
+define('TF_USER_NAME', 'user_email');
 
 /*
 |--------------------------------------------------------------------------

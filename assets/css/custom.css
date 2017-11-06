@@ -359,7 +359,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
   text-align: right;
   float: right;
   font-size: 12px;
-  margin-top: 18px;
+  margin-top: 5px;
 }
 .inbox .message .attachments {
   border-top: 3px solid #f2f4f8;

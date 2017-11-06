@@ -67,6 +67,16 @@ class User_model extends CI_Model {
     	}
     	
 	}
+	public function getTypeEmployee(){
+		$query 	= $this->db->query("SELECT id,type FROM employee_type");
+    	$result = $query->result('array');
+    	return $result;
+	}
+	public function getUser($post){
+		$query 	= $this->db->query("SELECT * FROM users WHERE user_rights = '{$post}'");
+    	$result = $query->result('array');
+    	return $result;
+	}
 
 
 	public function current_id()
