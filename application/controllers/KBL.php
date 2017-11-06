@@ -26,9 +26,9 @@ class KBL extends CI_Controller {
 			redirect('login', 'refresh');
 			die();
 		}else{
-			$data['kbl_data'] = $this->KBL_model->kbl_view(2);
+			$data['kbl_data'] = $this->KBL_model->kbl_view(2,$is_logged_in['user_id']);
 			$data['status'] = $this->KBL_model->kbl_status();
-			$data['user'] = $this->KBL_model->kbl_userdata(1);
+			$data['user'] = $this->KBL_model->kbl_userdata($is_logged_in['user_id']);
 			$this->load->view('template/header');
 	        $this->load->view('korean_basic_language/view_applicant',$data);
 	        $this->load->view('template/footer');
@@ -37,8 +37,10 @@ class KBL extends CI_Controller {
 	
 	public function insert_new_kbl() {
 		$this->load->model("KBL_model");
+		$is_logged_in = $this->session->userdata('is_logged_in');
+
 		$data = array(
-		    "user_id" =>1,
+			"user_id" 		=>$is_logged_in['user_id'],
 			"cl_type_id" =>2,
 			"name" => $_POST["name"],
 			"client_address" => $_POST["address"],
@@ -55,12 +57,23 @@ class KBL extends CI_Controller {
 			"client_enrolled" => $_POST["enrollment"],
 			"client_referredby" => $_POST["referral"],
 			"client_remarks" => $_POST["remarks"],
-			"client_formno" => $_POST["formno"]
+			"client_formno" => $_POST["formno"],
+			"password"     => md5($this->randomPassword())
  		);
 		$this->KBL_model->kbl_insert($data);
 		if ($this->db->affected_rows() > 0) {
 			echo $this->db->insert_id();
 		} 	
+	}
+	function randomPassword() {
+	    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+	    $pass = array(); //remember to declare $pass as an array
+	    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+	    for ($i = 0; $i < 10; $i++) {
+	        $n = rand(0, $alphaLength);
+	        $pass[] = $alphabet[$n];
+	    }
+	    return implode($pass); //turn the array into a string
 	}
 	
 	public function kbl_update_client()

@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <select name="myTable_length" id="search_status" style="height: calc(3rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
           <option value="">Select</option>
           <option value="Inquire">Inquire</option>
-          <option value="SignUp">SignUp</option>
+          <option value="Sign Up">SignUp</option>
           <option value="Departed">Departed</option>
           <option value="Cancelled">Cancelled</option>
       </select>

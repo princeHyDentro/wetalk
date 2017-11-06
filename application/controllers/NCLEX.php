@@ -27,19 +27,23 @@ class NCLEX extends CI_Controller {
 			redirect('login', 'refresh');
 			die();
 		}else{
-			$data['nclex'] = $this->NCLEX_model->nclex_view(1);
+			$data['nclex'] = $this->NCLEX_model->nclex_view(3,$is_logged_in['user_id']);
 			$data['status'] = $this->NCLEX_model->nclex_status();
-			$data['user'] = $this->NCLEX_model->nclex_userdata(1);
+			$data['user'] = $this->NCLEX_model->nclex_userdata($is_logged_in['user_id']);
 			$this->load->view('template/header');
 	        $this->load->view('NCLEX/view_applicant',$data);
 	        $this->load->view('template/footer');
 	    }
 	}
 	
-	public function insert_nlex() {
+	public function insert_nclex() {
+
 		$this->load->model("NLEX_model");
+		
+		$is_logged_in = $this->session->userdata('is_logged_in');
+
 		$data = array(
-		    "user_id" =>1,
+			"user_id" 		=>$is_logged_in['user_id'],
 			"cl_type_id" =>3,
 			"status_id" =>$_POST['status'],
 			"client_course" => $_POST["course"],
@@ -61,12 +65,24 @@ class NCLEX extends CI_Controller {
 			"client_formno" => $_POST['formno'],
 			"client_age" => $_POST["age"],
 			"client_referredby" => $_POST["referred_by"],
-			"client_company" => $_POST["company"]
+			"client_company" => $_POST["company"],
+			"password" => md5($this->randomPassword())
 		);
-		$this->NLEX_model->nlex_insert($data);
+
+		$this->NLEX_model->nclex_insert($data);
 		if ($this->db->affected_rows() > 0) {
 			echo $this->db->insert_id();
 		}
+	}
+	function randomPassword() {
+	    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+	    $pass = array(); //remember to declare $pass as an array
+	    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+	    for ($i = 0; $i < 10; $i++) {
+	        $n = rand(0, $alphaLength);
+	        $pass[] = $alphabet[$n];
+	    }
+	    return implode($pass); //turn the array into a string
 	}
 	
 	public function nclex_update()

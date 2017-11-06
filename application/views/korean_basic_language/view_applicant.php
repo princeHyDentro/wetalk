@@ -56,13 +56,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </thead>
             <tbody>
              <?php if(isset($kbl_data)){ 
+
               foreach ($kbl_data as $data) { ?>
               <tr>
                <td><?php echo $data->name;?></td>
                <td><?php echo $data->client_address;?></td>
                <td><?php echo $data->client_contactno;?></td>
                <td><?php echo $data->client_datevisited;?></td>
-               <td><?php echo $status[$data->status_id-1]; ?></td>
+               <td><?php echo $status[$data->status_id]; ?></td>
                <td><?php echo $data->client_datevisited; ?></td>
                <td><?php echo $data->client_formno; ?></td>
                <th style="text-align: center;"><a href="kbl_update_client/<?php echo $data->client_id; ?>" class="btn btn-success">Update</a></th>

@@ -112,32 +112,38 @@
 													}
 												}
 											?>
+											<?php
+											if ($this->uri->segment(3) != "") { 
+											 	$status = $nclex[0]->status_id;
+											}
+											 ?>
 											<label for="gender">Status</label>
 											<select class="selectpicker form-control" id="status">
 												<option value="">Select</option>
-											  	<option value="1" <?php dropDownValue(1,$nclex[0]->status_id);?>>Inquire</option>
-											  	<option value="2" <?php dropDownValue(1,$nclex[0]->status_id);?>>SignUp</option>
-											  	<option value="3" <?php dropDownValue(1,$nclex[0]->status_id);?>>Cancelled</option>
-											  	<option value="4" <?php dropDownValue(1,$nclex[0]->status_id);?>>Departed</option>
+											  	<option value="1" <?php if ($this->uri->segment(3) != "") {dropDownValue(1,$nclex[0]->status_id);}?>>Inquire</option>
+											  	<option value="2" <?php if ($this->uri->segment(3) != "") {dropDownValue(1,$nclex[0]->status_id);}?>>SignUp</option>
+											  	<option value="3" <?php if ($this->uri->segment(3) != "") {dropDownValue(1,$nclex[0]->status_id);}?>>Cancelled</option>
+											  	<option value="4" <?php if ($this->uri->segment(3) != "") {dropDownValue(1,$nclex[0]->status_id);}?>>Departed</option>
 											</select>
 										</div>
+										
 										<div class="form-group">
 											<div class="input-group">												
 												<span class="label-custom input-group-addon-new">Month</span>
 											    <select class="selectpicker form-control form-control-new" id="month">
 													<option ="">Select</option>
-												  	<option value="january" <?php dropDownValue("january",$nclex[0]->client_month);?>>January</option>
-												  	<option value="febuary" <?php dropDownValue("febuary",$nclex[0]->client_month);?>>Febuary</option>
-												  	<option value="march" <?php dropDownValue("march",$nclex[0]->client_month);?>>March</option>
-												  	<option value="april" <?php dropDownValue("april",$nclex[0]->client_month);?>>April</option>
-												  	<option value="may" <?php dropDownValue("may",$nclex[0]->client_month);?>>May</option>
-												  	<option value="june" <?php dropDownValue("june",$nclex[0]->client_month);?>>June</option>
-												  	<option value="july"<?php dropDownValue("july",$nclex[0]->client_month);?>>July</option>
-												  	<option value="august" <?php dropDownValue("august",$nclex[0]->client_month);?>>August</option>
-												  	<option value="september"<?php dropDownValue("september",$nclex[0]->client_month);?>>September</option>
-												  	<option value="october"<?php dropDownValue("october",$nclex[0]->client_month);?>>October</option>
-												  	<option value="november" <?php dropDownValue("november",$nclex[0]->client_month);?>>November</option>
-												  	<option value="december"<?php dropDownValue("december",$nclex[0]->client_month);?>>December</option>
+												  	<option value="january" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>January</option>
+												  	<option value="febuary" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>Febuary</option>
+												  	<option value="march" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>March</option>
+												  	<option value="april" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>April</option>
+												  	<option value="may" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>May</option>
+												  	<option value="june" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>June</option>
+												  	<option value="july" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>July</option>
+												  	<option value="august" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>August</option>
+												  	<option value="september" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>September</option>
+												  	<option value="october" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>October</option>
+												  	<option value="november" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>November</option>
+												  	<option value="december" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>December</option>
 												</select>
 											    <span class="label-custom input-group-addon-new">Year</span>
 											    <input type="text" class="form-control form-control-new" id="year" placeholder="End" value="<?php if ($this->uri->segment(3) != "") {echo $nclex[0]->client_yearapplied;}?>"/>

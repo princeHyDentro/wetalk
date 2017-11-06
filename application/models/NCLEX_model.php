@@ -11,8 +11,8 @@
 		  $this->db->update("client",$data);
 	  }
 	  
-	  public function nclex_view($id) {
-	      $result = $this->db->query("select * from client where cl_type_id =".$id. " and deleted = 0");
+	  public function nclex_view($id,$user_id) {
+	     $result = $this->db->query("select * from client where cl_type_id =".$id. " and user_id =".$user_id." and deleted = 0");
 		  if ($result->num_rows() > 0) {
 			  return $result->result();
 		  }

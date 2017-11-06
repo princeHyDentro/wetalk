@@ -80,13 +80,14 @@ class J1_exchange_culture extends CI_Controller {
 	{
 		$this->load->model("J1_Exchange_Culture_Model");
 		$is_logged_in = $this->session->userdata('is_logged_in');
+		//echo "<pre>"; print_r($is_logged_in); echo "</pre>";
 		if (!isset($is_logged_in) || $is_logged_in != true) {
 			redirect('login', 'refresh');
 			die();
 		}else{
-			$data['j1_data'] = $this->J1_Exchange_Culture_Model->j1_view(1);
+			$data['j1_data'] = $this->J1_Exchange_Culture_Model->j1_view(1,$is_logged_in['user_id']);
 			$data['status'] = $this->J1_Exchange_Culture_Model->j1_status();
-			$data['user'] = $this->J1_Exchange_Culture_Model->j1_userdata(1);
+			$data['user'] = $this->J1_Exchange_Culture_Model->j1_userdata($is_logged_in['user_id']);
 			$this->load->view('template/header');
 			$this->load->view('j1_exchange_culture/view_applicant',$data);
 			$this->load->view('template/footer');
@@ -95,17 +96,19 @@ class J1_exchange_culture extends CI_Controller {
 	
 	public function insert_new_j1exchangeculture() {
 		$this->load->model("J1_Exchange_Culture_Model");
+		$is_logged_in = $this->session->userdata('is_logged_in');
+
 		$data = array(
-			"user_id" =>1,
-			"cl_type_id" =>1,
-			"status_id" =>$_POST['status'],
+			"user_id" 		=>$is_logged_in['user_id'],
+			"cl_type_id"	=>1,
+			"status_id" 	=>$_POST['status'],
 			"client_course" => $_POST["course"],
-			"pic_id" =>1,
-			"name" => $_POST['name'],
+			"pic_id" 		=>1,
+			"name" 			=> $_POST['name'],
 			"client_address" => $_POST['address'],
-			"client_contactno" => $_POST['contact_no'],
-			"client_email" => $_POST['email_address'],
-			"gender_id" => $_POST['gender'],
+			"client_contactno" 	=> $_POST['contact_no'],
+			"client_email" 		=> $_POST['email_address'],
+			"gender_id" 		=> $_POST['gender'],
 			"client_datevisited" => $_POST['date_visited'],
 			"client_school" => $_POST['school'],
 			"client_month" => $_POST['month'],
@@ -118,12 +121,23 @@ class J1_exchange_culture extends CI_Controller {
 			"client_formno" => $_POST['formno'],
 			"client_age" => $_POST["age"],
 			"client_referredby" => $_POST["referred_by"],
-			"client_company" => $_POST["company"]
+			"client_company" => $_POST["company"],
+			"password"  => md5($this->randomPassword())
 			);
 		$this->J1_Exchange_Culture_Model->j1_insert($data);
 		if ($this->db->affected_rows() > 0) {
 			echo $this->db->insert_id();
 		}
+	}
+	function randomPassword() {
+	    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+	    $pass = array(); //remember to declare $pass as an array
+	    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+	    for ($i = 0; $i < 10; $i++) {
+	        $n = rand(0, $alphaLength);
+	        $pass[] = $alphabet[$n];
+	    }
+	    return implode($pass); //turn the array into a string
 	}
 	
 	public function do_upload_data(){
