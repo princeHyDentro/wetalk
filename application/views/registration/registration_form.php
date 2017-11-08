@@ -19,15 +19,12 @@
           </div>
           <div class="col-md-4">
             <span class="label-custom custom-font" for="age">View By :</span>
-            <select name="myTable_length" id="kbl_search_status" style="height: calc(3rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
+            <select name="myTable_length" id="admin_search_status" style="height: calc(3rem + 2px) !important;" aria-controls="myTable" class="custom-fon form-control form-control-sm">
               <option value="">Select</option>
               <option value="">All</option>
-              <option value="Enrolled">Enrolled</option>
-              <option value="Inquire">Inquire</option>
-              <option value="Passed">Passed</option>
-              <option value="Retake">Retake</option>
-              <option value="Departed">Departed</option>
-              <option value="Cancelled">Cancelled</option>
+              <option value="Nursing">Nursing</option>
+              <option value="KBL">KBL</option>
+              <option value="J1">J1</option>
             </select>
           </div>
         </div>
@@ -50,8 +47,7 @@
                   <th>Account Privilege</th>
                   <th>Date Created</th>
                   <th>Date Updated</th>
-                  <th>Update</th>
-                  <th>Delete</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,8 +64,7 @@
                   <th>Account Privilege</th>
                   <th>Date Created</th>
                   <th>Date Updated</th>
-                  <th>Update</th>
-                  <th>Delete</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
             </table>

@@ -35,6 +35,10 @@ $(document).ready(function() {
     $('#search_register_account_by_name').on('keyup' , function(){
         table.search( this.value ).draw();
     });
+    $('#admin_search_status').on('change' , function(){
+        table.search( this.value ).draw();
+    });
+    kbl_search_status
  
     //datepicker
     $('.datepicker').datepicker({
