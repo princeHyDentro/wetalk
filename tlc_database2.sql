@@ -2,10 +2,10 @@
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 07, 2017 at 02:15 PM
--- Server version: 5.7.19
--- PHP Version: 5.6.31
+-- Host: 127.0.0.1
+-- Generation Time: Nov 08, 2017 at 03:06 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.0.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,9 +28,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `client`
 --
 
-DROP TABLE IF EXISTS `client`;
-CREATE TABLE IF NOT EXISTS `client` (
-  `client_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `client` (
+  `client_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `cl_type_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
@@ -56,21 +55,23 @@ CREATE TABLE IF NOT EXISTS `client` (
   `client_course` varchar(255) NOT NULL,
   `client_referredby` varchar(255) NOT NULL,
   `client_company` varchar(255) NOT NULL,
-  `j1_type` int(11) NOT NULL,
+  `j1_type` varchar(50) NOT NULL,
   `client_mobile` varchar(200) NOT NULL,
   `client_enrolled` varchar(255) NOT NULL,
   `client_educationalattainment` text NOT NULL,
-  `deleted` int(11) NOT NULL,
-  PRIMARY KEY (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `deleted` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `client`
 --
 
 INSERT INTO `client` (`client_id`, `user_id`, `cl_type_id`, `status_id`, `pic_id`, `name`, `client_address`, `client_contactno`, `client_email`, `password`, `gender_id`, `client_datevisited`, `client_school`, `client_month`, `client_remarks`, `client_datecreated`, `client_of`, `client_birthdate`, `client_yeargraduated`, `client_yearapplied`, `client_lastupdated`, `client_formno`, `client_age`, `client_course`, `client_referredby`, `client_company`, `j1_type`, `client_mobile`, `client_enrolled`, `client_educationalattainment`, `deleted`) VALUES
-(3, 5, 1, 1, 1, 'j133', 'j1', 'j1', 'j1@yahoo.com', '14bd6122beda6377928efa73886dd4', 1, '2017-11-20', 'USJR', 'febuary', 'qwer', '2017-11-06', '', '2017-11-15', 2012, 1012, '0000-00-00', 234234, 23, 'BIST', '', 'friend', 0, '', '', '', 0),
-(4, 6, 2, 0, 0, 'kbl', 'kbl', '234234', 'kbl@yahoo.com', '220129196adc6aac44166b28cbf1c4', 0, '2014-11-05', 'usjr', '', 'werwer', '0000-00-00', '', '2017-11-21', 0, 0, '0000-00-00', 234234, 34, 'bsit', 'wer', '', 0, '234234', '1', 'usjr', 0);
+(1, 1, 1, 3, 1, 'sample 1223', 'gvghvggg', '455', 'sample', 'a09c25e8b7c86eb1a961616f5709ef', 1, '2017-11-14', '', 'november', 'asdsdasd', '2017-11-08', '', '2017-11-14', 345, 78, '0000-00-00', 1, 67, 'hjkh', 'afsdsfsdf', '', '0', '', '', '', 0),
+(2, 1, 1, 1, 1, ' jhbjhb', 'hvbjhbhbh', '678', 'fcfgvg', '35f9739a17ae5cfcb49dc7894091f9', 2, '2017-11-14', 'fgcgcvj', 'january', 'vhbhkl', '2017-11-08', '', '2017-11-14', 56, 667, '0000-00-00', 222, 56, 'hvkhgv', '', 'friend', '0', '', '', '', 0),
+(3, 1, 2, 0, 0, 'testing 333', 'ghghigb', '77', 'ygvgiu', '8d5e5d9efd844d7bb80704684cf06b', 2, '78', 'hvhjkb', '', 'jhljl', '2017-11-08', '', '2017-11-07', 0, 0, '0000-00-00', 990, 34, 'hbkh', 'cfc', '', '0', '233', 'cancelled', 'gygvg', 0),
+(4, 1, 3, 1, 1, 'hbjhb', 'hbhb', '67', 'hbhb', 'c994657946e1e8e8b96bbe85f61b44', 1, '2017-11-29', 'dfssdfsdfs', 'Select', 'gvjvvjg', '2017-11-08', '', '2017-11-23', 89, 89, '0000-00-00', 90, 78, 'bljk', '', 'Online Website', '0', '', '', '', 0),
+(5, 1, 3, 1, 1, 'kkkkk', 'fgcfgfg', '344', 'fgcfgfg', '28ca1f2610d5eafeb7f12bb4664ce0', 1, '2017-11-24', 'hjhhjjh', 'march', 'vghfvgf', '2017-11-08', '', '2017-11-15', 678, 909, '0000-00-00', 1233, 12234, 'sdsd', '', 'Facebook', 'intern', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -78,12 +79,10 @@ INSERT INTO `client` (`client_id`, `user_id`, `cl_type_id`, `status_id`, `pic_id
 -- Table structure for table `client_type`
 --
 
-DROP TABLE IF EXISTS `client_type`;
-CREATE TABLE IF NOT EXISTS `client_type` (
-  `cl_type_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cl_type_desc` varchar(255) NOT NULL,
-  PRIMARY KEY (`cl_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `client_type` (
+  `cl_type_id` int(11) NOT NULL,
+  `cl_type_desc` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `client_type`
@@ -100,12 +99,10 @@ INSERT INTO `client_type` (`cl_type_id`, `cl_type_desc`) VALUES
 -- Table structure for table `employee_type`
 --
 
-DROP TABLE IF EXISTS `employee_type`;
-CREATE TABLE IF NOT EXISTS `employee_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `employee_type` (
+  `id` int(11) NOT NULL,
+  `type` varchar(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee_type`
@@ -123,12 +120,10 @@ INSERT INTO `employee_type` (`id`, `type`) VALUES
 -- Table structure for table `gender`
 --
 
-DROP TABLE IF EXISTS `gender`;
-CREATE TABLE IF NOT EXISTS `gender` (
-  `gender_id` int(11) NOT NULL AUTO_INCREMENT,
-  `gender` varchar(50) NOT NULL,
-  PRIMARY KEY (`gender_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+CREATE TABLE `gender` (
+  `gender_id` int(11) NOT NULL,
+  `gender` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `gender`
@@ -144,17 +139,14 @@ INSERT INTO `gender` (`gender_id`, `gender`) VALUES
 -- Table structure for table `kbl`
 --
 
-DROP TABLE IF EXISTS `kbl`;
-CREATE TABLE IF NOT EXISTS `kbl` (
-  `kbl_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `kbl` (
+  `kbl_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `kbl_phone_no` varchar(50) NOT NULL,
   `kbl_age` int(11) NOT NULL,
   `kbl_educationalattainment` text NOT NULL,
   `kbl_purposeenrollment` text NOT NULL,
-  `kbl_referrals` int(11) NOT NULL,
-  PRIMARY KEY (`kbl_id`),
-  KEY `client_id` (`client_id`)
+  `kbl_referrals` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -163,13 +155,11 @@ CREATE TABLE IF NOT EXISTS `kbl` (
 -- Table structure for table `pictures`
 --
 
-DROP TABLE IF EXISTS `pictures`;
-CREATE TABLE IF NOT EXISTS `pictures` (
-  `pic_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pictures` (
+  `pic_id` int(11) NOT NULL,
   `pic_path` text NOT NULL,
-  `client_id` int(11) NOT NULL,
-  PRIMARY KEY (`pic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `client_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pictures`
@@ -186,9 +176,8 @@ INSERT INTO `pictures` (`pic_id`, `pic_path`, `client_id`) VALUES
 -- Table structure for table `privmsgs`
 --
 
-DROP TABLE IF EXISTS `privmsgs`;
-CREATE TABLE IF NOT EXISTS `privmsgs` (
-  `privmsg_id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `privmsgs` (
+  `privmsg_id` bigint(20) NOT NULL,
   `privmsg_author` bigint(20) NOT NULL,
   `from_name` varchar(50) NOT NULL,
   `privmsg_date` varchar(20) NOT NULL,
@@ -197,9 +186,8 @@ CREATE TABLE IF NOT EXISTS `privmsgs` (
   `privmsg_notify` tinyint(1) DEFAULT NULL,
   `sent` varchar(10) NOT NULL DEFAULT 'read',
   `privmsg_deleted` tinyint(1) DEFAULT NULL,
-  `privmsg_ddate` datetime DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY `privmsg_id` (`privmsg_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+  `privmsg_ddate` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `privmsgs`
@@ -217,18 +205,16 @@ INSERT INTO `privmsgs` (`privmsg_id`, `privmsg_author`, `from_name`, `privmsg_da
 -- Table structure for table `privmsgs_to`
 --
 
-DROP TABLE IF EXISTS `privmsgs_to`;
-CREATE TABLE IF NOT EXISTS `privmsgs_to` (
-  `pmto_id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `privmsgs_to` (
+  `pmto_id` bigint(20) NOT NULL,
   `pmto_message` bigint(20) NOT NULL,
   `pmto_recipient` bigint(20) NOT NULL,
   `pmto_read` int(1) DEFAULT NULL,
   `pmto_rdate` text,
   `pmto_deleted` tinyint(1) DEFAULT NULL,
   `pmto_ddate` varchar(20) DEFAULT NULL,
-  `pmto_allownotify` tinyint(1) DEFAULT NULL,
-  UNIQUE KEY `pmto_id` (`pmto_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+  `pmto_allownotify` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `privmsgs_to`
@@ -245,12 +231,10 @@ INSERT INTO `privmsgs_to` (`pmto_id`, `pmto_message`, `pmto_recipient`, `pmto_re
 -- Table structure for table `status`
 --
 
-DROP TABLE IF EXISTS `status`;
-CREATE TABLE IF NOT EXISTS `status` (
-  `status_id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(50) NOT NULL,
-  PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `status` (
+  `status_id` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `status`
@@ -268,9 +252,8 @@ INSERT INTO `status` (`status_id`, `status`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
   `user_fname` varchar(50) NOT NULL,
   `user_lname` varchar(30) NOT NULL,
   `user_mname` varchar(50) NOT NULL,
@@ -279,10 +262,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_email` varchar(50) NOT NULL,
   `user_rights` text NOT NULL,
   `user_datecreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_updateddate` timestamp NOT NULL,
-  `flag` int(10) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `user_updateddate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `flag` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -294,6 +276,135 @@ INSERT INTO `users` (`user_id`, `user_fname`, `user_lname`, `user_mname`, `user_
 (5, 'J1', 'J1', 'J1', 'J1', '49b5926251bfc0e5166a1c407ccd1050', 'J1@gmail.com', 'J1', '2017-11-06 09:53:28', '0000-00-00 00:00:00', 0),
 (6, 'kbl', 'kbl', 'kbl', 'kbl', 'fa623b24a9f8d07c9c21652d3db0e569', 'kbl', 'KBL', '2017-11-06 09:53:56', '0000-00-00 00:00:00', 0),
 (7, 'Nursing1', 'Nursing1', 'Nursing1', 'Nursing1', 'aa91b896dfd9b371622c5d8bbc4ecdcb', 'Nursing1@gmail.com', 'Nursing', '2017-11-06 11:16:00', '0000-00-00 00:00:00', 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`client_id`);
+
+--
+-- Indexes for table `client_type`
+--
+ALTER TABLE `client_type`
+  ADD PRIMARY KEY (`cl_type_id`);
+
+--
+-- Indexes for table `employee_type`
+--
+ALTER TABLE `employee_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gender`
+--
+ALTER TABLE `gender`
+  ADD PRIMARY KEY (`gender_id`);
+
+--
+-- Indexes for table `kbl`
+--
+ALTER TABLE `kbl`
+  ADD PRIMARY KEY (`kbl_id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
+-- Indexes for table `pictures`
+--
+ALTER TABLE `pictures`
+  ADD PRIMARY KEY (`pic_id`);
+
+--
+-- Indexes for table `privmsgs`
+--
+ALTER TABLE `privmsgs`
+  ADD UNIQUE KEY `privmsg_id` (`privmsg_id`);
+
+--
+-- Indexes for table `privmsgs_to`
+--
+ALTER TABLE `privmsgs_to`
+  ADD UNIQUE KEY `pmto_id` (`pmto_id`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`status_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `client`
+--
+ALTER TABLE `client`
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `client_type`
+--
+ALTER TABLE `client_type`
+  MODIFY `cl_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `employee_type`
+--
+ALTER TABLE `employee_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `gender`
+--
+ALTER TABLE `gender`
+  MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `kbl`
+--
+ALTER TABLE `kbl`
+  MODIFY `kbl_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pictures`
+--
+ALTER TABLE `pictures`
+  MODIFY `pic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `privmsgs`
+--
+ALTER TABLE `privmsgs`
+  MODIFY `privmsg_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `privmsgs_to`
+--
+ALTER TABLE `privmsgs_to`
+  MODIFY `pmto_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
