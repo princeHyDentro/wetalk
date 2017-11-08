@@ -38,14 +38,14 @@ class NCLEX extends CI_Controller {
 	
 	public function insert_nclex() {
 
-		$this->load->model("NLEX_model");
+		$this->load->model("NCLEX_model");
 		
 		$is_logged_in = $this->session->userdata('is_logged_in');
 
 		$data = array(
 			"user_id" 		=>$is_logged_in['user_id'],
 			"cl_type_id" =>3,
-			"status_id" =>$_POST['status'],
+			"status_id" =>1,
 			"client_course" => $_POST["course"],
 			"pic_id" =>1,
 			"name" => $_POST['name'],
@@ -69,7 +69,7 @@ class NCLEX extends CI_Controller {
 			"password" => md5($this->randomPassword())
 		);
 
-		$this->NLEX_model->nclex_insert($data);
+		$this->NCLEX_model->nclex_insert($data);
 		if ($this->db->affected_rows() > 0) {
 			echo $this->db->insert_id();
 		}
@@ -107,7 +107,8 @@ class NCLEX extends CI_Controller {
 			"client_formno" => $_POST['formno'],
 			"client_age" => $_POST["age"],
 			"client_referredby" => $_POST["referred_by"],
-			"client_company" => $_POST["company"]
+			"client_company" => $_POST["company"],
+			"j1_type" => $_POST["j1_type"]
 		   );
 		   $this->NCLEX_model->nclex_update($_POST["client_id"],$nclex);
 		   if ($this->db->affected_rows() > 0) {

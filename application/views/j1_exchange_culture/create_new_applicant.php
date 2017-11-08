@@ -194,6 +194,7 @@
 									        </div>
 									    </div>
 										<div class="form-group">
+										    <label for ="remarks"> Remarks</label>
 											<textarea  class="form-control" id="message" placeholder="Enter Your Message"><?php if($id != "") {echo $client[0]->client_remarks;}?></textarea>
 										</div>
 										<div class="form-group">

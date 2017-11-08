@@ -50,6 +50,7 @@ class KBL extends CI_Controller {
 			"client_birthdate" => $_POST["datepicker"],
 			"client_age" => $_POST["age"],
 			"gender_id" => $_POST["gender"],
+			"client_datecreated" => date('Y-m-d'),
 			"client_educationalattainment" => $_POST["educational"],
 			"client_datevisited" => $_POST["datevisited"],
 			"client_school" => $_POST["school"],
@@ -96,6 +97,7 @@ class KBL extends CI_Controller {
 			 "client_enrolled" => $_POST["enrollment"],
 			 "client_referredby" => $_POST["referral"],
 			 "client_remarks" => $_POST["remarks"],
+			 "client_datecreated" => date('Y-m-d'),
 			 "client_formno" => $_POST["formno"]
 		   );
 		   $this->KBL_model->kbl_update($_POST["client_id"],$client_update);

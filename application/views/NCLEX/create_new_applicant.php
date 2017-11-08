@@ -132,18 +132,18 @@
 												<span class="label-custom input-group-addon-new">Month</span>
 											    <select class="selectpicker form-control form-control-new" id="month">
 													<option ="">Select</option>
-												  	<option value="january" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>January</option>
-												  	<option value="febuary" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>Febuary</option>
-												  	<option value="march" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>March</option>
-												  	<option value="april" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>April</option>
-												  	<option value="may" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>May</option>
-												  	<option value="june" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>June</option>
-												  	<option value="july" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>July</option>
-												  	<option value="august" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>August</option>
-												  	<option value="september" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>September</option>
-												  	<option value="october" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>October</option>
-												  	<option value="november" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>November</option>
-												  	<option value="december" <?php if ($this->uri->segment(3) != "") { $client_month = $nclex[0]->client_month;} ?>>December</option>
+												  	<option value="january" <?php if ($this->uri->segment(3) != "") { dropDownValue("january",$nclex[0]->client_month);} ?>>January</option>
+												  	<option value="febuary" <?php if ($this->uri->segment(3) != "") { dropDownValue("febuary",$nclex[0]->client_month);} ?>>Febuary</option>
+												  	<option value="march" <?php if ($this->uri->segment(3) != "") { dropDownValue("march",$nclex[0]->client_month);} ?>>March</option>
+												  	<option value="april" <?php if ($this->uri->segment(3) != "") { dropDownValue("april",$nclex[0]->client_month);} ?>>April</option>
+												  	<option value="may" <?php if ($this->uri->segment(3) != "") { dropDownValue("may",$nclex[0]->client_month);} ?>>May</option>
+												  	<option value="june" <?php if ($this->uri->segment(3) != "") { dropDownValue("june",$nclex[0]->client_month);} ?>>June</option>
+												  	<option value="july" <?php if ($this->uri->segment(3) != "") { dropDownValue("july",$nclex[0]->client_month);} ?>>July</option>
+												  	<option value="august" <?php if ($this->uri->segment(3) != "") { dropDownValue("august",$nclex[0]->client_month);} ?>>August</option>
+												  	<option value="september" <?php if ($this->uri->segment(3) != "") { dropDownValue("september",$nclex[0]->client_month);} ?>>September</option>
+												  	<option value="october" <?php if ($this->uri->segment(3) != "") { dropDownValue("october",$nclex[0]->client_month);} ?>>October</option>
+												  	<option value="november" <?php if ($this->uri->segment(3) != "") { dropDownValue("november",$nclex[0]->client_month);} ?>>November</option>
+												  	<option value="december" <?php if ($this->uri->segment(3) != "") { dropDownValue("december",$nclex[0]->client_month);} ?>>December</option>
 												</select>
 											    <span class="label-custom input-group-addon-new">Year</span>
 											    <input type="text" class="form-control form-control-new" id="year" placeholder="End" value="<?php if ($this->uri->segment(3) != "") {echo $nclex[0]->client_yearapplied;}?>"/>
@@ -153,31 +153,41 @@
 											<label for="gender">J1 Type</label>
 											<select class="selectpicker form-control" id="j1_type">
 												<option value="">Select</option>
-											  	<option value="1">Intern</option>
-											  	<option value="2">Trainee</option>
+											  	<option value="intern" <?php if ($this->uri->segment(3) != "") { dropDownValue("intern",$nclex[0]->j1_type);} ?>>Intern</option>
+											  	<option value="trainee" <?php if ($this->uri->segment(3) != "") { dropDownValue("trainee",$nclex[0]->j1_type);} ?>>Trainee</option>
 											</select>
 										</div>
 										<div class="form-group">
+										     <?php
+													function checkedValue($value1,$value2) {
+														if (ucwords($value1) == ucwords($value2)) {
+														echo "checked";
+														} else {
+															echo "unchecked";
+														}
+													}
+												?>
 									        <label class="col-sm-12 control-label">Where did you know about our company ?</label>
 									        <div class="col-sm-12">
 									            <div class="radio">
-									                <label> <input type="radio" name="radio" class="company" value="friend" checked> Friend </label>
+									                <label> <input type="radio" name="radio" class="company" value="friend" checked <?php if ($this->uri->segment(3) != "") { checkedValue("friend",$nclex[0]->client_company);} ?>> Friend </label>
 									            </div>
 									            <div class="radio">
-									                <label> <input type="radio" name="radio" class="company" value="Poster,Flyers,Etc"> Poster,Flyers,Etc </label>
+									                <label> <input type="radio" name="radio" class="company" value="Poster,Flyers,Etc" <?php if ($this->uri->segment(3) != "") { checkedValue("poster,flyers,etc",$nclex[0]->client_company);} ?>> Poster,Flyers,Etc </label>
 									            </div>
 									            <div class="radio">
-									                <label> <input type="radio" name="radio" class="company" value="Facebook" > Facebook </label>
+									                <label> <input type="radio" name="radio" class="company" value="Facebook" <?php if ($this->uri->segment(3) != "") { checkedValue("facebook",$nclex[0]->client_company);} ?>> Facebook </label>
 									            </div>
 									            <div class="radio">
-									                <label> <input type="radio" name="radio" class="company" value="Online Website" > Online Website </label>
+									                <label> <input type="radio" name="radio" class="company" value="Online Website" <?php if ($this->uri->segment(3) != "") { checkedValue("online website",$nclex[0]->client_company);} ?>> Online Website </label>
 									            </div>
 									            <div class="radio">
-									                <label> <input type="radio" name="radio" class="company" value="Walkin" > Walkin </label>
+									                <label> <input type="radio" name="radio" class="company" value="Walkin" <?php if ($this->uri->segment(3) != "") { checkedValue("walkin",$nclex[0]->client_company);} ?>> Walkin </label>
 									            </div>
 									            <div class="radio">
-									                <label> <input type="radio" name="radio" id="referred" value="Referred By" > Reffered By
-									                	<input type="text" value="" class="form-control" disabled id="referred_by_input" name="">
+									                <label> <input type="radio" name="radio" id="referred" value="Referred By" <?php if ($this->uri->segment(3) != "" && $nclex[0]->client_referredby != "") {echo "checked";}else {echo "unchecked";}?>> Reffered By
+									                	<input type="text" class="form-control" id="referred_by_input" name="" value="<?php if ($this->uri->segment(3) != "") {echo $nclex[0]->client_referredby;}?>"
+														<?php if ($this->uri->segment(3) != "" && $nclex[0]->client_referredby != "") {echo "";}else {echo "disabled";}?>>
 									                </label>
 									            </div>
 									        </div>

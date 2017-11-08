@@ -81,8 +81,8 @@
 											<label for="gender">Gender</label>
 											<select class="selectpicker form-control" id="gender">
 												<option value="">Select</option>
-											  	<option value="male" <?php echo $male; ?>>Male</option>
-											  	<option value="female" <?php echo $female; ?>>Female</option>
+											  	<option value="1" <?php echo $male; ?>>Male</option>
+											  	<option value="2" <?php echo $female; ?>>Female</option>
 											</select>
 										</div>
 										<div class="form-group">
@@ -123,10 +123,10 @@
 											<label for="gender">Purpose in Enrollment</label>
 											<select class="selectpicker form-control"id="enrollment">
 												<option value="">Select</option>
-												<option value="1" <?php if ($this->uri->segment(3)) { dropDownValue(1,$kbl[0]->status_id); }?>>Enrolled</option>
-											  	<option value="2" <?php if ($this->uri->segment(3)) { dropDownValue(2,$kbl[0]->status_id); }?>>Inquire</option>
-											  	<option value="3" <?php if ($this->uri->segment(3)) { dropDownValue(3,$kbl[0]->status_id); }?>>Passed</option>
-											  	<option value="4" <?php if ($this->uri->segment(3)) { dropDownValue(4,$kbl[0]->status_id); }?>>Cancelled</option>
+												<option value="enrolled" <?php if ($this->uri->segment(3)) { dropDownValue("enrolled",$kbl[0]->client_enrolled); }?>>Enrolled</option>
+											  	<option value="inquire" <?php if ($this->uri->segment(3)) { dropDownValue("inquire",$kbl[0]->client_enrolled); }?>>Inquire</option>
+											  	<option value="passed" <?php if ($this->uri->segment(3)) { dropDownValue("passed",$kbl[0]->client_enrolled); }?>>Passed</option>
+											  	<option value="cancelled" <?php if ($this->uri->segment(3)) { dropDownValue("cancelled",$kbl[0]->client_enrolled); }?>>Cancelled</option>
 											</select>
 										</div>
 										<div class="form-group">

@@ -12,6 +12,7 @@ $("document").ready(function(){
   
 	  $("#nlex_save").click(function(){
 		    var company;
+			var referred_by;			
 		    var name = $("#name").val();
 		    var contact_no = $("#contact_no").val();
 		    var address = $("#address").val();
@@ -27,17 +28,20 @@ $("document").ready(function(){
 		    var month = $("#month").val();
 		    var year = $("#year").val();
 		    var j1_type = $("#j1_type").val();
-		    var company = $(".company").is(':checked');
 		    var message = $("#message").val();
-		    var referred_by = $("#referred_by").val();
 		    var formno = $("#formno").val(); 
-		    var referred_by = $("#referred_by_input").val();	
-
+		 
             $(".company").each(function(){
 				 if ($(this).is(":checked") == true) {
 					 company = $(this).val();
+					 referred_by = "";
 				 }
-			});		
+			});
+            
+            if ($("#referred").is(":checked") == true) {
+				 referred_by = $("#referred_by_input").val();
+				 company = "";
+			}				
 			
 			$.ajax({
 				 url    : "insert_nclex",
@@ -74,6 +78,7 @@ $("document").ready(function(){
 	  $("#nclex_update").click(function(){
 		  
 		        var company;
+				var referred_by;
 				var name = $("#name").val();
 				var contact_no = $("#contact_no").val();
 				var address = $("#address").val();
@@ -91,16 +96,19 @@ $("document").ready(function(){
 				var j1_type = $("#j1_type").val();
 				var company = $(".company").is(':checked');
 				var message = $("#message").val();
-				var referred_by = $("#referred_by").val();
 				var formno = $("#formno").val(); 
-				var referred_by = $("#referred_by_input").val();	
 				var client_id = $("#client_id").val();	
 
 				$(".company").each(function(){
 					 if ($(this).is(":checked") == true) {
 						 company = $(this).val();
 					 }
-				});		
+				});
+
+               if ($("#referred").is(":checked") == true) {
+				   referred_by = $("#referred_by_input").val();
+				   company = "";
+			   }					
 		   				
 				$.ajax({
 					url : ""+$("#client_id").val()+"/1",

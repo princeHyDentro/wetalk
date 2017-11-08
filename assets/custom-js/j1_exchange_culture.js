@@ -72,9 +72,10 @@ $("document").ready(function(){
 			}); 
 	  });
 	  
-	  $("#update_applicant").click(function(){
+	  $("#update_applicant").click(function(){ 
 		  
 		        var company;
+				var referred_by;
 				var name = $("#name").val();
 				var address = $("#address").val();
 				var contact_no = $("#contact_no").val();
@@ -93,14 +94,19 @@ $("document").ready(function(){
 				var message = $("#message").val();
 				var formno = $("#formno").val();
 				var client_id = $("#client_id").val();
-				var referred_by = $("#referred_by_input").val();
 				
-				 $(".company").each(function(){
+				$(".company").each(function(){
 				   if ($(this).is(":checked") == true) {
 					 company = $(this).val();
-				   }
+					 referred_by = "";
+				   } 
 			     });	
-		   				
+				 
+				 if ($("#referred_by").is(":checked") == true) {
+					 referred_by = $("#referred_by_input").val();
+					 company = "";
+				 }
+		   		
 				$.ajax({
 					url : ""+$("#client_id").val()+"/1",
 					method : "post",
@@ -131,6 +137,6 @@ $("document").ready(function(){
 						   window.location.href = '/wetalk/J1_exchange_culture/view_all_applicant';
 					   }
 					}
-				});
+				}); 
 	  });
 });
