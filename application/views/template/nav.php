@@ -13,7 +13,7 @@
 			<span class="nav-link-text">Dashboard</span>
 		  </a>
 		</li>
-		<?php if($is_logged_in['user_rights'] == 'J1' || $is_logged_in['user_rights'] == 'Admin'): ?>
+		<?php if($is_logged_in['user_rights'] == 'J1' || $is_logged_in['user_rights'] == 'Admin' || $is_logged_in['user_rights'] == 'super'): ?>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
 			<i class="flag-icon flag-icon-us"></i>
@@ -27,13 +27,13 @@
 			  <a href="<?php echo base_url('J1_exchange_culture/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('J1_exchange_culture/report'); ?>"><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>
 
 	<?php endif; ?>
-		<?php if($is_logged_in['user_rights'] == 'KBL' || $is_logged_in['user_rights'] == 'Admin'): ?>
+		<?php if($is_logged_in['user_rights'] == 'KBL' || $is_logged_in['user_rights'] == 'Admin' || $is_logged_in['user_rights'] == 'super'): ?>
 
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
@@ -49,14 +49,14 @@
 			  <a href="<?php echo base_url('kbl/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('kbl/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>
 
 	<?php endif ?>
 
-	<?php if($is_logged_in['user_rights'] == 'Nursing' || $is_logged_in['user_rights'] == 'Admin'): ?>
+	<?php if($is_logged_in['user_rights'] == 'Nursing' || $is_logged_in['user_rights'] == 'Admin' || $is_logged_in['user_rights'] == 'super'): ?>
 		<li class="nav-item"  data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
 			<i class="flag-icon flag-icon-us"></i>
@@ -71,12 +71,12 @@
 			  <a href="<?php echo base_url('nclex/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('nclex/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>
 	<?php endif; ?>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+		<li style="display: none;" class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2" data-parent="#exampleAccordion">
 			<i class="fa fa-fw fa-link"></i>
 			<span class="nav-link-text">Profile</span>
@@ -116,7 +116,7 @@
 		</li>
 	 
 
-	<?php if($is_logged_in['user_rights'] == 'Admin'): ?>
+	<?php if($is_logged_in['user_rights'] == 'Admin' || $is_logged_in['user_rights'] == 'super'): ?>
 		<li class="nav-item"  data-toggle="tooltip" data-placement="right" title="Link">
 		  <a class="nav-link" href="<?php  echo base_url('registration/employee_registration_form'); ?>">
 			<i class="fa fa-fw fa-users"></i>
@@ -178,7 +178,7 @@
 			<?php 
 				$is_logged_in = $this->session->userdata('is_logged_in');
 
-				if($is_logged_in['user_rights'] == "Admin"){
+				if($is_logged_in['user_rights'] == "Admin" || $is_logged_in['user_rights'] == 'super'){
 					echo "Logged as: Administrator";
 				}else{
 					echo "Logged as: TLC Employee";

@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registration extends CI_Controller {
-   
+ 
     public function __construct()
     {
         parent::__construct();
@@ -24,12 +24,12 @@ class Registration extends CI_Controller {
         }
     }
     public function get_employee_data(){
-       $list = $this->users->employees_table();
-       return $list;
-   }
+     $list = $this->users->employees_table();
+     return $list;
+ }
 
-   public function ajax_list_data()
-   {
+ public function ajax_list_data()
+ {
     $list = $this->users->get_datatables();
     $data = array();
     $no = $_POST['start'];
@@ -47,8 +47,8 @@ class Registration extends CI_Controller {
         $row[] = $person->user_updateddate;
         
             //add html for action
-        $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->user_id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>';
-        $row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->user_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+        $row[] = '<a style="width: 4rem;" class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->user_id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a> <a style="width: 4rem;" class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->user_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+
         
         $data[] = $row;
     }
@@ -72,6 +72,7 @@ public function ajax_edit($id)
 
 public function ajax_add()
 {
+    $is_logged_in = $this->session->userdata('is_logged_in');
     $this->_validate();
     $data = array(
         'user_fname' => $this->input->post('user_fname'),
@@ -81,6 +82,7 @@ public function ajax_add()
         'user_password' => md5($this->input->post('user_password')),
         'user_email' => $this->input->post('user_email'),
         'user_rights' => $this->input->post('permission'),
+        'added_by'    => $is_logged_in['user_id']
     );
     $insert = $this->users->save($data);
     echo json_encode(array("status" => TRUE));

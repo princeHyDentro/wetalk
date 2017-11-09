@@ -86,12 +86,6 @@ class Pm extends CI_Controller {
 			$i = 0;
 			foreach ($messages as $message)
 			{
-				
-				// $old_date = date($message['privmsg_date']);            // works
-				// $middle = strtotime($old_date);             // returns bool(false)
-
-				// $message['privmsg_date'] = date("F j, Y - g:i A", $middle); 
-				// //
 
 				$messages[$i][TF_PM_BODY] 		= $this->render($messages[$i][TF_PM_BODY]);
 				$messages[$i][TF_PM_AUTHOR] 	= $this->user_model->get_username($message[TF_PM_AUTHOR]);
@@ -109,16 +103,10 @@ class Pm extends CI_Controller {
 			foreach ($messages as $key => $msg_id) {				
 				$messages[$x]['read_unread'] = $this->user_model->get_read_unread($msg_id['privmsg_id']);
 				$x++;
-				// $dae = $this->user_model->get_read_unread($msg_id['privmsg_id'],$user_id);
-				// echo  "<pre>"; print_r($dae); echo "</pre>";
 			}
-			
-			
-		//	print_r($messages);
 			$data['messages'] = $messages;
 		}
 		else $data['messages'] = array();
-			//print_r(json_encode($data));
 		echo 	json_encode($data);
 		exit;
 		
@@ -134,7 +122,6 @@ class Pm extends CI_Controller {
 		$data['type'] = $type;
 		$messages = $this->pm_model->get_messages($type , $user_id);
 		
-
 		if($messages)
 		{
 			// Get recipients & get usernames instead of user ids

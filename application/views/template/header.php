@@ -22,4 +22,8 @@
   <link  href="<?php echo base_url('assets/css/custom.css'); ?>" rel="stylesheet">
   <link  href="<?php echo base_url('assets/css/select.css'); ?>" rel="stylesheet">
   <link  href="<?php echo base_url('flag-icon-css-master/css/flag-icon.css'); ?>" rel="stylesheet">
+  
+  <link  href="<?php echo base_url('assets/css/print/jquery.dataTables.min.css'); ?>" rel="stylesheet">
+  <link  href="<?php echo base_url('assets/css/print/buttons.dataTables.min.css'); ?>" rel="stylesheet">
+ 
 </head>
