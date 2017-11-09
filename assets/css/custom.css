@@ -667,7 +667,7 @@ button:focus {
 }
 
 #admin_search_privilege , #search_status,
-#kbl_search_status{
+#kbl_search_status,#admin_search_status{
   position: relative;
     cursor: pointer;
     background-color: transparent;

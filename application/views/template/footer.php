@@ -20,57 +20,15 @@
 <script src="<?php echo base_url('assets/custom-js/nlex.js'); ?>"></script>
 <script src="<?php echo base_url('assets/custom-js/jquery.ajaxfileupload.js'); ?>"></script>
 
-<script src="<?php echo base_url('assets/js/print/jquery-1.12.4.js'); ?>"></script>  
 <script src="<?php echo base_url('assets/js/print/jquery.dataTables.min.js'); ?>"></script>  
 <script src="<?php echo base_url('assets/js/print/dataTables.buttons.min.js'); ?>"></script>  
 <script src="<?php echo base_url('assets/js/print/buttons.print.min.js'); ?>"></script> 
 
 </div>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('.datepicker').datepicker({ format: "yyyy/mm/dd" });
-	}); 
-</script>
-<?php 
-// $is_logged_in = $this->session->userdata('is_logged_in');
-// $name = $is_logged_in['user_rights'].' : '.$is_logged_in['user_fname'].' '.$is_logged_in['user_lname'];
-?>
-<script type="text/javascript">
 	// $(document).ready(function() {
-	// 	var base_url = window.location.origin;
-	// 	var host   = window.location.host;
-	// 	url =  base_url+"/wetalk/pm/ajax_messages";
-	// 	$.ajax({
-	// 		url    : url,
-	// 		method : "post",
-	// 		data   : {
-	// 			MSG_NONDELETED      : 'MSG_NONDELETED',
-	// 		},
-	// 		success : function (data) {
-
-	// 			jsonObject = JSON.parse(data);
-
-	// 			$.each(jsonObject, function (key, val) {
-
-	// 				$.each(val, function (key1, val1) {
-	// 					console.log( val1);
-	// 					var date = new Date(Date.parse(val1.privmsg_date)).toUTCString()
-
-	// 					if(val1.read_unread['pmto_read'] == 1){
-	// 						data = '<div class="dropdown-divider"></div>';
-	// 						data += '<a class="dropdown-item" href="">';
-	// 						data += '<strong>'+val1.from_name+'</strong>';
-	// 						data += '<span class="small float-right text-muted">'+date+'</span>';
-	// 						data += '<br><div class="dropdown-message small">'+val1.privmsg_body+'</div>';
-	// 						data += '</a> ';
-
-	// 						$(".data-msgs").append(data);
-	// 					}
-	// 				});
-	// 			});
-	// 		}
-	// 	});
-	// });
+	// 	$('.datepicker').datepicker({ format: "yyyy/mm/dd" });
+	// }); 
 </script>
 
 <!--End of Tawk.to Script-->

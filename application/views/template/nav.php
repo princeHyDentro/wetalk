@@ -76,7 +76,7 @@
 		  </ul>
 		</li>
 	<?php endif; ?>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+		<li style="display: none;" class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
 		  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2" data-parent="#exampleAccordion">
 			<i class="fa fa-fw fa-link"></i>
 			<span class="nav-link-text">Profile</span>
