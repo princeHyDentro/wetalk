@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registration extends CI_Controller {
-   
+ 
     public function __construct()
     {
         parent::__construct();
@@ -24,12 +24,12 @@ class Registration extends CI_Controller {
         }
     }
     public function get_employee_data(){
-       $list = $this->users->employees_table();
-       return $list;
-   }
+     $list = $this->users->employees_table();
+     return $list;
+ }
 
-   public function ajax_list_data()
-   {
+ public function ajax_list_data()
+ {
     $list = $this->users->get_datatables();
     $data = array();
     $no = $_POST['start'];
@@ -72,6 +72,7 @@ public function ajax_edit($id)
 
 public function ajax_add()
 {
+    $is_logged_in = $this->session->userdata('is_logged_in');
     $this->_validate();
     $data = array(
         'user_fname' => $this->input->post('user_fname'),
@@ -81,6 +82,7 @@ public function ajax_add()
         'user_password' => md5($this->input->post('user_password')),
         'user_email' => $this->input->post('user_email'),
         'user_rights' => $this->input->post('permission'),
+        'added_by'    => $is_logged_in['user_id']
     );
     $insert = $this->users->save($data);
     echo json_encode(array("status" => TRUE));

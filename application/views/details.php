@@ -11,8 +11,6 @@
 			</ol>
 			<div class="col-md-12 col-sm-12 main " style="min-height: 243px;">
 				<div class="row inbox">
-					
-					
 					<div class="col-md-12">
 						
 						<div class="panel panel-default">
@@ -85,7 +83,6 @@
 				</div><!--/.col-->	
 
 			</div><!--/row-->
-
 		</div>
 
 	</div>

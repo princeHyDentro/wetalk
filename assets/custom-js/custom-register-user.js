@@ -38,7 +38,7 @@ $(document).ready(function() {
     $('#admin_search_status').on('change' , function(){
         table.search( this.value ).draw();
     });
-    kbl_search_status
+   
  
     //datepicker
     $('.datepicker').datepicker({

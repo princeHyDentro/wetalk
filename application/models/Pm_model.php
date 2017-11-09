@@ -177,14 +177,14 @@ class Pm_model extends CI_Model {
 		return $this->flag_deleted($msg_id, NULL);
 	}
 
-
-	function send_message($recipients, $subject, $body, $notify = TRUE)
+	function send_message_from_client($recipients, $subject, $body, $notify = TRUE)
 	{
 		// Check notify
 		$is_logged_in 	= $this->session->userdata('is_logged_in');
-		$user_id      	= $is_logged_in['user_id'];
-		$user_email      	= $is_logged_in['user_email'];
-		$client_from 	= $is_logged_in['user_fname'].' '.$is_logged_in['user_lname'];
+
+		$client_id      	= $is_logged_in['client_id'];
+		$user_email     	= $is_logged_in['client_email'];
+		$client_from 		= $is_logged_in['name'];
 
 		// exit;
 		$failed = FALSE; // if sth. fails here, more complex cleanup is required
@@ -199,8 +199,9 @@ class Pm_model extends CI_Model {
 				return FALSE;
 				$date = date("Y-m-d H:i:s");
 				// insert message in privmsgs
-				$this->db->set(TF_PM_AUTHOR, $user_id);
+				$this->db->set(TF_PM_AUTHOR, $client_id);
 				$this->db->set('from_name', $client_from);
+				$this->db->set('type', 1);
 				//$this->db->set(TF_PM_DATE, 'NOW()', FALSE);
 				$this->db->set(TF_PM_DATE, $date);
 				
@@ -211,7 +212,6 @@ class Pm_model extends CI_Model {
 				if( ! $this->table1->insert_data())
 					return FALSE;
 				
-
 				$msg_id = $this->table1->insert_id;
 
 
@@ -239,7 +239,6 @@ class Pm_model extends CI_Model {
 			$this->table2->delete_data(array(TF_PMTO_MESSAGE, $msg_id));
 			return FALSE;
 		}
-
 		return TRUE;
 	}
 }

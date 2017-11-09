@@ -1,6 +1,12 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
+  <style type="text/css">
+    th{
+      width: auto !important;
+    }
+  </style>
   <?php require_once(APPPATH."views/template/nav.php"); ?>
+  <?php $is_logged_in = $this->session->userdata('is_logged_in'); ?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -120,23 +126,26 @@
                       <input type="text" name="user_email" id="user_email" placeholder="Enter Email Address Here.." class="form-control">
                       <span class="help-block"></span>
                     </div>       
-                    <div class="row">
                       <div class="form-group has-error">
-                        <label class="checkbox-inline col-sm-5">
-                          <input type="checkbox" name="permission" class="permission" value="J1" >J1
+                        <label>
+                          <input type="checkbox" name="permission" class="permission1" value="J1" >J1
                         </label>
-                        <label class="checkbox-inline col-sm-5">
-                          <input type="checkbox" name="permission" class="permission" value="Nursing">Nursing
+                        <br>
+                        <label>
+                          <input type="checkbox" name="permission" class="permission2" value="Nursing">Nursing
                         </label>
-                        <label class="checkbox-inline col-sm-5">
-                          <input type="checkbox" name="permission" class="permission" value="KBL">KBL
+                        <br>
+                        <label>
+                          <input type="checkbox" name="permission" class="permission3" value="KBL">KBL
                         </label>
-                        <label class="checkbox-inline col-sm-5">
-                          <input type="checkbox" name="permission" class="permission" value="Admin">As Admin
+                        <br>
+                        <?php if( $is_logged_in['user_rights'] == 'super' ): ?>
+                        <label>
+                          <input type="checkbox" name="permission" class="permission4" value="Admin">As Admin
                         </label>
+                        <?php endif; ?>
                         <span class="help-block"></span>
                       </div>
-                    </div>
                   </div>
                 </form>
               </div>

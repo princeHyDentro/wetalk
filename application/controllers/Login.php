@@ -14,16 +14,15 @@ class Login extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 	public function login_auth(){
-		// echo $_POST['user_password'];
-		// exit;
 		if(isset($_POST['user_password']) && isset($_POST['user_name'])){
-			$user_name      = $_POST['user_password'];
-			$user_password  = $_POST['user_name'];
+			$user_password  = $_POST['user_password'];
+			$user_name  	= $_POST['user_name'];
 		}
 		$this->authLogin($user_name,$user_password);
 	}
 	public function authLogin($user_name,$user_password){
 		$this->load->model('login_model');
+		$this->load->helper('url');
 		//Field validation succeeded.  Validate against database
 		if(isset($user_password) && isset($user_name)){
 			$user_name      = $user_name;
@@ -36,7 +35,6 @@ class Login extends CI_Controller {
 		if($result){
 			$sess_array = array();
 			foreach($result as $row){
-
 				$sess_array = array(
 					'user_name' 	=> $row->user_username,
 					'user_fname' 	=> $row->user_fname,
@@ -45,13 +43,21 @@ class Login extends CI_Controller {
 					'user_email'	=> $row->user_email,
 					'user_rights'	=> $row->user_rights,
 					'user_id' 		=> $row->user_id
-					);
-
+				);
 				$this->session->set_userdata('is_logged_in', $sess_array);
 			}
-			echo "succeeded";
+			echo "succeeded-admin";
 		}else{
-			echo "failed";
+			$client_result = $this->login_model->user_login($user_name,$user_password);
+			if($client_result){
+				$sess_array = array();
+				foreach($client_result as $row){
+					$this->session->set_userdata('is_logged_in', $row);
+				}
+				echo "succeeded-client";
+			}else{
+				echo "failed";
+			}
 		}
 	}
 	public function logout(){
