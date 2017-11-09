@@ -27,7 +27,7 @@
 			  <a href="<?php echo base_url('J1_exchange_culture/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('J1_exchange_culture/report'); ?>"><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>
@@ -49,7 +49,7 @@
 			  <a href="<?php echo base_url('kbl/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('kbl/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>
@@ -71,7 +71,7 @@
 			  <a href="<?php echo base_url('nclex/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="cards.html"><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('nclex/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>

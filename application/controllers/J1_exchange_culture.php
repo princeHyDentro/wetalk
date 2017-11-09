@@ -30,6 +30,9 @@ class J1_exchange_culture extends CI_Controller {
 	public function update_client()
 	{    
 		$this->load->model("J1_Exchange_Culture_Model");
+		if ($this->uri->segment(4) == "upload") {
+			$this->do_upload_data();
+		}
 		if ($this->uri->segment(4) != "") {
 			$client_update = array (
 				"name" => $_POST["name"],
@@ -58,6 +61,7 @@ class J1_exchange_culture extends CI_Controller {
 			}
 		} else {
 			$data['client'] = $this->J1_Exchange_Culture_Model->j1_view_by_id($this->uri->segment(3));
+		    $data['picture'] = $this->J1_Exchange_Culture_Model->j1_get_picture($this->uri->segment(3));
 			$this->load->view('template/header');
 			$this->load->view('j1_exchange_culture/create_new_applicant',$data);
 			$this->load->view('template/footer');
@@ -94,6 +98,24 @@ class J1_exchange_culture extends CI_Controller {
 		}
 	}
 	
+	public function report()
+	{
+		$this->load->model("J1_Exchange_Culture_Model");
+		$is_logged_in = $this->session->userdata('is_logged_in');
+		//echo "<pre>"; print_r($is_logged_in); echo "</pre>";
+		if (!isset($is_logged_in) || $is_logged_in != true) {
+			redirect('login', 'refresh');
+			die();
+		}else{
+			$data['j1_data'] = $this->J1_Exchange_Culture_Model->j1_view(1,$is_logged_in['user_id']);
+			$data['status'] = $this->J1_Exchange_Culture_Model->j1_status();
+			$data['user'] = $this->J1_Exchange_Culture_Model->j1_userdata($is_logged_in['user_id']);
+			$this->load->view('template/header');
+			$this->load->view('j1_exchange_culture/report',$data);
+			$this->load->view('template/footer');
+		}
+	}
+	
 	public function insert_new_j1exchangeculture() {
 		$this->load->model("J1_Exchange_Culture_Model");
 		$is_logged_in = $this->session->userdata('is_logged_in');
@@ -103,7 +125,7 @@ class J1_exchange_culture extends CI_Controller {
 			"cl_type_id"	=>1,
 			"status_id" 	=>$_POST['status'],
 			"client_course" => $_POST["course"],
-			"pic_id" 		=>1,
+			"pic_id" 		=>$_POST["pic_id"],
 			"name" 			=> $_POST['name'],
 			"client_address" => $_POST['address'],
 			"client_contactno" 	=> $_POST['contact_no'],
@@ -141,20 +163,29 @@ class J1_exchange_culture extends CI_Controller {
 	}
 	
 	public function do_upload_data(){
+		
 		$this->load->model("J1_Exchange_Culture_Model");
-		$config['upload_path']="/upload";
-		$config['allowed_types']='gif|jpg|png';
-		$this->load->library('upload',$config);
-		if($this->upload->do_upload("file")){
-			$data = array('upload_data' => $this->upload->data());
-			$data1 = array(
-				'client_id' => 1,
-				'pic_path' => $data['upload_data']['file_name']
-				);  
-			$result= $this->J1_Exchange_Culture_Model->j1_insertPic($data1);
-			if ($result == TRUE) {
-				echo "true";
-			}
+		
+		$config['upload_path']= './upload/';
+        $config['allowed_types']='gif|jpg|png';
+        $this->load->library('upload',$config);
+		
+        if($this->upload->do_upload("file")){
+        $data = array('upload_data' => $this->upload->data());
+        $data1 = array(
+           'pic_path' => $data['upload_data']['file_name']
+        ); 
+        if ($this->uri->segment(5) != "") {
+		   $this->J1_Exchange_Culture_Model->j1_updatePic($this->uri->segment(5),$data1);
+		} else {			
+	       $this->J1_Exchange_Culture_Model->j1_insertPic($data1);
 		}
+		$id = $this->db->insert_id();
+        if ($this->db->affected_rows() > 0) {
+            echo $id;
+        } else {
+		   echo "";
+		}
+        }
 	}
 }

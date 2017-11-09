@@ -18,6 +18,13 @@
 <script src="<?php echo base_url('assets/custom-js/j1_exchange_culture.js'); ?>"></script>
 <script src="<?php echo base_url('assets/custom-js/kbl.js'); ?>"></script>
 <script src="<?php echo base_url('assets/custom-js/nlex.js'); ?>"></script>
+<script src="<?php echo base_url('assets/custom-js/jquery.ajaxfileupload.js'); ?>"></script>
+
+<script src="<?php echo base_url('assets/js/print/jquery-1.12.4.js'); ?>"></script>  
+<script src="<?php echo base_url('assets/js/print/jquery.dataTables.min.js'); ?>"></script>  
+<script src="<?php echo base_url('assets/js/print/dataTables.buttons.min.js'); ?>"></script>  
+<script src="<?php echo base_url('assets/js/print/buttons.print.min.js'); ?>"></script> 
+
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
