@@ -51,7 +51,22 @@
 	  public function j1_insertPic($data) {
 		  $this->db->insert("pictures",$data);
 	  }
-
+	  
+	  public function j1_updatePic($id,$data) {
+		  $this->db->where("pic_id",$id);
+		  $this->db->update("pictures",$data);
+	  }
+	  
+	  public function j1_get_picture($client_id) {
+		  $client_pic_id = $this->db->query("select pic_id from client where client_id =".$client_id);
+		  if ($client_pic_id->num_rows() > 0) {
+			  $row = $client_pic_id->row();
+			  $picture = $this->db->query("select * from pictures where pic_id=".$row->pic_id);
+			  if ($picture->num_rows() > 0) {
+				  return $picture->result();
+			  }
+		  }
+	  }
   }
 
 ?>

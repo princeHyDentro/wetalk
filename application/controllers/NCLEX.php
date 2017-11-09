@@ -36,6 +36,24 @@ class NCLEX extends CI_Controller {
 	    }
 	}
 	
+	public function report()
+	{
+		$this->load->model("NCLEX_model");
+
+		$is_logged_in = $this->session->userdata('is_logged_in');
+		if (!isset($is_logged_in) || $is_logged_in != true) {
+			redirect('login', 'refresh');
+			die();
+		}else{
+			$data['nclex'] = $this->NCLEX_model->nclex_view(3,$is_logged_in['user_id']);
+			$data['status'] = $this->NCLEX_model->nclex_status();
+			$data['user'] = $this->NCLEX_model->nclex_userdata($is_logged_in['user_id']);
+			$this->load->view('template/header');
+	        $this->load->view('NCLEX/report',$data);
+	        $this->load->view('template/footer');
+	    }
+	}
+	
 	public function insert_nclex() {
 
 		$this->load->model("NCLEX_model");
@@ -88,6 +106,9 @@ class NCLEX extends CI_Controller {
 	public function nclex_update()
 	{    
 	     $this->load->model("NCLEX_model");
+		 if ($this->uri->segment(4) == "upload") {
+			$this->do_upload_data();
+		 }
 	     if ($this->uri->segment(4) != "") {
 		   $nclex = array (
 			"name" => $_POST['name'],
@@ -116,6 +137,7 @@ class NCLEX extends CI_Controller {
 		   }
 		 } else {
 			 $data['nclex'] = $this->NCLEX_model->nclex_view_by_id($this->uri->segment(3));
+			 $data['picture'] = $this->NCLEX_model->nclex_get_picture($this->uri->segment(3));
 			 $this->load->view('template/header');
 			 $this->load->view('nclex/create_new_applicant',$data);
 			 $this->load->view('template/footer');
@@ -132,5 +154,32 @@ class NCLEX extends CI_Controller {
 		if ($this->db->affected_rows() > 0) {
 			header("Location:/wetalk/nclex/view_all_applicant");
 		}
+	}
+	
+	public function do_upload_data(){
+		
+		$this->load->model("NCLEX_model");
+		
+		$config['upload_path']= './upload/';
+        $config['allowed_types']='gif|jpg|png';
+        $this->load->library('upload',$config);
+		
+        if($this->upload->do_upload("file")){
+        $data = array('upload_data' => $this->upload->data());
+        $data1 = array(
+           'pic_path' => $data['upload_data']['file_name']
+        );  
+		if ($this->uri->segment(5) != "") {
+		   $this->NCLEX_model->nclex_updatePic($this->uri->segment(5),$data1);
+		} else {			
+	       $this->NCLEX_model->nclex_insertPic($data1);
+		}
+		$id = $this->db->insert_id();
+        if ($this->db->affected_rows() > 0) {
+           echo $id;
+        } else {
+		    echo "";
+		}
+        }
 	}
 }
