@@ -31,7 +31,6 @@ class Registration extends CI_Controller {
 
  public function ajax_list_data()
  {
-    
     $list = $this->users->get_datatables();
     $data = array();
     $no = $_POST['start'];
@@ -48,10 +47,9 @@ class Registration extends CI_Controller {
         $row[] = $person->user_rights;
         $row[] = $person->user_datecreated;
         $row[] = $person->user_updateddate;
-        
-         //add html for action
+
+        //add html for action
         $row[] = '<a style="width: 4rem;" class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->user_id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a> <a style="width: 4rem;" class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->user_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-        
          $data[] = $row;
        
     }

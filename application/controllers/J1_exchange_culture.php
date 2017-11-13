@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class J1_exchange_culture extends CI_Controller {
     public function __construct(){
         parent::__construct();
-        $this->load->model("J1_model");
     }
 
     public function create_new_applicant()

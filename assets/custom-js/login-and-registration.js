@@ -45,9 +45,7 @@ $(document).ready(function() {
 					userID			  : userID
 				 },
 				 success : function (data) {
-				 	
 				 	if(data == 'Message has been sent') {
-				 		//clear_form();
 				 		$('#close-form').text('Close');		
 				 		$('#change-password').css({'display' : 'none'});
 				 		$('.hide-form').css({'display' : 'none'});
@@ -57,12 +55,10 @@ $(document).ready(function() {
 				 		$('.error-same-pass').show();
 				 		$('#change-password').text("Send");
 				 		$('.error-same-pass').text(data);
-				 		//alert(data);	
 					}
 				 }
 			});
 		}
-		
 	});
 });
 function clear_form(){
@@ -71,15 +67,16 @@ function clear_form(){
 	$('#change-password').show();
 	$('#change-password').text("Send");
 	$('#close-form').text('Cancel');
-    $('#form')[0].reset(); // reset form on modals
-    $('.form-group').removeClass('has-error'); // clear error class
+    $('#form')[0].reset();
+    $('.form-group').removeClass('has-error');
     $('.form-group').show();
     $('#confirm_password').val("");
     $('#new_password').val("");
-    $('.help-block').empty(); // clear error string
-    $('#resetPassword').modal('hide'); // show bootstrap modal
+    $('.help-block').empty();
+    $('#resetPassword').modal('hide');
 }
 function login_auth(user_name,user_password){
+
 	$.ajax({
 		 url    : "login/login_auth",
 		 method : "post",
@@ -88,14 +85,17 @@ function login_auth(user_name,user_password){
 			 user_password 	  : user_password,
 		 },
 		 success : function (data) {
-		 	//alert(data)
-		 	if(data != 'succeeded') {
-		 		//alert(data);
+		 	if(data == 'failed') {
 		 		$('.failed-login').show();
 		 		return false;
-		 	} else {
+		 	}
+		 	if(data == 'succeeded-admin') {
 				window.location.href = "dashboard";
 			}
+			if(data == 'succeeded-client'){
+				window.location.href = "profile";
+			}
+			return false;
 		 }
 	});
 }
