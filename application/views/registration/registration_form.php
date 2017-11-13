@@ -41,7 +41,7 @@
               <button class="btn btn-default" onclick="reload_table()"><i class="fa fa-refresh"></i> Reload</button>
             </div>
 
-            <table id="person1-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="person1-table" class="table table-striped table-bordered display no-footer" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -59,7 +59,7 @@
               <tbody>
               </tbody>
 
-              <tfoot>
+             <!-- <tfoot>
                 <tr>
                   <th>ID</th>
                   <th>Fname</th>
@@ -72,7 +72,7 @@
                   <th>Date Updated</th>
                   <th>Action</th>
                 </tr>
-              </tfoot>
+              </tfoot> -->
             </table>
             <!-- </div> -->
           </div>
@@ -128,20 +128,20 @@
                     </div>       
                       <div class="form-group has-error">
                         <label>
-                          <input type="checkbox" name="permission" class="permission1" value="J1" >J1
+                          <input type="radio" name="permission" class="permission1" value="J1" >J1
                         </label>
                         <br>
                         <label>
-                          <input type="checkbox" name="permission" class="permission2" value="Nursing">Nursing
+                          <input type="radio" name="permission" class="permission2" value="Nursing">Nursing
                         </label>
                         <br>
                         <label>
-                          <input type="checkbox" name="permission" class="permission3" value="KBL">KBL
+                          <input type="radio" name="permission" class="permission3" value="KBL">KBL
                         </label>
                         <br>
                         <?php if( $is_logged_in['user_rights'] == 'super' ): ?>
                         <label>
-                          <input type="checkbox" name="permission" class="permission4" value="Admin">As Admin
+                          <input type="radio" name="permission" class="permission4" value="Admin">As Admin
                         </label>
                         <?php endif; ?>
                         <span class="help-block"></span>

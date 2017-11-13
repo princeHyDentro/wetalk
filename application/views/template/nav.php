@@ -43,13 +43,13 @@
 		  <ul class="sidenav-second-level collapse" id="collapseExamplePages">
 			<li>       
 				
-			  	<a href="<?php echo base_url('kbl/create_new_applicant'); ?>"><i class="fa fa-fw fa-users"></i> Create New Applicant</a>
+			  	<a href="<?php echo base_url('KBL/create_new_applicant'); ?>"><i class="fa fa-fw fa-users"></i> Create New Applicant</a>
 			</li>
 			<li>
-			  <a href="<?php echo base_url('kbl/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
+			  <a href="<?php echo base_url('KBL/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="<?php echo base_url('kbl/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('KBL/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>
@@ -65,13 +65,13 @@
 		  <ul class="sidenav-second-level collapse" id="collapseMulti">
 			<li>    
 
-			  <a href="<?php echo base_url('nclex/create_new_applicant'); ?>"><i class="fa fa-fw fa-users"></i> Create New Applicant</a>
+			  <a href="<?php echo base_url('NCLEX/create_new_applicant'); ?>"><i class="fa fa-fw fa-users"></i> Create New Applicant</a>
 			</li>
 			<li>
-			  <a href="<?php echo base_url('nclex/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
+			  <a href="<?php echo base_url('NCLEX/view_all_applicant'); ?>"><i class="fa fa-fw fa-eye"></i> View Application</a>
 			</li>
 			 <li>
-			  <a href="<?php echo base_url('nclex/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
+			  <a href="<?php echo base_url('NCLEX/report'); ?>""><i class="fa fa-fw fa-flag"></i> Reports</a>
 			</li>
 		  </ul>
 		</li>
@@ -141,24 +141,6 @@
 		</li>
 	  </ul>
 	  <ul class="navbar-nav ml-auto">
-
-	  	<li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-envelope"></i>
-            <span class="d-lg-none">Messages
-              <span class="badge badge-pill badge-primary">12 New</span>
-            </span>
-            <span class="indicator text-primary d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-            <h6 class="dropdown-header">New Messages:</h6>
-            <div class="data-msgs"></div>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item small" href="#">View all messages</a>
-          </div>
-        </li>
 		<li class="nav-item">
 		  <form class="form-inline my-2 my-lg-0 mr-lg-2">
 			<div class="input-group">
