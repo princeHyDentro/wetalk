@@ -1,12 +1,5 @@
 $("document").ready(function(){
 	
-		  $('#report').DataTable( {
-			dom: 'Bfrtip',
-			buttons: [
-				'print'
-			]
-		} );
-	
 	  $("#referred_by").click(function(){
 		  $("#referred_by_input").attr("disabled",false);
 	  });
@@ -17,10 +10,8 @@ $("document").ready(function(){
 		  });
 	  });
   
-	  $("#create_new_applicant").on("submit",function(e){
-		    e.preventDefault(); 
-    	    var company;
-    	    var pic_id;
+	  $("#create_new_applicant").click(function(){
+		    var company;
 		    var name = $("#name").val();
 		    var contact_no = $("#contact_no").val();
 		    var address = $("#address").val();
@@ -50,56 +41,40 @@ $("document").ready(function(){
 			});		
 			
 			$.ajax({
-				 url:'do_upload_data',
-				 method:"post",
-				 data:new FormData(this),
-				 processData:false,
-				 contentType:false,
-				 cache:false,
-				 async:false,
-				   success: function(data){
-					   if (data != "") {
-							$.ajax({
-								 url    : "insert_new_j1exchangeculture/insert_new_j1exchangeculture",
-								 method : "post",
-								 data   : {
-									name : name,
-									contact_no : contact_no,
-									email_address : email_address,
-									birthdate : birthdate,
-									age : age,
-									gender : gender,
-									year_graduated : year_graduated,
-									date_visited : date_visited,
-									school : school,
-									status : status,
-									month : month,
-									year : year,
-									j1_type : j1_type,
-									company : company,
-									message : message,
-									formno : formno,
-									address : address,
-									course : course,
-									referred_by : referred_by,
-									pic_id : data
-								 },
-								 success : function (data1) {
-									if (data1 == "success") {
-									   alert("Successfully saved!");
-									   window.location.href = "view_all_applicant";
-									}
-								 }
-							});  
-	        }
-	      }
-	     });		
+				 url    : "insert_new_j1exchangeculture/insert_new_j1exchangeculture",
+				 method : "post",
+				 data   : {
+					name : name,
+					contact_no : contact_no,
+					email_address : email_address,
+					birthdate : birthdate,
+					age : age,
+					gender : gender,
+					year_graduated : year_graduated,
+					date_visited : date_visited,
+					school : school,
+					status : status,
+					month : month,
+					year : year,
+					j1_type : j1_type,
+					company : company,
+					message : message,
+					formno : formno,
+					address : address,
+					course : course,
+					referred_by : referred_by
+				 },
+				 success : function (data1) {
+					if (data1 != "") {
+						window.location.href = "view_all_applicant";
+					}
+				 }
+			}); 
 	  });
 	  
-	  $("#update_applicant").on("submit",function(e){ 
-		        e.preventDefault();
+	  $("#update_applicant").click(function(){
+		  
 		        var company;
-				var referred_by;
 				var name = $("#name").val();
 				var address = $("#address").val();
 				var contact_no = $("#contact_no").val();
@@ -118,62 +93,44 @@ $("document").ready(function(){
 				var message = $("#message").val();
 				var formno = $("#formno").val();
 				var client_id = $("#client_id").val();
+				var referred_by = $("#referred_by_input").val();
 				
-				$(".company").each(function(){
+				 $(".company").each(function(){
 				   if ($(this).is(":checked") == true) {
 					 company = $(this).val();
-					 referred_by = "";
-				   } 
+				   }
 			     });	
-				 
-				 if ($("#referred_by").is(":checked") == true) {
-					 referred_by = $("#referred_by_input").val();
-					 company = "";
-				 }
-		   		$.ajax({
-				 url:""+$("#client_id").val()+"/upload/"+$("#pic_id").val(),
-				 method:"post",
-				 data:new FormData(this),
-				 processData:false,
-				 contentType:false,
-				 cache:false,
-				 async:false,
-				   success: function(data){
-					if (data != "") {
-						$.ajax({
-							url : ""+$("#client_id").val()+"/1",
-							method : "post",
-							data : {
-								name : name,
-								address : address,
-								contact_no : contact_no,
-								email_address : email_address,
-								birthdate : birthdate,
-								age : age,
-								gender : gender,
-								year_graduated : year_graduated,
-								date_visited : date_visited,
-								school : school,
-								course : course,
-								status : status,
-								month : month,
-								year : year,
-								j1_type : j1_type,
-								message : message,
-								formno : formno,
-								client_id : client_id,
-								company : company,
-								referred_by : referred_by
-							},
-							success : function (data) {
-							   if (data == "success") {
-								   alert("Successfully updated!");
-								   window.location.href = '/wetalk/J1_exchange_culture/view_all_applicant';
-							   }
-							}
-						}); 
-			    }
-	          }
-	      });	
+		   				
+				$.ajax({
+					url : ""+$("#client_id").val()+"/1",
+					method : "post",
+					data : {
+						name : name,
+						address : address,
+						contact_no : contact_no,
+						email_address : email_address,
+						birthdate : birthdate,
+						age : age,
+						gender : gender,
+						year_graduated : year_graduated,
+						date_visited : date_visited,
+						school : school,
+						course : course,
+						status : status,
+						month : month,
+						year : year,
+						j1_type : j1_type,
+						message : message,
+						formno : formno,
+						client_id : client_id,
+						company : company,
+						referred_by : referred_by
+					},
+					success : function (data) {
+					   if (data == "success") {
+						   window.location.href = '/wetalk/J1_exchange_culture/view_all_applicant';
+					   }
+					}
+				});
 	  });
 });

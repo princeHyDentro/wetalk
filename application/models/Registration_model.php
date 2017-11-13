@@ -31,8 +31,15 @@ class Registration_model extends CI_Model {
  
     private function _get_datatables_query()
     {
+         $is_logged_in = $this->session->userdata('is_logged_in');
+         if($is_logged_in['user_rights'] == "super"){
+          	$this->db->from($this->table);
+         }else{
+         	$this->db->from($this->table);
+        	$this->db->where("added_by",$is_logged_in['user_id']);
+         }
          
-        $this->db->from($this->table);
+        
  
         $i = 0;
      

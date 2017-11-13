@@ -1,6 +1,6 @@
 <?php 
   defined('BASEPATH') OR exit('No direct script access allowed');
-  class J1_Exchange_Culture_Model extends CI_Model {
+  class J1_Model extends CI_Model {
       
 	  public function j1_insert($data) {
 		  $this->db->insert("client",$data);
