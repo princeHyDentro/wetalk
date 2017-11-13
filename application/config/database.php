@@ -76,8 +76,8 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'itworks',
-	'password' => 'Czu&WTw=r%NT',
+	'username' => 'root',
+	'password' => 'root',
 	'database' => 'tlc_database',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
