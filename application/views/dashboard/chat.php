@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  
     <?php require_once(APPPATH."views/template/nav.php"); ?>
+
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->

@@ -1,0 +1,93 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 14/11/2017 09:10
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-cogwheel:before { content: "\f100"; }
+.flaticon-interface-4:before { content: "\f101"; }
+.flaticon-calendar:before { content: "\f102"; }
+.flaticon-list-1:before { content: "\f103"; }
+.flaticon-checklist:before { content: "\f104"; }
+.flaticon-money:before { content: "\f105"; }
+.flaticon-signs:before { content: "\f106"; }
+.flaticon-paper:before { content: "\f107"; }
+.flaticon-communication-1:before { content: "\f108"; }
+.flaticon-communication:before { content: "\f109"; }
+.flaticon-information:before { content: "\f10a"; }
+.flaticon-profile:before { content: "\f10b"; }
+.flaticon-note:before { content: "\f10c"; }
+.flaticon-computer-1:before { content: "\f10d"; }
+.flaticon-document:before { content: "\f10e"; }
+.flaticon-people:before { content: "\f10f"; }
+.flaticon-folder:before { content: "\f110"; }
+.flaticon-interface-3:before { content: "\f111"; }
+.flaticon-journal:before { content: "\f112"; }
+.flaticon-interface:before { content: "\f113"; }
+.flaticon-first-aid-kit:before { content: "\f114"; }
+.flaticon-tasks:before { content: "\f115"; }
+.flaticon-interface-2:before { content: "\f116"; }
+.flaticon-e-learning:before { content: "\f117"; }
+.flaticon-interface-1:before { content: "\f118"; }
+.flaticon-computer:before { content: "\f119"; }
+.flaticon-list:before { content: "\f11a"; }
+    
+    $font-Flaticon-cogwheel: "\f100";
+    $font-Flaticon-interface-4: "\f101";
+    $font-Flaticon-calendar: "\f102";
+    $font-Flaticon-list-1: "\f103";
+    $font-Flaticon-checklist: "\f104";
+    $font-Flaticon-money: "\f105";
+    $font-Flaticon-signs: "\f106";
+    $font-Flaticon-paper: "\f107";
+    $font-Flaticon-communication-1: "\f108";
+    $font-Flaticon-communication: "\f109";
+    $font-Flaticon-information: "\f10a";
+    $font-Flaticon-profile: "\f10b";
+    $font-Flaticon-note: "\f10c";
+    $font-Flaticon-computer-1: "\f10d";
+    $font-Flaticon-document: "\f10e";
+    $font-Flaticon-people: "\f10f";
+    $font-Flaticon-folder: "\f110";
+    $font-Flaticon-interface-3: "\f111";
+    $font-Flaticon-journal: "\f112";
+    $font-Flaticon-interface: "\f113";
+    $font-Flaticon-first-aid-kit: "\f114";
+    $font-Flaticon-tasks: "\f115";
+    $font-Flaticon-interface-2: "\f116";
+    $font-Flaticon-e-learning: "\f117";
+    $font-Flaticon-interface-1: "\f118";
+    $font-Flaticon-computer: "\f119";
+    $font-Flaticon-list: "\f11a";

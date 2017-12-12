@@ -1,6 +1,7 @@
            <?php $is_logged_in = $this->session->userdata('is_logged_in');
           // echo "<pre>"; print_r($is_logged_in); echo "</pre>";
            ?>
+    
            <div class="w3-twothird">
             <div class="messages-list w3-container w3-card w3-white w3-margin-bottom">
                 <div class="panel-body message">
@@ -54,3 +55,4 @@
                     </div>
                 </div>
             </div>
+            

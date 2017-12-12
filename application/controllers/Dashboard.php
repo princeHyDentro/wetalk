@@ -11,21 +11,20 @@ class Dashboard extends CI_Controller {
      $this->load->model('dashboard_model','privmsgs');
  }
 
- public function index()
- {
+ public function index(){
   $data = array();
   $is_logged_in = $this->session->userdata('is_logged_in');
-  if (!isset($is_logged_in) || $is_logged_in != true) {
-     redirect('login', 'refresh');
-     die();
- }else{
-  $new_message   = $this->privmsgs->new_message($is_logged_in['user_id']);
-  $data['count_msgs'] = $new_message;
+    if (!isset($is_logged_in) || $is_logged_in != true) {
+        redirect('login', 'refresh');
+        die();
+    }else{
+      $new_message   = $this->privmsgs->new_message($is_logged_in['user_id']);
+      $data['count_msgs'] = $new_message;
 
-  $this->load->view('template/header');
-  $this->load->view('dashboard/dashboard',$data);
-  $this->load->view('template/footer');
-}	
+      $this->load->view('template/header');
+      $this->load->view('dashboard/dashboard',$data);
+      $this->load->view('template/footer');
+    }	
 }
 
 public function chat()

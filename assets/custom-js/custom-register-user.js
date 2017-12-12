@@ -5,12 +5,12 @@ var table;
  
 $(document).ready(function() {
 
-    //datatables
-    table = $('#person1-table').DataTable({ 
- 
+    table = $('#staff-table').DataTable({ 
+        
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
+        "order": [],
+        
  
         // Load data for the table's content from an Ajax source
         "ajax": {
@@ -21,14 +21,53 @@ $(document).ready(function() {
  
         //Set column definition initialisation properties.
         "columnDefs": [
-        { 
-            "targets": [ -1 ], //last column
-            "orderable": false, //set not orderable
-        },
+            { 
+                "targets": [ -1 ], //last column
+                "orderable": false, //set not orderable
+            },
         ],
+        dom: '<"toolbar">Bfrtip',
+        buttons: [
+                    {
+                        text: '<i class="fa fa-plus-circle"></i> Add Person',
+                        action: function ( e, dt, node, config ) {
+                            add_person();
+                        }
+                    },
+                    {
+                        text: '<i class="fa fa-refresh"></i> Reload',
+                        action: function ( e, dt, node, config ) {
+                           reload_table();
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                        }
+                    },
+                    {
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                        }
+                    }
+                    
+                ]
+        // buttons: [
+        //     'copy', 'csv', 'excel', 'pdf', 'print'
+        // ],
 
- 
     });
+    
+    // $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
+
     $('#admin_search_privilege').on('change' , function(){
         table.search( this.value ).draw();
     });
@@ -41,14 +80,14 @@ $(document).ready(function() {
    
  
     //datepicker
-    $('.datepicker').datepicker({
-        autoclose: true,
-        format: "yyyy-mm-dd",
-        todayHighlight: true,
-        orientation: "top auto",
-        todayBtn: true,
-        todayHighlight: true,  
-    });
+    // $('.datepicker').datepicker({
+    //     autoclose: true,
+    //     format: "yyyy-mm-dd",
+    //     todayHighlight: true,
+    //     orientation: "top auto",
+    //     todayBtn: true,
+    //     todayHighlight: true,  
+    // });
  
     //set input/textarea/select event when change value, remove class error and remove text help block 
     $("input").change(function(){
@@ -74,7 +113,7 @@ function add_person()
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
-    $('#modal_form').modal('show'); // show bootstrap modal
+    $('#modal_form').modal('open'); // show bootstrap modal
     $('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
 }
  
