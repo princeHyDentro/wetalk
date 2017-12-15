@@ -36,29 +36,33 @@ class Login extends CI_Controller {
 			$sess_array = array();
 			foreach($result as $row){
 				$sess_array = array(
-					'user_name' 	=> $row->user_username,
-					'user_fname' 	=> $row->user_fname,
-					'user_lname'	=> $row->user_lname,
-					'user_mname'	=> $row->user_mname,
-					'user_email'	=> $row->user_email,
-					'user_rights'	=> $row->user_rights,
-					'user_id' 		=> $row->user_id
+					'user_name' 	=> $row->username,
+					'user_fname' 	=> $row->fname,
+					'user_full_name'=> $row->full_name,
+					'user_lname'	=> $row->lname,
+					'user_mname'	=> $row->middle,
+					'user_email'	=> $row->email,
+					'user_rights'	=> $row->roles,
+					'user_id' 		=> $row->id
 				);
 				$this->session->set_userdata('is_logged_in', $sess_array);
 			}
 			echo "succeeded-admin";
 		}else{
-			$client_result = $this->login_model->user_login($user_name,$user_password);
-			if($client_result){
-				$sess_array = array();
-				foreach($client_result as $row){
-					$this->session->set_userdata('is_logged_in', $row);
-				}
-				echo "succeeded-client";
-			}else{
-				echo "failed";
-			}
+			echo "failed";
 		}
+		// else{
+		// 	$client_result = $this->login_model->user_login($user_name,$user_password);
+		// 	if($client_result){
+		// 		$sess_array = array();
+		// 		foreach($client_result as $row){
+		// 			$this->session->set_userdata('is_logged_in', $row);
+		// 		}
+		// 		echo "succeeded-client";
+		// 	}else{
+		// 		echo "failed";
+		// 	}
+		// }
 	}
 	public function logout(){
 		$this->session->unset_userdata('is_logged_in');

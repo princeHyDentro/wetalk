@@ -8,7 +8,6 @@ class Dashboard extends CI_Controller {
 	public function __construct(){
      parent::__construct();
      $this->load->model('registration_model','users');
-     $this->load->model('dashboard_model','privmsgs');
  }
 
  public function index(){
@@ -18,11 +17,10 @@ class Dashboard extends CI_Controller {
         redirect('login', 'refresh');
         die();
     }else{
-      $new_message   = $this->privmsgs->new_message($is_logged_in['user_id']);
-      $data['count_msgs'] = $new_message;
 
       $this->load->view('template/header');
-      $this->load->view('dashboard/dashboard',$data);
+      $this->load->view('template/head_left_nav');
+      $this->load->view('dashboard/dashboard');
       $this->load->view('template/footer');
     }	
 }
@@ -55,10 +53,10 @@ public function password_reset(){
   $template 	= $this->reset_template($userID);
 
   $data = array(
-    'user_password' => ($newPass == "") ? "" : md5($newPass),
+    'password' => ($newPass == "") ? "" : md5($newPass),
     'flag' => 1,
     );
-  $result = $this->users->update(array('user_id' => $userID), $data);
+  $result = $this->users->update(array('id' => $userID), $data);
 
   if($result){
      $this->email->from('no-reply@tlcwetalk.com', 'TLCWETALK');
@@ -79,7 +77,7 @@ public function confirm(){
   $data = array('flag' => 0);
   $userID = base64_decode($_GET['key']);
 
-  $this->users->update(array('user_id' => $userID), $data);
+  $this->users->update(array('id' => $userID), $data);
 
   $this->load->view('template/header');
   $this->load->view('password_confirm');

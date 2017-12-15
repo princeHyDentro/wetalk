@@ -6,6 +6,7 @@
 				</div>
 			</div>
 		</footer> -->
+
 	</body>
 	<!--Import jQuery before materialize.js-->
 		<script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
@@ -67,14 +68,16 @@
 		      startingTop: '4%', // Starting top style attribute
 		      endingTop: '10%', // Ending top style attribute
 		      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-		        alert("Ready");
-		        console.log(modal, trigger);
+		       
 		      },
-		      complete: function() { alert('Closed'); } // Callback for Modal close
+		      complete: function() {} // Callback for Modal close
 		    }
 		  );
 
-
+			$.each($(':checkbox'), function(k, v) {
+			    var label = $(this).closest('label');
+			    $(this).insertBefore(label);
+			});
 
 
 		//	$('.button-collapse').sideNav('show');

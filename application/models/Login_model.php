@@ -4,16 +4,17 @@ class Login_model extends CI_Model {
 
     public function login($username,$password) {
         $query = $this->db->select('
-            users.user_id,
-            users.user_fname,
-            users.user_lname,
-            users.user_mname,
-            users.user_username,
-            users.user_email,
-            users.user_rights')
+            users.id,
+            users.fname,
+            users.lname,
+            users.middle,
+            users.username,
+            users.full_name,
+            users.email,
+            users.roles')
         ->from('users')
-        ->where("(users.user_email = '$username' OR users.user_username = '$username')")
-        ->where('user_password', MD5($password));
+        ->where("(users.email = '$username' OR users.username = '$username')")
+        ->where('password', MD5($password));
 
         $query = $this->db->get();
         if($query->num_rows() == 1){

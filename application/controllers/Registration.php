@@ -9,29 +9,57 @@ class Registration extends CI_Controller {
         $this->load->model('registration_model','users');
     }
 
-    public function employee_registration_form()
+    public function deleted_at(){
+        return date("Y-m-d h:i:sa");
+    }
+
+    public function updated_at(){
+        return date("Y-m-d h:i:sa");
+    }
+
+    public function staff()
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
-       // print_r($is_logged_in);
         if (!isset($is_logged_in) || $is_logged_in != true) {
             redirect('login', 'refresh');
             die();
         }else{
-            $data['employee_result'] = $this->get_employee_data();
-
+            $data['roles']      = $this->staff_roles();
+            $data['services']   = $this->staff_services();
+           // print_r($data);
             $this->load->view('template/header');
+            $this->load->view('template/head_left_nav');
             $this->load->view('registration/registration_form',$data);
             $this->load->view('template/footer');
         }
     }
-    public function get_employee_data(){
-       $list = $this->users->employees_table();
+
+    public function deleted_staff(){
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        if (!isset($is_logged_in) || $is_logged_in != true) {
+            redirect('login', 'refresh');
+            die();
+        }else{
+            $this->load->view('template/header');
+            $this->load->view('template/head_left_nav');
+            $this->load->view('registration/staff_deleted');
+            $this->load->view('template/footer');
+        }
+    }
+
+    public function staff_services(){
+       $list = $this->users->_tableStafServices();
        return $list;
     }
 
-    public function ajax_list_data(){
+    public function staff_roles(){
+       $list = $this->users->_tableStafRoles();
+       return $list;
+    }
 
-        $list   = $this->users->get_datatables();
+    public function ajax_list_dl_data(){
+        $this->load->helper('date');
+        $list   = $this->users->get_dl_datatables();
 
         $data   = array();
         $no     = $_POST['start'];
@@ -39,19 +67,49 @@ class Registration extends CI_Controller {
             $no++;
             $row = array();
 
-            $row[] = $person->user_id;
-            $row[] = $person->user_fname.' '.$person->user_lname.' '.$person->user_lname;
-            //$row[] = $person->user_lname;
-            //$row[] = $person->user_mname;
-            $row[] = $person->user_username;
-            $row[] = $person->user_email;
-            $row[] = $person->user_rights;
-            $row[] = $person->user_datecreated;
-            $row[] = $person->user_updateddate;
+            $row[] = $person->id;
+            $row[] = $person->full_name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
+            $row[] = $person->username;
+            $row[] = $person->email;
+            $row[] = $person->roles;
+            $row[] =  nice_date($person->deleted_at, 'Y-m-d');
+            //add html for action
+            $row[] = '<center><a class="btn-floating waves-effect waves-light blue" onclick="restore_person('."'".$person->id."'".')" href="javascript:void(0)" title="restore staff" ><i class="material-icons">restore</i></a></center>';
+            $data[] = $row;
+
+        }
+    
+        $output = array(
+            "draw"              => $_POST['draw'],
+            "recordsTotal"      => $this->users->count_all(),
+            "recordsFiltered"   => $this->users->dl_count_filtered(),//for entries label
+            "data"              => $data,
+        );
+
+        echo json_encode($output);
+    }
+
+    public function ajax_list_data(){
+        $this->load->helper('date');
+        $list   = $this->users->get_datatables('');
+
+        $data   = array();
+        $no     = $_POST['start'];
+        foreach ($list as $person) {
+            $no++;
+            $row = array();
+
+            $row[] = $person->id;
+            $row[] = $person->full_name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
+            $row[] = $person->username;
+            $row[] = $person->email;
+            $row[] = $person->roles;
+            $row[] =  nice_date($person->created_at, 'Y-m-d');
+            $row[] =  nice_date($person->updated_at, 'Y-m-d');
 
 
             //add html for action
-            $row[] = '<a style="width: 4rem;" class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" ><i class="glyphicon glyphicon-pencil"></i> Edit</a> <a style="width: 4rem;" class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->user_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$person->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$person->id."'".')"><i class="material-icons">delete</i></a>';
             $data[] = $row;
 
         }
@@ -73,35 +131,50 @@ class Registration extends CI_Controller {
     }
 
     public function ajax_add(){
+
         $is_logged_in = $this->session->userdata('is_logged_in');
         $this->_validate();
+
         $data = array(
-            'user_fname'    => $this->input->post('user_fname'),
-            'user_lname'    => $this->input->post('user_lname'),
-            'user_mname'    => $this->input->post('user_mname'),
-            'user_username' => $this->input->post('user_username'),
-            'user_password' => md5($this->input->post('user_password')),
-            'user_email'    => $this->input->post('user_email'),
-            'user_rights'   => $this->input->post('permission'),
-            'added_by'      => $is_logged_in['user_id']
+            'fname'         => $this->input->post('user_fname'),
+            'lname'         => $this->input->post('user_lname'),
+            'middle'        => $this->input->post('user_mname'),
+            'full_name'     => $this->input->post('user_fname').' '.$this->input->post('user_mname').' '.$this->input->post('user_lname'),
+            'username'      => $this->input->post('user_username'),
+            'password'      => md5($this->input->post('user_password')),
+            'email'         => $this->input->post('user_email'),
+            'roles'         => $this->input->post('permission'),
+            'created_by'    => $is_logged_in['user_id'],
+            'type_of_user'  => 'staff'
+            //'updated_at'    => date("Y-m-d h:i:sa")
         );
+
         $insert = $this->users->save($data);
+        // service assign to staff
+        foreach ($this->input->post('services') as $key => $value) {
+            $this->db->set('_userID', $insert);
+            $this->db->set('service_id', $value);
+            $this->db->insert('assign_staff_service');
+        }
+ 
         echo json_encode(array("status" => TRUE));
     }
 
     public function ajax_update(){
-            //$this->_validate();
         $data = array(
-            'user_fname'    => $this->input->post('user_fname'),
-            'user_lname'    => $this->input->post('user_lname'),
-            'user_mname'    => $this->input->post('user_mname'),
-            'user_username' => $this->input->post('user_username'),
-            'user_password' => ($this->input->post('user_password') == "") ? "" : md5($this->input->post('user_password')),
-            'user_email'    => $this->input->post('user_email'),
-            'user_rights'   => $this->input->post('permission'),
-            'user_updateddate' => date("Y-m-d h:i:sa")
+            'fname'     => $this->input->post('user_fname'),
+            'lname'     => $this->input->post('user_lname'),
+            'middle'     => $this->input->post('user_mname'),
+            'username'  => $this->input->post('user_username'),
+            'full_name' => $this->input->post('user_fname').' '.$this->input->post('user_mname').' '.$this->input->post('user_lname'),
+            'password'  => ($this->input->post('user_password') == "") ? "" : md5($this->input->post('user_password')),
+            'email'     => $this->input->post('user_email'),
+            'roles'     => $this->input->post('permission'),
+            'updated_at'=> date("Y-m-d h:i:sa")
         );
-        $this->users->update(array('user_id' => $this->input->post('id')), $data);
+
+
+        $this->users->update(array('id' => $this->input->post('id')), $data);
         echo json_encode(array("status" => TRUE));
     }
 
@@ -114,9 +187,9 @@ class Registration extends CI_Controller {
 
     private function _validate(){
         $data = array();
-        $data['error_string'] = array();
-        $data['inputerror'] = array();
-        $data['status'] = TRUE;
+        $data['error_string']   = array();
+        $data['inputerror']     = array();
+        $data['status']         = TRUE;
         
         if($this->input->post('user_fname') == '')
         {
