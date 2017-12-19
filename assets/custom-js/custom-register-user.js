@@ -129,13 +129,46 @@ $(document).ready(function() {
 function add_person()
 {
     save_method = 'add';
-    $('#form')[0].reset(); // reset form on modals
+    //$('#form')[0].reset(); // reset form on modals
+    var form = document.getElementById("form");
+    clearForm(form);
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('open'); // show bootstrap modal
     $('.modal-title').text('Add Staff'); // Set Title to Bootstrap modal title
 }
- 
+function clearForm(frm_elements){
+
+    for (i = 0; i < frm_elements.length; i++)
+    {
+        field_type = frm_elements[i].type.toLowerCase();
+        
+        switch (field_type)
+        {
+            case "text":
+            case "password":
+            case "textarea":
+            // case "hidden":
+            case "email":
+            frm_elements[i].value = "";
+            break;
+            case "radio":
+            case "checkbox":
+            if (frm_elements[i].checked)
+            {
+                frm_elements[i].checked = false;
+            }
+
+            break;
+            case "select-one":
+            case "select-multi":
+            frm_elements[i].selectedIndex = -1;
+            break;
+            default:
+            break;
+        }
+    }
+}
 function edit_person(id)
 {
     save_method = 'update';
@@ -151,26 +184,21 @@ function edit_person(id)
         success: function(data)
         {
 
-            // if( data.user_rights == "J1") {
-            //     $( ".permission1" ).prop( "checked", true );
-            // }else if(data.user_rights == "Nursing"){
-            //     $( ".permission2" ).prop( "checked", true );
-            // }else if(data.user_rights == "KBL"){
-            //     $( ".permission3" ).prop( "checked", true );
-            // }else if(data.user_rights == "Admin"){
-            //     $( ".permission4" ).prop( "checked", true );
-            // }
+            $(data['services']).each(function(index, el) {
+                $('#services').find('option[value="'+el.service_id+'"]').prop('selected', true);
+                $('#services').find('option[value="'+el.service_id+'"]').attr('data-id', el.id);
+            });
 
-            $('[name="id"]').val(data.id);
-            $('[name="user_fname"]').val(data.fname);
-            $('[name="user_lname"]').val(data.lname);
-            $('[name="user_mname"]').val(data.middle);
-            $('[name="user_username"]').val(data.username);
-            $('[name="user_email"]').val(data.email);
-            $('#permission').find('option[value="'+data.roles+'"]').prop('selected', true);
-            console.log(data)
-            //$('#assign-to-company').find('option[value="'+companyID+'"]').prop('selected', true);
+            $('[name="id"]').val(data['user_info'][0].id);
+            $('[name="user_fname"]').val(data['user_info'][0].fname);
+            $('[name="user_lname"]').val(data['user_info'][0].lname);
+            $('[name="user_mname"]').val(data['user_info'][0].middle);
+            $('[name="user_username"]').val(data['user_info'][0].username);
+            $('[name="user_email"]').val(data['user_info'][0].email);
+            $('#permission').find('option[value="'+data['user_info'][0].roles+'"]').prop('selected', true);
+
             $("#permission").material_select();
+            $("#services").material_select();
 
             $('#modal_form').modal('open'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Staff'); // Set title to Bootstrap modal title
@@ -193,17 +221,31 @@ function save()
     $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
     var url;
- 
+    var unselected;
     if(save_method == 'add') {
         url = "ajax_add";
     } else {
         url = "ajax_update";
+        var unselected = $('#services option:not(:selected)').map(function(){
+                data = {
+                        'service_id' : $(this).val(),
+                        'primary_id' : $(this).attr('data-id')
+                    }
+                return data;
+        }).get();
+
     }
 
-    var checkValues = $('#services option:selected').map(function(){
-                    return $(this).val();
-                }).get();
+    var checkValues  = $('#services option:selected').map(function(){
+                data = {
+                        'service_id' : $(this).val(),
+                        'primary_id' : $(this).attr('data-id')
+                    }
+                return data;
+        }).get();
 
+
+    console.log(unselected);
     // ajax adding data to database
     $.ajax({
         url : url,
@@ -217,7 +259,8 @@ function save()
             'user_password' : $('#user_password').val(),
             'user_email'    : $('#user_email').val(),
             'permission'    : $('#permission').val(),
-            'services' : checkValues
+            'services'      : checkValues,
+            'unselected_service' : unselected
         },
         dataType: "JSON",
         success: function(data)

@@ -158,13 +158,13 @@ th{
                                         <option value="<?php echo $role['value']; ?>"><?php echo $role['staff_roles']; ?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <label>Assing staff role<i style="color:red;">*</i></label>
+                                <label>Assign staff role<i style="color:red;">*</i></label>
                             </div>
                             <div class="input-field col s12 has-error">
                                 <select multiple class="active" id="services" name="services">
                                     <option value="" disabled>Choose your option</option>
                                     <?php foreach ($services as $key => $service): ?>
-                                        <option value="<?php echo $service['id'];?>"><?php echo $service['service_name'];?></option>
+                                        <option data-id="" value="<?php echo $service['id'];?>"><?php echo $service['service_name'];?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <label>Assign Multiple Services<i style="color:red;">*</i></label>
@@ -180,3 +180,4 @@ th{
         </div>
     </div>
 </div>
+

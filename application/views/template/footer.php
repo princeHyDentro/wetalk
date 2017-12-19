@@ -70,7 +70,14 @@
 		      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 		       
 		      },
-		      complete: function() {} // Callback for Modal close
+		      complete: function() {
+    			$('#services option:selected').each(function(i, sel){ 
+				    $(sel).attr('data-id',''); 
+				});
+				$('#services option:not(:selected)').each(function(i, sel){ 
+				    $(sel).attr('data-id',''); 
+				});
+		      } // Callback for Modal close
 		    }
 		  );
 

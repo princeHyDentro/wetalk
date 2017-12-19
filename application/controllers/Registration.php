@@ -105,7 +105,7 @@ class Registration extends CI_Controller {
             $row[] = $person->email;
             $row[] = $person->roles;
             $row[] =  nice_date($person->created_at, 'Y-m-d');
-            $row[] =  nice_date($person->updated_at, 'Y-m-d');
+            $row[] =  ($person->updated_at != NULL) ? nice_date($person->updated_at, 'Y-m-d') : '';
 
 
             //add html for action
@@ -146,25 +146,33 @@ class Registration extends CI_Controller {
             'roles'         => $this->input->post('permission'),
             'created_by'    => $is_logged_in['user_id'],
             'type_of_user'  => 'staff'
-            //'updated_at'    => date("Y-m-d h:i:sa")
+           // 'updated_at'    => date("Y-m-d h:i:sa")
         );
 
-        $insert = $this->users->save($data);
+       $insert = $this->users->save($data);
         // service assign to staff
+
+        //print_r($this->input->post('services'));
+         
         foreach ($this->input->post('services') as $key => $value) {
-            $this->db->set('_userID', $insert);
-            $this->db->set('service_id', $value);
-            $this->db->insert('assign_staff_service');
+            //print_r($value['primary_id']);
+            if($value['primary_id'] == ""){
+                $this->db->set('_userID', $insert);
+                $this->db->set('service_id', $value['service_id']);
+                $this->db->insert('assign_staff_service');
+            }
         }
- 
+
+
         echo json_encode(array("status" => TRUE));
     }
 
     public function ajax_update(){
+
         $data = array(
             'fname'     => $this->input->post('user_fname'),
             'lname'     => $this->input->post('user_lname'),
-            'middle'     => $this->input->post('user_mname'),
+            'middle'    => $this->input->post('user_mname'),
             'username'  => $this->input->post('user_username'),
             'full_name' => $this->input->post('user_fname').' '.$this->input->post('user_mname').' '.$this->input->post('user_lname'),
             'password'  => ($this->input->post('user_password') == "") ? "" : md5($this->input->post('user_password')),
@@ -173,6 +181,24 @@ class Registration extends CI_Controller {
             'updated_at'=> date("Y-m-d h:i:sa")
         );
 
+        foreach ($this->input->post('unselected_service') as $key => $value) {
+            if($value['service_id'] != "" && $value['primary_id']){
+                $this->db->where('id', $value['primary_id']);
+                $this->db->delete('assign_staff_service'); 
+            }
+        }
+
+        foreach ($this->input->post('services') as $key => $value) {
+            if($value['primary_id'] == ""){
+                $this->db->set('_userID', $insert);
+                $this->db->set('service_id', $value['service_id']);
+                $this->db->insert('assign_staff_service');
+            }
+        }
+
+        // print_r($this->input->post('unselected_service'));
+        // print_r($this->input->post('services'));
+        // exit;
 
         $this->users->update(array('id' => $this->input->post('id')), $data);
         echo json_encode(array("status" => TRUE));

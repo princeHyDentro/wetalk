@@ -171,11 +171,17 @@ class Registration_model extends CI_Model {
 
     public function get_by_id($id)
     {
+        $data = array();
+
         $this->db->from($this->table);
         $this->db->where('id',$id);
-        $query = $this->db->get();
-
-        return $query->row();
+        $query['user_info'] = $this->db->get()->result_array();
+       
+        $this->db->from('assign_staff_service');
+        $this->db->where('_userID',$id);
+        $query['services'] = $this->db->get()->result_array();
+        
+        return $query; 
     }
 
     public function save($data)
