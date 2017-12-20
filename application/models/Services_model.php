@@ -1,11 +1,9 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Registration_model extends CI_Model {
-
-    var $table          = 'users';
-    var $column_order   = array('id','full_name','username','email','roles','created_at','updated_at'); 
-    var $column_search  = array('id','full_name','middle','username','roles');
+class Services_model extends CI_Model {
+	var $table          = 'services';
+    var $column_order   = array('id','service_name','service_desc','created_at','updated_at'); 
+    var $column_search  = array('id','service_name');
     var $order          = array('id' => 'desc');
 
     public function __construct()
@@ -13,45 +11,10 @@ class Registration_model extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
+	private function _get_datatables_query(){
 
-    public function _tableStafServices(){
-        $query = $this->db->query('SELECT * FROM services');
-
-        if(count($query->result_array()) >= 1){
-            return $query->result_array();
-        }else{
-            return false;
-        }
-    }
-
-    public function _tableStafRoles(){
-        $query = $this->db->query('SELECT * FROM staff_position');
-
-        if(count($query->result_array()) >= 1){
-            return $query->result_array();
-        }else{
-            return false;
-        }
-    }
-
-    public function index(){
-        $this->load->helper('url');
-        $this->load->view('registration/registration_form');
-    }
-
-    private function _get_datatables_query(){
-
-        $is_logged_in = $this->session->userdata('is_logged_in');
-
-
-        if($is_logged_in['user_rights'] == "super"){
-            $this->db->where("deleted_at",NULL);
-            $this->db->from($this->table);
-        }else{
-            $this->db->from($this->table);
-            $this->db->where("deleted_at",NULL);
-            $this->db->where("created_by",$is_logged_in['user_id']);
-        }
+		$this->db->from($this->table);
+        $this->db->where("deleted_at",NULL);
 
         $i = 0;
 
@@ -85,7 +48,7 @@ class Registration_model extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-    function get_datatables()
+    public function get_datatables()
     {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
@@ -94,7 +57,7 @@ class Registration_model extends CI_Model {
         return $query->result();
     }
 
-    function count_filtered()
+    public function count_filtered()
     {
         $this->_get_datatables_query();
         $query = $this->db->get();
@@ -108,22 +71,29 @@ class Registration_model extends CI_Model {
     }
 
 
-    /*deleted staff*/
-    private function _get_dl_datatables_query(){
+    /*deleted services*/
+    public function get_delete_datatables()
+    {
+        $this->_get_service_datatables_query();
+        
+        if($_POST['length'] != -1)
+            $this->db->limit($_POST['length'], $_POST['start']);
+            $query = $this->db->get();
+        return $query->result();
+    }
+    public function deleted_count_filtered()
+    {
+        $this->_get_service_datatables_query();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+   	private function _get_service_datatables_query(){
 
-        $is_logged_in = $this->session->userdata('is_logged_in');
-
-        if($is_logged_in['user_rights'] == "super"){
-            $this->db->where("deleted_at !=",NULL);
-            $this->db->from($this->table);
-        }else{
-            $this->db->from($this->table);
-            $this->db->where("deleted_at !=",NULL);
-            $this->db->where("created_by",$is_logged_in['user_id']);
-        }
+		$this->db->from($this->table);
+        $this->db->where("deleted_at !=",NULL);
 
         $i = 0;
-  
+
         foreach ($this->column_search as $item){
 
             if($_POST['search']['value']) // if datatable send POST for search
@@ -143,8 +113,6 @@ class Registration_model extends CI_Model {
             }
                     $i++;
         }
-        // print_r($this->column_order[$_POST['order']['0']['column']]);
-        //         $sort = $_POST['order'][0];
 
         if(isset($_POST['order'])) // here order processing
         {
@@ -154,39 +122,11 @@ class Registration_model extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-
-    function get_dl_datatables()
-    {
-        $this->_get_dl_datatables_query();
-        if($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
-            $query = $this->db->get();
-        return $query->result();
-    }
-    function dl_count_filtered()
-    {
-        $this->_get_dl_datatables_query();
-        $query = $this->db->get();
-        return $query->num_rows();
-    }
    
-    /*end deleted staff*/
+    /*end deleted services*/
 
 
-    public function get_by_id($id)
-    {
-        $data = array();
-
-        $this->db->from($this->table);
-        $this->db->where('id',$id);
-        $query['user_info'] = $this->db->get()->result_array();
-       
-        $this->db->from('assign_staff_service');
-        $this->db->where('_userID',$id);
-        $query['services'] = $this->db->get()->result_array();
-        
-        return $query; 
-    }
+    /*CRUD*/
 
     public function save($data)
     {
@@ -202,7 +142,7 @@ class Registration_model extends CI_Model {
 
     public function delete_by_id($id)
     {
-        $data  = array('deleted_by' => 1 , 'deleted_at' =>date('Y-m-d H:i:s') );
+        $data  = array('deleted_at' =>date('Y-m-d H:i:s') );
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
     }
@@ -210,7 +150,7 @@ class Registration_model extends CI_Model {
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
         
-        $data  = array('deleted_by' => NULL , 'deleted_at' => NULL );
+        $data  = array('deleted_at' => NULL );
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
     }

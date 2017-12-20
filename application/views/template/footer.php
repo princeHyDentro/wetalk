@@ -26,7 +26,6 @@
 		<script src="<?php echo base_url('assets/datetimepicker/build/jquery.datetimepicker.full.min.js'); ?>"></script>
 		
 		<script src="<?php echo base_url('assets/custom-js/login-and-registration.js'); ?>"></script>
-		<script src="<?php echo base_url('assets/custom-js/custom-register-user.js'); ?>"></script>
 	<!-- 	<script src="<?php echo base_url('custom-js/j1_exchange_culture.js'); ?>"></script>
 		<script src="<?php echo base_url('assets/custom-js/kbl.js'); ?>"></script>
 		<script src="<?php echo base_url('assets/custom-js/nlex.js'); ?>"></script>
@@ -85,19 +84,6 @@
 			    var label = $(this).closest('label');
 			    $(this).insertBefore(label);
 			});
-
-
-		//	$('.button-collapse').sideNav('show');
-			// $('.button-collapse').sideNav({
-		 //      menuWidth: 300, // Default is 300
-		 //      edge: 'right', // Choose the horizontal origin
-		 //      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-		 //      draggable: true, // Choose whether you can drag to open on touch screens,
-		 //      onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
-		 //      onClose: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is closed
-		 //    }
-		 //  );
-
 		});
 		
 	</script>

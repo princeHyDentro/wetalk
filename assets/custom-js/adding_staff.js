@@ -1,40 +1,10 @@
-
  
 var save_method; //for save method string
 var table;
  
 $(document).ready(function() {
-    $('#deleted-staff-table').DataTable({ 
-        
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [],
-        
- 
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "ajax_list_dl_data",
-            "type": "POST",
-
-        },
- 
-        //Set column definition initialisation properties.
-        "columnDefs": [
-            { 
-                "targets": [ -1 ], //last column
-                "orderable": false, //set not orderable
-            },
-        ],
-        dom: '<"toolbar">Bfrtip',
-       
-        buttons: [
-            
-        ],
-
-    });
     
-
-    table = $('#staff-table').DataTable({ 
+	table = $('#staff-table').DataTable({ 
         
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -107,7 +77,6 @@ $(document).ready(function() {
         table.search( this.value ).draw();
     });
 
-
     //set input/textarea/select event when change value, remove class error and remove text help block 
     $("input").change(function(){
         $(this).parent().parent().removeClass('has-error');
@@ -121,11 +90,8 @@ $(document).ready(function() {
         $(this).parent().parent().removeClass('has-error');
         $(this).next().empty();
     });
- 
 });
- 
- 
- 
+
 function add_person()
 {
     save_method = 'add';
@@ -169,6 +135,7 @@ function clearForm(frm_elements){
         }
     }
 }
+
 function edit_person(id)
 {
     save_method = 'update';
@@ -215,17 +182,20 @@ function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
 }
- 
 function save()
 {
     $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
+
     var url;
     var unselected;
+
     if(save_method == 'add') {
         url = "ajax_add";
     } else {
+
         url = "ajax_update";
+
         var unselected = $('#services option:not(:selected)').map(function(){
                 data = {
                         'service_id' : $(this).val(),
@@ -245,13 +215,13 @@ function save()
         }).get();
 
 
-    console.log(unselected);
     // ajax adding data to database
     $.ajax({
         url : url,
         type: "POST",
         data: {
             //'form' : $('#form').serialize() ,
+            'id'            : $('#user_id').val(),
             'user_fname'    : $('#user_fname').val(),
             'user_lname'    : $('#user_lname').val(),
             'user_mname'    : $('#user_mname').val(),
@@ -270,6 +240,11 @@ function save()
             {
                 $('#modal_form').modal('close');
                 reload_table();
+                if(save_method == 'add') {
+                    Materialize.toast('Succesfully Added!', 3000, 'rounded')
+                } else {
+                    Materialize.toast('Succesfully Updated!', 3000, 'rounded')
+                }
             }
             else
             {
@@ -294,7 +269,7 @@ function save()
         }
     });
 }
- 
+
 function delete_person(id){
     if(confirm('Are you sure delete this data?'))
     {
@@ -308,6 +283,7 @@ function delete_person(id){
                 //if success reload ajax table
                 $('#modal_form').modal('close');
                 reload_table();
+                Materialize.toast('Succesfully Deleted!', 3000, 'rounded')
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

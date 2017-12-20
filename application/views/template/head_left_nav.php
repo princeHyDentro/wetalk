@@ -60,12 +60,12 @@
 
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Staff<i class="material-icons right">arrow_drop_down</i></a>
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">people</i>Staff<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="<?php  echo base_url('registration/staff'); ?>">Create Staff</a> </li>
+                                    <li><a href="<?php  echo base_url('registration/staff'); ?>"><span class="material-icons">person_add</span> Add/View Employees</a> </li>
                                     <!-- <li><a href="#!">View Staff</a> </li> -->
-                                    <li><a href="<?php  echo base_url('registration/deleted_staff'); ?>">Deleted Staff</a> </li>
+                                    <li><a href="<?php  echo base_url('registration/deleted_staff'); ?>"> <span class="material-icons">delete_sweep</span> Deleted Employees</a> </li>
                                 </ul>
                             </div>
                         </li>
@@ -75,13 +75,11 @@
                 <li><a href="#!"><i class="material-icons">description</i>Policies</a> </li>
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Directories<i class="material-icons right">arrow_drop_down</i></a>
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Services<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#!">First</a> </li>
-                                    <li><a href="#!">Second</a> </li>
-                                    <li><a href="#!">Third</a> </li>
-                                    <li><a href="#!">Fourth</a> </li>
+                                    <li><a href="<?php  echo base_url('services'); ?>">Add/View Services</a> </li>
+                                    <li><a href="<?php  echo base_url('services/deleted_services'); ?>">Deleted Services</a></li>
                                 </ul>
                             </div>
                         </li>
