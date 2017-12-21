@@ -23,7 +23,7 @@
                                 <li><a href="#!"><i class="material-icons">face</i>Profile</a> </li>
                                 <li><a href="#!"><i class="material-icons">settings</i>Settings</a> </li>
                                 <li class="divider"></li>
-                                <li><a href="http://localhost/pmg_hr_new/public/logout"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
+                                <li><a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
                             </ul>
                         </li>
                     </ul>
@@ -47,7 +47,7 @@
                                     <li><a href="#!"><i class="material-icons">face</i>Profile</a> </li>
                                     <li><a href="#!"><i class="material-icons">settings</i>Settings</a> </li>
                                     <li class="divider"></li>
-                                    <li><a href="http://localhost/pmg_hr_new/public/logout"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
+                                    <li><a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
                                 </ul> <span class="white-text email">static_data</span>
                             </div>
                         </div>
