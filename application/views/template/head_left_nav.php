@@ -1,6 +1,10 @@
 <?php $is_logged_in = $this->session->userdata('is_logged_in'); ?>
 
-
+<?php
+// echo "<pre>";
+// print_r($is_logged_in);
+// echo "</pre>";
+?>
 <header>
     <div class="navbar-fixed">
         <nav class="top-nav teal darken-1">
@@ -21,8 +25,8 @@
                             <a href="#" class="waves-effect waves-light dropdown-button" data-beloworigin="true" data-constrainwidth="false" data-activates="top-nav-user-menu"><img class="circle" src="http://i.pravatar.cc/300"> </a>
                             <ul id="top-nav-user-menu" class="dropdown-content">
                                 <li><a href="#!"><i class="material-icons">face</i>Profile</a> </li>
-                                <li><a href="#!"><i class="material-icons">settings</i>Settings</a> </li>
-                                <li class="divider"></li>
+                                <li><a href="#resetPassword" class="modal-trigger"><i class="material-icons">settings</i>Pass Reset</a> </li>
+                                <li class="divider"><?php echo $is_logged_in['user_full_name']; ?></li>
                                 <li><a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
                             </ul>
                         </li>
@@ -45,10 +49,11 @@
                                 <a href="#." class="dropdown-button white-text waves-effect waves-light user-btn" data-beloworigin="true" data-constrainwidth="false" data-activates="user-menu"> <span></span> <i class="material-icons">arrow_drop_down_circle</i> </a>
                                 <ul id="user-menu" class="dropdown-content">
                                     <li><a href="#!"><i class="material-icons">face</i>Profile</a> </li>
-                                    <li><a href="#!"><i class="material-icons">settings</i>Settings</a> </li>
+                                    <li><a href="#!"><i class="material-icons">settings</i>Pass Reset</a> </li>
                                     <li class="divider"></li>
                                     <li><a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
-                                </ul> <span class="white-text email">static_data</span>
+                                </ul>
+                                <span class="white-text email"><?php echo $is_logged_in['user_full_name']; ?></span>
                             </div>
                         </div>
                     </div>

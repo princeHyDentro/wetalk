@@ -40,9 +40,6 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
 			</div>
 			<div class="modal-body">
 				<form action="#" id="form" class="form-horizontal">
@@ -67,7 +64,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" id="close-form" type="button" onclick="clear_form();" data-dismiss="modal">Cancel</button>
+					<button class="btn btn-secondary modal-action modal-close" id="close-form " type="button">Cancel</button>
 					<button class="btn btn-primary" type="button" id="change-password" data-dismiss="">Send</button>
 					<!-- a class="btn btn-primary" href="">Logout</a> -->
 				</div>
