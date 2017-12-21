@@ -34,14 +34,9 @@ $(document).ready(function() {
         ],
     });
 
-    $('#admin_search_privilege').on('change' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#search_register_account_by_name').on('keyup' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#admin_search_status').on('change' , function(){
-        table.search( this.value ).draw();
+
+    $('#search_service').on('keyup' , function(){
+        dl_table.search( this.value ).draw();
     });
 });
 
@@ -62,7 +57,7 @@ function restore(id){
                 //if success reload ajax table
                 $('#modal_form').modal('close');
                 reload_delete_table();
-                Materialize.toast('Succesfully Restored!', 3000, 'rounded')
+                Materialize.toast('<i class="material-icons">notifications</i> Succesfully Restored!', 3000, 'rounded')
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

@@ -70,7 +70,7 @@ span.badge.new {
                                                     <th>Service Name</th>
                                                     <th>Service Desc</th>
                                                     <th>Date Deleted</th>
-                                                    <th>Action</th>
+                                                    <th>Restore</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>

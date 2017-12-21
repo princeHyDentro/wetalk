@@ -188,24 +188,25 @@ class Registration extends CI_Controller {
 
        $this->users->update(array('id' => $this->input->post('id')), $data);
 
+   
         foreach ($this->input->post('unselected_service') as $key => $value) {
-            if($value['service_id'] != "" && $value['primary_id']){
+            if($value['service_id'] != "" && $value['primary_id'] != ""){
                 $this->db->where('id', $value['primary_id']);
                 $this->db->delete('assign_staff_service'); 
             }
         }
 
+        //print_r($this->input->post('unselected_service'));
         foreach ($this->input->post('services') as $key => $value) {
             if($value['primary_id'] == ""){
-                $this->db->set('_userID', $insert);
+                $this->db->set('_userID',$this->input->post('id'));
                 $this->db->set('service_id', $value['service_id']);
                 $this->db->insert('assign_staff_service');
             }
         }
 
-        // print_r($this->input->post('unselected_service'));
-        // print_r($this->input->post('services'));
-        // exit;
+        //   print_r($this->input->post('services'));
+        //   exit;
 
         
         echo json_encode(array("status" => TRUE));
