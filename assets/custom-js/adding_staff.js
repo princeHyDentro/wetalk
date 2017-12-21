@@ -241,9 +241,9 @@ function save()
                 $('#modal_form').modal('close');
                 reload_table();
                 if(save_method == 'add') {
-                    Materialize.toast('Succesfully Added!', 3000, 'rounded')
+                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
                 } else {
-                    Materialize.toast('Succesfully Updated!', 3000, 'rounded')
+                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
                 }
             }
             else
@@ -283,7 +283,7 @@ function delete_person(id){
                 //if success reload ajax table
                 $('#modal_form').modal('close');
                 reload_table();
-                Materialize.toast('Succesfully Deleted!', 3000, 'rounded')
+                Materialize.toast('<i class="material-icons">notifications</i> Succesfully Deleted!', 3000, 'rounded')
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

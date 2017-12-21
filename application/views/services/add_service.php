@@ -57,7 +57,7 @@ span.badge.new {
                                                 <!-- <div class="">
                                                     <i class="material-icons search-icon"> search </i>
                                                 </div> -->
-                                                <input class="validate" id="search_register_account_by_name" placeholder="Search for (ID ,Full Name , Username , Email , Roles)" type='search'>
+                                                <input class="validate" id="search_service" placeholder="Search for (ID ,Full Name , Username , Email , Roles)" type='search'>
                                                 <!-- <label for="first_name" class="active">First Name</label> -->
                                             </div>
 
@@ -88,5 +88,46 @@ span.badge.new {
         </div>
     </div>
 </main>
+<style type="text/css">
+   .input-field.col label{
+        font-size: 1.3rem;
+   }
+   .select-wrapper+label{
+        top:-31px;
+   }
+</style>
+<div class="modal fade" id="modal_form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Person Form</h3>
+            </div>
+            <div class="modal-body form">
+
+                <form action="#" class="form-horizontal" id="form" name="form">
+                    <input name="id" id="user_id" type="hidden" value="">
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12 has-error">
+                                <label>Service Name<i style="color:red;">*</i></label>
+                                <input class="validate" id="service-name" name="service-name" placeholder="Enter First Name Here.." type="text">
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="input-field col s12 has-error">
+                                <label id="desc" for="service-description">Service Description<i style="color:red;">*</i></label>
+                                <textarea id="service-description" name="service-description" class="materialize-textarea"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="padding: 6px;">
+                <button class="btn btn-primary " id="btnSave" onclick="save()" type="button">Save</button>
+                <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/custom-js/add_service.js'); ?>"></script>

@@ -36,31 +36,33 @@
 
         <!-- HORIZONTAL NAV FOR DESKTOP -->
         <ul id="left-side-nav" class="side-nav white hide-on-med-and-down" style="transform: translateX(0px);">
-            <li>
-                <div class="user-view">
-                    <div class="background"> <img src="http://localhost/pmg_hr_new/public/assets/img/user-view-bg.jpg"> </div>
-                    <div class="row">
-                        <div class="col s4"> <img class="circle" src="http://i.pravatar.cc/300"> </div>
-                        <div class="col s8">
-                            <a href="#." class="dropdown-button white-text waves-effect waves-light user-btn" data-beloworigin="true" data-constrainwidth="false" data-activates="user-menu"> <span></span> <i class="material-icons">arrow_drop_down_circle</i> </a>
-                            <ul id="user-menu" class="dropdown-content">
-                                <li><a href="#!"><i class="material-icons">face</i>Profile</a> </li>
-                                <li><a href="#!"><i class="material-icons">settings</i>Settings</a> </li>
-                                <li class="divider"></li>
-                                <li><a href="http://localhost/pmg_hr_new/public/logout"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
-                            </ul> <span class="white-text email">static_data</span> </div>
+                <li>
+                    <div class="user-view">
+                        <div class="background"> <img src="http://localhost/pmg_hr_new/public/assets/img/user-view-bg.jpg"> </div>
+                        <div class="row">
+                            <div class="col s4"> <img class="circle" src="http://i.pravatar.cc/300"> </div>
+                            <div class="col s8">
+                                <a href="#." class="dropdown-button white-text waves-effect waves-light user-btn" data-beloworigin="true" data-constrainwidth="false" data-activates="user-menu"> <span></span> <i class="material-icons">arrow_drop_down_circle</i> </a>
+                                <ul id="user-menu" class="dropdown-content">
+                                    <li><a href="#!"><i class="material-icons">face</i>Profile</a> </li>
+                                    <li><a href="#!"><i class="material-icons">settings</i>Settings</a> </li>
+                                    <li class="divider"></li>
+                                    <li><a href="http://localhost/pmg_hr_new/public/logout"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
+                                </ul> <span class="white-text email">static_data</span>
+                            </div>
                         </div>
                     </div>
                 </li>
+
                 <li>
                     <a href="<?php echo base_url('dashboard'); ?>"><i class="material-icons">dashboard</i>Dashboard</a>
                 </li>
-
-                <!-- <li><a href="<?php  echo base_url('registration/employee_registration_form'); ?>"><i class="material-icons">person</i>Employees</a> </li> -->
+                <li><a href="#!"><i class="material-icons">desktop_windows</i> Monitoring</a> </li>
+                <li><a href="#!"><i class="material-icons">desktop_windows</i> Tickets</a> </li>
 
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li> <a class="collapsible-header padding-32"><i class="material-icons">people</i>Staff<i class="material-icons right">arrow_drop_down</i></a>
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Staff<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
                                     <li><a href="<?php  echo base_url('registration/staff'); ?>"><span class="material-icons">person_add</span> Add/View Employees</a> </li>
@@ -72,7 +74,6 @@
                     </ul>
                 </li>
 
-                <li><a href="#!"><i class="material-icons">description</i>Policies</a> </li>
                 <li>
                     <ul class="collapsible collapsible-accordion">
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Services<i class="material-icons right">arrow_drop_down</i></a>
@@ -88,13 +89,13 @@
 
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li> <a class="collapsible-header padding-32"><i class="material-icons">group</i>Administration<i class="material-icons right">arrow_drop_down</i></a>
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#!">First</a> </li>
-                                    <li><a href="#!">Second</a> </li>
-                                    <li><a href="#!">Third</a> </li>
-                                    <li><a href="#!">Fourth</a> </li>
+                                    <li><a href="#!">Add Applicant</a> </li>
+                                    <li><a href="#!">Enrolled Applicant</a> </li>
+                                    <li><a href="#!">Inquire Applicant</a> </li>
+                                    <li><a href="#!">Deleted Applicant</a> </li>
                                 </ul>
                             </div>
                         </li>

@@ -42,19 +42,19 @@ $(document).ready(function() {
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                            columns: [ 0, 1, 2, 3 ]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                            columns: [ 0, 1, 2, 3 ]
                         }
                     },
                     {
                         extend: 'copy',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                            columns: [ 0, 1, 2, 3 ]
                         }
                     }
                     
@@ -67,13 +67,7 @@ $(document).ready(function() {
     
     // $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
 
-    $('#admin_search_privilege').on('change' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#search_register_account_by_name').on('keyup' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#admin_search_status').on('change' , function(){
+    $('#search_service').on('keyup' , function(){
         table.search( this.value ).draw();
     });
 
@@ -101,8 +95,9 @@ function add_service()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('open'); // show bootstrap modal
-    $('.modal-title').text('Add Staff'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add New Service'); // Set Title to Bootstrap modal title
 }
+
 function clearForm(frm_elements){
 
     for (i = 0; i < frm_elements.length; i++)
@@ -145,27 +140,16 @@ function edit_service(id)
  
     //Ajax Load data from ajax
     $.ajax({
-        url : "ajax_edit/" + id,
+        url : "services/ajax_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
-
-            $(data['services']).each(function(index, el) {
-                $('#services').find('option[value="'+el.service_id+'"]').prop('selected', true);
-                $('#services').find('option[value="'+el.service_id+'"]').attr('data-id', el.id);
-            });
-
-            $('[name="id"]').val(data['user_info'][0].id);
-            $('[name="user_fname"]').val(data['user_info'][0].fname);
-            $('[name="user_lname"]').val(data['user_info'][0].lname);
-            $('[name="user_mname"]').val(data['user_info'][0].middle);
-            $('[name="user_username"]').val(data['user_info'][0].username);
-            $('[name="user_email"]').val(data['user_info'][0].email);
-            $('#permission').find('option[value="'+data['user_info'][0].roles+'"]').prop('selected', true);
-
-            $("#permission").material_select();
-            $("#services").material_select();
+            console.log(data);
+            $('[name="id"]').val(data[0].id);
+            $('[name="service-name"]').val(data[0].service_name);
+            $('[name="service-description"]').val(data[0].service_desc);
+            $('#desc').addClass('active');
 
             $('#modal_form').modal('open'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Staff'); // Set title to Bootstrap modal title
@@ -191,47 +175,16 @@ function save()
     var unselected;
 
     if(save_method == 'add') {
-        url = "ajax_add";
+        url = "services/ajax_add";
     } else {
-
-        url = "ajax_update";
-
-        var unselected = $('#services option:not(:selected)').map(function(){
-                data = {
-                        'service_id' : $(this).val(),
-                        'primary_id' : $(this).attr('data-id')
-                    }
-                return data;
-        }).get();
-
+        url = "services/ajax_update";
     }
-
-    var checkValues  = $('#services option:selected').map(function(){
-                data = {
-                        'service_id' : $(this).val(),
-                        'primary_id' : $(this).attr('data-id')
-                    }
-                return data;
-        }).get();
-
 
     // ajax adding data to database
     $.ajax({
         url : url,
         type: "POST",
-        data: {
-            //'form' : $('#form').serialize() ,
-            'id'            : $('#user_id').val(),
-            'user_fname'    : $('#user_fname').val(),
-            'user_lname'    : $('#user_lname').val(),
-            'user_mname'    : $('#user_mname').val(),
-            'user_username' : $('#user_username').val(),
-            'user_password' : $('#user_password').val(),
-            'user_email'    : $('#user_email').val(),
-            'permission'    : $('#permission').val(),
-            'services'      : checkValues,
-            'unselected_service' : unselected
-        },
+        data: $('#form').serialize(),
         dataType: "JSON",
         success: function(data)
         {	
@@ -241,9 +194,9 @@ function save()
                 $('#modal_form').modal('close');
                 reload_table();
                 if(save_method == 'add') {
-                    Materialize.toast('Succesfully Added!', 3000, 'rounded')
+                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
                 } else {
-                    Materialize.toast('Succesfully Updated!', 3000, 'rounded')
+                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
                 }
             }
             else
@@ -283,7 +236,7 @@ function delete_service(id){
                 //if success reload ajax table
                 $('#modal_form').modal('close');
                 reload_table();
-                Materialize.toast('Succesfully Deleted!', 3000, 'rounded')
+                Materialize.toast('<i class="material-icons">notifications</i> Succesfully Deleted!', 3000, 'rounded')
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

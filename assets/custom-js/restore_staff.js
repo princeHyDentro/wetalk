@@ -62,7 +62,7 @@ function restore(id){
                 $('#modal_form').modal('close');
                
                 reload_delete_table();
-                Materialize.toast('Succesfully Restored!', 3000, 'rounded')
+                Materialize.toast('<i class="material-icons">notifications</i> Succesfully Restored!', 3000, 'rounded')
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

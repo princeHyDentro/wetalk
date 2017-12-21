@@ -154,4 +154,13 @@ class Services_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
     }
+    public function get_by_id($id)
+    {
+        $data = array();
+
+        $this->db->from($this->table);
+        $this->db->where('id',$id);
+        $query = $this->db->get()->result_array();
+        return $query; 
+    }
 }

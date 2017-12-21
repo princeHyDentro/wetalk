@@ -93,6 +93,35 @@ class Services extends CI_Controller {
 
         echo json_encode($output);
     }
+    public function ajax_edit($id)
+    {
+        $data = $this->services->get_by_id($id);
+        echo json_encode($data);
+    }
+    public function ajax_add(){
+
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        $this->_validate();
+
+        $data = array(
+            'service_name'  => $this->input->post('service-name'),
+            'service_desc'  => $this->input->post('service-description'),
+        );
+       $insert = $this->services->save($data);
+        echo json_encode(array("status" => TRUE));
+    }
+
+    public function ajax_update(){
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        $data = array(
+            'service_name'  => $this->input->post('service-name'),
+            'service_desc'  => $this->input->post('service-description'),
+            'updated_at'    => date("Y-m-d h:i:s")
+        );
+
+        $this->services->update(array('id' => $this->input->post('id')), $data);
+        echo json_encode(array("status" => TRUE));
+    }
 
     public function ajax_delete($id)
     {
@@ -111,47 +140,19 @@ class Services extends CI_Controller {
         $data['inputerror']     = array();
         $data['status']         = TRUE;
         
-        if($this->input->post('user_fname') == '')
+        if($this->input->post('service-name') == '')
         {
-            $data['inputerror'][] = 'user_fname';
-            $data['error_string'][] = 'First name is required';
+            $data['inputerror'][] = 'service-name';
+            $data['error_string'][] = 'Service name is required';
             $data['status'] = FALSE;
         }
         
-        if($this->input->post('user_lname') == '')
+        if($this->input->post('service-description') == '')
         {
-            $data['inputerror'][] = 'user_lname';
-            $data['error_string'][] = 'Last name is required';
+            $data['inputerror'][] = 'service-description';
+            $data['error_string'][] = 'Service description is required';
             $data['status'] = FALSE;
         }
-        
-        if($this->input->post('user_username') == '')
-        {
-            $data['inputerror'][] = 'user_username';
-            $data['error_string'][] = 'Username is required';
-            $data['status'] = FALSE;
-        }
-        
-        if($this->input->post('user_password') == '')
-        {
-            $data['inputerror'][] = 'user_password';
-            $data['error_string'][] = 'Password is required';
-            $data['status'] = FALSE;
-        }
-        
-        if($this->input->post('user_email') == '')
-        {
-            $data['inputerror'][] = 'user_email';
-            $data['error_string'][] = 'Email address is required';
-            $data['status'] = FALSE;
-        }
-        if($this->input->post('permission') == '')
-        {
-            $data['inputerror'][] = 'permission';
-            $data['error_string'][] = 'Permission is required';
-            $data['status'] = FALSE;
-        }
-        
         
         if($data['status'] === FALSE)
         {

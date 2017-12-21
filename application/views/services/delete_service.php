@@ -60,7 +60,6 @@ span.badge.new {
                                                 <input class="validate" id="search_register_account_by_name" placeholder="Search for (ID ,Full Name , Username , Email , Roles)" type='search'>
                                                 <!-- <label for="first_name" class="active">First Name</label> -->
                                             </div>
-
                                         </div>
                                     </li>   
                                    <div class="table-responsive">
