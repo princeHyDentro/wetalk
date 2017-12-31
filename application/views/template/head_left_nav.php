@@ -65,6 +65,8 @@
                 <li><a href="#!"><i class="material-icons">desktop_windows</i> Monitoring</a> </li>
                 <li><a href="#!"><i class="material-icons">desktop_windows</i> Tickets</a> </li>
 
+                <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
+
                 <li>
                     <ul class="collapsible collapsible-accordion">
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Staff<i class="material-icons right">arrow_drop_down</i></a>
@@ -78,7 +80,8 @@
                         </li>
                     </ul>
                 </li>
-
+                <?php endif; ?>
+                <?php if($is_logged_in['user_rights'] == 'super'): ?>
                 <li>
                     <ul class="collapsible collapsible-accordion">
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Services<i class="material-icons right">arrow_drop_down</i></a>
@@ -91,7 +94,7 @@
                         </li>
                     </ul>
                 </li>
-
+                <?php endif; ?>
                 <li>
                     <ul class="collapsible collapsible-accordion">
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>

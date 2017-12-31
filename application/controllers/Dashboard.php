@@ -19,9 +19,9 @@ class Dashboard extends CI_Controller {
     }else{
 
       $this->load->view('template/header');
-      $this->load->view('template/head_left_nav');
+      // $this->load->view('template/head_left_nav');
       $this->load->view('dashboard/dashboard');
-      $this->load->view('template/footer');
+      // $this->load->view('template/footer');
   }	
 }
 
