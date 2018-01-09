@@ -14,6 +14,11 @@
 .side-nav .collapsible-body li a, .side-nav.fixed .collapsible-body li a {
     padding: 0px 25.5px 0 84px;
 }
+side-nav .user-view, .side-nav .userView {
+    position: relative;
+    padding: 0px 0px 0 !important;
+    margin-bottom: 8px;
+}
 </style>
 <header>
     <div class="navbar-fixed">
@@ -52,26 +57,25 @@
 
         <!-- HORIZONTAL NAV FOR DESKTOP -->
         <ul id="left-side-nav" class="side-nav white hide-on-med-and-down" style="transform: translateX(0px);">
-                <li>
+                <!-- <li>
                     <div class="user-view">
-                        <!-- <div class="background"> <img src="http://localhost/pmg_hr_new/public/assets/img/user-view-bg.jpg"> </div> -->
+                        <div class="background"> <img src="http://i.pravatar.cc/300"> </div>
                         <div class="row">
-                            <!-- <div class="col s4"> <img class="circle" src="http://i.pravatar.cc/300"> </div>
-                            <div class="col s8"> -->
-                                <!-- <a href="#." class="dropdown-button white-text waves-effect waves-light user-btn">
+                            <div class="col s4"> <img class="circle" src="http://i.pravatar.cc/300"> </div>
+                            <div class="col s8">
+                                <a href="#." class="dropdown-button white-text waves-effect waves-light user-btn">
                                     <span></span> 
-                                    <i class="material-icons">arrow_drop_down_circle</i> </a> -->
-                               <!--  <ul id="user-menu" class="dropdown-content">
+                                    <i class="material-icons">arrow_drop_down_circle</i> </a>
+                                <ul id="user-menu" class="dropdown-content">
                                     <li><a href="#!"><i class="material-icons">face</i>Profile</a> </li>
                                     <li><a href="#!"><i class="material-icons">settings</i>Pass Reset</a> </li>
                                     <li class="divider"></li>
                                     <li><a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a> </li>
-                                </ul> -->
-                                <!-- <span class="white-text email"><?php echo $is_logged_in['user_full_name']; ?></span> -->
-                            <!-- </div> -->
-                        </div>
+                                </ul>
+                                <span class="white-text email"><?php echo $is_logged_in['user_full_name']; ?></span>
+                            </div>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="#"><i class="material-icons">face</i>Profile</a>
                 </li>
