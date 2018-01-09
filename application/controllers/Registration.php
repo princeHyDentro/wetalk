@@ -7,6 +7,7 @@ class Registration extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('registration_model','users');
+        $this->load->model('sales_model','applicant');
     }
 
     public function deleted_at(){
@@ -28,6 +29,20 @@ class Registration extends CI_Controller {
             $data['services']   = $this->staff_services();
             $this->load->view('template/header');
             $this->load->view('registration/registration_form',$data);
+        }
+    }
+	
+	 public function sales()
+    {
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        if (!isset($is_logged_in) || $is_logged_in != true) {
+            redirect('login', 'refresh');
+            die();
+        }else{
+            $data['roles']      = $this->staff_roles();
+            $data['services']   = $this->staff_services();
+            $this->load->view('template/header');
+            $this->load->view('registration/sales_form',$data);
         }
     }
 
@@ -118,10 +133,52 @@ class Registration extends CI_Controller {
 
         echo json_encode($output);
     }
+	
+	public function ajax_sales_list_data(){
+        $this->load->helper('date');
+        $list   = $this->applicant->get_datatables();
+
+        $data   = array();
+        $no     = $_POST['start'];
+        foreach ($list as $app) {
+            $no++;
+            $row = array();
+
+            $row[] = $app->id;
+            $row[] = $app->name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
+            $row[] = $app->contact;
+            $row[] = $app->address;
+            $row[] = $app->email;
+            $row[] = $app->service;
+            $row[] = $app->status	;
+            $row[] = $app->username;
+            $row[] = $app->password;
+          
+            //add html for action
+            $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$app->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$app->id."'".')"><i class="material-icons">delete</i></a>';
+            $data[] = $row;
+
+        }
+    
+        $output = array(
+            "draw"              => $_POST['draw'],
+            "recordsTotal"      => $this->applicant->count_all(),
+            "recordsFiltered"   => $this->applicant->count_filtered(),//for entries label
+            "data"              => $data,
+        );
+
+        echo json_encode($output);
+    }
 
     public function ajax_edit($id)
     {
         $data = $this->users->get_by_id($id);
+        echo json_encode($data);
+    }
+	
+	public function ajax_edit_sales($id)
+    {
+        $data = $this->applicant->get_by_id($id);
         echo json_encode($data);
     }
 
@@ -156,6 +213,28 @@ class Registration extends CI_Controller {
         }
 
         echo json_encode(array("status" => TRUE));
+    }
+	
+	public function ajax_add_sales(){
+
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        //$this->_validate();
+
+        $data = array(
+            'name'       => $this->input->post('name'),
+            'contact'    => $this->input->post('contact'),
+            'address'    => $this->input->post('address'),
+            'email'      => $this->input->post('email'),
+            'service'    => $this->input->post('service'),
+            'username'   => md5($this->input->post('username')),
+            'password'   => $this->input->post('password'),
+            'status'     => $this->input->post('status'),
+			'date'       => date("Y-m-d h:i:s")
+        );
+
+       $insert = $this->applicant->save($data);
+        
+       echo json_encode(array("status" => TRUE));
     }
 
     public function ajax_update(){
@@ -211,12 +290,38 @@ class Registration extends CI_Controller {
         
         echo json_encode(array("status" => TRUE));
     }
-
+	
+	public function ajax_update_sales(){
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        
+            $data = array(
+                'name'          => $this->input->post('name'),
+                'contact'       => $this->input->post('contact'),
+                'email'         => $this->input->post('email'),
+                'address'       => $this->input->post('address'),
+                'service'       => $this->input->post('service'),
+                'status'        => $this->input->post('status'),
+                'username'      => $this->input->post('username'),
+                'password'      => $this->input->post('password')
+            );
+      
+       $this->applicant->update(array('id' => $this->input->post('id')), $data);
+      
+        echo json_encode(array("status" => TRUE));
+    }
+	
     public function ajax_delete($id)
     {
         $this->users->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
+	
+	public function ajax_delete_sales($id)
+    {
+        $this->applicant->delete_by_id($id);
+        echo json_encode(array("status" => TRUE));
+    }
+	
     public function ajax_restore($id)
     {
         $this->users->resotore_by_id($id);
