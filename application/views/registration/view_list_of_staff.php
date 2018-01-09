@@ -36,7 +36,7 @@ th{
                 <div class="panel panel-default">
                     <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
                         <li class="active">
-                            <div class="collapsible-header teal white-text task-list-data active">
+                            <div class="collapsible-header teal white-text task-list-data active" data-id="{{ $task_group['id']}}">
                                 <i class="material-icons more">keyboard_arrow_right</i>
                                 <i class="material-icons less" style="display: none">keyboard_arrow_down</i>
                                 <span class="right">Staff List</span>
@@ -65,7 +65,7 @@ th{
                                         </div>
                                     </li>   
                                    <div class="table-responsive">
-                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="staff-table" width="100%">
+                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="view-staff-list" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -76,7 +76,7 @@ th{
                                                    <!--  <th>Position</th> -->
                                                     <th>Created</th>
                                                     <th>Updated</th>
-                                                    <!-- <th>Action</th> -->
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -167,7 +167,7 @@ th{
                                         <option data-id="" value="<?php echo $service['id'];?>"><?php echo $service['service_name'];?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <label class="show-hide">Assign Multiple Services<i style="color:red;">*</i></label>
+                                <label>Assign Multiple Services<i style="color:red;">*</i></label>
                             </div>
                         </div>
                     </div>
@@ -181,18 +181,4 @@ th{
     </div>
 </div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
-<script src="<?php echo base_url('assets/new-js/adding_staff.js'); ?>"></script>
-<script>
-    $('#permission').change(function(event) {
-        event.preventDefault();
-        var data = $(this).val();
-        if(data == 'office-admin'){
-            $('#services').material_select('destroy');
-            $('.show-hide').hide();
-        }else{
-            $('#services').material_select('');
-            $('.show-hide').show();
-        }
-        
-    });
-</script>
+<script src="<?php echo base_url('assets/new-js/view_list_of_staff.js'); ?>"></script>

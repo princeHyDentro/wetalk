@@ -65,13 +65,14 @@ span.badge.new {
                                         </div>
                                     </li>   
                                    <div class="table-responsive">
-                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="service-table" width="100%">
+                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="list-service-table" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Service Name</th>
                                                     <th>Created</th>
                                                     <th>Updated</th>
+                                                    <th>Action</th>
                                                     <th>Service Description</th>
                                                 </tr>
                                             </thead>
@@ -110,12 +111,12 @@ span.badge.new {
                         <div class="row">
                             <div class="input-field col s12 has-error">
                                 <label>Service Name<i style="color:red;">*</i></label>
-                                <input class="validate" id="service-name" name="service-name" placeholder="Enter First Name Here.." type="text">
+                                <input class="validate" id="service-name-1" name="service-name" placeholder="Enter First Name Here.." type="text">
                                 <span class="help-block"></span>
                             </div>
                             <div class="input-field col s12 has-error">
                                 <label id="desc" for="service-description">Service Description<i style="color:red;">*</i></label>
-                                <textarea id="service-description" name="service-description" class="materialize-textarea"></textarea>
+                                <textarea id="service-description-1" name="service-description" class="materialize-textarea"></textarea>
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -129,6 +130,23 @@ span.badge.new {
         </div>
     </div>
 </div>
+
+<!-- <div class="modal modal-fixed-footer fade" id="modal_description" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Details</h3>
+            </div>
+            <div class="modal-body form-description">
+
+            </div>
+            <div class="modal-footer" style="padding: 6px;">
+                <button class="btn btn-danger modal-action modal-close"  type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
 <div id="modal_description" class="modal modal-fixed-footer">
     <div class="modal-content">
         <h4>Description</h4>
@@ -137,16 +155,17 @@ span.badge.new {
         </div>
     </div>
     <div class="modal-footer">
-        <button class="modal-action modal-close waves-effect waves-green btn-flat"  type="button">Close</button>
+      <button class="modal-action modal-close waves-effect waves-green btn-flat"  type="button">Close</button>
     </div>
 </div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
-<script src="<?php echo base_url('assets/new-js/add_service.js'); ?>"></script>
+<script src="<?php echo base_url('assets/new-js/view_all_services.js'); ?>"></script>
+
 <script>
 
 function descriptionClick(id){
     $.ajax({
-        url : "services/description/"+id,
+        url : "description/"+id,
         type: "POST",
         dataType: "JSON",
         success: function(data)

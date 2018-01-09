@@ -11,7 +11,7 @@ canvas { background-color : #eee;
   <div class="container">
     <div class="row">
       <div class="col s12 m9 l10">
-        <canvas id="chartJSContainer" width="600" height="400"></canvas>
+       <!--  <canvas id="chartJSContainer" width="600" height="400"></canvas> -->
 
       </div>
     </div>
@@ -31,12 +31,12 @@ canvas { background-color : #eee;
             responsive : true,
             datasets: [
               {
-                label: '# of Votes',
+                label: 'test 1',
                 data: [12, 19, 3, 5, 2],
                 borderWidth: 1
               },  
               {
-                label: '# of Points',
+                label: 'test 2',
                 data: [7, 11, 5, 8, 3],
                 borderWidth: 1
               }

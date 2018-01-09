@@ -42,11 +42,11 @@
 				<h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
 			</div>
 			<div class="modal-body">
-				<form action="#" id="form" class="form-horizontal">
+				<!-- <form action="#" id="form" class="form-horizontal"> -->
 					<?php $is_logged_in = $this->session->userdata('is_logged_in'); ?>
 
-					<input type="hidden" id="userEmail" value="<?php echo $is_logged_in['user_email']; ?>" name=""/> 
-					<input type="hidden" id="userID" value="<?php echo $is_logged_in['user_id']; ?>" name=""/> 
+					<input type="hidden" class="user-email" value="<?php echo $is_logged_in['user_email']; ?>" name="user-email"/> 
+					<input type="hidden" class="user-id" value="<?php echo $is_logged_in['user_id']; ?>" name="user-id"/> 
 					<div class="col-sm-12 custom-border">
 						<div class="success-text" style="display: none;"></div>                     
 
@@ -61,7 +61,7 @@
 							<div class="help-block-new"></div>
 						</div>  
 						<div class="alert alert-warning error-same-pass" style="display: none;"></div>
-					</form>
+					<!-- </form> -->
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary modal-action modal-close" id="close-form " type="button">Cancel</button>

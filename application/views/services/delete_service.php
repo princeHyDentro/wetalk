@@ -87,4 +87,4 @@ span.badge.new {
     </div>
 </main>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
-<script src="<?php echo base_url('assets/custom-js/restore_service.js'); ?>"></script>
+<script src="<?php echo base_url('assets/new-js/restore_service.js'); ?>"></script>

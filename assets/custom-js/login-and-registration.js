@@ -12,8 +12,8 @@ $(document).ready(function() {
 
 		var confirm_password = $('#confirm_password').val();
         var new_password	 = $('#new_password').val();
-        var userEmail		 = $('#userEmail').val();
-        var userID			 = $('#userID').val();
+        var userEmail		 = $('.user-email').val();
+        var userID			 = $('.user-id').val();
        
 
         if(new_password == "" && confirm_password == ""){

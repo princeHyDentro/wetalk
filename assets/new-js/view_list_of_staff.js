@@ -4,7 +4,7 @@ var table;
  
 $(document).ready(function() {
     
-	table = $('#staff-table').DataTable({ 
+	table = $('#view-staff-list').DataTable({ 
         
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -13,7 +13,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "ajax_list_data",
+            "url": "ajax_list_of_staff",
             "type": "POST",
 
         },
@@ -27,18 +27,6 @@ $(document).ready(function() {
         ],
         dom: '<"toolbar">Bfrtip',
         buttons: [
-                    {
-                        text: '<i class="fa fa-plus-circle"></i> Add Staff',
-                        action: function ( e, dt, node, config ) {
-                            add_person();
-                        }
-                    },
-                    {
-                        text: '<i class="fa fa-refresh"></i> Reload List',
-                        action: function ( e, dt, node, config ) {
-                           reload_table();
-                        }
-                    },
                     {
                         extend: 'print',
                         exportOptions: {
@@ -59,10 +47,6 @@ $(document).ready(function() {
                     }
                     
                 ]
-        // buttons: [
-        //     'copy', 'csv', 'excel', 'pdf', 'print'
-        // ],
-
     });
     
     // $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
@@ -92,17 +76,7 @@ $(document).ready(function() {
     });
 });
 
-function add_person()
-{
-    save_method = 'add';
-    //$('#form')[0].reset(); // reset form on modals
-    var form = document.getElementById("form");
-    clearForm(form);
-    $('.form-group').removeClass('has-error'); // clear error class
-    $('.help-block').empty(); // clear error string
-    $('#modal_form').modal('open'); // show bootstrap modal
-    $('.modal-title').text('Add Staff'); // Set Title to Bootstrap modal title
-}
+
 function clearForm(frm_elements){
 
     for (i = 0; i < frm_elements.length; i++)

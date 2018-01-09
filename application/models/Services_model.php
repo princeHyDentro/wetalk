@@ -163,4 +163,10 @@ class Services_model extends CI_Model {
         $query = $this->db->get()->result_array();
         return $query; 
     }
+    public function get_service_desc($id){
+        $this->db->from($this->table);
+        $this->db->where('id',$id);
+        $query = $this->db->get()->result_array();
+        return $query; 
+    }
 }
