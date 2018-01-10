@@ -19,6 +19,9 @@ side-nav .user-view, .side-nav .userView {
     padding: 0px 0px 0 !important;
     margin-bottom: 8px;
 }
+li{
+    border-bottom: 1px solid #efefef;
+}
 </style>
 <header>
     <div class="navbar-fixed">
@@ -32,7 +35,7 @@ side-nav .user-view, .side-nav .userView {
                                 <div class="notification"></div>
                             </a>
                         </li> -->
-                        <li>
+                        <li style="border-bottom: 1px solid #00897b;border-bottom: none;">
                             <span class="white-text email" style="font-size: medium;">Welcome : <?php echo $is_logged_in['user_full_name']; ?></span>
                             <!-- <a href="#" class="waves-effect waves-light"> <i class="material-icons">mail</i>
                                 <div class="notification"></div>
@@ -85,7 +88,21 @@ side-nav .user-view, .side-nav .userView {
                 </li>
 
                 <li><a href="#!"><i class="material-icons">desktop_windows</i> Monitoring</a> </li>
-                <li><a href="#!"><i class="material-icons">assignment</i> Tickets</a> </li>
+               
+               <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">assignment</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="<?php  echo base_url('ticket/pending_tickets'); ?>">Pending Tickets</a> </li>
+                                    <li><a href="<?php  echo base_url('ticket/completed_tickets'); ?>">Completed Tickets</a> </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <?php endif; ?>
 
                 <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
 
@@ -103,6 +120,7 @@ side-nav .user-view, .side-nav .userView {
                     </ul>
                 </li>
                 <?php endif; ?>
+
                 <?php if($is_logged_in['user_rights'] == 'super'): ?>
                 <li>
                     <ul class="collapsible collapsible-accordion">
@@ -118,20 +136,40 @@ side-nav .user-view, .side-nav .userView {
                     </ul>
                 </li>
                 <?php endif; ?>
-                <li>
-                    <ul class="collapsible collapsible-accordion">
-                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="<?php  echo base_url('registration/sales'); ?>"">Add Applicant</a> </li>
-                                    <li><a href="#!">Enrolled Applicant</a> </li>
-                                    <li><a href="#!">Inquire Applicant</a> </li>
-                                    <li><a href="#!">Deleted Applicant</a> </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+                
+                <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
+                    <li>
+                        <ul class="collapsible collapsible-accordion">
+                            <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li><a href="#!">Enrolled Applicant</a> </li>
+                                        <li><a href="#!">Inquire Applicant</a> </li>
+                                        <li><a href="#!">Deleted Applicant</a> </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <?php if($is_logged_in['user_rights'] === 'encoder' || $is_logged_in['user_rights'] === 'sales'): ?>
+                    <li>
+                        <ul class="collapsible collapsible-accordion">
+                            <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li><a href="<?php  echo base_url('registration/sales'); ?>">Add Applicant</a> </li>
+                                        <li><a href="#!">Enrolled Applicant</a> </li>
+                                        <li><a href="#!">Inquire Applicant</a> </li>
+                                        <li><a href="#!">Deleted Applicant</a> </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
                 <li>
                     <a href="#resetPassword" class="modal-trigger"><i class="material-icons">settings</i>Reset Password</a>
                 </li>

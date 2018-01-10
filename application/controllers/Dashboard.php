@@ -10,20 +10,17 @@ class Dashboard extends CI_Controller {
        $this->load->model('registration_model','users');
    }
 
-   public function index(){
+    public function index(){
       $data = array();
       $is_logged_in = $this->session->userdata('is_logged_in');
       if (!isset($is_logged_in) || $is_logged_in != true) {
-        redirect('login', 'refresh');
-        die();
-    }else{
-
-      $this->load->view('template/header');
-      // $this->load->view('template/head_left_nav');
-      $this->load->view('dashboard/dashboard');
-      // $this->load->view('template/footer');
-  }	
-}
+          redirect('login', 'refresh');
+          die();
+      }else{
+          $this->load->view('template/header');
+          $this->load->view('dashboard/dashboard');
+      }	
+    }
 
 public function chat()
 {
