@@ -36,7 +36,7 @@ li{
                             </a>
                         </li> -->
                         <li style="border-bottom: 1px solid #00897b;border-bottom: none;">
-                            <span class="white-text email" style="font-size: medium;">Welcome : <?php echo $is_logged_in['user_full_name']; ?></span>
+                           <span class="material-icons">person_pin</span> <span class="white-text email" style="font-size: medium;">Welcome : <?php echo $is_logged_in['user_full_name']; ?></span>
                             <!-- <a href="#" class="waves-effect waves-light"> <i class="material-icons">mail</i>
                                 <div class="notification"></div>
                             </a> -->
@@ -143,9 +143,9 @@ li{
                             <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
                                 <div class="collapsible-body">
                                     <ul>
-                                        <li><a href="#!">Enrolled Applicant</a> </li>
-                                        <li><a href="#!">Inquire Applicant</a> </li>
-                                        <li><a href="#!">Deleted Applicant</a> </li>
+                                        <li><a href="<?php  echo base_url('applicant/enrolled_applicants'); ?>">Enrolled Applicant</a> </li>
+                                        <li><a href="<?php  echo base_url('applicant/inquire_applicants'); ?>">Inquire Applicant</a> </li>
+                                        <li><a href="<?php  echo base_url('applicant/deleted_applicants'); ?>">Deleted Applicant</a> </li>
                                     </ul>
                                 </div>
                             </li>
