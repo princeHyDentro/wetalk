@@ -188,7 +188,7 @@ li{
                             <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
                                 <div class="collapsible-body">
                                     <ul>
-                                        <li><a href="#">Pending Tickets</a> </li>
+                                        <li><a href="#">Create Applicant</a> </li>
                                     </ul>
                                 </div>
                             </li>
