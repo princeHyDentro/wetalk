@@ -153,16 +153,54 @@ li{
                     </li>
                 <?php endif; ?>
 
-                <?php if($is_logged_in['user_rights'] === 'encoder' || $is_logged_in['user_rights'] === 'sales'): ?>
+                <!-- FOR ENCODER TAB -->
+                <?php if( $is_logged_in['user_rights'] === 'encoder'): ?>
+                    <li>
+                        <ul class="collapsible collapsible-accordion">
+                            <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li><a href="#">Pending Tickets</a> </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <ul class="collapsible collapsible-accordion">
                             <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
                                 <div class="collapsible-body">
                                     <ul>
-                                        <li><a href="<?php  echo base_url('registration/sales'); ?>">Add Applicant</a> </li>
-                                        <li><a href="#!">Enrolled Applicant</a> </li>
-                                        <li><a href="#!">Inquire Applicant</a> </li>
-                                        <li><a href="#!">Deleted Applicant</a> </li>
+                                        <li><a href="#!">View Enrolled Applicants</a> </li>
+                                        <li><a href="#!">View Inquire Applicants</a> </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+                <!--END FOR ENCODER TAB -->
+
+                 <?php if( $is_logged_in['user_rights'] === 'sales'): ?>
+                <!--FOR SALES TAB -->
+                <li>
+                        <ul class="collapsible collapsible-accordion">
+                            <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li><a href="#">Pending Tickets</a> </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="collapsible collapsible-accordion">
+                            <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li><a href="#!">View Enrolled Applicants</a> </li>
+                                        <li><a href="#!">View Inquire Applicants</a> </li>
                                     </ul>
                                 </div>
                             </li>
