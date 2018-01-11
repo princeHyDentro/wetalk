@@ -27,24 +27,24 @@ $(document).ready(function() {
         ],
         dom: '<"toolbar">Bfrtip',
         buttons: [
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3 ]
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3 ]
-                        }
-                    },
-                    {
-                        extend: 'copy',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3 ]
-                        }
-                    }
+                    // {
+                    //     extend: 'print',
+                    //     exportOptions: {
+                    //         columns: [ 0, 1, 2, 3 ]
+                    //     }
+                    // },
+                    // {
+                    //     extend: 'excel',
+                    //     exportOptions: {
+                    //         columns: [ 0, 1, 2, 3 ]
+                    //     }
+                    // },
+                    // {
+                    //     extend: 'copy',
+                    //     exportOptions: {
+                    //         columns: [ 0, 1, 2, 3 ]
+                    //     }
+                    // }
                     
                 ]
         // buttons: [

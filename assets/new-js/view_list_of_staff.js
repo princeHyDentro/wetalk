@@ -27,24 +27,24 @@ $(document).ready(function() {
         ],
         dom: '<"toolbar">Bfrtip',
         buttons: [
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    },
-                    {
-                        extend: 'copy',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    }
+                    // {
+                    //     extend: 'print',
+                    //     exportOptions: {
+                    //         columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                    //     }
+                    // },
+                    // {
+                    //     extend: 'excel',
+                    //     exportOptions: {
+                    //         columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                    //     }
+                    // },
+                    // {
+                    //     extend: 'copy',
+                    //     exportOptions: {
+                    //         columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                    //     }
+                    // }
                     
                 ]
     });
@@ -112,6 +112,7 @@ function clearForm(frm_elements){
 
 function edit_person(id)
 {
+
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
@@ -124,11 +125,16 @@ function edit_person(id)
         dataType: "JSON",
         success: function(data)
         {
+            console.log(data)
+            // alert(data['user_info'][0].roles)
 
-            $(data['services']).each(function(index, el) {
-                $('#services').find('option[value="'+el.service_id+'"]').prop('selected', true);
-                $('#services').find('option[value="'+el.service_id+'"]').attr('data-id', el.id);
-            });
+            if(data['user_info'][0].roles != "office-admin" || data['user_info'][0].roles != "super"){
+                $(data['services']).each(function(index, el) {
+                    $('#services').find('option[value="'+el.service_id+'"]').prop('selected', true);
+                    $('#services').find('option[value="'+el.service_id+'"]').attr('data-id', el.id);
+                });
+            }
+
 
             $('[name="id"]').val(data['user_info'][0].id);
             $('[name="user_fname"]').val(data['user_info'][0].fname);
@@ -138,8 +144,17 @@ function edit_person(id)
             $('[name="user_email"]').val(data['user_info'][0].email);
             $('#permission').find('option[value="'+data['user_info'][0].roles+'"]').prop('selected', true);
 
+
+            if(data['user_info'][0].roles == "office-admin" || data['user_info'][0].roles == "super"){
+                $('#services').material_select('destroy');
+                $('.show-hide').hide();
+                $('#permission').attr("disabled",true);
+            }else{
+                $("#services").material_select();
+            }
+
             $("#permission").material_select();
-            $("#services").material_select();
+            
 
             $('#modal_form').modal('open'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Staff'); // Set title to Bootstrap modal title
@@ -156,6 +171,7 @@ function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
 }
+
 function save()
 {
     $('#btnSave').text('saving...'); //change button text
@@ -188,60 +204,113 @@ function save()
                 return data;
         }).get();
 
-
-    // ajax adding data to database
-    $.ajax({
-        url : url,
-        type: "POST",
-        data: {
-            //'form' : $('#form').serialize() ,
-            'id'            : $('#user_id').val(),
-            'user_fname'    : $('#user_fname').val(),
-            'user_lname'    : $('#user_lname').val(),
-            'user_mname'    : $('#user_mname').val(),
-            'user_username' : $('#user_username').val(),
-            'user_password' : $('#user_password').val(),
-            'user_email'    : $('#user_email').val(),
-            'permission'    : $('#permission').val(),
-            'services'      : checkValues,
-            'unselected_service' : unselected
-        },
-        dataType: "JSON",
-        success: function(data)
-        {	
- 
-            if(data.status) //if success close modal and reload ajax table
-            {
-                $('#modal_form').modal('close');
-                reload_table();
-                if(save_method == 'add') {
-                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
-                } else {
-                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
-                }
-            }
-            else
-            {
-                for (var i = 0; i < data.inputerror.length; i++) 
+    if($('#permission').val() == "office-admin"){
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: {
+                //'form' : $('#form').serialize() ,
+                'id'            : $('#user_id').val(),
+                'user_fname'    : $('#user_fname').val(),
+                'user_lname'    : $('#user_lname').val(),
+                'user_mname'    : $('#user_mname').val(),
+                'user_username' : $('#user_username').val(),
+                'user_password' : $('#user_password').val(),
+                'user_email'    : $('#user_email').val(),
+                'permission'    : $('#permission').val(),
+            },
+            dataType: "JSON",
+            success: function(data)
+            {   
+     
+                if(data.status) //if success close modal and reload ajax table
                 {
-                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                    $('#modal_form').modal('close');
+                    reload_table();
+                    if(save_method == 'add') {
+                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
+                    } else {
+                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
+                    }
                 }
-            }
-            $('#btnSave').text('save'); //change button text
-            $('#btnSave').attr('disabled',false); //set button enable 
- 
- 
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
+                else
+                {
+                    for (var i = 0; i < data.inputerror.length; i++) 
+                    {
+                        $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                    }
+                }
+                $('#btnSave').text('save'); //change button text
+                $('#btnSave').attr('disabled',false); //set button enable 
+     
+     
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
 
-            alert('Error adding / update data');
-            $('#btnSave').text('save'); //change button text
-            $('#btnSave').attr('disabled',false); //set button enable 
- 
-        }
-    });
+                alert('Error adding / update data');
+                $('#btnSave').text('save'); //change button text
+                $('#btnSave').attr('disabled',false); //set button enable 
+     
+            }
+        });
+    }else{
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: {
+                //'form' : $('#form').serialize() ,
+                'id'            : $('#user_id').val(),
+                'user_fname'    : $('#user_fname').val(),
+                'user_lname'    : $('#user_lname').val(),
+                'user_mname'    : $('#user_mname').val(),
+                'user_username' : $('#user_username').val(),
+                'user_password' : $('#user_password').val(),
+                'user_email'    : $('#user_email').val(),
+                'permission'    : $('#permission').val(),
+                'services'      : checkValues,
+                'unselected_service' : unselected
+            },
+            dataType: "JSON",
+            success: function(data)
+            {   
+     
+                if(data.status) //if success close modal and reload ajax table
+                {
+                    $('#modal_form').modal('close');
+                    reload_table();
+                    if(save_method == 'add') {
+                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
+                    } else {
+                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < data.inputerror.length; i++) 
+                    {
+                        $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                    }
+                }
+                $('#btnSave').text('save'); //change button text
+                $('#btnSave').attr('disabled',false); //set button enable 
+     
+     
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+
+                alert('Error adding / update data');
+                $('#btnSave').text('save'); //change button text
+                $('#btnSave').attr('disabled',false); //set button enable 
+     
+            }
+        });
+    }
+
+   
 }
 
 function delete_person(id){

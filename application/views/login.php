@@ -2,7 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <link  href="<?php echo base_url('assets/css/custom.css'); ?>" rel="stylesheet">
-
+<style type="text/css" media="screen">
+	#login-page{
+		margin-top: 10%;
+	}
+</style>
 <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
         <form class="login-form">

@@ -122,19 +122,21 @@ class Registration extends CI_Controller {
         foreach ($list as $person) {
             $no++;
             $row = array();
+            if( $person->roles !== 'super'){
+                $row[] = $person->id;
+                $row[] = $person->full_name;
+                $row[] = $person->username;
+                $row[] = $person->email;
+                $row[] = $person->roles;
+                $row[] =  nice_date($person->created_at, 'Y-m-d');
+                $row[] =  ($person->updated_at != NULL) ? nice_date($person->updated_at, 'Y-m-d') : '';
 
-            $row[] = $person->id;
-            $row[] = $person->full_name;
-            $row[] = $person->username;
-            $row[] = $person->email;
-            $row[] = $person->roles;
-            $row[] =  nice_date($person->created_at, 'Y-m-d');
-            $row[] =  ($person->updated_at != NULL) ? nice_date($person->updated_at, 'Y-m-d') : '';
 
-
-            //add html for action
-            $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$person->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$person->id."'".')"><i class="material-icons">delete</i></a>';
-            $data[] = $row;
+                //add html for action
+                $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$person->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$person->id."'".')"><i class="material-icons">delete</i></a>';
+                $data[] = $row;
+            }
+                
 
         }
     
@@ -157,19 +159,20 @@ class Registration extends CI_Controller {
         foreach ($list as $person) {
             $no++;
             $row = array();
+            if( $person->roles !== 'super'){
+                $row[] = $person->id;
+                $row[] = $person->full_name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
+                $row[] = $person->username;
+                $row[] = $person->email;
+                $row[] = $person->roles;
+                $row[] =  nice_date($person->created_at, 'Y-m-d');
+                $row[] =  ($person->updated_at != NULL) ? nice_date($person->updated_at, 'Y-m-d') : '';
 
-            $row[] = $person->id;
-            $row[] = $person->full_name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
-            $row[] = $person->username;
-            $row[] = $person->email;
-            $row[] = $person->roles;
-            $row[] =  nice_date($person->created_at, 'Y-m-d');
-            $row[] =  ($person->updated_at != NULL) ? nice_date($person->updated_at, 'Y-m-d') : '';
 
-
-            //add html for action
-            // $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$person->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$person->id."'".')"><i class="material-icons">delete</i></a>';
-            $data[] = $row;
+                //add html for action
+                // $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$person->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$person->id."'".')"><i class="material-icons">delete</i></a>';
+                $data[] = $row;
+            }
 
         }
     

@@ -82,6 +82,7 @@ function add_person()
     $('#modal_form').modal('open'); // show bootstrap modal
     $('.modal-title').text('Add Staff'); // Set Title to Bootstrap modal title
 }
+
 function clearForm(frm_elements){
 
     for (i = 0; i < frm_elements.length; i++)
@@ -119,6 +120,7 @@ function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
 }
+
 function save()
 {
     $('#btnSave').text('saving...'); //change button text
@@ -129,8 +131,7 @@ function save()
 
     url = "ajax_add";
     
-    // alert($('#permission').val())
-    // return false;
+
     if($('#permission').val() == "office-admin"){
         $.ajax({
             url : "ajax_add_all",

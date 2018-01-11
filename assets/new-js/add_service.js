@@ -150,10 +150,8 @@ function edit_service(id)
             $('[name="service-name"]').val(data[0].service_name);
             $('[name="service-description"]').val(data[0].service_desc);
             $('#desc').addClass('active');
-
             $('#modal_form').modal('open'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Staff'); // Set title to Bootstrap modal title
- 
         },
         error: function (jqXHR, textStatus, errorThrown)
         {

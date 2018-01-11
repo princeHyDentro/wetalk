@@ -167,7 +167,7 @@ th{
                                         <option data-id="" value="<?php echo $service['id'];?>"><?php echo $service['service_name'];?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <label>Assign Multiple Services<i style="color:red;">*</i></label>
+                                <label class="show-hide">Assign Multiple Services<i style="color:red;">*</i></label>
                             </div>
                         </div>
                     </div>
@@ -182,3 +182,23 @@ th{
 </div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/new-js/view_list_of_staff.js'); ?>"></script>
+<script>
+    $('#permission').change(function(event) {
+        event.preventDefault();
+        var data = $(this).val();
+        if(data == 'office-admin'){
+            $('#services').material_select('destroy');
+            $('.show-hide').hide();
+        }else{
+            $(this).each(function(index, el) {
+                $('#services').prop('selected', false);
+                
+            });
+            $('#services').material_select('');
+            $('.show-hide').show();
+        }
+
+
+        
+    });
+</script>
