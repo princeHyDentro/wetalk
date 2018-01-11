@@ -6,21 +6,21 @@ header("Access-Control-Allow-Methods: GET, OPTIONS");
 
 class Dashboard extends CI_Controller {
 	public function __construct(){
-       parent::__construct();
-       $this->load->model('registration_model','users');
-   }
+     parent::__construct();
+     $this->load->model('registration_model','users');
+ }
 
-    public function index(){
-      $data = array();
-      $is_logged_in = $this->session->userdata('is_logged_in');
-      if (!isset($is_logged_in) || $is_logged_in != true) {
-          redirect('login', 'refresh');
-          die();
-      }else{
-          $this->load->view('template/header');
-          $this->load->view('dashboard/dashboard');
-      }	
-    }
+ public function index(){
+  $data = array();
+  $is_logged_in = $this->session->userdata('is_logged_in');
+  if (!isset($is_logged_in) || $is_logged_in != true) {
+      redirect('login', 'refresh');
+      die();
+  }else{
+      $this->load->view('template/header');
+      $this->load->view('dashboard/dashboard');
+  }	
+}
 
 public function chat()
 {
@@ -37,37 +37,36 @@ public function chat()
 }
 
 public function password_reset(){
-  $this->load->library('email');
-		// $config = array('protocol' => 'smtp',
-		// 				'smtp_host' => 'smtp.gmail.com',
-		// 				'smtp_user' => 'caranoobenjie@gmail.com',
-		// 				'smtp_pass' => 'Dentrobenjie1991',
-		// 				'smtp_port' => 587);
+    $this->load->library('email');
 
-  $emailTo 	= $this->input->post('userEmail');
-  $userID  	= $this->input->post('userID');
-  $newPass 	= $this->input->post('new_password');
-  $template = $this->reset_template($userID);
+    $emailTo  = $this->input->post('userEmail');
+    $userID   = $this->input->post('userID');
+    $newPass  = $this->input->post('new_password');
+    $template_message = $this->reset_template($userID);
 
-  $data = array(
-    'password' => ($newPass == "") ? "" : md5($newPass),
-    'flag' => 1,
-);
-  $result = $this->users->update(array('id' => $userID), $data);
+    $data = array(
+      'password' => ($newPass == "") ? "" : md5($newPass),
+      'flag' => 1,
+    );
+    $result = $this->users->update(array('id' => $userID), $data);
 
-  if($result){
-    $this->email->from('no-reply@tlcwetalk.com', 'TLCWETALK');
-    $this->email->to($emailTo);
-    $this->email->subject('Change Password');
-    $this->email->message($template);
-    if($this->email->send()){
-        echo 'Message has been sent';
+
+    if($result){
+        $subject   = "Password Reset";
+        $headers   = "MIME-Version: 1.0" . "\r\n";
+        $headers  .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers  .= 'From: <no-reply@tlcwetalk.com>' . "\r\n";
+
+        $mail = mail($emailTo   ,$subject,$template_message ,$headers);
+
+        if($mail){
+            echo 'Message has been sent';
+        }else{
+            echo 'Message could not be sent.';
+        }
     }else{
-        echo 'Message could not be sent.';
+      echo 'You enter the same password as before.';
     }
-}else{
-  echo 'You enter the same password as before.';
-}
 
 }
 public function confirm(){

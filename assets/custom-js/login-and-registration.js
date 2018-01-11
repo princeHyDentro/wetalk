@@ -36,7 +36,7 @@ $(document).ready(function() {
 			var base_url = window.location.origin;
 			var host 	 = window.location.host;
 			$.ajax({
-				 url    : base_url+"/wetalk/dashboard/password_reset",
+				 url    : "dashboard/password_reset",//base_url+"/wetalk/dashboard/password_reset",
 				 method : "post",
 				 data   : {
 					new_password      : new_password,
