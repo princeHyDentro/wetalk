@@ -32,7 +32,7 @@ nav .button-collapse{
         <nav class="top-nav teal darken-1">
             <div class="container">
                 <div class="nav-wrapper"> <a href="<?php echo base_url('dashboard') ?>" class="page-title">
-                    <img  src="<?php echo base_url('assets/logo/logo2.png'); ?>" style="height: 56px;" alt="" class="responsive-img valign profile-image-login"></a>
+                    <img  src="<?php echo base_url('assets/logo/logo2.png'); ?>" style="height: 56px;margin-top: 5px;" alt="" class="responsive-img valign profile-image-login"></a>
                     <ul class="right hide-on-med-and-down">
                        <!--  <li>
                             <a href="#" class="waves-effect waves-light"> <i class="material-icons">notifications</i>
@@ -57,8 +57,6 @@ nav .button-collapse{
                     </ul>
                     <ul class="left show-on-medium-and-down hide-on-med-and-up">
                         <li>
-                            <!-- <a href="#"  id="mobile-side-nav-btn" class="button-collapse full btn-floating btn-medium accent-2 lighten-2"><i class="material-icons">menu</i></a> -->
-
                             <a href="#"  data-activates="slide-out" class="side-nav-collapse  top-nav full btn-floating btn-medium accent-2 lighten-2"><i class="material-icons">format_align_left</i></a>
                         </li>
                     </ul>
