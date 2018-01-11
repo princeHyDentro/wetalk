@@ -104,6 +104,10 @@
 	
 	<script>
 		$(document).ready(function($) {
+
+			$(".side-nav-collapse").sideNav();
+
+			
 			$.datetimepicker.setLocale('en');
 			$('.datepicker').datetimepicker({
 				onGenerate:function( ct ){

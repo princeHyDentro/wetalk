@@ -22,38 +22,38 @@ canvas { background-color : #eee;
 <script src="<?php echo base_url('assets/chart-js/chart-js.js'); ?>"></script>
 
 <script>
-  $(document).ready(function(){
-      var options = {
-          type: 'line',
-          data: {
-            labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            fill: false,
-            responsive : true,
-            datasets: [
-              {
-                label: 'test 1',
-                data: [12, 19, 3, 5, 2],
-                borderWidth: 1
-              },  
-              {
-                label: 'test 2',
-                data: [7, 11, 5, 8, 3],
-                borderWidth: 1
-              }
-            ]
-          },
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  reverse: false
-                }
-              }]
-            }
-          }
-        }
+  // $(document).ready(function(){
+  //     var options = {
+  //         type: 'line',
+  //         data: {
+  //           labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  //           fill: false,
+  //           responsive : true,
+  //           datasets: [
+  //             {
+  //               label: 'test 1',
+  //               data: [12, 19, 3, 5, 2],
+  //               borderWidth: 1
+  //             },  
+  //             {
+  //               label: 'test 2',
+  //               data: [7, 11, 5, 8, 3],
+  //               borderWidth: 1
+  //             }
+  //           ]
+  //         },
+  //         options: {
+  //           scales: {
+  //             yAxes: [{
+  //               ticks: {
+  //                 reverse: false
+  //               }
+  //             }]
+  //           }
+  //         }
+  //       }
 
-        var ctx = document.getElementById('chartJSContainer').getContext('2d');
-        new Chart(ctx, options);
-  });
+  //       var ctx = document.getElementById('chartJSContainer').getContext('2d');
+  //       new Chart(ctx, options);
+  //-});
 </script>

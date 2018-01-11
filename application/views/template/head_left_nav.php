@@ -22,13 +22,17 @@ side-nav .user-view, .side-nav .userView {
 li{
     border-bottom: 1px solid #efefef;
 }
+nav .button-collapse{
+    height: auto;
+}
 </style>
+
 <header>
     <div class="navbar-fixed">
         <nav class="top-nav teal darken-1">
             <div class="container">
                 <div class="nav-wrapper"> <a href="<?php echo base_url('dashboard') ?>" class="page-title">
-                    <img src="<?php echo base_url('assets/logo/logo2.png'); ?>" style="width: 22%;" alt="" class="responsive-img valign profile-image-login"></a>
+                    <img  src="<?php echo base_url('assets/logo/logo2.png'); ?>" style="height: 56px;" alt="" class="responsive-img valign profile-image-login"></a>
                     <ul class="right hide-on-med-and-down">
                        <!--  <li>
                             <a href="#" class="waves-effect waves-light"> <i class="material-icons">notifications</i>
@@ -51,9 +55,13 @@ li{
                             </ul> -->
                         </li>
                     </ul>
-                    <!-- <ul class="left show-on-medium-and-down hide-on-med-and-up">
-                        <li><a href="#" id="mobile-side-nav-btn" data-activates="left-side-nav" class="side-nav-collapse top-nav full btn-floating btn-medium accent-2 lighten-2"><i class="material-icons">format_align_left</i></a> </li>
-                    </ul> -->
+                    <ul class="left show-on-medium-and-down hide-on-med-and-up">
+                        <li>
+                            <!-- <a href="#"  id="mobile-side-nav-btn" class="button-collapse full btn-floating btn-medium accent-2 lighten-2"><i class="material-icons">menu</i></a> -->
+
+                            <a href="#"  data-activates="slide-out" class="side-nav-collapse  top-nav full btn-floating btn-medium accent-2 lighten-2"><i class="material-icons">format_align_left</i></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -215,8 +223,151 @@ li{
                 <li>
                     <a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a>
                 </li>
-            </ul>
+        </ul>
             <!--END HORIZONTAL NAV FOR DESKTOP -->
-        </div>
-    </header>
+    </div>
+
+    <!-- SIDE NAV FOR MOBILE -->
+    <ul id="slide-out" class="side-nav">
+        <li>
+                <a href="#"><i class="material-icons">face</i>Profile</a>
+            </li>
+
+            <li>
+                <a href="<?php echo base_url('dashboard'); ?>"><i class="material-icons">dashboard</i>Dashboard</a>
+            </li>
+
+            <li><a href="#!"><i class="material-icons">desktop_windows</i> Monitoring</a> </li>
+           
+           <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
+            <li>
+                <ul class="collapsible collapsible-accordion">
+                    <li> <a class="collapsible-header padding-32"><i class="material-icons">assignment</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="<?php  echo base_url('ticket/pending_tickets'); ?>">Pending Tickets</a> </li>
+                                <li><a href="<?php  echo base_url('ticket/completed_tickets'); ?>">Completed Tickets</a> </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <?php endif; ?>
+
+            <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
+
+            <li>
+                <ul class="collapsible collapsible-accordion">
+                    <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Staff<i class="material-icons right">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="<?php  echo base_url('registration/create_staff'); ?>">Create Staff</a> </li>
+                                <li><a href="<?php  echo base_url('registration/view_staff'); ?>">View Staff</a> </li>
+                                <li><a href="<?php  echo base_url('registration/deleted_staff'); ?>">View Deleted Staff </a> </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <?php endif; ?>
+
+            <?php if($is_logged_in['user_rights'] == 'super'): ?>
+            <li>
+                <ul class="collapsible collapsible-accordion">
+                    <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Services<i class="material-icons right">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="<?php  echo base_url('services'); ?>">Create a Services</a> </li>
+                                <li><a href="<?php  echo base_url('services/view_services'); ?>">View Services</a></li>
+                                <li><a href="<?php  echo base_url('services/deleted_services'); ?>">View Deleted Services</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <?php endif; ?>
+            
+            <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="<?php  echo base_url('applicant/enrolled_applicants'); ?>">Enrolled Applicant</a> </li>
+                                    <li><a href="<?php  echo base_url('applicant/inquire_applicants'); ?>">Inquire Applicant</a> </li>
+                                    <li><a href="<?php  echo base_url('applicant/deleted_applicants'); ?>">Deleted Applicant</a> </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif; ?>
+
+            <!-- FOR ENCODER TAB -->
+            <?php if( $is_logged_in['user_rights'] === 'encoder'): ?>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#">Pending Tickets</a> </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#!">View Enrolled Applicants</a> </li>
+                                    <li><a href="#!">View Inquire Applicants</a> </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif; ?>
+            <!--END FOR ENCODER TAB -->
+
+             <?php if( $is_logged_in['user_rights'] === 'sales'): ?>
+            <!--FOR SALES TAB -->
+            <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#">Create Iquire Applicant</a> </li>
+                                    <li><a href="#">Create Enroll Applicant</a> </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#!">View Enrolled Applicants</a> </li>
+                                    <li><a href="#!">View Inquire Applicants</a> </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif; ?>
+
+            <li>
+                <a href="#resetPassword" class="modal-trigger"><i class="material-icons">settings</i>Reset Password</a>
+            </li>
+            <li>
+                <a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a>
+            </li>
+    </ul>
+    <!-- END SIDE NAV FOR MOBILE -->
+</header>
+
+
 
