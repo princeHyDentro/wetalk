@@ -117,17 +117,17 @@ th{
                             </div>
                             <div class="input-field col s6 has-error">
                                 <label>Contact<i style="color:red;">*</i></label> 
-                                <input class="validate" id="contact" name="contact" placeholder="Enter Last Name Here.." type="text">
+                                <input class="validate" id="contact" name="contact" placeholder="Enter Contact Here.." type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6 has-error">
-                                <label>Address<i style="color:red;">*</i></label> <input class="validate" id="address" name="address" placeholder="Enter Username Here.." type="text"> <span class="help-block"></span>
+                                <label>Address<i style="color:red;">*</i></label> <input class="validate" id="address" name="address" placeholder="Enter Address Here.." type="text"> <span class="help-block"></span>
                             </div>
                             <div class="input-field col s6 has-error">
                                 <label>Email<i style="color:red;">*</i></label>
-                                <input class="validate" id="email" name="email" placeholder="Enter Password Here.." type="password">
+                                <input class="validate" id="email" name="email" placeholder="Enter Email Here.." type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
