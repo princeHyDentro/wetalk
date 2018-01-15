@@ -168,7 +168,7 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#">Pending Tickets</a> </li>
+                                    <li><a href="<?php  echo base_url('ticket/pending_tickets'); ?>">Pending Tickets</a> </li>
                                 </ul>
                             </div>
                         </li>
@@ -179,8 +179,8 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#!">View Enrolled Applicants</a> </li>
-                                    <li><a href="#!">View Inquire Applicants</a> </li>
+                                    <li><a href="<?php  echo base_url('encoder/enrolled_applicants'); ?>">View Enrolled Applicants</a> </li>
+                                    <li><a href="<?php  echo base_url('encoder/inquire_applicants'); ?>">View Inquire Applicants</a> </li>
                                 </ul>
                             </div>
                         </li>
@@ -196,8 +196,8 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#">Create Iquire Applicant</a> </li>
-                                    <li><a href="#">Create Enroll Applicant</a> </li>
+                                    <li><a href="<?php  echo base_url('ticket/create_inquire_applicant'); ?>">Create Inquire Applicant</a> </li>
+                                    <li><a href="<?php  echo base_url('ticket/create_enroll_applicant'); ?>">Create Enroll Applicant</a> </li>
                                 </ul>
                             </div>
                         </li>
@@ -208,8 +208,8 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="#!">View Enrolled Applicants</a> </li>
-                                    <li><a href="#!">View Inquire Applicants</a> </li>
+                                    <li><a href="<?php  echo base_url('applicant/view_enrolled_applicant'); ?>">View Enrolled Applicants</a> </li>
+                                    <li><a href="<?php  echo base_url('applicant/view_inquire_applicant'); ?>">View Inquire Applicants</a> </li>
                                 </ul>
                             </div>
                         </li>

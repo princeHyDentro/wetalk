@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sales_model extends CI_Model {
+class Encoder_model extends CI_Model {
 
     var $table          = 'applicant';
     var $column_order   = array('id','name','contact','	address','email	','service','status'); 

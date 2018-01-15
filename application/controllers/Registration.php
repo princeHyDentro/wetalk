@@ -56,7 +56,7 @@ class Registration extends CI_Controller {
             $data['roles']      = $this->staff_roles();
             $data['services']   = $this->staff_services();
             $this->load->view('template/header');
-            $this->load->view('registration/sales_form',$data);
+            $this->load->view('sales_tickets/create_enroll_applicant',$data);
         }
     }
 
@@ -186,42 +186,6 @@ class Registration extends CI_Controller {
         echo json_encode($output);
     }
 	
-	public function ajax_sales_list_data(){
-        $this->load->helper('date');
-        $list   = $this->applicant->get_datatables();
-
-        $data   = array();
-        $no     = $_POST['start'];
-        foreach ($list as $app) {
-            $no++;
-            $row = array();
-
-            $row[] = $app->id;
-            $row[] = $app->name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
-            $row[] = $app->contact;
-            $row[] = $app->address;
-            $row[] = $app->email;
-            $row[] = $app->service;
-            $row[] = $app->status	;
-            $row[] = $app->username;
-            $row[] = $app->password;
-          
-            //add html for action
-            $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$app->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$app->id."'".')"><i class="material-icons">delete</i></a>';
-            $data[] = $row;
-
-        }
-    
-        $output = array(
-            "draw"              => $_POST['draw'],
-            "recordsTotal"      => $this->applicant->count_all(),
-            "recordsFiltered"   => $this->applicant->count_filtered(),//for entries label
-            "data"              => $data,
-        );
-
-        echo json_encode($output);
-    }
-
     public function ajax_edit($id)
     {
         $data = $this->users->get_by_id($id);
