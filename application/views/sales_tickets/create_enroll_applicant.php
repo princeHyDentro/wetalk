@@ -54,11 +54,11 @@ th{
                                                 <!-- <label for="first_name" class="active">First Name</label> -->
                                             </div>
                                             <div class="input-field col s6">
-                                                <select aria-controls="myTable" class="validate" id="admin_search_status" name="myTable_length">
-                                                     <option value="" disabled selected>Search your option</option>
+                                                <select aria-controls="myTable" class="validate" id="filter-status" name="myTable_length">
+                                                     <option value="" disabled selected>Filter</option>
                                                     <option value="">All</option>
-                                                    <option value="Inquire">Inquire</option>
-                                                    <option value="Enroll">Enroll</option>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="Complete">Complete</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -67,15 +67,11 @@ th{
                                         <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="sales-table" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th aria-sort="ascending" class="sorting_asc">Name</th>
-                                                    <th>Contact</th>
-                                                    <th>Address</th>
-                                                    <th>Email</th>
+                                                    <th>TicketID</th>
+                                                    <th aria-sort="ascending" class="sorting_asc">Assing to</th>
                                                     <th>Service</th>
                                                     <th>Status</th>
-                                                    <th>Username</th>
-                                                    <th>Password</th>
+                                                    <th>Date Created</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -108,56 +104,113 @@ th{
             <div class="modal-body form">
 
                 <form action="#" class="form-horizontal" id="form" name="form">
-                    <input name="id" id="id" type="hidden" value="">
+                    <input name="sale-id" id="sale-id" type="hidden" value="<?php echo $is_logged_in['user_id'];?>">
                     <div class="col s12">
-                        
+                        <?php
+                        // echo "<pre>";
+                        // print_r($is_logged_in);
+                        // echo "</pre>";
+                        ?>
                         <div class="row">
-                            <div class="input-field col s6 has-error">
-                                <label>Name<i style="color:red;">*</i></label>
-                                <input class="validate" id="name" name="name" placeholder="Enter First Name Here.." type="text">
-                                <span class="help-block"></span>
-                            </div>
-                            <div class="input-field col s6 has-error">
-                                <label>Contact<i style="color:red;">*</i></label> 
-                                <input class="validate" id="contact" name="contact" placeholder="Enter Contact Here.." type="text">
+                            <div class="input-field col s12 has-error">
+                                <label>Sales Representative Name:</label>
+                                <input disabled="true" class="validate" id="sales-name" value="<?php echo $is_logged_in['user_full_name'];?>" name="sales-name"  type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s6 has-error">
-                                <label>Address<i style="color:red;">*</i></label> <input class="validate" id="address" name="address" placeholder="Enter Address Here.." type="text"> <span class="help-block"></span>
-                            </div>
-                            <div class="input-field col s6 has-error">
-                                <label>Email<i style="color:red;">*</i></label>
-                                <input class="validate" id="email" name="email" placeholder="Enter email Here.." type="email">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-						<div class="row">
-                            <div class="input-field col s6 has-error">
-                                <label>Username<i style="color:red;">*</i></label> <input class="validate" id="username" name="username" placeholder="Enter username Here.." type="text"> <span class="help-block"></span>
-                            </div>
-                            <div class="input-field col s6 has-error">
-                                <label>Password<i style="color:red;">*</i></label>
-                                <input class="validate" id="password" name="password" placeholder="Enter Password Here.." type="password">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
+
                         <div class="row">
                             <div class="input-field col s12 has-error">
                                 <select class="active" id="services" name="service">
-                                    <option value="" disabled>Choose your option</option>
+                                    <option value="" disabled selected>Choose your option</option>
                                     <?php foreach ($services as $key => $service): ?>
                                         <option data-id="" value="<?php echo $service['id'];?>"><?php echo $service['service_name'];?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <label>Assign Services<i style="color:red;">*</i></label>
+                                <label>Enroll To :<i style="color:red;">*</i></label>
                             </div>
 				        </div>
+                        <div class="row">
+                            <div class="input-field col s12 has-error">
+                                <select class="active" id="encoder-name" name="encoder-name">
+                                    <option value="" disabled>Choose your option</option>
+                                </select>
+                                <label>Assign To :<i style="color:red;">*</i></label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12 has-error">
+                                <label>Ticket Data :</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 has-error">
+                                <label>Applicant Information Data :</label>
+                            </div>
+                            <div class="input-field col s12 has-error">
+                                <textarea id="ticket-format" class="materialize-textarea">
+                                    <p style="text-align: center;">&nbsp;</p>
+                                    <table style="height: 232px; width: 100.418%; border-collapse: collapse;" border="1" cellspacing="1">
+                                    <tbody>
+                                    <tr style="height: 18px;">
+                                    <td style="width: 715px; text-align: center; height: 18px;"><strong>APPLICANT INFORMATION</strong></td>
+                                    </tr>
+                                    <tr style="height: 40px;">
+                                    <td style="width: 715px; height: 40px;"><br />
+                                    <table style="border-collapse: collapse; width: 100%;" border="1">
+                                    <tbody>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Name :</strong></td>
+                                    <td style="width: 74.8951%;">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Current Address :</strong></td>
+                                    <td style="width: 74.8951%;">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Date of Birth :</strong></td>
+                                    <td style="width: 74.8951%;">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Email Address :</strong></td>
+                                    <td style="width: 74.8951%;">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Contact No.&nbsp; &nbsp; &nbsp;:</strong></td>
+                                    <td style="width: 74.8951%;">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Status&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp;</strong></td>
+                                    <td style="width: 74.8951%;"><strong>&nbsp; Enroll</strong></td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Username&nbsp; &nbsp;:</strong></td>
+                                    <td style="width: 74.8951%;">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 25.1049%;"><strong>Password&nbsp; &nbsp; :</strong></td>
+                                    <td style="width: 74.8951%;">&nbsp;</td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    </td>
+                                    </tr>
+                                    <tr style="height: 18px;">
+                                    <td style="width: 715px; height: 18px;">&nbsp;</td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    <p style="text-align: center;">&nbsp;</p>
+                                    <p>&nbsp;</p>
+                                    </textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
                 </form>
             </div>
             <div class="modal-footer" style="padding: 6px;">
-                <button class="btn btn-primary " id="btnSave" onclick="save()" type="button">Save</button>
+                <button class="btn btn-primary " id="btnSave" onclick="save_ticket()" type="button">Save</button>
                 <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
             </div>
         </div>
@@ -165,3 +218,82 @@ th{
 </div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/custom-js/sales_enroll_applicant.js'); ?>"></script>
+<script src="<?php echo base_url('assets/tinymce/tinymce.min.js'); ?>"></script>
+<script>
+    
+    $(document).ready(function(){
+        editor();
+
+        $("#services").change(function(event){
+            event.preventDefault();
+             $('#encoder-name').material_select('destroy');
+            var arr         = new Array();
+            var service_id  = $(this).val();
+            var url         = 'get_encoder';
+
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: {'service_id' : service_id },
+                success: function(data)
+                {
+                    ojb     = $.parseJSON(data);
+                   
+                    $(ojb).each(function(indxe,elem){
+                        answer_data = new Array();
+                        console.log(elem)
+                        data = [
+                                '<option value="'+elem.id+'">'+elem.full_name+'</option>'
+                            ].join('');
+                        answer_data.push(data);
+                        arr.push(answer_data);
+                    });
+                    data1 = [
+                            '<option value="" disabled>Choose your option</option>'
+                            ].join('');
+
+                    result = data1+arr.join('');
+
+                    $("#encoder-name").html(result);
+                    $('#encoder-name').material_select();
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    console.log(errorThrown)
+                    //alert('Error adding / update data');
+                }
+            });
+            //alert($("#services option:selected").text())
+        });
+    });
+
+     function editor(){
+
+        tinymce.init({ 
+            selector:'#ticket-format',
+            branding: false,
+            menubar: false,
+            height : 50,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor textcolor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code help template code'
+            ],
+            toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help, UserInfo | code',
+        
+            height: 500,
+            mobile: {
+                theme: 'mobile',
+                plugins: [ 'autosave', 'lists', 'autolink' ],
+                toolbar: [ 'undo', 'bold', 'italic', 'styleselect' ]
+            },
+            /* Will save the data to the textarea on change*/
+            setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+            },
+        });
+    }
+</script>
+

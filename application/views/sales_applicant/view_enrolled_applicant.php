@@ -93,3 +93,4 @@ th{
 </main>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/custom-js/view_enrolled_applicant.js'); ?>"></script>
+

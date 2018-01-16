@@ -25,6 +25,16 @@ li{
 nav .button-collapse{
     height: auto;
 }
+.patreon-ad {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 45px;
+    width: 299px;
+    background-color: #fff;
+    z-index: 1000;
+    border-top: 1px solid rgba(0,0,0,0.14);
+}
 </style>
 
 <header>
@@ -66,7 +76,7 @@ nav .button-collapse{
     </div>
 </header>
 <!-- HORIZONTAL NAV FOR DESKTOP -->
-    <div>
+    <header>
         <ul id="left-side-nav" class="side-nav white hide-on-med-and-down" style="transform: translateX(0px);">
             <!-- <li>
                 <div class="user-view">
@@ -224,7 +234,6 @@ nav .button-collapse{
                 <a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a>
             </li>
     </ul>
-
     <!-- SIDE NAV FOR MOBILE -->
     <ul id="slide-out" class="side-nav">
         <li>
@@ -364,7 +373,10 @@ nav .button-collapse{
                 <a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a>
             </li>
     </ul>
-    </div>
+<!--      <div class="patreon-ad">
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div> -->
+    </header>
     
     <!-- END SIDE NAV FOR MOBILE -->
 

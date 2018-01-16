@@ -64,10 +64,10 @@ class Ticket extends CI_Controller {
 		}	
 	}
 	
-	public function ajax_enroll_applicant_list_data(){
+	public function ajax_enroll_applicant_list_data_ticket(){
 		$this->load->model("Sales_model");
         $this->load->helper('date');
-        $list   = $this->Sales_model->get_datatables_enroll();
+        $list   = $this->Sales_model->get_datatables_enroll_tickets();
 
         $data   = array();
         $no     = $_POST['start'];
@@ -76,25 +76,18 @@ class Ticket extends CI_Controller {
             $row = array();
 
             $row[] = $app->id;
-            $row[] = $app->name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
-            $row[] = $app->contact;
-            $row[] = $app->address;
-            $row[] = $app->email;
-            $row[] = $app->service;
+            $row[] = $app->encoder_name;
+            $row[] = $app->service_name;
             $row[] = $app->status;
-            $row[] = $app->username;
-            $row[] = $app->password;
-          
-            //add html for action
-            //$row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$app->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$app->id."'".')"><i class="material-icons">delete</i></a>';
+            $row[] = $app->created_at;
             $data[] = $row;
 
         }
     
         $output = array(
             "draw"              => $_POST['draw'],
-            "recordsTotal"      => $this->Sales_model->count_all_enroll(),
-            "recordsFiltered"   => $this->Sales_model->count_filtered_enroll(),//for entries label
+            "recordsTotal"      => $this->Sales_model->count_all_enroll_tickets(),
+            "recordsFiltered"   => $this->Sales_model->count_filtered_enroll_tickets(),//for entries label
             "data"              => $data,
         );
 
@@ -138,8 +131,16 @@ class Ticket extends CI_Controller {
 	
 	public function staff_services(){
 	   $this->load->model("Sales_model");
-       $list = $this->Sales_model->_tableStafServices();
+       $is_logged_in    = $this->session->userdata('is_logged_in');
+       $list            = $this->Sales_model->_tableStafServices($is_logged_in['user_id']);
        return $list;
+    }
+
+    public function get_encoder(){
+        $this->load->model("Sales_model");
+        $service_id = $this->input->post('service_id');
+        $list       = $this->Sales_model->_tableGetServices($service_id);
+        echo  json_encode($list);
     }
 
     public function staff_roles(){
@@ -148,34 +149,26 @@ class Ticket extends CI_Controller {
        return $list;
     }
 	
-	public function ajax_add_enroll(){
+	public function ajax_add_enroll_ticket(){
         $this->load->model("Sales_model");
         $is_logged_in = $this->session->userdata('is_logged_in');
-        $this->_validate();
+        // print_r($_POST);
+        // $this->_validate();
 
         $data = array(
-            'name'          => $this->input->post('name'),
-            'contact'       => $this->input->post('contact'),
-            'address'       => $this->input->post('address'),
-            'email'         => $this->input->post('email'),
-            'service'       => $this->input->post('service'),
-            'status'        => 'enroll',
-            'username'      => $this->input->post('username'),
-            'password'      => md5($this->input->post('password'))
+            'sales_id'       => $this->input->post('sale-id'),
+            'encoder_id'     => $this->input->post('encoder-id'),
+            'service_id'     => $this->input->post('services_id'),
+            'encoder_name'   => $this->input->post('encoder-name'),
+            'sales_name'     => $this->input->post('sales-name'),
+            'service_name'   => $this->input->post('services_name'),
+            'status'         => "Pending",
+            'applicant_data' => $this->input->post('ticket-format')
         );
 
-       $insert = $this->Sales_model->save($data);
-        
-        /*// service assign to staff
-        foreach ($this->input->post('services') as $key => $value) {
-            if($value['primary_id'] == ""){
-                $this->db->set('_userID', $insert);
-                $this->db->set('service_id', $value['service_id']);
-                $this->db->insert('assign_staff_service');
-            }
-        } */
+       $insert = $this->Sales_model->save_ticket($data);
 
-        echo json_encode(array("status" => TRUE));
+       // echo json_encode(array("status" => TRUE));
     }
 	
 	public function ajax_add_inquire(){
