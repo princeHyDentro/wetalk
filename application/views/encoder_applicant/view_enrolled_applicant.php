@@ -41,24 +41,19 @@ th{
                                 <i class="material-icons less" style="display: none">keyboard_arrow_down</i>
                                 <span class="right">Enroll Applicant List</span>
                             </div>
-
                             <div class="collapsible-body teal lighten-5" style="display: none;">
                                 <ul class="collection">
                                     <li>
                                         <div class="row">
                                             <div class="input-field col s6">
-                                                <!-- <div class="">
-                                                    <i class="material-icons search-icon"> search </i>
-                                                </div> -->
-                                                <input class="validate" id="search_register_account_by_name" placeholder="Search for (ID ,Full Name , Contact , Address , Email Address, Service, Status)" type='search'>
-                                                <!-- <label for="first_name" class="active">First Name</label> -->
+                                                <input class="validate" id="search_register_account_by_name" placeholder="Search" type='search'>
                                             </div>
                                             <div class="input-field col s6">
                                                 <select aria-controls="myTable" class="validate" id="admin_search_status" name="myTable_length">
-                                                     <option value="" disabled selected>Search your option</option>
+                                                    <option value="" disabled selected>Search your option</option>
                                                     <option value="">All</option>
-                                                    <option value="Inquire">Inquire</option>
-                                                    <option value="Enroll">Enroll</option>
+                                                    <option value="Inquired">Inquired</option>
+                                                    <option value="Enrolled">Enrolled</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -68,14 +63,14 @@ th{
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th aria-sort="ascending" class="sorting_asc">Name</th>
+                                                    <th aria-sort="ascending" class="sorting_asc">Applicant Name</th>
+                                                    <th>Encoded By</th>
                                                     <th>Contact</th>
                                                     <th>Address</th>
                                                     <th>Email</th>
-                                                    <!--<th>Service</th>-->
+                                                    <th>Service</th>
                                                     <th>Status</th>
-                                                    <!--<th>Username</th>
-                                                    <th>Password</th> -->
+                                                    <th>Date Created</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>

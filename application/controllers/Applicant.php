@@ -89,17 +89,10 @@ class Applicant extends CI_Controller {
             $row = array();
 
             $row[] = $app->id;
-            $row[] = $app->name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
+            $row[] = $app->name;
             $row[] = $app->contact;
             $row[] = $app->address;
             $row[] = $app->email;
-           /* $row[] = $app->service;
-            $row[] = $app->status;
-            $row[] = $app->username;
-            $row[] = $app->password; */
-          
-            //add html for action
-            //$row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$app->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$app->id."'".')"><i class="material-icons">delete</i></a>';
             $data[] = $row;
 
         }
@@ -126,15 +119,10 @@ class Applicant extends CI_Controller {
             $row = array();
 
             $row[] = $app->id;
-            $row[] = $app->name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
+            $row[] = $app->name;
             $row[] = $app->contact;
             $row[] = $app->address;
             $row[] = $app->email;
-           /* $row[] = $app->service;
-            $row[] = $app->status; */
-          
-            //add html for action
-            //$row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$app->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$app->id."'".')"><i class="material-icons">delete</i></a>';
             $data[] = $row;
 
         }

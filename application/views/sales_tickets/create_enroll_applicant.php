@@ -141,7 +141,7 @@ th{
 
                         <div class="row">
                             <div class="input-field col s12 has-error">
-                                <label>Ticket Data :</label>
+                                <label>Applicant Information :</label>
                             </div>
                         </div>
                         <div class="row">
@@ -237,13 +237,14 @@ th{
                 data: {'service_id' : service_id },
                 success: function(data)
                 {
+                    
                     ojb     = $.parseJSON(data);
                    
                     $(ojb).each(function(indxe,elem){
                         answer_data = new Array();
-                        console.log(elem)
+                    console.log(elem)
                         data = [
-                                '<option value="'+elem.id+'">'+elem.full_name+'</option>'
+                                '<option value="'+elem.id+'">'+elem.full_name+' || <span class="new badge">Ticket Pending '+elem.tickets+'</span></option>'
                             ].join('');
                         answer_data.push(data);
                         arr.push(answer_data);

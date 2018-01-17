@@ -6,18 +6,19 @@ $(document).ready(function() {
     
 	table = $('#sales-table').DataTable({ 
         
-        "processing": true,
+        "processing": true, 
         "serverSide": true,
         "order": [],
+        // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "ajax_enrolled_applicant_list_for_encoder",
+            "url": "ajax_all_pending_ticket_for_encoder",
             "type": "POST",
 
         },
         "columnDefs": [
             { 
-                "targets": [ -1 ],
-                "orderable": false,
+                "targets": [ -1 ], //last column
+                "orderable": false, //set not orderable
             },
         ],
         dom: '<"toolbar">Bfrtip',
@@ -31,35 +32,20 @@ $(document).ready(function() {
                 ]
     });
     
-
-    $('#admin_search_privilege').on('change' , function(){
+    $('#filter-status').on('change' , function(){
+        // alert(this.value)
         table.search( this.value ).draw();
     });
-    $('#search_register_account_by_name').on('keyup' , function(){
+    $('#search_tickets').on('keyup' , function(){
         table.search( this.value ).draw();
-    });
-    $('#admin_search_status').on('change' , function(){
-        table.search( this.value ).draw();
-    });
-
-
-    $("input").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("textarea").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("select").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
     });
 });
+
 
 function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
 }
+
 
 

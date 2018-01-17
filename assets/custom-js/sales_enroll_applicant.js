@@ -29,7 +29,7 @@ $(document).ready(function() {
         dom: '<"toolbar">Bfrtip',
         buttons: [
                     {
-                        text: '<i class="fa fa-plus-circle"></i> Enroll Applicant',
+                        text: '<i class="fa fa-plus-circle"></i> New Ticket',
                         action: function ( e, dt, node, config ) {
                             add_person();
                         }
@@ -43,13 +43,6 @@ $(document).ready(function() {
                 ]
     });
 
-
-    // $('#admin_search_privilege').on('change' , function(){
-    //     table.search( this.value ).draw();
-    // });
-    // $('#search_register_account_by_name').on('keyup' , function(){
-    //     table.search( this.value ).draw();
-    // });
 
     $('#filter-status').on('change' , function(){
         // alert(this.value)
@@ -76,11 +69,12 @@ $(document).ready(function() {
 function add_person()
 {
 	save_method = 'add';
-    $('#form')[0].reset(); // reset form on modals
-    $('.form-group').removeClass('has-error'); // clear error class
-    $('.help-block').empty(); // clear error string
-    $('#modal_enroll').modal("open"); // show bootstrap modal
-    $('.modal-title').text('Enroll Applicant Form'); // Set Title to Bootstrap modal title
+    var form = document.getElementById("form");
+    clearForm(form);
+    $('.form-group').removeClass('has-error');
+    $('.help-block').empty();
+    $('#modal_enroll').modal("open");
+    $('.modal-title').text('Create Applicant Ticket');
 }
 
 
@@ -99,11 +93,10 @@ function save_ticket()
     var sales_name    = $("#sales-name").val()
     var services_name = $("#services option:selected").text();
     var services_id   = $("#services").val();
-    var encoder_name  = $("#encoder-name option:selected").text();
+    var encoder_name  = $("#encoder-name option:selected").text().split("||")[0];
     var encoder_id    = $("#encoder-name").val();
     var ticket_format = tinyMCE.activeEditor.getContent(); //tinymce.get('#ticket-format').getContent();
 
-    // ajax adding data to database
     $.ajax({
         url : url,
         type: "POST",
@@ -119,91 +112,57 @@ function save_ticket()
       //  dataType: "JSON",
         success: function(data)
         {	
-            console.log(data);
-            // if(data.status) //if success close modal and reload ajax table
-            // {
-            //     $('#modal_form').modal('hide');
-            //     reload_table();
-            // }
-            // else
-            // {
-            //     for (var i = 0; i < data.inputerror.length; i++) 
-            //     {
-            //         $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-            //         $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
-            //     }
-            // }
-            // $('#btnSave').text('save'); //change button text
-            // $('#btnSave').attr('disabled',false); //set button enable 
- 
- 
+            if(data)
+            {
+                $('#modal_enroll').modal('close');
+                reload_table();
+                Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
+            }
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable 
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-            console.log(errorThrown)
-            // alert('Error adding / update data');
-            // $('#btnSave').text('save'); //change button text
-            // $('#btnSave').attr('disabled',false); //set button enable 
- 
+            alert('Error adding / update data');
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable 
         }
     });
+}
+
+function clearForm(frm_elements){
+
+    for (i = 0; i < frm_elements.length; i++)
+    {
+        field_type = frm_elements[i].type.toLowerCase();
+        
+        switch (field_type)
+        {
+            // case "text":
+            // case "password":
+            case "textarea":
+            // case "hidden":
+            case "email":
+            frm_elements[i].value = "";
+            break;
+            case "radio":
+            case "checkbox":
+            if (frm_elements[i].checked)
+            {
+                frm_elements[i].checked = false;
+            }
+            break;
+            case "select-one":
+            case "select-multi":
+            frm_elements[i].selectedIndex = -1;
+            break;
+            default:
+            break;
+        }
+    }
 }
 
 function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
 }
-
-// function save()
-// {
-//     $('#btnSave').text('saving...'); //change button text
-//     $('#btnSave').attr('disabled',true); //set button disable 
-//     var url;
- 
-//     if(save_method == 'add') {
-//         url = "ajax_add";
-//     } else {
-//         url = "ajax_update";
-//     }
-
-//     // ajax adding data to database
-//     $.ajax({
-//         url : url,
-//         type: "POST",
-//         data: $('#form').serialize(),
-//         dataType: "JSON",
-//         success: function(data)
-//         {	
- 
-//             if(data.status) //if success close modal and reload ajax table
-//             {
-//                 $("#modal_enroll").removeClass("in");
-// 				$(".modal-backdrop").remove();
-//                 $("#modal_enroll").hide();
-//                 reload_table();
-//             }
-//             else
-//             {
-//                 for (var i = 0; i < data.inputerror.length; i++) 
-//                 {
-//                     $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-//                     $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
-//                 }
-//             }
-//             $('#btnSave').text('save'); //change button text
-//             $('#btnSave').attr('disabled',false); //set button enable 
- 
- 
-//         },
-//         error: function (jqXHR, textStatus, errorThrown)
-//         {
-//             alert('Error adding / update data');
-//             $('#btnSave').text('save'); //change button text
-//             $('#btnSave').attr('disabled',false); //set button enable 
- 
-//         }
-//     });
-// }
-
-
-

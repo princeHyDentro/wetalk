@@ -178,7 +178,7 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="<?php  echo base_url('ticket/pending_tickets'); ?>">Pending Tickets</a> </li>
+                                    <li><a href="<?php  echo base_url('ticket/encoder_pending_tickets'); ?>">Pending Tickets</a> </li>
                                 </ul>
                             </div>
                         </li>
@@ -206,8 +206,9 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="<?php  echo base_url('ticket/create_inquire_applicant'); ?>">Create Inquire Applicant</a> </li>
-                                    <li><a href="<?php  echo base_url('ticket/create_enroll_applicant'); ?>">Create Enroll Applicant</a> </li>
+                                    <li><a href="<?php  echo base_url('ticket/create_enroll_applicant'); ?>">Enroll Applicant</a></li>
+                                    <li><a href="<?php  echo base_url('ticket/create_inquire_applicant'); ?>">Inquire Applicant</a></li>
+                                    
                                 </ul>
                             </div>
                         </li>

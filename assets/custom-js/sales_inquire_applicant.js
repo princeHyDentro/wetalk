@@ -15,7 +15,6 @@ $(document).ready(function() {
         "ajax": {
             "url": "ajax_inquire_applicant_list_data",
             "type": "POST",
-
         },
  
         //Set column definition initialisation properties.
@@ -28,7 +27,7 @@ $(document).ready(function() {
         dom: '<"toolbar">Bfrtip',
         buttons: [
                     {
-                        text: '<i class="fa fa-plus-circle"></i> Inquire Applicant',
+                        text: '<i class="fa fa-plus-circle"></i> New Inquire Applicant',
                         action: function ( e, dt, node, config ) {
                             add_person();
                         }

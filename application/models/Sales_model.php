@@ -30,18 +30,28 @@ class Sales_model extends CI_Model {
     }
 
     public function _tableGetServices($service_id){
-
-        $records  = $this->db->query('SELECT id, _userID as user_id FROM assign_staff_service where service_id = '.$service_id);
+        $data =  array();
+        $records    = $this->db->query('SELECT id, _userID as user_id FROM assign_staff_service where service_id = '.$service_id);
         $service_id = array_column($records->result_array(), 'user_id');
 
-        $this->db->select('id , full_name');
-        $this->db->where_in('id', $service_id);
-        $this->db->where('roles', 'encoder');
-
+        $query = $this->db->select('id , full_name');
+        $query = $this->db->where_in('id', $service_id);
+        $query = $this->db->where('roles', 'encoder');
         $query = $this->db->get('users');
 
         if(count($query->result_array()) >= 1){
-            return $query->result_array();
+            foreach ($query->result_array() as $key => $value) {
+               
+                $num_rows = $this->db->where('encoder_id', $value['id']);
+                $num_rows = $this->db->count_all_results('encoder_assign_tickets');
+                $data[] = array(
+                                'id'        => $value['id'],
+                                'full_name' => $value['full_name'],
+                                'tickets'   => $num_rows
+                            );
+                
+            }
+            return $data;
         }else{
             return false;
         }
@@ -117,7 +127,7 @@ class Sales_model extends CI_Model {
 
                     if($i===0) // first loop
                     {
-                        $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                        $this->db->group_start();
                         $this->db->like($item, $_POST['search']['value']);
                     }else{
                         $this->db->or_like($item, $_POST['search']['value']);
@@ -313,6 +323,7 @@ class Sales_model extends CI_Model {
 
 
     /*----------------------------------TICKETS---------------------------------------------*/
+    
     var $table_tickets         = 'encoder_assign_tickets';
     var $column_order_ticket   = array('id','encoder_name','service_name',' status'); 
     var $column_search_ticket  = array('id','encoder_name','service_name',' status');
@@ -338,7 +349,13 @@ class Sales_model extends CI_Model {
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
 
-        $this->db->where("sales_id", $is_logged_in['user_id']);
+        if($is_logged_in['user_rights'] == 'encoder'){
+            $this->db->where("encoder_id", $is_logged_in['user_id']);
+            $this->db->where("status", 'Pending');
+        }
+        if($is_logged_in['user_rights'] == 'sales'){
+            $this->db->where("sales_id", $is_logged_in['user_id']);
+        }
         $this->db->where("deleted_at", NULL);
         $this->db->from($this->table_tickets);
         return $this->db->count_all_results();
@@ -348,7 +365,14 @@ class Sales_model extends CI_Model {
 
         $is_logged_in = $this->session->userdata('is_logged_in');
 
-        $this->db->where("sales_id", $is_logged_in['user_id']);
+        if($is_logged_in['user_rights'] == 'encoder'){
+            $this->db->where("encoder_id", $is_logged_in['user_id']);
+            $this->db->where("status", 'Pending');
+        }
+        if($is_logged_in['user_rights'] == 'sales'){
+            $this->db->where("sales_id", $is_logged_in['user_id']);
+        }
+        
         $this->db->where("deleted_at", NULL);
         $this->db->from($this->table_tickets);
 
