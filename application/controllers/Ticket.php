@@ -112,7 +112,7 @@ class Ticket extends CI_Controller {
             'address'       => $this->input->post('address'),
             'email'         => $this->input->post('email'),
             'service'       => $this->input->post('service'),
-            'status'        => 'inquire',
+            'status'        => 'Inquired',
         );
 
         $insert = $this->Sales_model->save($data);
@@ -135,6 +135,42 @@ class Ticket extends CI_Controller {
             $this->load->view('encoder_tickets/pending_tickets');
         }   
     }
+    public function enroll_applicant(){
+
+        $this->load->model("Sales_model");
+        $is_logged_in   = $this->session->userdata('is_logged_in');
+        $ticket_id      = $this->input->post('ticket_id');
+
+
+        $data = array(
+            'name'          => $this->input->post('name'),
+            'contact'       => $this->input->post('contact'),
+            'address'       => $this->input->post('address'),
+            'email'         => $this->input->post('email'),
+            'service'       => $this->input->post('service'),
+
+            'username'       => $this->input->post('username'),
+            'password'       => md5($this->input->post('password')),
+            'service_id'     => $this->input->post('service_id'),
+            'sales_id'       => $this->input->post('sales_id'),
+            'sales_name'     => $this->input->post('sales_name'),
+            'encoder_name'   => $this->input->post('encoder_name'),
+            'encoder_id'     => $this->input->post('encoder_id'),
+            'status'         => 'Enrolled',
+        );
+
+        $insert = $this->Sales_model->save($data);
+        
+        $status = array(
+                'status' => 'Complete',
+        );
+
+        $this->db->where('id', $ticket_id);
+        $this->db->update('encoder_assign_tickets', $status);
+
+        echo json_encode("success");
+    }
+
     public function ajax_add_enroll_ticket(){
         $this->load->model("Sales_model");
         $is_logged_in = $this->session->userdata('is_logged_in');
@@ -197,7 +233,6 @@ class Ticket extends CI_Controller {
             "recordsFiltered"   => $this->Sales_model->count_filtered_enroll_tickets(),//for entries label
             "data"              => $data,
         );
-
         echo json_encode($output);
     }
 
@@ -234,6 +269,18 @@ class Ticket extends CI_Controller {
             $row[] = $app->service_name;
             $row[] = $app->status;
             $row[] = $app->created_at;
+
+            $row[] = '
+            <div class="grouped-button"> 
+                <button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
+                <button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button> 
+                <ul class="button-dropdown-menu"> 
+                    <li>
+                        <a href="ticket_information/'.$app->id.'" class="edit-button">
+                        Open Ticket</a>
+                    </li>
+                </ul> 
+            </div>';
             $data[] = $row;
         }
 
@@ -245,6 +292,25 @@ class Ticket extends CI_Controller {
         );
 
         echo json_encode($output);
+    }
+
+    public function ticket_information() {
+        $this->load->model("Encoder_model");
+        $data           = array();
+        $is_logged_in   = $this->session->userdata('is_logged_in');
+        $ticket_id      = $this->uri->segment(3);
+
+
+        if (!isset($is_logged_in) || $is_logged_in != true) {
+            redirect('login', 'refresh');
+            die();
+        }else{
+
+            $data['ticket_info'] =  $this->Encoder_model->ticket_info($ticket_id);
+
+            $this->load->view('template/header');
+            $this->load->view('encoder_tickets/ticket_information',$data);
+        }   
     }
     /*------------------------end encoder pending tickets-----------------------------*/
 

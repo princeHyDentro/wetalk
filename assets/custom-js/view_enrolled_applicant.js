@@ -27,37 +27,12 @@ $(document).ready(function() {
         ],
         dom: '<"toolbar">Bfrtip',
         buttons: [
-                    /*{
-                        text: '<i class="fa fa-plus-circle"></i> Enroll Applicant',
-                        action: function ( e, dt, node, config ) {
-                            add_person();
-                        }
-                    }, */
                     {
                         text: '<i class="fa fa-refresh"></i> Reload List',
                         action: function ( e, dt, node, config ) {
                            reload_table();
                         }
                     },
-                  /*  {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    },
-                    {
-                        extend: 'copy',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    } */
-                    
                 ]
         // buttons: [
         //     'copy', 'csv', 'excel', 'pdf', 'print'

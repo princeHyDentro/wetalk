@@ -149,61 +149,47 @@ th{
                                 <label>Applicant Information Data :</label>
                             </div>
                             <div class="input-field col s12 has-error">
-                                <textarea id="ticket-format" class="materialize-textarea">
-                                    <p style="text-align: center;">&nbsp;</p>
-                                    <table style="height: 232px; width: 100.418%; border-collapse: collapse;" border="1" cellspacing="1">
-                                    <tbody>
-                                    <tr style="height: 18px;">
-                                    <td style="width: 715px; text-align: center; height: 18px;"><strong>APPLICANT INFORMATION</strong></td>
-                                    </tr>
-                                    <tr style="height: 40px;">
-                                    <td style="width: 715px; height: 40px;"><br />
-                                    <table style="border-collapse: collapse; width: 100%;" border="1">
-                                    <tbody>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Name :</strong></td>
-                                    <td style="width: 74.8951%;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Current Address :</strong></td>
-                                    <td style="width: 74.8951%;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Date of Birth :</strong></td>
-                                    <td style="width: 74.8951%;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Email Address :</strong></td>
-                                    <td style="width: 74.8951%;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Contact No.&nbsp; &nbsp; &nbsp;:</strong></td>
-                                    <td style="width: 74.8951%;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Status&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp;</strong></td>
-                                    <td style="width: 74.8951%;"><strong>&nbsp; Enroll</strong></td>
-                                    </tr>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Username&nbsp; &nbsp;:</strong></td>
-                                    <td style="width: 74.8951%;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                    <td style="width: 25.1049%;"><strong>Password&nbsp; &nbsp; :</strong></td>
-                                    <td style="width: 74.8951%;">&nbsp;</td>
-                                    </tr>
-                                    </tbody>
-                                    </table>
-                                    </td>
-                                    </tr>
-                                    <tr style="height: 18px;">
-                                    <td style="width: 715px; height: 18px;">&nbsp;</td>
-                                    </tr>
-                                    </tbody>
-                                    </table>
-                                    <p style="text-align: center;">&nbsp;</p>
-                                    <p>&nbsp;</p>
-                                    </textarea>
+                                <textarea id="ticket-format" class="materialize-textarea"><table class="striped" style="height: 161px;" width="658">
+                                <thead>
+                                <tr>
+                                <th style="width: 173px;" colspan="5" data-field="id">Applicant Information</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                <td style="width: 173px;"><strong>Name</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                <td style="width: 173px;"><strong>Current Address</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                <td style="width: 173px;"><strong>Date of Birth</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                <td style="width: 173px;"><strong>Email Address</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                <td style="width: 173px;"><strong>Contact No.</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                <td style="width: 173px;"><strong>Status</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                <td style="width: 173px;"><strong>Username</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                <td style="width: 173px;"><strong>Password</strong></td>
+                                <td style="width: 239px;" colspan="3">&nbsp;</td>
+                                </tr>
+                                </tbody>
+                                </table></textarea>
                                 <span class="help-block"></span>
                             </div>
                         </div>

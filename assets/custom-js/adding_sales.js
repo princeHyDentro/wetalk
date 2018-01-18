@@ -9,15 +9,11 @@ $(document).ready(function() {
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [],
-        
- 
         // Load data for the table's content from an Ajax source
         "ajax": {
             "url": "ajax_enroll_applicant_list_data",
             "type": "POST",
-
         },
- 
         //Set column definition initialisation properties.
         "columnDefs": [
             { 
@@ -57,15 +53,8 @@ $(document).ready(function() {
                             columns: [ 0, 1, 2, 3, 4, 5, 6 ]
                         }
                     }
-                    
                 ]
-        // buttons: [
-        //     'copy', 'csv', 'excel', 'pdf', 'print'
-        // ],
-
     });
-    
-    // $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
 
     $('#admin_search_privilege').on('change' , function(){
         table.search( this.value ).draw();

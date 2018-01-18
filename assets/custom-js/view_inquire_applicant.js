@@ -13,7 +13,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "ajax_inquire_applicant_list_data",
+            "url": "ajax_inquire_applicant",
             "type": "POST",
 
         },

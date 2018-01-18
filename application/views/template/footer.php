@@ -76,6 +76,7 @@
 	</body>
 	<!--Import jQuery before materialize.js-->
 		<script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
+		
 		<script type="text/javascript" src="<?php echo base_url('assets/js/materialize.min.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/js/moment.js'); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url('assets/js/prism.js'); ?>"></script>
@@ -92,15 +93,7 @@
 		<script src="<?php echo base_url('assets/datetimepicker/build/jquery.datetimepicker.full.min.js'); ?>"></script>
 		
 		<script src="<?php echo base_url('assets/custom-js/login-and-registration.js'); ?>"></script>
-	<!-- 	<script src="<?php echo base_url('custom-js/j1_exchange_culture.js'); ?>"></script>
-		<script src="<?php echo base_url('assets/custom-js/kbl.js'); ?>"></script>
-		<script src="<?php echo base_url('assets/custom-js/nlex.js'); ?>"></script>
-		<script src="<?php echo base_url('assets/custom-js/jquery.ajaxfileupload.js'); ?>"></script> -->
-
-
-
-		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.1/vue-resource.min.js"></script>
+		
 	
 	<script>
 		$(document).ready(function($) {
@@ -137,7 +130,6 @@
 		      startingTop: '4%', // Starting top style attribute
 		      endingTop: '10%', // Ending top style attribute
 		      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-		       
 		      },
 		      complete: function() {
     			$('#services option:selected').each(function(i, sel){ 

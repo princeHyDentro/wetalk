@@ -233,4 +233,12 @@ class Encoder_model extends CI_Model {
     }
     
     /*---------------------------END FOR INQUIRED APPLICANT--------------------*/
+
+    public function ticket_info($ticket_id){
+        $this->db->where("id", $ticket_id);
+        $this->db->where("deleted_at", NULL);
+        $this->db->from("encoder_assign_tickets");
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
