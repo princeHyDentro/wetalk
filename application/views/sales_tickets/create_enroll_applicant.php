@@ -68,6 +68,7 @@ th{
                                             <thead>
                                                 <tr>
                                                     <th>TicketID</th>
+                                                    <th aria-sort="ascending" class="sorting_asc">Applicant Name</th>
                                                     <th aria-sort="ascending" class="sorting_asc">Assing to</th>
                                                     <th>Service</th>
                                                     <th>Status</th>
@@ -94,6 +95,27 @@ th{
    .select-wrapper+label{
         top:-31px;
    }
+   select {
+        background-color: transparent;
+        width: 100%;
+        padding: 5px;
+        border: none;
+        border-radius: 2px;
+        height: 3rem;
+        border-bottom: 1px solid #9e9e9e;
+    }
+    .input-field div.error {
+        position: relative;
+        top: -1rem;
+        left: 0rem;
+        font-size: 0.8rem;
+        color: red;
+        -webkit-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        transform: translateY(0%);
+        font-style: oblique;
+    }
 </style>
 <div class="modal fade" id="modal_enroll" role="dialog">
     <div class="modal-dialog">
@@ -112,30 +134,40 @@ th{
                         // echo "</pre>";
                         ?>
                         <div class="row">
-                            <div class="input-field col s12 has-error">
-                                <label>Sales Representative Name:</label>
-                                <input disabled="true" class="validate" id="sales-name" value="<?php echo $is_logged_in['user_full_name'];?>" name="sales-name"  type="text">
-                                <span class="help-block"></span>
+                            <div class="input-field col s12">
+                                <label for="sales_name">Sales Representative Name:</label>
+                                <input disabled="true" class="validate" id="sales_name" value="<?php echo $is_logged_in['user_full_name'];?>" name="sales_name"  type="text">
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="input-field col s12 has-error">
-                                <select class="active" id="services" name="service">
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <?php foreach ($services as $key => $service): ?>
+                            <div class="input-field col s12">
+                                <label for="applicant_name">Applicant Name:</label>
+                                <input class="applicant_name" id="applicant_name" value="" name="applicant_name"  type="text">
+                                <div class="input-field">
+                                    <div class="errorTxt0"></div>
+                                </div>
+                            </div>
+
+                            <div class="col s12">
+                                <label for="services" style="font-size: 1.2rem;">Select Service :<i style="color:red;">*</i></label>
+                                <select class="error browser-default" id="services" name="services" data-error=".errorTxt1">
+                                    <option value="" disabled="" selected="">Choose your profile</option>
+                                     <?php foreach ($services as $key => $service): ?>
                                         <option data-id="" value="<?php echo $service['id'];?>"><?php echo $service['service_name'];?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <label>Enroll To :<i style="color:red;">*</i></label>
+                                <div class="input-field">
+                                    <div class="errorTxt1"></div>
+                                </div>
                             </div>
-				        </div>
-                        <div class="row">
-                            <div class="input-field col s12 has-error">
-                                <select class="active" id="encoder-name" name="encoder-name">
+
+                            <div class="col s12">
+                                <label for="encoder_name" style="font-size: 1.2rem;">Assign To :<i style="color:red;">*</i></label>
+                                <select class="error browser-default" id="encoder_name" name="encoder_name" data-error=".errorTxt2">
                                     <option value="" disabled>Choose your option</option>
                                 </select>
-                                <label>Assign To :<i style="color:red;">*</i></label>
+                                <div class="input-field">
+                                    <div class="errorTxt2"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -146,10 +178,10 @@ th{
                         </div>
                         <div class="row">
                             <div class="input-field col s12 has-error">
-                                <label>Applicant Information Data :</label>
+                                <label for="ticket_format">Applicant Information Data :</label>
                             </div>
                             <div class="input-field col s12 has-error">
-                                <textarea id="ticket-format" class="materialize-textarea"><table class="striped" style="height: 161px;" width="658">
+                                <textarea  id="ticket_format" name="ticket_format" class="materialize-textarea"><table class="striped" style="height: 161px;" width="658">
                                 <thead>
                                 <tr>
                                 <th style="width: 173px;" colspan="5" data-field="id">Applicant Information</th>
@@ -190,25 +222,60 @@ th{
                                 </tr>
                                 </tbody>
                                 </table></textarea>
-                                <span class="help-block"></span>
+                                <div class="input-field">
+                                    <div class="errorTxt3"></div>
+                                </div>
                             </div>
                         </div>
+                        <div class="modal-footer" style="padding: 6px;">
+                            <button class="btn btn-primary " id="btnSave"  type="submit">Save</button>
+                            <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
+                        </div>
                 </form>
-            </div>
-            <div class="modal-footer" style="padding: 6px;">
-                <button class="btn btn-primary " id="btnSave" onclick="save_ticket()" type="button">Save</button>
-                <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
             </div>
         </div>
     </div>
 </div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
+
 <script src="<?php echo base_url('assets/custom-js/sales_enroll_applicant.js'); ?>"></script>
 <script src="<?php echo base_url('assets/tinymce/tinymce.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.validate-1-17-0.js'); ?>"></script>
 <script>
     
     $(document).ready(function(){
-        editor();
+
+        $("#form").validate({
+            rules: {
+                sales_name  : { required: true },
+                services    : { required: true },
+                encoder_name: { required: true },
+                applicant_name : { required: true }
+            },
+            //For custom messages
+            messages: {
+                sales_name:{
+                    required: "Name field is required.",
+                },
+                services:{
+                    required: "Service field is required.",
+                },
+                encoder_name: { required: "Encoder field is required.", },
+                applicant_name : { required: "Applicant name field is required." }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                save_ticket();
+            }
+        });
 
         $("#services").change(function(event){
             event.preventDefault();
@@ -228,7 +295,6 @@ th{
                    
                     $(ojb).each(function(indxe,elem){
                         answer_data = new Array();
-                    console.log(elem)
                         data = [
                                 '<option value="'+elem.id+'">'+elem.full_name+' || <span class="new badge">Ticket Pending '+elem.tickets+'</span></option>'
                             ].join('');
@@ -241,23 +307,23 @@ th{
 
                     result = data1+arr.join('');
 
-                    $("#encoder-name").html(result);
-                    $('#encoder-name').material_select();
+                    $("#encoder_name").html(result);
+                    $('#encoder_name').material_select();
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
-                    console.log(errorThrown)
-                    //alert('Error adding / update data');
+                    alert('Error adding / update data');
                 }
             });
-            //alert($("#services option:selected").text())
         });
+
+        editor();
     });
 
-     function editor(){
+    function editor(){
 
         tinymce.init({ 
-            selector:'#ticket-format',
+            selector:'#ticket_format',
             branding: false,
             menubar: false,
             height : 50,

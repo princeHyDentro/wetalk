@@ -4,16 +4,14 @@ var table;
  
 $(document).ready(function() {
     
-	table = $('#sales-table').DataTable({ 
+	table = $('#sales-table').DataTable({
         
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [],
-        
- 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "ajax_enroll_applicant_list_data_ticket",
+            "url": "sales_ticket_for_enroll",
             "type": "POST",
 
         },
@@ -82,19 +80,15 @@ function save_ticket()
 {
     $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
-    var url;
- 
-    if(save_method == 'add') {
-        url = "ajax_add_enroll_ticket";
-    } else {
-        url = "ajax_update";
-    }
+   
+    var url           = "ajax_add_enroll_ticket";
     var sale_id       = $("#sale-id").val();
-    var sales_name    = $("#sales-name").val()
+    var sales_name    = $("#sales_name").val()
     var services_name = $("#services option:selected").text();
     var services_id   = $("#services").val();
-    var encoder_name  = $("#encoder-name option:selected").text().split("||")[0];
-    var encoder_id    = $("#encoder-name").val();
+    var encoder_name  = $("#encoder_name option:selected").text().split("||")[0];
+    var encoder_id    = $("#encoder_name").val();
+    var applicant_name    = $("#applicant_name").val();
     var ticket_format = tinyMCE.activeEditor.getContent(); //tinymce.get('#ticket-format').getContent();
 
     $.ajax({
@@ -107,9 +101,9 @@ function save_ticket()
             'services_id'   : services_id,
             'encoder-name'  : encoder_name,
             'encoder-id'    : encoder_id,
-            'ticket-format' : ticket_format
+            'ticket-format' : ticket_format,
+            'applicant-name': applicant_name
         },
-      //  dataType: "JSON",
         success: function(data)
         {	
             if(data)

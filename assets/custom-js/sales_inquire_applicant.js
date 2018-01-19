@@ -13,7 +13,7 @@ $(document).ready(function() {
  
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "ajax_inquire_applicant_list_data",
+            "url": "ajax_inquire_applicant_tickets",
             "type": "POST",
         },
  
@@ -38,30 +38,7 @@ $(document).ready(function() {
                            reload_table();
                         }
                     },
-                  /*  {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    },
-                    {
-                        extend: 'copy',
-                        exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5, 6 ]
-                        }
-                    } */
-                    
                 ]
-        // buttons: [
-        //     'copy', 'csv', 'excel', 'pdf', 'print'
-        // ],
-
     });
     
     // $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
@@ -108,29 +85,30 @@ function save()
 {
     $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
-    var url;
- 
-    if(save_method == 'add') {
-        url = "ajax_add_inquire";
-    } else {
-        url = "ajax_update";
-    }
 
-    // ajax adding data to database
+    var url = "ajax_add_inquire";
+    data = {
+        'name'          : $("#name").val(),
+        'contact'       : $('#contact').val(),
+        'address'       : $('#address').val(),
+        'email'         : $('#email').val(),
+        'service'       : $('#services').val(),
+        'service_name'  : $("#services option:selected").text()
+    }
+   
     $.ajax({
         url : url,
         type: "POST",
-        data: $('#form').serialize(),
+        data: data,
         dataType: "JSON",
         success: function(data)
-        {	
+        {
  
             if(data.status) //if success close modal and reload ajax table
             {
-                $('#modal_form').hide();
+                $('#modal_enroll').modal('close');
                 reload_table();
-            }
-            else
+            }else
             {
                 for (var i = 0; i < data.inputerror.length; i++) 
                 {

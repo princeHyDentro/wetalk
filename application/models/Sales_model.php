@@ -75,16 +75,16 @@ class Sales_model extends CI_Model {
 
         $is_logged_in = $this->session->userdata('is_logged_in');
 
-		$this->db->from($this->table);
+		$this->db->from($this->table_applicant);
 
         $i = 0;
 
         foreach ($this->column_search as $item){
 
-            if($_POST['search']['value']) // if datatable send POST for search
+            if($_POST['search']['value'])
             {
 
-                    if($i===0) // first loop
+                    if($i===0)
                     {
                         $this->db->group_start();
                         $this->db->like($item, $_POST['search']['value']);
@@ -92,16 +92,14 @@ class Sales_model extends CI_Model {
                         $this->db->or_like($item, $_POST['search']['value']);
                     }
 
-                    if(count($this->column_search) - 1 == $i) //last loop
+                    if(count($this->column_search) - 1 == $i)
                 
-                       $this->db->group_end(); //close bracket
+                       $this->db->group_end(); 
             }
                     $i++;
         }
-        // print_r($this->column_order[$_POST['order']['0']['column']]);
-        //  $sort = $_POST['order'][0];
 
-        if(isset($_POST['order'])) // here order processing
+        if(isset($_POST['order']))
         {
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         }elseif(isset($this->order)){
@@ -157,27 +155,24 @@ class Sales_model extends CI_Model {
   
         foreach ($this->column_search as $item){
 
-            if($_POST['search']['value']) // if datatable send POST for search
+            if($_POST['search']['value'])
             {
-
-                    if($i===0) // first loop
+                    if($i===0)
                     {
-                        $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                        $this->db->group_start();
                         $this->db->like($item, $_POST['search']['value']);
                     }else{
                         $this->db->or_like($item, $_POST['search']['value']);
                     }
 
-                    if(count($this->column_search) - 1 == $i) //last loop
-                
-                       $this->db->group_end(); //close bracket
+                    if(count($this->column_search) - 1 == $i)
+
+                       $this->db->group_end();
             }
                     $i++;
         }
-        // print_r($this->column_order[$_POST['order']['0']['column']]);
-        //         $sort = $_POST['order'][0];
 
-        if(isset($_POST['order'])) // here order processing
+        if(isset($_POST['order']))
         {
             $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         }elseif(isset($this->order)){
@@ -205,37 +200,10 @@ class Sales_model extends CI_Model {
     public function get_by_id($id)
     {
         $data = array();
-
         $this->db->from($this->table);
         $this->db->where('id',$id);
         $query['user_info'] = $this->db->get()->result_array();
-       
-        /*$this->db->from('assign_staff_service');
-        $this->db->where('_userID',$id);
-        $query['services'] = $this->db->get()->result_array();*/
-        
         return $query; 
-    }
-
-    public function save_ticket($data){
-        $this->db->insert("encoder_assign_tickets", $data);
-        return $this->db->insert_id();
-    }
-
-    public function save($data){
-        $this->db->insert($this->table, $data);
-        return $this->db->insert_id();
-    }
-
-    public function update($where, $data){
-        $this->db->update($this->table, $data, $where);
-        return $this->db->affected_rows();
-    }
-
-    public function delete_by_id($id){
-        //$data  = array('deleted_by' => 1 , 'deleted_at' =>date('Y-m-d H:i:s') );
-        $this->db->where('id', $id);
-        $this->db->delete($this->table);
     }
 
     public function resotore_by_id($id){
@@ -247,104 +215,18 @@ class Sales_model extends CI_Model {
     }
 
 
-    /***********************************TICKETS FUNCTION**************************/
-    
-    var $table_tickets         = 'encoder_assign_tickets';
-    var $column_order_ticket   = array('id','encoder_name','service_name',' status'); 
-    var $column_search_ticket  = array('id','encoder_name','service_name',' status');
-    var $order_ticket          = array('id' => 'desc');
-
-    public function get_datatables_enroll_tickets(){
-
-        $this->_get_enroll_ticket_datatables_query();
-        if($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
-            $query = $this->db->get();
-        return $query->result();
-    }
-
-    public function count_filtered_enroll_tickets()
-    {
-        $this->_get_enroll_ticket_datatables_query();
-        $query = $this->db->get();
-        return $query->num_rows();
-    }
-
-    public function count_all_enroll_tickets()
-    {
-        $is_logged_in = $this->session->userdata('is_logged_in');
-
-        if($is_logged_in['user_rights'] == 'encoder'){
-            $this->db->where("encoder_id", $is_logged_in['user_id']);
-            $this->db->where("status", 'Pending');
-        }
-        if($is_logged_in['user_rights'] == 'sales'){
-            $this->db->where("sales_id", $is_logged_in['user_id']);
-        }
-        $this->db->where("deleted_at", NULL);
-        $this->db->from($this->table_tickets);
-        return $this->db->count_all_results();
-    }
-
-    private function _get_enroll_ticket_datatables_query(){
-
-        $is_logged_in = $this->session->userdata('is_logged_in');
-
-        if($is_logged_in['user_rights'] == 'encoder'){
-            $this->db->where("encoder_id", $is_logged_in['user_id']);
-            $this->db->where("status", 'Pending');
-        }
-        if($is_logged_in['user_rights'] == 'sales'){
-            $this->db->where("sales_id", $is_logged_in['user_id']);
-        }
-        
-        $this->db->where("deleted_at", NULL);
-        $this->db->from($this->table_tickets);
-
-        $i = 0;
-
-        foreach ($this->column_search_ticket as $item){
-
-            if($_POST['search']['value']) // if datatable send POST for search
-            {
-
-                    if($i===0) // first loop
-                    {
-                        $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-                        $this->db->like($item, $_POST['search']['value']);
-                    }else{
-                        $this->db->or_like($item, $_POST['search']['value']);
-                    }
-
-                    if(count($this->column_search_ticket) - 1 == $i) //last loop
-                
-                       $this->db->group_end(); //close bracket
-            }
-                    $i++;
-        }
-
-        if(isset($_POST['order'])) // here order processing
-        {
-            $this->db->order_by($this->column_order_ticket[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        }elseif(isset($this->order)){
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
-        }
-    }
-    /**************************************END****************************/
-
     /*************************FOR ENROLLED APPLICANT**********************/
 
-    public function all_enroll_applicants(){
+    public function sales_list_of_all_enroll_applicant(){
 
-        $this->_all_enroll_applicant_data();
+        $this->sales_enroll_list();
         if($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
             $query = $this->db->get();
         return $query->result();
     }
 
-    private function _all_enroll_applicant_data(){
+    private function sales_enroll_list(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
 
@@ -385,8 +267,8 @@ class Sales_model extends CI_Model {
         }
     }
 
-    public function count_all_enroll_applicants()
-    {
+    public function count_all_enroll_applicants(){
+
         $is_logged_in = $this->session->userdata('is_logged_in');
         $this->db->where("sales_id", $is_logged_in['user_id']);
         $this->db->where("status", 'Enrolled');
@@ -395,9 +277,8 @@ class Sales_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function count_filtered_enroll_applicants()
-    {
-        $this->_all_enroll_applicant_data();
+    public function count_filtered_enroll_applicants(){
+        $this->sales_enroll_list();
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -405,17 +286,15 @@ class Sales_model extends CI_Model {
     /******************************END FOR ENROLLED APPLICANT*********************/
 
     /*---------------------------FOR INQUIRED APPLICANT--------------------*/
-
-    public function all_inquire_applicants(){
-
-        $this->_all_inquire_applicant_data();
+    public function all_inquire_list(){
+        $this->all_inquire_list_data();
         if($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
             $query = $this->db->get();
         return $query->result();
     }
 
-    private function _all_inquire_applicant_data(){
+    private function all_inquire_list_data(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
         $this->db->where("sales_id", $is_logged_in['user_id']);
@@ -455,8 +334,7 @@ class Sales_model extends CI_Model {
         }
     }
 
-    public function count_all_inquire_applicants()
-    {
+    public function count_all_inquire_list(){
         $is_logged_in = $this->session->userdata('is_logged_in');
         $this->db->where("sales_id", $is_logged_in['user_id']);
         $this->db->where("status", 'Inquired');
@@ -465,13 +343,11 @@ class Sales_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function count_filtered_inquire_applicants()
-    {
-        $this->_all_inquire_applicant_data();
+    public function count_filtered_inquire_list(){
+        $this->all_inquire_list_data();
         $query = $this->db->get();
         return $query->num_rows();
     }
 
     /************************END FOR INQUIRED APPLICANT**********************/
-
 }

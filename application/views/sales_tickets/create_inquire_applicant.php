@@ -64,16 +64,18 @@ th{
                                         </div>
                                     </li>   
                                    <div class="table-responsive">
-                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="sales-table" width="100%">
+                                       <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="sales-table" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th aria-sort="ascending" class="sorting_asc">Name</th>
+                                                    <th aria-sort="ascending" class="sorting_asc">Applicant Name</th>
+                                                    <th>Encoded By</th>
                                                     <th>Contact</th>
                                                     <th>Address</th>
                                                     <th>Email</th>
                                                     <th>Service</th>
                                                     <th>Status</th>
+                                                    <th>Date Created</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -90,12 +92,33 @@ th{
     </div>
 </main>
 <style type="text/css">
-   .input-field.col label{
+    .input-field.col label{
         font-size: 1.3rem;
-   }
-   .select-wrapper+label{
+    }
+    .select-wrapper+label{
         top:-31px;
-   }
+    }
+    select {
+        background-color: transparent;
+        width: 100%;
+        padding: 5px;
+        border: none;
+        border-radius: 2px;
+        height: 3rem;
+        border-bottom: 1px solid #9e9e9e;
+    }
+    .input-field div.error {
+        position: relative;
+        top: -1rem;
+        left: 0rem;
+        font-size: 0.8rem;
+        color: red;
+        -webkit-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        transform: translateY(0%);
+        font-style: oblique;
+    }
 </style>
 <div class="modal fade" id="modal_enroll" role="dialog">
     <div class="modal-dialog">
@@ -111,45 +134,92 @@ th{
                         
                         <div class="row">
                             <div class="input-field col s6 has-error">
-                                <label>Name<i style="color:red;">*</i></label>
+                                <label for="name">Name<i style="color:red;">*</i></label>
                                 <input class="validate" id="name" name="name" placeholder="Enter First Name Here.." type="text">
-                                <span class="help-block"></span>
+                                <div class="input-field">
+                                    <div class="errorTxt1"></div>
+                                </div>
                             </div>
                             <div class="input-field col s6 has-error">
-                                <label>Contact<i style="color:red;">*</i></label> 
+                                <label for="contact">Contact<i style="color:red;">*</i></label> 
                                 <input class="validate" id="contact" name="contact" placeholder="Enter Contact Here.." type="text">
-                                <span class="help-block"></span>
+                                <div class="input-field">
+                                    <div class="errorTxt1"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s6 has-error">
-                                <label>Address<i style="color:red;">*</i></label> <input class="validate" id="address" name="address" placeholder="Enter Address Here.." type="text"> <span class="help-block"></span>
+                                <label for="address">Address<i style="color:red;">*</i></label> <input class="validate" id="address" name="address" placeholder="Enter Address Here.." type="text">
+                                <div class="input-field">
+                                    <div class="errorTxt1"></div>
+                                </div>
                             </div>
                             <div class="input-field col s6 has-error">
-                                <label>Email<i style="color:red;">*</i></label>
-                                <input class="validate" id="email" name="email" placeholder="Enter Email Here.." type="text">
-                                <span class="help-block"></span>
+                                <label for="email">Email<i style="color:red;">*</i></label>
+                                <input class="validate" id="email" name="email" placeholder="Enter Email Here.." type="email">
+                                <div class="input-field">
+                                    <div class="errorTxt1"></div>
+                                </div>
                             </div>
                         </div>
 						<div class="row">
-                            <div class="input-field col s12 has-error">
-                                <select class="active" id="services" name="service">
-                                    <option value="" disabled>Choose your option</option>
+                            <div class="col s12">
+                                <label for="services">Role *</label>
+                                <select class="error browser-default" id="services" name="services" data-error=".errorTxt6">
+                                    <option value="" disabled selected="">Choose your option</option>
                                     <?php foreach ($services as $key => $service): ?>
                                         <option data-id="" value="<?php echo $service['id'];?>"><?php echo $service['service_name'];?></option>
                                     <?php endforeach ?>
                                 </select>
-                                <label>Assign Services<i style="color:red;">*</i></label>
+                                <div class="input-field">
+                                    <div class="errorTxt6"></div>
+                                </div>
                             </div>
 				        </div>
+                        <div class="modal-footer" style="padding: 6px;">
+                            <button class="btn btn-primary " id="btnSave"  type="submit">Save</button>
+                            <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
+                        </div>
                 </form>
             </div>
-            <div class="modal-footer" style="padding: 6px;">
-                <button class="btn btn-primary " id="btnSave" onclick="save()" type="button">Save</button>
-                <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
-            </div>
+            
         </div>
     </div>
 </div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/custom-js/sales_inquire_applicant.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.validate-1-17-0.js'); ?>"></script>
+<script type="text/javascript">
+     $("#form").validate({
+        rules: {
+            name        : "required",
+            contact     : "required",
+            address     : "required",
+            email       : "required",
+            services    : "required"
+        },
+        //For custom messages
+        messages: {
+            // sales_name:{
+            //     required: "Name field is required.",
+            // },
+            // services:{
+            //     required: "Service field is required.",
+            // },
+            // encoder_name: { required: "Encoder field is required.", }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function(form) {
+            save();
+        }
+    });
+</script>

@@ -9,16 +9,11 @@ $(document).ready(function() {
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
         "order": [],
-        
- 
-        // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "ajax_enrolled_applicant_list_data",
+            "url": "sales_enroll_list",
             "type": "POST",
 
         },
- 
-        //Set column definition initialisation properties.
         "columnDefs": [
             { 
                 "targets": [ -1 ], //last column

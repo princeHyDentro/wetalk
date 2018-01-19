@@ -206,8 +206,8 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="<?php  echo base_url('ticket/create_enroll_applicant'); ?>">Enroll Applicant</a></li>
-                                    <li><a href="<?php  echo base_url('ticket/create_inquire_applicant'); ?>">Inquire Applicant</a></li>
+                                    <li><a href="<?php  echo base_url('sales_ticket/create_enroll_applicant_ticket'); ?>">Enroll Applicant</a></li>
+                                    <li><a href="<?php  echo base_url('sales_ticket/create_inquire_applicant'); ?>">Inquire Applicant</a></li>
                                     
                                 </ul>
                             </div>
@@ -219,8 +219,8 @@ nav .button-collapse{
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="<?php  echo base_url('applicant/view_enrolled_applicant'); ?>">View Enrolled Applicants</a> </li>
-                                    <li><a href="<?php  echo base_url('applicant/view_inquire_applicant'); ?>">View Inquire Applicants</a> </li>
+                                    <li><a href="<?php  echo base_url('sales/view_enrolled_applicant'); ?>">View Enrolled Applicants</a> </li>
+                                    <li><a href="<?php  echo base_url('sales/view_inquire_applicant'); ?>">View Inquire Applicants</a> </li>
                                 </ul>
                             </div>
                         </li>

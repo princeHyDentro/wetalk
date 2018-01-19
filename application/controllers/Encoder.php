@@ -44,6 +44,22 @@ class Encoder extends CI_Controller {
             $row[] = $app->status;
             $row[] = $app->created_at;
 
+            $row[] = '
+            <div class="grouped-button"> 
+                <button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
+                <button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button> 
+                <ul class="button-dropdown-menu"> 
+                    <li>
+                        <a href="#" class="edit-button">
+                        Request for Update</a>
+                    </li>
+                    <li>
+                        <a href="#" class="edit-button">
+                        Request for Delete</a>
+                    </li>
+                </ul> 
+            </div>';
+
             $data[] = $row;
         }
 

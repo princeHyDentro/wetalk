@@ -167,10 +167,6 @@ class Registration extends CI_Controller {
                 $row[] = $person->roles;
                 $row[] =  nice_date($person->created_at, 'Y-m-d');
                 $row[] =  ($person->updated_at != NULL) ? nice_date($person->updated_at, 'Y-m-d') : '';
-
-
-                //add html for action
-                // $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$person->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$person->id."'".')"><i class="material-icons">delete</i></a>';
                 $data[] = $row;
             }
 
@@ -201,7 +197,7 @@ class Registration extends CI_Controller {
     public function ajax_add(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
-        $this->_validate();
+        //$this->_validate();
 
         $data = array(
             'fname'         => $this->input->post('user_fname'),
@@ -214,7 +210,6 @@ class Registration extends CI_Controller {
             'roles'         => $this->input->post('permission'),
             'created_by'    => $is_logged_in['user_id'],
             'type_of_user'  => 'staff'
-           //updated_at'    => date("Y-m-d h:i:sa")
         );
 
        $insert = $this->users->save($data);
@@ -234,7 +229,7 @@ class Registration extends CI_Controller {
     public function ajax_add_all(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
-        $this->_validate();
+        //$this->_validate();
 
         $data = array(
             'fname'         => $this->input->post('user_fname'),
@@ -247,7 +242,6 @@ class Registration extends CI_Controller {
             'roles'         => $this->input->post('permission'),
             'created_by'    => $is_logged_in['user_id'],
             'type_of_user'  => 'staff'
-           //updated_at'    => date("Y-m-d h:i:sa")
         );
 
        $insert = $this->users->save($data);
@@ -266,7 +260,6 @@ class Registration extends CI_Controller {
 	public function ajax_add_sales(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
-        //$this->_validate();
 
         $data = array(
             'name'       => $this->input->post('name'),
@@ -323,7 +316,6 @@ class Registration extends CI_Controller {
             }
         }
 
-        //print_r($this->input->post('unselected_service'));
         foreach ($this->input->post('services') as $key => $value) {
             if($value['primary_id'] == ""){
                 $this->db->set('_userID',$this->input->post('id'));
@@ -332,10 +324,6 @@ class Registration extends CI_Controller {
             }
         }
 
-        //   print_r($this->input->post('services'));
-        //   exit;
-
-        
         echo json_encode(array("status" => TRUE));
     }
 	
@@ -374,60 +362,5 @@ class Registration extends CI_Controller {
     {
         $this->users->resotore_by_id($id);
         echo json_encode(array("status" => TRUE));
-    }
-
-    private function _validate(){
-        $data = array();
-        $data['error_string']   = array();
-        $data['inputerror']     = array();
-        $data['status']         = TRUE;
-        
-        if($this->input->post('user_fname') == '')
-        {
-            $data['inputerror'][] = 'user_fname';
-            $data['error_string'][] = 'First name is required';
-            $data['status'] = FALSE;
-        }
-        
-        if($this->input->post('user_lname') == '')
-        {
-            $data['inputerror'][] = 'user_lname';
-            $data['error_string'][] = 'Last name is required';
-            $data['status'] = FALSE;
-        }
-        
-        if($this->input->post('user_username') == '')
-        {
-            $data['inputerror'][] = 'user_username';
-            $data['error_string'][] = 'Username is required';
-            $data['status'] = FALSE;
-        }
-        
-        if($this->input->post('user_password') == '')
-        {
-            $data['inputerror'][] = 'user_password';
-            $data['error_string'][] = 'Password is required';
-            $data['status'] = FALSE;
-        }
-        
-        if($this->input->post('user_email') == '')
-        {
-            $data['inputerror'][] = 'user_email';
-            $data['error_string'][] = 'Email address is required';
-            $data['status'] = FALSE;
-        }
-        if($this->input->post('permission') == '')
-        {
-            $data['inputerror'][] = 'permission';
-            $data['error_string'][] = 'Permission is required';
-            $data['status'] = FALSE;
-        }
-        
-        
-        if($data['status'] === FALSE)
-        {
-            echo json_encode($data);
-            exit();
-        }
     }
 }

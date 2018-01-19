@@ -83,13 +83,10 @@ class Services extends CI_Controller {
 
             $row[] = $services->id;
             $row[] = $services->service_name;
-            // $row[] = '<span class="new badge" onclick="descriptionClick('."'".$services->id."'".')" data-badge-caption="show details"></span>';
             $row[] =  nice_date($services->created_at, 'Y-m-d');
             $row[] =  ($services->updated_at != NULL) ? nice_date($services->updated_at, 'Y-m-d') : '';
             $row[] = '<button class="btn waves-effect waves-light" type="button" onclick="descriptionClick('."'".$services->id."'".')" data-badge-caption="show details" href="javascript:void(0)">Open</button>';
 
-            //add html for action
-            // $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_service('."'".$services->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_service('."'".$services->id."'".')"><i class="material-icons">delete</i></a>';
             $data[] = $row;
 
         }
@@ -121,7 +118,6 @@ class Services extends CI_Controller {
             $row[] = $services->service_name;
             $row[] = '<span class="new badge" onclick="descriptionClick('."'".$services->id."'".')" data-badge-caption="show details" ></span>';
             $row[] = nice_date($services->deleted_at, 'Y-m-d');
-           // $row[] = ($services->updated_at != NULL) ? nice_date($services->updated_at, 'Y-m-d') : '';
 
             //add html for action
             $row[] = '<center><a class="btn-floating waves-effect waves-light blue" onclick="restore('."'".$services->id."'".')" href="javascript:void(0)" title="restore staff" ><i class="material-icons">restore</i></a></center>';

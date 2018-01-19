@@ -176,7 +176,8 @@ th{
                                             <thead>
                                                 <tr>
                                                     <th>TicketID</th>
-                                                    <th aria-sort="ascending" class="sorting_asc">From </th>
+                                                    <th aria-sort="ascending" class="sorting_asc">Applicant Name </th>
+                                                    <th aria-sort="ascending" class="sorting_asc">Sales Rep. </th>
                                                     <th>Service</th>
                                                     <th>Status</th>
                                                     <th>Date Created</th>

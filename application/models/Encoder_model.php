@@ -160,7 +160,10 @@ class Encoder_model extends CI_Model {
         $query = $this->db->get();
         return $query->num_rows();
     }
-
+    public function enrolled_applicant($data){
+        $this->db->insert($this->table_applicant, $data);
+        return $this->db->insert_id();
+    }
     /*---------------------------END FOR ENROLLED APPLICANT--------------------*/
 
     /*---------------------------FOR INQUIRED APPLICANT--------------------*/

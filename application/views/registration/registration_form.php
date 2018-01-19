@@ -99,6 +99,10 @@ th{
    .select-wrapper+label{
         top:-31px;
    }
+   .error{
+        font-style: oblique;
+        color: red;
+   }
 </style>
 <div class="modal fade" id="modal_form" role="dialog">
     <div class="modal-dialog">
@@ -116,12 +120,10 @@ th{
                             <div class="input-field col s6 has-error">
                                 <label>First Name<i style="color:red;">*</i></label>
                                 <input class="validate" id="user_fname" name="user_fname" placeholder="Enter First Name Here.." type="text">
-                                <span class="help-block"></span>
                             </div>
                             <div class="input-field col s6 has-error">
                                 <label>Last Name<i style="color:red;">*</i></label> 
                                 <input class="validate" id="user_lname" name="user_lname" placeholder="Enter Last Name Here.." type="text">
-                                <span class="help-block"></span>
                             </div>
                         </div>
 
@@ -129,29 +131,25 @@ th{
                             <div class="input-field col s12 has-error">
                                 <label>Middle Name</label>
                                 <input class="validate" id="user_mname" name="user_mname" placeholder="Enter Middle Name Here.." type="text">
-                                <span class="help-block"></span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s6 has-error">
-                                <label>Username<i style="color:red;">*</i></label> <input class="validate" id="user_username" name="user_username" placeholder="Enter Username Here.." type="text"> <span class="help-block"></span>
+                                <label>Username<i style="color:red;">*</i></label> <input class="validate" id="user_username" name="user_username" placeholder="Enter Username Here.." type="text">
                             </div>
                             <div class="input-field col s6 has-error">
                                 <label>Password<i style="color:red;">*</i></label>
                                 <input class="validate" id="user_password" name="user_password" placeholder="Enter Password Here.." type="password">
-                                <span class="help-block"></span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s12 has-error">
                                 <label>Email Address<i style="color:red;">*</i></label>
-                                <input class="validate" id="user_email" name="user_email" placeholder="Enter Email Address Here.." type="text">
-                                <span class="help-block"></span>
+                                <input class="validate" id="user_email" name="user_email" placeholder="Enter Email Address Here.." type="email">
                             </div>
                             <div class="input-field col s12 has-error">
-                               <!--  <label>Position<i style="color:red;">*</i></label> -->
                                 <select  class="validate" id="permission" name="permission">
                                     <option value="" disabled selected>Choose staff roles</option>
                                     <?php foreach ($roles as $key => $role): ?>
@@ -171,16 +169,18 @@ th{
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer" style="padding: 6px;">
+                        <button class="btn btn-primary " id="btnSave"  type="submit">Save</button>
+                        <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer" style="padding: 6px;">
-                <button class="btn btn-primary " id="btnSave" onclick="save()" type="button">Save</button>
-                <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
-            </div>
+            
         </div>
     </div>
 </div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
+<script src="<?php echo base_url('assets/js/jquery.validate-1-17-0.js'); ?>"></script>
 <script src="<?php echo base_url('assets/new-js/adding_staff.js'); ?>"></script>
 <script>
     $('#permission').change(function(event) {
@@ -193,6 +193,46 @@ th{
             $('#services').material_select('');
             $('.show-hide').show();
         }
-        
+    });
+
+    $("#form").validate({
+        rules: {
+            user_fname      : { required : true },
+            user_lname      : { required : true },
+            user_username   : { required : true },
+            user_password   : { required : true },
+            user_email      : { required : true },
+            permission      : { required : true }
+        },
+        //For custom messages
+        messages: {
+            user_fname:{
+                required: "First name field is required."
+            },
+            user_lname :{
+                required: "Last name field is required."
+            },
+            user_username : {
+                required: "Username field is required."
+            },
+            user_password: {
+                required: "Password field is required."
+            },
+            user_email : { 
+                required : "Email field is required." 
+            }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function(form) {
+            save()
+        }
     });
 </script>
