@@ -42,7 +42,7 @@
 				<h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
 			</div>
 			<div class="modal-body">
-				<!-- <form action="#" id="form" class="form-horizontal"> -->
+				<form action="#" method="get" accept-charset="utf-8">
 					<?php $is_logged_in = $this->session->userdata('is_logged_in'); ?>
 
 					<input type="hidden" class="user-email" value="<?php echo $is_logged_in['user_email']; ?>" name="user-email"/> 
@@ -61,13 +61,12 @@
 							<div class="help-block-new"></div>
 						</div>  
 						<div class="alert alert-warning error-same-pass" style="display: none;"></div>
-					<!-- </form> -->
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary modal-action modal-close" id="close-form " type="button">Cancel</button>
-					<button class="btn btn-primary" type="button" id="change-password" data-dismiss="">Send</button>
-					<!-- a class="btn btn-primary" href="">Logout</a> -->
-				</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary modal-action modal-close" id="close-form " type="button">Cancel</button>
+						<button class="btn btn-primary" type="button" id="change-password" data-dismiss="">Send</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -93,7 +92,7 @@
 		<script src="<?php echo base_url('assets/datetimepicker/build/jquery.datetimepicker.full.min.js'); ?>"></script>
 		
 		<script src="<?php echo base_url('assets/custom-js/login-and-registration.js'); ?>"></script>
-		
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 	<script>
 		$(document).ready(function($) {

@@ -244,4 +244,12 @@ class Encoder_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function applicant_info($id){
+        $this->db->where("id", $id);
+        $this->db->where("deleted_at", NULL);
+        $this->db->from("applicant");
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

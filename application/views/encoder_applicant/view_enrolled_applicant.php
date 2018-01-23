@@ -199,5 +199,12 @@ th{
     </div>
 </main>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
-<script src="<?php echo base_url('assets/custom-js/encoder_view_enrolled_applicant.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/button-dropdown.js'); ?>"></script>
+<script src="<?php echo base_url('assets/custom-js/encoder_view_enrolled_applicant.js'); ?>"></script>
+
+<script>
+    // $(".request-button").click(function(event){
+    //     event.preventDefault();
+    //     alert($(this).attr('data-id'));
+    // });
+</script>

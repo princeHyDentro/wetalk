@@ -401,10 +401,16 @@ function enroll_applicant(){
                 
                 $('.enrolled').remove();
                 $('#modal_form').modal('close');
-                Materialize.toast('<i class="material-icons">notifications</i> Applicant Succesfully Added!', 3000, 'rounded')
-                setTimeout(function(){ 
-                    window.location = "<?php echo base_url('ticket/encoder_pending_tickets');?>";
-                }, 4000);
+                
+                swal({   title: "Applicant Succesfully Added!",   
+                   text: "I will close in 3 seconds.",   
+                   timer: 3000,  
+                   icon: "success", 
+                   type: "success",
+                   showConfirmButton: false 
+                }).then(function() {
+                    window.location.href = "<?php echo base_url('ticket/encoder_pending_tickets');?>";
+                });
             }
 
             $('#btnSave').text('save');

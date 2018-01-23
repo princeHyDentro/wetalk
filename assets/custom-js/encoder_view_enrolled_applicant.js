@@ -62,4 +62,8 @@ function reload_table()
     table.ajax.reload(null,false); //reload datatable ajax 
 }
 
+// function request(id , string){
+//     alert(id);
+// }
+
 

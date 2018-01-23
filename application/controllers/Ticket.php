@@ -167,4 +167,35 @@ class Ticket extends CI_Controller {
     }
     /*------------------------end encoder pending tickets-----------------------------*/
 
+    public function submit_ticket_to_admin(){
+
+        $this->load->model("Encoder_model");
+        $is_logged_in   = $this->session->userdata('is_logged_in');
+        $ticket_id      = $this->input->post('ticket_id');
+
+
+        $data = array(
+            'requestor_name'  => $this->input->post('requestor_name'),
+            'requestor_id'    => $this->input->post('requestor_id'),
+            'service_name'    => $this->input->post('service_name'),
+            'service_id'      => $this->input->post('service_id'),
+            'desc'            => $this->input->post('description'),
+            'reason'          => $this->input->post('reason'),
+            'status'          => 'New',
+            'request_for'     => $this->input->post('request_for')
+        );
+
+        $insert = $this->db->insert('admin_tickets', $data);
+        
+        // $status = array(
+        //         'status' => 'Complete',
+        // );
+
+        // $this->db->where('id', $ticket_id);
+        // $this->db->update('encoder_assign_tickets', $status);
+
+        echo json_encode("success");
+    }
+
+
 }
