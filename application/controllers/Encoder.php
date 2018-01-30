@@ -49,7 +49,7 @@ class Encoder extends CI_Controller {
 			$applicant_id   = $this->uri->segment(3);
 			$applicant_info['applicant'] = $this->Encoder_model->applicant_info($applicant_id);
 			$this->load->view('template/header');
-			$this->load->view('encoder_tickets/request_for_update',$applicant_info);
+			$this->load->view('encoder_tickets/request_for_delete',$applicant_info);
 		}   
 	}
 
@@ -75,22 +75,36 @@ class Encoder extends CI_Controller {
 			$row[] = $app->service;
 			$row[] = $app->status;
 			$row[] = $app->created_at;
-
-			$row[] = '
-			<div class="grouped-button"> 
-				<button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
-				<button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button> 
-				<ul class="button-dropdown-menu"> 
-					<li>
-						<a href="request_for_update_client/'.$app->id.'" data-id="'.$app->id.'" for="update" class="request-button">
-						Request for Update</a>
-					</li>
-					<li>
-						<a href="request_for_delete_client/'.$app->id.'" data-id="'.$app->id.'" for="delete" class="request-button">
-						Request for Delete</a>
-					</li>
-				</ul> 
-			</div>';
+			if($app->request_admin == "Request for Delete Pending" || $app->request_admin == "Request for Update Pending"){
+				//$row[] = $app->request_admin;
+				// $row[] = '
+				// 	<button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
+				//     <i class="material-icons right">send</i>
+				//   </button>
+				// ';
+				$row[] = '
+					<button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
+				    <i class="material-icons right">send</i>
+				  	</button>
+				';
+			}else{
+				$row[] = '
+				<div class="grouped-button"> 
+					<button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
+					<button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button> 
+					<ul class="button-dropdown-menu"> 
+						<li>
+							<a href="request_for_update_client/'.$app->id.'" data-id="'.$app->id.'" for="update" class="request-button">
+							Request for Update</a>
+						</li>
+						<li>
+							<a href="request_for_delete_client/'.$app->id.'" data-id="'.$app->id.'" for="delete" class="request-button">
+							Request for Delete</a>
+						</li>
+					</ul> 
+				</div>';
+			}
+			
 
 			$data[] = $row;
 		}
@@ -146,21 +160,36 @@ class Encoder extends CI_Controller {
 			$row[] = $app->status;
 			$row[] = $app->created_at;
 
-			$row[] = '
-				<div class="grouped-button"> 
-					<button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
-					<button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button> 
-					<ul class="button-dropdown-menu"> 
-						<li>
-							<a href="request_for_update_client/'.$app->id.'" data-id="'.$app->id.'" for="update" class="request-button">
-							Request for Update</a>
-						</li>
-						<li>
-							<a href="request_for_delete_client/'.$app->id.'" data-id="'.$app->id.'" for="delete" class="request-button">
-							Request for Delete</a>
-						</li>
-					</ul> 
-				</div>';
+			if($app->request_admin == "Request for Delete Pending" || $app->request_admin == "Request for Update Pending"){
+				//$row[] = $app->request_admin;
+				// $row[] = '
+				// 	<button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
+				//     <i class="material-icons right">send</i>
+				//   </button>
+				// ';
+				$row[] = '
+					<button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
+				    <i class="material-icons right">send</i>
+				  	</button>
+				';
+			}else{
+				$row[] = '
+					<div class="grouped-button"> 
+						<button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
+						<button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button> 
+						<ul class="button-dropdown-menu"> 
+							<li>
+								<a href="request_for_update_client/'.$app->id.'" data-id="'.$app->id.'" for="update" class="request-button">
+								Request for Update</a>
+							</li>
+							<li>
+								<a href="request_for_delete_client/'.$app->id.'" data-id="'.$app->id.'" for="delete" class="request-button">
+								Request for Delete</a>
+							</li>
+						</ul> 
+					</div>';
+			}
+
 			
 			$data[] = $row;
 		}

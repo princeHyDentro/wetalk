@@ -188,7 +188,7 @@
                                                     <textarea  id="reason" name="reason" class="materialize-textarea"></textarea>
                                                 </div>
                                             </div>
-
+                                            <input class="" value="<?php echo $applicant[0]['id']; ?>" id="applicant_id" name="applicant_id"  type="hidden"/>
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
@@ -258,6 +258,8 @@ function submit_update_ticket(){
     description     = $("#description").val();
     reason          = $("#reason").val();
     request_for     = $("#request_for").val();
+    applicant_id    = $("#applicant_id").val();
+
 
     $.ajax({
         url : url,
@@ -269,7 +271,8 @@ function submit_update_ticket(){
             'service_id'     : service_id,
             'description'    : description,
             'reason'         : reason,
-            'request_for'    : request_for
+            'request_for'    : request_for,
+            'applicant_id'   : applicant_id
         },
         success: function(data)
         {   
@@ -282,7 +285,13 @@ function submit_update_ticket(){
                    type: "success",
                    showConfirmButton: false 
                 }).then(function() {
-                    window.location.href = "<?php echo base_url('encoder/enrolled_applicants');?>";
+                    var status  = "<?php echo $applicant[0]['status'];?>";
+                    if(status === 'Inquired'){
+                        window.location.href = "<?php echo base_url('encoder/inquire_applicants');?>";
+                    }else{
+                        window.location.href = "<?php echo base_url('encoder/enrolled_applicants');?>";
+                    }
+                   
                 });
             }
         },

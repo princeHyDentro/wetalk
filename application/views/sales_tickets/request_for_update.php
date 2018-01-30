@@ -293,9 +293,9 @@ function submit_update_ticket(){
                 }).then(function() {
                     var status  = "<?php echo $applicant[0]['status'];?>";
                     if(status === 'Inquired'){
-                        window.location.href = "<?php echo base_url('encoder/inquire_applicants');?>";
+                        window.location.href = "<?php echo base_url('sales/view_inquire_applicant');?>";
                     }else{
-                        window.location.href = "<?php echo base_url('encoder/enrolled_applicants');?>";
+                        window.location.href = "<?php echo base_url('sales/view_enrolled_applicant');?>";
                     }
                 });
             }

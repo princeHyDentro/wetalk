@@ -101,7 +101,82 @@ class Ticket extends CI_Controller {
 
         echo json_encode("success");
     }
+    public function update_enroll_applicant(){
 
+        $this->load->model("Encoder_model");
+        $is_logged_in   = $this->session->userdata('is_logged_in');
+        $ticket_id      = $this->input->post('ticket_id');
+
+        if($this->input->post('password') != ""){
+            $data = array(
+                'name'          => $this->input->post('name'),
+                'contact'       => $this->input->post('contact'),
+                'address'       => $this->input->post('address'),
+                'email'         => $this->input->post('email'),
+                'service'       => $this->input->post('service'),
+
+                'username'      => $this->input->post('username'),
+                'password'      => md5($this->input->post('password')),
+                'service_id'    => $this->input->post('service_id'),
+                'updated_at'    => date("Y-m-d h:i:s")
+            );
+        }else{
+            $data = array(
+                'name'          => $this->input->post('name'),
+                'contact'       => $this->input->post('contact'),
+                'address'       => $this->input->post('address'),
+                'email'         => $this->input->post('email'),
+                'service'       => $this->input->post('service'),
+                'username'      => $this->input->post('username'),
+                'service_id'    => $this->input->post('service_id'),
+                'updated_at'    => date("Y-m-d h:i:s")
+            );
+        }
+
+        $this->db->where('id', $this->input->post('applicant_id'));
+        $this->db->update('applicant', $data);
+
+        echo json_encode("success");
+    }
+
+    public function update_inquire_applicant(){
+
+        $this->load->model("Encoder_model");
+        $is_logged_in   = $this->session->userdata('is_logged_in');
+        $ticket_id      = $this->input->post('ticket_id');
+
+        if($this->input->post('password') != ""){
+            $data = array(
+                'name'          => $this->input->post('name'),
+                'contact'       => $this->input->post('contact'),
+                'address'       => $this->input->post('address'),
+                'email'         => $this->input->post('email'),
+                'service'       => $this->input->post('service'),
+                'status'        => $this->input->post('status'),
+                'username'      => $this->input->post('username'),
+                'password'      => md5($this->input->post('password')),
+                'service_id'    => $this->input->post('service_id'),
+                'updated_at'    => date("Y-m-d h:i:s")
+            );
+        }else{
+            $data = array(
+                'name'          => $this->input->post('name'),
+                'contact'       => $this->input->post('contact'),
+                'address'       => $this->input->post('address'),
+                'email'         => $this->input->post('email'),
+                'service'       => $this->input->post('service'),
+                'username'      => $this->input->post('username'),
+                'service_id'    => $this->input->post('service_id'),
+                'status'        => $this->input->post('status'),
+                'updated_at'    => date("Y-m-d h:i:s")
+            );
+        }
+
+        $this->db->where('id', $this->input->post('applicant_id'));
+        $this->db->update('applicant', $data);
+
+        echo json_encode("success");
+    }
     /*-------------------------------END ENROLL TICKETS ------------------*/
 	
 
@@ -186,16 +261,48 @@ class Ticket extends CI_Controller {
         );
 
         $insert = $this->db->insert('admin_tickets', $data);
-        
-        // $status = array(
-        //         'status' => 'Complete',
-        // );
+        if($this->input->post('request_for') == "delete"){
+            $status = array(
+                'request_admin' => 'Request for Delete Pending',
+            );
+        }else{
+            $status = array(
+                'request_admin' => 'Request for Update Pending',
+            );  
+        }
+       
 
-        // $this->db->where('id', $ticket_id);
-        // $this->db->update('encoder_assign_tickets', $status);
+        $this->db->where('id', $this->input->post('applicant_id'));
+        $this->db->update('applicant', $status);
 
         echo json_encode("success");
     }
+
+
+    public function get_applicant_data(){
+        $this->load->model("Encoder_model");
+        $this->load->model("Sales_model");
+        $data = array();
+        $is_logged_in           = $this->session->userdata('is_logged_in');
+        
+        $applicant_id           = $this->input->post('applicant_id');
+        $data['applicant_data'] = $this->Encoder_model->applicant_info($applicant_id);
+        $data['services_list']  = $this->Sales_model->_tableStafServices($is_logged_in['user_id']);
+        
+
+        echo json_encode($data);
+    }
+
+    public function soft_delete_applicant_data(){
+        $applicant_id = $this->input->post("applicant_id");
+        $status = array(
+                'deleted_at' => date("Y-m-d h:i:s"),
+        );
+
+        $this->db->where('id', $applicant_id);
+        $this->db->update('applicant', $status);
+    }
+   
 
 
 }

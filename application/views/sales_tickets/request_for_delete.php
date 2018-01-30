@@ -151,14 +151,8 @@
                             <div class="collapsible-header teal white-text task-list-data active">
                                 <i class="material-icons more">keyboard_arrow_right</i>
                                 <i class="material-icons less" style="display: none">keyboard_arrow_down</i>
-                                <span>Request for applicant update</span>
+                                <span>Request for applicant delete</span>
                             </div>
-                            <?php
-                                echo "<pre>";
-                               // print_r($applicant);
-                               // print_r($is_logged_in);
-                                echo "</pre>";
-                            ?>
                             <div class="collapsible-body teal lighten-5">
                                 <ul class="collection">
                                     <li>
@@ -166,7 +160,6 @@
 
                                             <div class="row">
                                                 <div class="input-field col s6 has-error">
-                                                    <input class="" value="<?php echo $applicant[0]['id']; ?>" id="applicant_id" name="applicant_id"  type="hidden"/>
                                                     <label for="requestor_name">Requestor Name<i style="color:red;">*</i></label>
                                                     <input class="validate" value="<?php echo $is_logged_in['user_full_name']; ?>" id="requestor_name" name="requestor_name" placeholder="applicant name" type="text" data-error=".errorTxt1" disabled/>
                                                     <div class="errorTxt1"></div>
@@ -180,7 +173,7 @@
                                                     <div class="errorTxt2"></div> 
 
                                                     <input class="validate" id="service_id" name="service_id" value="<?php echo $applicant[0]['service_id'];?>" type="hidden" />
-                                                    <input class="validate" id="request_for" name="request_for" value="update" type="hidden" />
+                                                    <input class="validate" id="request_for" name="request_for" value="delete" type="hidden" />
                                                 </div>
                                             </div>
 
@@ -195,7 +188,7 @@
                                                     <textarea  id="reason" name="reason" class="materialize-textarea"></textarea>
                                                 </div>
                                             </div>
-
+                                            <input class="" value="<?php echo $applicant[0]['id']; ?>" id="applicant_id" name="applicant_id"  type="hidden"/>
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
@@ -267,6 +260,7 @@ function submit_update_ticket(){
     request_for     = $("#request_for").val();
     applicant_id    = $("#applicant_id").val();
 
+
     $.ajax({
         url : url,
         type: "POST",
@@ -293,16 +287,16 @@ function submit_update_ticket(){
                 }).then(function() {
                     var status  = "<?php echo $applicant[0]['status'];?>";
                     if(status === 'Inquired'){
-                        window.location.href = "<?php echo base_url('encoder/inquire_applicants');?>";
+                        window.location.href = "<?php echo base_url('sales/view_inquire_applicant');?>";
                     }else{
-                        window.location.href = "<?php echo base_url('encoder/enrolled_applicants');?>";
+                        window.location.href = "<?php echo base_url('sales/view_enrolled_applicant');?>";
                     }
                 });
             }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-            swal({   title: "Error adding / update data!",   
+            swal({   title: "Error deleting data!",   
                  text: "I will close in 2 seconds.",   
                  timer: 2000,  
                  icon: "error", 
