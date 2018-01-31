@@ -80,7 +80,7 @@ class Sales extends CI_Controller {
     public function sales_enroll_list(){
 		$this->load->model("Sales_model");
         $this->load->helper('date');
-        
+        $is_logged_in   = $this->session->userdata('is_logged_in');
         $list   = $this->Sales_model->sales_list_of_all_enroll_applicant();
 
         $data  	= array();
@@ -100,18 +100,18 @@ class Sales extends CI_Controller {
             $row[] = $app->status;
             $row[] = $app->created_at;
 
-            if($app->request_admin == "Request for Delete Pending" || $app->request_admin == "Request for Update Pending"){
-                //$row[] = $app->request_admin;
+            if($app->approve_from_admin == 1){
                 $row[] = '
-                 <button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
+                    <button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
                     <i class="material-icons right">send</i>
                   </button>
                 ';
-                // $row[] = '
-                //     <button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
-                //     <i class="material-icons right">send</i>
-                //     </button>
-                // ';
+            }elseif ($app->approve_from_admin == 2) {
+                $row[] = '
+                    <button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
+                    <i class="material-icons right">send</i>
+                    </button>
+                ';
             }else{
                 $row[] = '
                     <div class="grouped-button"> 
@@ -130,6 +130,7 @@ class Sales extends CI_Controller {
                     </div>';
             }
 
+            $row[]  = ($is_logged_in['user_id'] == $app->requestor_ticket_id) ? $app->request_admin : "";
             $data[] = $row;
         }
 
@@ -168,13 +169,13 @@ class Sales extends CI_Controller {
             $row[] = $app->status;
             $row[] = $app->created_at;
 
-            if($app->request_admin == "Request for Delete Pending" || $app->request_admin == "Request for Update Pending"){
-                //$row[] = $app->request_admin;
-                // $row[] = '
-                //  <button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
-                //     <i class="material-icons right">send</i>
-                //   </button>
-                // ';
+            if($app->approve_from_admin == 1){
+                $row[] = '
+                    <button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
+                    <i class="material-icons right">send</i>
+                  </button>
+                ';
+            }elseif ($app->approve_from_admin == 2) {
                 $row[] = '
                     <button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
                     <i class="material-icons right">send</i>
@@ -193,7 +194,7 @@ class Sales extends CI_Controller {
                         </ul> 
                     </div>';
             }
-            
+            $row[]  = ($is_logged_in['user_id'] == $app->requestor_ticket_id) ? $app->request_admin : "";
             $data[] = $row;
         }
 

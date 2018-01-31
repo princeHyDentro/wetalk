@@ -57,7 +57,7 @@ class Encoder extends CI_Controller {
 
 		$this->load->model("Encoder_model");
 		$this->load->helper('date');
-
+		$is_logged_in   = $this->session->userdata('is_logged_in');
 		$list   = $this->Encoder_model->all_enroll_applicants();
 		$data   = array();
 		$no     = $_POST['start'];
@@ -75,13 +75,13 @@ class Encoder extends CI_Controller {
 			$row[] = $app->service;
 			$row[] = $app->status;
 			$row[] = $app->created_at;
-			if($app->request_admin == "Request for Delete Pending" || $app->request_admin == "Request for Update Pending"){
-				//$row[] = $app->request_admin;
-				// $row[] = '
-				// 	<button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
-				//     <i class="material-icons right">send</i>
-				//   </button>
-				// ';
+			if($app->approve_from_admin == 1){
+				$row[] = '
+					<button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
+				    <i class="material-icons right">send</i>
+				  </button>
+				';
+			}elseif ($app->approve_from_admin == 2) {
 				$row[] = '
 					<button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
 				    <i class="material-icons right">send</i>
@@ -104,7 +104,7 @@ class Encoder extends CI_Controller {
 					</ul> 
 				</div>';
 			}
-			
+			$row[]  = ($is_logged_in['user_id'] == $app->requestor_ticket_id) ? $app->request_admin : "";
 
 			$data[] = $row;
 		}
@@ -141,7 +141,7 @@ class Encoder extends CI_Controller {
 
 		$this->load->model("Encoder_model");
 		$this->load->helper('date');
-
+		$is_logged_in   = $this->session->userdata('is_logged_in');
 		$list   = $this->Encoder_model->all_inquire_applicants();
 		$data   = array();
 		$no     = $_POST['start'];
@@ -160,13 +160,13 @@ class Encoder extends CI_Controller {
 			$row[] = $app->status;
 			$row[] = $app->created_at;
 
-			if($app->request_admin == "Request for Delete Pending" || $app->request_admin == "Request for Update Pending"){
-				//$row[] = $app->request_admin;
-				// $row[] = '
-				// 	<button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
-				//     <i class="material-icons right">send</i>
-				//   </button>
-				// ';
+			if($app->approve_from_admin == 1){
+				$row[] = '
+					<button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
+				    <i class="material-icons right">send</i>
+				  </button>
+				';
+			}elseif ($app->approve_from_admin == 2) {
 				$row[] = '
 					<button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
 				    <i class="material-icons right">send</i>
@@ -189,6 +189,8 @@ class Encoder extends CI_Controller {
 						</ul> 
 					</div>';
 			}
+
+			$row[]  = ($is_logged_in['user_id'] == $app->requestor_ticket_id) ? $app->request_admin : "";
 
 			
 			$data[] = $row;

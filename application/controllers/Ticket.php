@@ -53,6 +53,22 @@ class Ticket extends CI_Controller {
        return $list;
     }
 
+    public function ticket_complete_information(){
+        $this->load->model("Admin_model");
+        $data           = array();
+        $is_logged_in   = $this->session->userdata('is_logged_in');
+
+        if (!isset($is_logged_in) || $is_logged_in != true) {
+            redirect('login', 'refresh');
+            die();
+        }else{
+            $ticket_id   = $this->uri->segment(3);
+            $ticket_info['ticket'] = $this->Admin_model->applicant_info($ticket_id);
+            $this->load->view('template/header');
+            $this->load->view('admin_tickets/ticket_complete_information',$ticket_info);
+        }   
+    }
+
     /*-------------------------------ENROLL TICKETS ----------------------*/
     public function encoder_pending_tickets(){
         $data           = array();
@@ -221,7 +237,53 @@ class Ticket extends CI_Controller {
 
         echo json_encode($output);
     }
+    /*administrator pending tickets*/
+    public function ajax_all_pending_ticket_for_administrator(){
+        $this->load->model("Admin_model");
+        $this->load->helper('date');
+        $list   = $this->Admin_model->all_pending_tickets();
+         $data  = array();
+        $no     = $_POST['start'];
+        foreach ($list as $app) {
+            $no++;
+            $row = array();
 
+            $row[] = $app->id;
+            $row[] = $app->requestor_name;
+            $row[] = $app->service_name;
+            $row[] = '<a href="ticket_complete_information/'.$app->id.'"  class="approve-button"><u>'.$app->applicant_name.'</u></a>';
+            $row[] = $app->desc;
+            $row[] = $app->status;
+            $row[] = $app->request_for;
+            $row[] = $app->created_at;
+
+            $row[] = '
+            <div class="grouped-button"> 
+                <button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
+                <button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button>
+                <ul class="button-dropdown-menu"> 
+                    <li>
+                        <a href="#" data-id="'.$app->id.'"  class="approve-button">Aprrove Ticket</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="'.$app->id.'"  class="decline-button">Decline Ticket</a>
+                    </li>
+                </ul> 
+            </div>';
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw"              => $_POST['draw'],
+            "recordsTotal"      => $this->Admin_model->count_all_enroll_tickets(),
+            "recordsFiltered"   => $this->Admin_model->count_filtered_enroll_tickets(),//for entries label
+            "data"              => $data,
+        );
+
+        echo json_encode($output);
+    }
+    /*end*/
     public function ticket_information() {
         $this->load->model("Encoder_model");
         $data           = array();
@@ -257,17 +319,21 @@ class Ticket extends CI_Controller {
             'desc'            => $this->input->post('description'),
             'reason'          => $this->input->post('reason'),
             'status'          => 'New',
-            'request_for'     => $this->input->post('request_for')
+            'request_for'     => $this->input->post('request_for'),
+            'applicant_id'    => $this->input->post('applicant_id'),
+            'applicant_name'  => $this->input->post('applicant_name')
         );
 
         $insert = $this->db->insert('admin_tickets', $data);
         if($this->input->post('request_for') == "delete"){
             $status = array(
-                'request_admin' => 'Request for Delete Pending',
+                'request_admin'     => 'Request for Delete Pending',
+                'requestor_ticket_id' => $is_logged_in['user_id']
             );
         }else{
             $status = array(
-                'request_admin' => 'Request for Update Pending',
+                'request_admin'     => 'Request for Update Pending',
+                'requestor_ticket_id' => $is_logged_in['user_id']
             );  
         }
        

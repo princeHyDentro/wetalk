@@ -187,6 +187,7 @@ th{
                                                     <th>Status</th>
                                                     <th>Date Created</th>
                                                     <th>Action</th>
+                                                    <th>Request Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>

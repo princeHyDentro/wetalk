@@ -32,6 +32,117 @@
 		border-radius: 2px;
 		float: left;
 	}
+    /* bootstrap dropdown button */
+.grouped-button{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.grouped-button>.btn:first-child {
+    margin-left: 0;
+}
+.grouped-button>.button {
+    position: relative;
+    float: left;
+}
+
+.button{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.button-default{
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.grouped-button>.button+.dropdown-toggle {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.grouped-button>.button:first-child:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.grouped-button>.button:last-child:not(:first-child), .grouped-button>.dropdown-toggle:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.grouped-button .button+.button, .grouped-button .button+.grouped-button, .grouped-button .grouped-button+.button, .grouped-button .grouped-button+.grouped-button {
+    margin-left: -1px;
+}
+.button .caret {
+    margin-left: 0;
+}
+
+.button-dropdown-menu{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.button-dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+.button-dropdown-menu .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+.caret > .material-icons{
+    font-size: 18px !important;
+}
+.open>.button-dropdown-menu {
+    display: block;
+}
+.button{
+    outline: none;
+    background-color: #fff !important;
+}
+.collection{
+    padding-bottom: 22px;
+}
 </style>
 
 <?php require_once(realpath(APPPATH.'views/template/head_left_nav.php')); ?>
@@ -64,15 +175,18 @@
                                         </div> -->
                                     </li>   
                                    <div class="table-responsive">
-                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="service-table" width="100%">
+                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="admin-staff-ticket-table" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>Ticket ID</th>
                                                     <th>Requestor Name</th>
                                                     <th>Subject By Service</th>
+                                                    <th>Applicant</th>
                                                     <th>Description</th>
                                                     <th>Status</th>
+                                                    <th>Request Type</th>
                                                     <th>Date Created</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -90,3 +204,5 @@
 </main>
 
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
+<script src="<?php echo base_url('assets/js/button-dropdown.js'); ?>"></script>
+<script src="<?php echo base_url('assets/new-js/admin_ticket_from_staff.js'); ?>"></script>

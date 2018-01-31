@@ -167,6 +167,7 @@
                                             <div class="row">
                                                 <div class="input-field col s6 has-error">
                                                     <input class="" value="<?php echo $applicant[0]['id']; ?>" id="applicant_id" name="applicant_id"  type="hidden"/>
+                                                    <input class="" value="<?php echo $applicant[0]['name']; ?>" id="applicant_name" name="applicant_name"  type="hidden"/>
                                                     <label for="requestor_name">Requestor Name<i style="color:red;">*</i></label>
                                                     <input class="validate" value="<?php echo $is_logged_in['user_full_name']; ?>" id="requestor_name" name="requestor_name" placeholder="applicant name" type="text" data-error=".errorTxt1" disabled/>
                                                     <div class="errorTxt1"></div>
@@ -266,11 +267,13 @@ function submit_update_ticket(){
     reason          = $("#reason").val();
     request_for     = $("#request_for").val();
     applicant_id    = $("#applicant_id").val();
+    applicant_name  = $("#applicant_name").val();
 
     $.ajax({
         url : url,
         type: "POST",
         data:{
+            
             'requestor_name' : requestor_name,
             'requestor_id'   : requestor_id,
             'service_name'   : service_name,
@@ -278,7 +281,8 @@ function submit_update_ticket(){
             'description'    : description,
             'reason'         : reason,
             'request_for'    : request_for,
-            'applicant_id'   : applicant_id
+            'applicant_id'   : applicant_id,
+            'applicant_name' : applicant_name
         },
         success: function(data)
         {   
