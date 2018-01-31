@@ -188,7 +188,10 @@
                                                     <textarea  id="reason" name="reason" class="materialize-textarea"></textarea>
                                                 </div>
                                             </div>
+                                            
                                             <input class="" value="<?php echo $applicant[0]['id']; ?>" id="applicant_id" name="applicant_id"  type="hidden"/>
+                                            <input class="" value="<?php echo $applicant[0]['name']; ?>" id="applicant_name" name="applicant_name"  type="hidden"/>
+
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <button class="btn waves-effect waves-light right submit" type="submit" name="action">Submit
@@ -259,7 +262,7 @@ function submit_update_ticket(){
     reason          = $("#reason").val();
     request_for     = $("#request_for").val();
     applicant_id    = $("#applicant_id").val();
-
+    applicant_name    = $("#applicant_name").val();
 
     $.ajax({
         url : url,
@@ -272,7 +275,8 @@ function submit_update_ticket(){
             'description'    : description,
             'reason'         : reason,
             'request_for'    : request_for,
-            'applicant_id'   : applicant_id
+            'applicant_id'   : applicant_id,
+            'applicant_name' : applicant_name
         },
         success: function(data)
         {   

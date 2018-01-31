@@ -150,7 +150,7 @@ class Sales extends CI_Controller {
 
         $this->load->model("Sales_model");
         $this->load->helper('date');
-
+        $is_logged_in   = $this->session->userdata('is_logged_in');
         $list   = $this->Sales_model->all_inquire_list();
         $data   = array();
         $no     = $_POST['start'];
