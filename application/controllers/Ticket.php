@@ -309,6 +309,7 @@ class Ticket extends CI_Controller {
         
         echo json_encode("success");
     }
+
     public function ajax_all_pending_ticket_for_administrator(){
         $this->load->model("Admin_model");
         $this->load->helper('date');
@@ -349,6 +350,49 @@ class Ticket extends CI_Controller {
             "draw"              => $_POST['draw'],
             "recordsTotal"      => $this->Admin_model->count_all_enroll_tickets(),
             "recordsFiltered"   => $this->Admin_model->count_filtered_enroll_tickets(),//for entries label
+            "data"              => $data,
+        );
+
+        echo json_encode($output);
+    }
+
+    public function ajax_all_complete_ticket_for_administrator(){
+        $this->load->model("Admin_model");
+        $this->load->helper('date');
+        $list   = $this->Admin_model->all_complete_tickets();
+         $data  = array();
+        $no     = $_POST['start'];
+        foreach ($list as $app) {
+            $no++;
+            $row = array();
+
+            $row[] = $app->id;
+            $row[] = $app->requestor_name;
+            $row[] = $app->service_name;
+            $row[] = '<a href="ticket_complete_information/'.$app->id.'" ><u>'.$app->applicant_name.'</u></a>';
+            $row[] = $app->desc;
+            $row[] = $app->status;
+            $row[] = $app->request_for;
+            $row[] = $app->created_at;
+
+            $row[] = ' <div class="grouped-button"> 
+                <button class="button button-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions</button>
+                <button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button> 
+                <ul class="button-dropdown-menu"> 
+                    <li>
+                        <a href="#" request-for="'.$app->request_for.'" ticket-id="'.$app->id.'" requestor-id="'.$app->requestor_id.'" applicant-id="'.$app->applicant_id.'" class="change-status">
+                        Change status to In progress</a>
+                    </li>
+                </ul> 
+            </div>';
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw"              => $_POST['draw'],
+            "recordsTotal"      => $this->Admin_model->count_all_complete_tickets(),
+            "recordsFiltered"   => $this->Admin_model->count_filtered_complete_tickets(),//for entries label
             "data"              => $data,
         );
 
@@ -449,4 +493,31 @@ class Ticket extends CI_Controller {
         $this->db->where('id', $applicant_id);
         $this->db->update('applicant', $ticket_data);
     }
+
+    public function roll_back_ticket(){
+        $ticket_id      = $this->input->post("ticket_id");
+        $applicant_id   = $this->input->post("applicant_id");
+        $requestor_id   = $this->input->post("requestor_id");
+        $request_for    = $this->input->post("request_for");
+
+        $status = array(
+                'status' => 'In progress',
+        );
+
+        $this->db->where('id', $ticket_id);
+        $this->db->update('admin_tickets', $status);
+
+
+        $ticket_data  = array(
+                            'requestor_ticket_id' => $requestor_id,
+                            'approve_from_admin' => NULL,
+                            'request_admin' => ($request_for == 'delete') ? 'Request for Delete Pending' : 'Request for Update Pending',
+                        );
+        
+        $this->db->where('id', $applicant_id);
+        $this->db->update('applicant', $ticket_data);
+
+        echo json_encode("success");
+    }
+
 }
