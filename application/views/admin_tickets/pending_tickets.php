@@ -202,7 +202,160 @@
         </div>
     </div>
 </main>
+<div class="modal" id="approve-modal" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Approval Form</h5>
+        </div>
+        <div class="modal-body">
+            <form  class="formValidate" id="formValidate" method="get" action="">
+                <div class="col-sm-12 custom-border">
+                    <div class="success-text" style="display: none;"></div>                     
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="approval_text" name="approval_text" class="materialize-textarea" data-error=".errorTxt3" ></textarea>
+                            <label for="approval_text">Reason Here.</label>
+                            <div class="errorTxt3"></div> 
+                      </div>
 
+                      <input type="hidden" name="" value="" id="ticket-id" placeholder="">
+                      <input type="hidden" name="" value="" id="requestor-id" placeholder="">
+                      <input type="hidden" name="" value="" id="applicant-id" placeholder="">
+                      <input type="hidden" name="" value="" id="approval-type" placeholder="">
+                      <input type="hidden" name="" value="" id="request-for-type" placeholder="">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary modal-action modal-close" id="close-form " type="button">Cancel</button>
+                    <button class="btn btn-primary" type="submit" id="reason-btn" data-dismiss="">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
-<script src="<?php echo base_url('assets/js/button-dropdown.js'); ?>"></script>
+
 <script src="<?php echo base_url('assets/new-js/admin_ticket_from_staff.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.validate-1-17-0.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/button-dropdown.js'); ?>"></script>
+
+<script>
+
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+
+    $(document).on('click', '.approve-button', function(event) {
+        event.preventDefault();
+
+        var applicant_id = $(this).attr('applicant-id');
+        var requestor_id = $(this).attr('requestor-id');
+        var ticket_id    = $(this).attr('ticket-id');
+        var request_for  = $(this).attr('request-for');
+
+        $("#applicant-id").attr('applicant_id', applicant_id);
+        $("#requestor-id").attr('requestor_id', requestor_id);
+        $("#ticket-id").attr('ticket_id', ticket_id);
+        $("#approval-type").attr('approval_type', 'Approved');
+        $("#request-for-type").attr('request_for_type', request_for);
+        
+
+        $("#exampleModalLabel").html("Approval Form");
+        $('#approve-modal').modal('open', );
+    });
+
+    $(document).on('click', '.decline-button', function(event) {
+        event.preventDefault();
+
+        var applicant_id = $(this).attr('applicant-id');
+        var requestor_id = $(this).attr('requestor-id');
+        var ticket_id    = $(this).attr('ticket-id');
+        var request_for  = $(this).attr('request-for');
+
+        $("#applicant-id").attr('applicant_id', applicant_id);
+        $("#requestor-id").attr('requestor_id', requestor_id);
+        $("#ticket-id").attr('ticket_id', ticket_id);
+        $("#approval-type").attr('approval_type', 'Declined');
+        $("#request-for-type").attr('request_for_type', request_for);
+        
+
+        $("#exampleModalLabel").html("Decline Form");
+        $('#approve-modal').modal('open', );
+    });
+
+    $("#formValidate").validate({
+        rules: {
+            approval_text: {
+                required: true,
+            },
+        },
+        messages: {
+            approval_text:{
+                required: "Reason field is required.",
+            },
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function(form) {
+            approve_ticket();
+        }
+    });
+
+    function approve_ticket(){
+   
+        url                 = "<?php echo base_url('ticket/stream_notification_callback'); ?>";
+        approval_text       = $("#approval-text").val();
+        applicant_id        = $("#applicant-id").attr('applicant_id');
+        requestor_id        = $("#requestor-id").attr('requestor_id');
+        ticket_id           = $("#ticket-id").attr('ticket_id');
+        approval_type       = $("#approval-type").attr('approval_type');
+        request_for_type    = $("#request-for-type").attr('request_for_type');
+
+
+        $.ajax({
+            url : url,
+            type: "POST",
+            data:{
+                'approval_text' : approval_text,
+                'applicant_id'  : applicant_id,
+                'requestor_id'  : requestor_id,
+                'ticket_id'     : ticket_id,
+                'approval_type' : approval_type,
+                'request_for_type' : request_for_type
+            },
+            success: function(data)
+            {   
+                if(data)
+                {
+                    swal({   title: "Ticket Succesfully submitted!",   
+                       text: "I will close in 2 seconds.",   
+                       timer: 2000,  
+                       icon: "success", 
+                       type: "success",
+                       showConfirmButton: false 
+                    }).then(function() {
+                       
+                    });
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                swal({   title: "Error deleting data!",   
+                     text: "I will close in 2 seconds.",   
+                     timer: 2000,  
+                     icon: "error", 
+                     type: "error",
+                     showConfirmButton: false 
+                });
+            }
+        });
+    }
+
+</script>

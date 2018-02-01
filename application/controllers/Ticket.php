@@ -152,6 +152,15 @@ class Ticket extends CI_Controller {
         $this->db->where('id', $this->input->post('applicant_id'));
         $this->db->update('applicant', $data);
 
+        $ticket_data  = array(
+                            'requestor_ticket_id' => NULL,
+                            'approve_from_admin' => NULL,
+                            'request_admin' => NULL,
+                        );
+
+        $this->db->where('id', $this->input->post('applicant_id'));
+        $this->db->update('applicant', $ticket_data);
+
         echo json_encode("success");
     }
 
@@ -190,6 +199,15 @@ class Ticket extends CI_Controller {
 
         $this->db->where('id', $this->input->post('applicant_id'));
         $this->db->update('applicant', $data);
+
+        $ticket_data  = array(
+                            'requestor_ticket_id' => NULL,
+                            'approve_from_admin' => NULL,
+                            'request_admin' => NULL,
+                        );
+        
+        $this->db->where('id', $this->input->post('applicant_id'));
+        $this->db->update('applicant', $ticket_data);
 
         echo json_encode("success");
     }
@@ -237,7 +255,60 @@ class Ticket extends CI_Controller {
 
         echo json_encode($output);
     }
+
     /*administrator pending tickets*/
+    public function stream_notification_callback(){
+
+        $this->load->model("Admin_model");
+
+        $approval_text   = $this->input->post('approval_text');
+        $applicant_id    = $this->input->post('applicant_id');
+        $requestor_id    = $this->input->post('requestor_id');
+        $ticket_id       = $this->input->post('ticket_id');
+        $approval_type   = $this->input->post('approval_type');
+        $request_for_type   = $this->input->post('request_for_type');
+
+        $insert                 = array(
+                                    'ticket_id'     =>  $ticket_id,
+                                    'requestor_id'  =>  $requestor_id,
+                                    'applicant_id'  =>  $applicant_id,
+                                    'approval_text' =>  $approval_text,
+                                    'approval_type' =>  $approval_type,
+                                    'request_for_type' => $request_for_type
+                                    );
+
+        if($approval_type == "Approved"){
+            if($request_for_type == 'delete'){
+                $update_applicant = array(
+                                    'approve_from_admin' => 2 ,
+                                    'request_admin'      => 'Approved'
+                                    );
+            }else{
+                $update_applicant = array(
+                                    'approve_from_admin' => 1 ,
+                                    'request_admin'      => 'Approved'
+                                    );
+            }
+           
+        }else{
+
+            $update_applicant       = array(
+                                    'requestor_ticket_id' => NULL,
+                                    'approve_from_admin'  => NULL ,
+                                    'request_admin'       => 'Declined'
+                                    );
+        }
+       
+        $admin_ticket_status   = array(
+                                    'status' => 'Complete' ,
+                                    );
+
+        $this->Admin_model->insert_admin_notification($insert);
+        $this->Admin_model->update_applicant_ticket($applicant_id , $requestor_id, $update_applicant);
+        $this->Admin_model->update_admin_ticket_status($ticket_id, $admin_ticket_status);
+        
+        echo json_encode("success");
+    }
     public function ajax_all_pending_ticket_for_administrator(){
         $this->load->model("Admin_model");
         $this->load->helper('date');
@@ -251,7 +322,7 @@ class Ticket extends CI_Controller {
             $row[] = $app->id;
             $row[] = $app->requestor_name;
             $row[] = $app->service_name;
-            $row[] = '<a href="ticket_complete_information/'.$app->id.'"  class="approve-button"><u>'.$app->applicant_name.'</u></a>';
+            $row[] = '<a href="ticket_complete_information/'.$app->id.'" ><u>'.$app->applicant_name.'</u></a>';
             $row[] = $app->desc;
             $row[] = $app->status;
             $row[] = $app->request_for;
@@ -263,10 +334,10 @@ class Ticket extends CI_Controller {
                 <button type="button" class="button button-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"> <i class="material-icons">arrow_drop_down</i></span>  </button>
                 <ul class="button-dropdown-menu"> 
                     <li>
-                        <a href="#" data-id="'.$app->id.'"  class="approve-button">Aprrove Ticket</a>
+                        <a href="#" request-for="'.$app->request_for.'" ticket-id="'.$app->id.'" requestor-id="'.$app->requestor_id.'" applicant-id="'.$app->applicant_id.'" class="approve-button">Aprrove Ticket</a>
                     </li>
                     <li>
-                        <a href="#" data-id="'.$app->id.'"  class="decline-button">Decline Ticket</a>
+                        <a href="#" request-for="'.$app->request_for.' ticket-id="'.$app->id.'" requestor-id="'.$app->requestor_id.'" applicant-id="'.$app->applicant_id.'"  class="decline-button">Decline Ticket</a>
                     </li>
                 </ul> 
             </div>';
@@ -283,6 +354,7 @@ class Ticket extends CI_Controller {
 
         echo json_encode($output);
     }
+
     /*end*/
     public function ticket_information() {
         $this->load->model("Encoder_model");
@@ -367,8 +439,14 @@ class Ticket extends CI_Controller {
 
         $this->db->where('id', $applicant_id);
         $this->db->update('applicant', $status);
+
+        $ticket_data  = array(
+                            'requestor_ticket_id' => NULL,
+                            'approve_from_admin' => NULL,
+                            'request_admin' => NULL,
+                        );
+        
+        $this->db->where('id', $applicant_id);
+        $this->db->update('applicant', $ticket_data);
     }
-   
-
-
 }

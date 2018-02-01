@@ -34,7 +34,7 @@ class Admin_model extends CI_Model {
     {
         // $is_logged_in = $this->session->userdata('is_logged_in');
         // $this->db->where("encoder_id", $is_logged_in['user_id']);
-        // $this->db->where("status", 'Pending');
+        $this->db->where("status", 'New');
         $this->db->where("deleted_at", NULL);
         $this->db->from($this->table_tickets);
         return $this->db->count_all_results();
@@ -43,7 +43,7 @@ class Admin_model extends CI_Model {
     private function _all_pending_tickest_data(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
-
+         $this->db->where("status", 'New');
         $this->db->where("deleted_at", NULL);
         $this->db->from($this->table_tickets);
 
@@ -93,9 +93,22 @@ class Admin_model extends CI_Model {
             $value['requestor_type'] = $this->db->get()->result_array()[0]['roles'];
             $data = $value;
         }
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
         return $data;
+    }
+
+    public function insert_admin_notification($data){
+        $insert = $this->db->insert('stream_notification_callback', $data);
+        return $insert;
+    }
+
+    public function update_applicant_ticket($applicant_id, $requestor_id, $data){
+        $this->db->where('id', $applicant_id);
+        $this->db->where('requestor_ticket_id', $requestor_id);
+        $this->db->update('applicant', $data);
+    }
+
+    public function update_admin_ticket_status($id, $data){
+        $this->db->where('id', $id);
+        $this->db->update('admin_tickets', $data);
     }
 }
