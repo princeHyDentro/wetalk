@@ -189,17 +189,11 @@ class Admin_model extends CI_Model {
 
         $data['reason'] = $query;
    
-
         $this->db->select("name , status");
         $this->db->where("id", $query['applicant_id']);
         $this->db->from('applicant');
         $data['applicant'] = $this->db->get()->result_array()[0];
 
-        // echo "<pre>";
-        // print_r($query);
-        // print_r($query_user);
-        // echo "</pre>";
-  
         return $data;
     }
 

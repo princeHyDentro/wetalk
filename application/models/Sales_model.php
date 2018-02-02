@@ -181,7 +181,7 @@ class Sales_model extends CI_Model {
         }
     }
 
-    function get_dl_datatables()
+    public function get_dl_datatables()
     {
         $this->_get_dl_datatables_query();
         if($_POST['length'] != -1)
@@ -189,7 +189,7 @@ class Sales_model extends CI_Model {
             $query = $this->db->get();
         return $query->result();
     }
-    function dl_count_filtered()
+    public function dl_count_filtered()
     {
         $this->_get_dl_datatables_query();
         $query = $this->db->get();

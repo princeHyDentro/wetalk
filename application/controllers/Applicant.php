@@ -45,8 +45,5 @@ class Applicant extends CI_Controller {
 			$this->load->view('admin_applicants/all_deleted_applicant');
 		}	
 	}
-
-	
-
     /***********************************************END OF VIEW********************************/
 }

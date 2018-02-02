@@ -180,8 +180,6 @@ class Encoder_model extends CI_Model {
     private function _all_inquire_applicant_data(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
-
-        //$this->db->where("encoder_id", $is_logged_in['user_id']);
         $this->db->where("status", 'Inquired');
         
         $this->db->where("deleted_at", NULL);
@@ -220,8 +218,6 @@ class Encoder_model extends CI_Model {
 
     public function count_all_inquire_applicants()
     {
-       // $is_logged_in = $this->session->userdata('is_logged_in');
-        //$this->db->where("encoder_id", $is_logged_in['user_id']);
         $this->db->where("status", 'Inquired');
         $this->db->where("deleted_at", NULL);
         $this->db->from($this->table_applicant);

@@ -13,6 +13,7 @@ class Login extends CI_Controller {
 		$this->load->view('login');
 		$this->load->view('template/footer');
 	}
+
 	public function login_auth(){
 		if(isset($_POST['user_password']) && isset($_POST['user_name'])){
 			$user_password  = $_POST['user_password'];
@@ -20,6 +21,7 @@ class Login extends CI_Controller {
 		}
 		$this->authLogin($user_name,$user_password);
 	}
+
 	public function authLogin($user_name,$user_password){
 		$this->load->model('login_model');
 		$this->load->helper('url');
@@ -64,6 +66,7 @@ class Login extends CI_Controller {
 		// 	}
 		// }
 	}
+	
 	public function logout(){
 		$this->session->unset_userdata('is_logged_in');
 		session_destroy();

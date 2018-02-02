@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sales_ticket_model extends CI_Model {
+    
 	var $table_tickets         = 'encoder_assign_tickets';
     var $column_order_ticket   = array('id','encoder_name','service_name',' status'); 
     var $column_search_ticket  = array('id','encoder_name','service_name',' status');
@@ -11,6 +12,7 @@ class Sales_ticket_model extends CI_Model {
     var $col_applicant          = array('id','name', 'encoder_name',' contact', 'address' , 'email' , 'service', 'status' , 'created_at'); 
     var $col_search_applicant   = array('id','name', 'encoder_name',' contact', 'address' , 'email' , 'service', 'status' , 'created_at');
     var $order_applicant        = array('id' => 'desc');
+
 
 	public function _tableStafRoles(){
         $query = $this->db->query('SELECT * FROM staff_position');

@@ -106,7 +106,7 @@ class Registration extends CI_Controller {
         $output = array(
             "draw"              => $_POST['draw'],
             "recordsTotal"      => $this->users->count_all(),
-            "recordsFiltered"   => $this->users->dl_count_filtered(),//for entries label
+            "recordsFiltered"   => $this->users->dl_count_filtered(),
             "data"              => $data,
         );
 
@@ -131,8 +131,6 @@ class Registration extends CI_Controller {
                 $row[] =  nice_date($person->created_at, 'Y-m-d');
                 $row[] =  ($person->updated_at != NULL) ? nice_date($person->updated_at, 'Y-m-d') : '';
 
-
-                //add html for action
                 $row[] = '<a class="btn-floating waves-effect waves-light blue" onclick="edit_person('."'".$person->id."'".')" href="javascript:void(0)" title="Edit" ><i class="material-icons">edit</i></a> <a class="btn-floating waves-effect waves-light red" href="javascript:void(0)" title="Delete" onclick="delete_person('."'".$person->id."'".')"><i class="material-icons">delete</i></a>';
                 $data[] = $row;
             }
@@ -161,7 +159,7 @@ class Registration extends CI_Controller {
             $row = array();
             if( $person->roles !== 'super'){
                 $row[] = $person->id;
-                $row[] = $person->full_name;//$person->user_fname.' '.$person->lname.' '.$person->lname;
+                $row[] = $person->full_name;
                 $row[] = $person->username;
                 $row[] = $person->email;
                 $row[] = $person->roles;
@@ -175,7 +173,7 @@ class Registration extends CI_Controller {
         $output = array(
             "draw"              => $_POST['draw'],
             "recordsTotal"      => $this->users->count_all(),
-            "recordsFiltered"   => $this->users->count_filtered(),//for entries label
+            "recordsFiltered"   => $this->users->count_filtered(),
             "data"              => $data,
         );
 
@@ -197,7 +195,6 @@ class Registration extends CI_Controller {
     public function ajax_add(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
-        //$this->_validate();
 
         $data = array(
             'fname'         => $this->input->post('user_fname'),
@@ -212,9 +209,8 @@ class Registration extends CI_Controller {
             'type_of_user'  => 'staff'
         );
 
-       $insert = $this->users->save($data);
+        $insert = $this->users->save($data);
         
-        // service assign to staff
         foreach ($this->input->post('services') as $key => $value) {
             if($value['primary_id'] == ""){
                 $this->db->set('_userID', $insert);
@@ -229,7 +225,7 @@ class Registration extends CI_Controller {
     public function ajax_add_all(){
 
         $is_logged_in = $this->session->userdata('is_logged_in');
-        //$this->_validate();
+
 
         $data = array(
             'fname'         => $this->input->post('user_fname'),
@@ -244,10 +240,8 @@ class Registration extends CI_Controller {
             'type_of_user'  => 'staff'
         );
 
-       $insert = $this->users->save($data);
+        $insert = $this->users->save($data);
         
-        // service assign to staff
-
         $this->db->set('_userID', $insert);
         $this->db->set('admin', "all");
         $this->db->insert('assign_staff_service');

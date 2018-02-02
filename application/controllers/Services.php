@@ -7,8 +7,6 @@ class Services extends CI_Controller {
         $this->load->model('services_model','services');
     }
 
-    
-
     public function index()
     {
         $is_logged_in = $this->session->userdata('is_logged_in');

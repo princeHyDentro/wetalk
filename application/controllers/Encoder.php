@@ -112,7 +112,7 @@ class Encoder extends CI_Controller {
 		$output = array(
 			"draw"              => $_POST['draw'],
 			"recordsTotal"      => $this->Encoder_model->count_all_enroll_applicants(),
-			"recordsFiltered"   => $this->Encoder_model->count_filtered_enroll_applicants(),//for entries label
+			"recordsFiltered"   => $this->Encoder_model->count_filtered_enroll_applicants(),
 			"data"              => $data,
 		);
 
@@ -199,7 +199,7 @@ class Encoder extends CI_Controller {
 		$output = array(
 			"draw"              => $_POST['draw'],
 			"recordsTotal"      => $this->Encoder_model->count_all_inquire_applicants(),
-			"recordsFiltered"   => $this->Encoder_model->count_filtered_inquire_applicants(),//for entries label
+			"recordsFiltered"   => $this->Encoder_model->count_filtered_inquire_applicants(),
 			"data"              => $data,
 		);
 
