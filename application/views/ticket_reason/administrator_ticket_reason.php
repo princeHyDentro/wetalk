@@ -187,18 +187,33 @@
                                                 </div>
 
                                             </div>
+                                            
+                                            <?php if($is_logged_in['user_rights'] === "sales"): ?>
+                                                <div class="row">
+                                                    <?php if($reason['applicant']['status'] == 'Enrolled'): ?>
+                                                        <div class="input-field col s12">
+                                                           <a href="<?php echo base_url('sales/view_enrolled_applicant'); ?>" title="" class="btn waves-effect waves-light left submit">Go To Enroll Page</a>
+                                                        </div>
+                                                    <?php else: ?>
+                                                        <div class="input-field col s12">
+                                                           <a href="<?php echo base_url('sales/view_inquire_applicant'); ?>" title="" class="btn waves-effect waves-light left submit">Go To Inquire Page</a>
+                                                        </div>
+                                                    <?php endif; ?>
+                                              </div>
+                                            <?php elseif($is_logged_in['user_rights'] === "encoder"): ?>
+                                                <div class="row">
+                                                    <?php if($reason['applicant']['status'] == 'Enrolled'): ?>
+                                                        <div class="input-field col s12">
+                                                           <a href="<?php echo base_url('encoder/enrolled_applicants'); ?>" title="" class="btn waves-effect waves-light left submit">Go To Enroll Page</a>
+                                                        </div>
+                                                    <?php else: ?>
+                                                        <div class="input-field col s12">
+                                                           <a href="<?php echo base_url('encoder/inquire_applicants'); ?>" title="" class="btn waves-effect waves-light left submit">Go To Inquire Page</a>
+                                                        </div>
+                                                    <?php endif; ?>
+                                              </div>
+                                            <?php endif; ?>
 
-                                            <div class="row">
-                                            	<?php if($reason['applicant']['status'] == 'Enrolled'): ?>
-	                                                <div class="input-field col s12">
-	                                                   <a href="<?php echo base_url('encoder/enrolled_applicants'); ?>" title="" class="btn waves-effect waves-light left submit">Go To Enroll Page</a>
-	                                              	</div>
-												<?php else: ?>
-													<div class="input-field col s12">
-	                                                   <a href="<?php echo base_url('encoder/inquire_applicants'); ?>" title="" class="btn waves-effect waves-light left submit">Go To Inquire Page</a>
-	                                              	</div>
-												<?php endif; ?>
-                                          </div>
                                       </form>
                                     </li> 
                                 </ul>
