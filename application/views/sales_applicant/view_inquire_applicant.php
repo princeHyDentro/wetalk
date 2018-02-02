@@ -214,7 +214,8 @@ th{
 <script>
 $(document).on("click",".applicant-delete",function(event) {
     event.preventDefault();
-    var applicant_id  = $(this).attr('data-id');
+    var applicant_id         = $(this).attr('data-id');
+    var requestor_ticket_id  = $(this).attr('requestor-id');
 
     swal({
       title: "Are you sure?",
@@ -223,9 +224,10 @@ $(document).on("click",".applicant-delete",function(event) {
       buttons: true,
       dangerMode: true,
     })
+    
     .then((willDelete) => {
         if (willDelete) {
-            soft_delete_applicant_data(applicant_id);
+            soft_delete_applicant_data(applicant_id , requestor_ticket_id);
         } else {
             swal({
                  title: "Applicant data is safe!",   
@@ -239,13 +241,14 @@ $(document).on("click",".applicant-delete",function(event) {
     });
 });
 
-function soft_delete_applicant_data(applicant_id){
+function soft_delete_applicant_data(applicant_id, requestor_ticket_id){
     var url             = "<?php echo base_url('ticket/soft_delete_applicant_data'); ?>"; 
     $.ajax({
         url : url,
         type: "POST",
         data:{
-            'applicant_id'     : applicant_id,
+            'applicant_id'          : applicant_id,
+            'requestor_ticket_id'   : requestor_ticket_id,
         },
         success: function(data)
         {   
