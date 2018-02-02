@@ -122,6 +122,17 @@ class Ticket extends CI_Controller {
         $this->load->model("Encoder_model");
         $is_logged_in   = $this->session->userdata('is_logged_in');
         $ticket_id      = $this->input->post('ticket_id');
+        $requestor_id   = $this->input->post('requestor_ticket_id');
+
+        $dl_at  = array(
+                            'deleted_at' => date("Y-m-d h:i:s"),
+                        );
+
+        $this->db->where('applicant_id' , $this->input->post('applicant_id'));
+        $this->db->where('requestor_id' , $requestor_id);
+        $this->db->where('deleted_at'   , NULL);
+        $this->db->update('stream_notification_callback', $dl_at);
+
 
         if($this->input->post('password') != ""){
             $data = array(
@@ -149,6 +160,7 @@ class Ticket extends CI_Controller {
             );
         }
 
+
         $this->db->where('id', $this->input->post('applicant_id'));
         $this->db->update('applicant', $data);
 
@@ -169,6 +181,16 @@ class Ticket extends CI_Controller {
         $this->load->model("Encoder_model");
         $is_logged_in   = $this->session->userdata('is_logged_in');
         $ticket_id      = $this->input->post('ticket_id');
+        $requestor_id   = $this->input->post('requestor_ticket_id');
+
+        $dl_at  = array(
+                            'deleted_at' => date("Y-m-d h:i:s"),
+                        );
+
+        $this->db->where('applicant_id' , $this->input->post('applicant_id'));
+        $this->db->where('requestor_id' , $requestor_id);
+        $this->db->where('deleted_at'   , NULL);
+        $this->db->update('stream_notification_callback', $dl_at);
 
         if($this->input->post('password') != ""){
             $data = array(
@@ -261,11 +283,11 @@ class Ticket extends CI_Controller {
 
         $this->load->model("Admin_model");
 
-        $approval_text   = $this->input->post('approval_text');
-        $applicant_id    = $this->input->post('applicant_id');
-        $requestor_id    = $this->input->post('requestor_id');
-        $ticket_id       = $this->input->post('ticket_id');
-        $approval_type   = $this->input->post('approval_type');
+        $approval_text      = $this->input->post('approval_text');
+        $applicant_id       = $this->input->post('applicant_id');
+        $requestor_id       = $this->input->post('requestor_id');
+        $ticket_id          = $this->input->post('ticket_id');
+        $approval_type      = $this->input->post('approval_type');
         $request_for_type   = $this->input->post('request_for_type');
 
         $insert                 = array(
@@ -310,6 +332,42 @@ class Ticket extends CI_Controller {
         echo json_encode("success");
     }
 
+    public function pg_get_notify(){
+        $this->load->model("Admin_model");
+        $requestor_id    = $this->input->post('requestor_id');
+
+        $notify          = $this->Admin_model->notify_status($requestor_id);
+        echo json_encode($notify);
+    }
+
+    public function administrator_reason(){
+        $this->load->model("Admin_model");
+        $administrator_reason = $this->uri->segment(2);
+        $id = $this->uri->segment(3);
+
+        $data           = array();
+        $is_logged_in   = $this->session->userdata('is_logged_in');
+
+        if (!isset($is_logged_in) || $is_logged_in != true) {
+            redirect('login', 'refresh');
+            die();
+        }else{
+            if($administrator_reason == 'administrator_reason'){
+
+                $data   = array(
+                            'deleted_at' => date("Y-m-d h:i:s") ,
+                        );
+                $this->Admin_model->update_administrator_reason($id, $data);
+            }
+
+            $data['reason'] = $this->Admin_model->get_administrator_reason($id);
+            $this->load->view('template/header');
+            $this->load->view('ticket_reason/administrator_ticket_reason', $data);
+        }   
+
+        
+    }
+
     public function ajax_all_pending_ticket_for_administrator(){
         $this->load->model("Admin_model");
         $this->load->helper('date');
@@ -338,7 +396,7 @@ class Ticket extends CI_Controller {
                         <a href="#" request-for="'.$app->request_for.'" ticket-id="'.$app->id.'" requestor-id="'.$app->requestor_id.'" applicant-id="'.$app->applicant_id.'" class="approve-button">Aprrove Ticket</a>
                     </li>
                     <li>
-                        <a href="#" request-for="'.$app->request_for.' ticket-id="'.$app->id.'" requestor-id="'.$app->requestor_id.'" applicant-id="'.$app->applicant_id.'"  class="decline-button">Decline Ticket</a>
+                        <a href="#" request-for="'.$app->request_for.'" ticket-id="'.$app->id.'" requestor-id="'.$app->requestor_id.'" applicant-id="'.$app->applicant_id.'"  class="decline-button">Decline Ticket</a>
                     </li>
                 </ul> 
             </div>';
@@ -476,7 +534,18 @@ class Ticket extends CI_Controller {
     }
 
     public function soft_delete_applicant_data(){
-        $applicant_id = $this->input->post("applicant_id");
+        $applicant_id   = $this->input->post("applicant_id");
+        $requestor_id   = $this->input->post('requestor_ticket_id');
+
+        $dl_at  = array(
+                            'deleted_at' => date("Y-m-d h:i:s"),
+                        );
+
+        $this->db->where('applicant_id' , $applicant_id);
+        $this->db->where('requestor_id' , $requestor_id);
+        $this->db->where('deleted_at'   , NULL);
+        $this->db->update('stream_notification_callback', $dl_at);
+        
         $status = array(
                 'deleted_at' => date("Y-m-d h:i:s"),
         );

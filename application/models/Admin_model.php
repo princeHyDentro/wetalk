@@ -175,4 +175,39 @@ class Admin_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update('admin_tickets', $data);
     }
+
+    public function update_administrator_reason($id, $data){
+        $this->db->where('id', $id);
+        $this->db->update('stream_notification_callback', $data);
+    }
+
+    public function get_administrator_reason($id){ 
+        $data = array();     
+        $this->db->where("id", $id);
+        $this->db->from('stream_notification_callback');
+        $query = $this->db->get()->result_array()[0];
+
+        $data['reason'] = $query;
+   
+
+        $this->db->select("name , status");
+        $this->db->where("id", $query['applicant_id']);
+        $this->db->from('applicant');
+        $data['applicant'] = $this->db->get()->result_array()[0];
+
+        // echo "<pre>";
+        // print_r($query);
+        // print_r($query_user);
+        // echo "</pre>";
+  
+        return $data;
+    }
+
+    public function notify_status($id){      
+        $this->db->where("deleted_at", NULL);
+        $this->db->where("requestor_id", $id);
+        $this->db->from('stream_notification_callback');
+        $query = $this->db->get()->result_array();
+        return $query;
+    }
 }

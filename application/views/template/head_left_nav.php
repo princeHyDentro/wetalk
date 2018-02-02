@@ -1,10 +1,6 @@
 <?php $is_logged_in = $this->session->userdata('is_logged_in'); ?>
 
-<?php
-// echo "<pre>";
-// print_r($is_logged_in);
-// echo "</pre>";
-?>
+
 <style type="text/css" media="screen">
     .divider1 {
     height: 1px;
@@ -44,11 +40,38 @@ nav .button-collapse{
                 <div class="nav-wrapper"> <a href="<?php echo base_url('dashboard') ?>" class="page-title">
                     <img  src="<?php echo base_url('assets/logo/logo2.png'); ?>" style="height: 56px;margin-top: 5px;" alt="" class="responsive-img valign profile-image-login"></a>
                     <ul class="right hide-on-med-and-down">
-                       <!--  <li>
-                            <a href="#" class="waves-effect waves-light"> <i class="material-icons">notifications</i>
+                        <li>
+                            <a href="#" class="dropdown-button  waves-effect waves-light open" data-activates='chat-out'>
+                                <i class="material-icons">notifications</i>
                                 <div class="notification"></div>
                             </a>
-                        </li> -->
+                            <ul id="chat-out" class="dropdown-content right-aligned ps-container ps-active-y">
+                                <li class="active">
+                                    <div class="collapsible-header teal white-text active"><i class="mdi-social-whatshot"></i>Recent Activity</div>
+                                </li>
+                                <li class="li-hover">
+                                 <div id="email-list" class="col s12 card-panel z-depth-1">
+                                    <ul class="collection notify-collection"></ul>
+                                </div>
+                                </li>
+                            </ul>
+                           <!--  <ul id='dropdown1' class='dropdown-content chat-out' >
+                                <li class="active">
+                                    <div class="collapsible-header teal white-text active "><i class="mdi-social-whatshot"></i>Notification Menu</div>
+                                    <div class="collapsible-body recent-activity" style="display: block;">
+                                      
+                                        <div class="recent-activity-list chat-out-list row">
+                                            <div class="col s3 recent-activity-list-icon"><i class="mdi-device-airplanemode-on"></i>
+                                            </div>
+                                            <div class="col s12 recent-activity-list-text">
+                                                <a href="#">Yesterday</a>
+                                                <p>Your Next flight for USA will be on 15th August 2015.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                          </ul> -->
+                        </li>
                         <li style="border-bottom: 1px solid #00897b;border-bottom: none;">
                            <span class="material-icons">person_pin</span> <span class="white-text email" style="font-size: medium;">Welcome : <?php echo $is_logged_in['user_full_name']; ?></span>
                             <!-- <a href="#" class="waves-effect waves-light"> <i class="material-icons">mail</i>

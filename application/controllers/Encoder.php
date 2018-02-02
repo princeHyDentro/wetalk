@@ -83,7 +83,7 @@ class Encoder extends CI_Controller {
 				';
 			}elseif ($app->approve_from_admin == 2) {
 				$row[] = '
-					<button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
+					<button class="btn waves-effect waves-light applicant-delete" type="button" requestor-id="'.$app->requestor_ticket_id.'" data-id="'.$app->id.'">Delete
 				    <i class="material-icons right">send</i>
 				  	</button>
 				';
@@ -168,7 +168,7 @@ class Encoder extends CI_Controller {
 				';
 			}elseif ($app->approve_from_admin == 2) {
 				$row[] = '
-					<button class="btn waves-effect waves-light applicant-delete" type="button" data-id="'.$app->id.'">Delete
+					<button class="btn waves-effect waves-light applicant-delete" requestor-id="'.$app->requestor_ticket_id.'" type="button" data-id="'.$app->id.'">Delete
 				    <i class="material-icons right">send</i>
 				  	</button>
 				';

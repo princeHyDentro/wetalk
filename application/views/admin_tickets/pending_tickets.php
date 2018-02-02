@@ -301,14 +301,14 @@
     function approve_ticket(){
    
         url                 = "<?php echo base_url('ticket/stream_notification_callback'); ?>";
-        approval_text       = $("#approval-text").val();
+        approval_text       = $("#approval_text").val();
         applicant_id        = $("#applicant-id").attr('applicant_id');
         requestor_id        = $("#requestor-id").attr('requestor_id');
         ticket_id           = $("#ticket-id").attr('ticket_id');
         approval_type       = $("#approval-type").attr('approval_type');
         request_for_type    = $("#request-for-type").attr('request_for_type');
 
-
+        $('#approve-modal').modal('close');
         $.ajax({
             url : url,
             type: "POST",
@@ -331,7 +331,8 @@
                        type: "success",
                        showConfirmButton: false 
                     }).then(function() {
-                       
+                        
+                        reload_table();
                     });
                 }
             },

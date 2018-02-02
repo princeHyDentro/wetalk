@@ -298,6 +298,7 @@ th{
                     </div>
 
                     <input type="hidden" data-id="" id="applicant_id" name="applicant_id" value="" placeholder="">
+                    <input type="hidden" data-id="" id="requestor_ticket_id" name="requestor_ticket_id" value="" placeholder="">
 
                     <div class="row">
                         <div class="input-field col s12">
@@ -393,6 +394,8 @@ function enroll_applicant(){
     service_id   = $("#service").val();
     service      = $("#service").find(":selected").text();
     status       = $("#status").val();
+    requestor_ticket_id   = $("#requestor_ticket_id").val();
+
 
     $.ajax({
         url : url,
@@ -407,7 +410,8 @@ function enroll_applicant(){
             'password'      : password,
             'service_id'    : service_id,
             'applicant_id'  : applicant_id,
-            'status'        : status
+            'status'        : status,
+            'requestor_ticket_id' : requestor_ticket_id
         },
         success: function(data)
         {   
@@ -470,6 +474,7 @@ $(document).on("click",".applicant-update",function(event) {
                 $("#address").val(el.address);
                 $("#email").val(el.email);
                 $("#username").val(el.username);
+                $("#requestor_ticket_id").val(el.requestor_ticket_id);
                 $("#applicant_id").val(el.id);
                 $('#status').find('option[value="'+el.status+'"]').prop('selected', true);
             });
@@ -499,7 +504,8 @@ $(document).on("click",".applicant-update",function(event) {
 
 $(document).on("click",".applicant-delete",function(event) {
     event.preventDefault();
-    var applicant_id  = $(this).attr('data-id');
+    var applicant_id         = $(this).attr('data-id');
+    var requestor_ticket_id  = $(this).attr('requestor-id');
 
     swal({
       title: "Are you sure?",
@@ -510,7 +516,7 @@ $(document).on("click",".applicant-delete",function(event) {
     })
     .then((willDelete) => {
         if (willDelete) {
-            soft_delete_applicant_data(applicant_id);
+            soft_delete_applicant_data( applicant_id, requestor_ticket_id );
         } else {
             swal({
                  title: "Applicant data is safe!",   
@@ -524,13 +530,14 @@ $(document).on("click",".applicant-delete",function(event) {
     });
 });
 
-function soft_delete_applicant_data(applicant_id){
+function soft_delete_applicant_data(applicant_id , requestor_ticket_id){
     var url             = "<?php echo base_url('ticket/soft_delete_applicant_data'); ?>"; 
     $.ajax({
         url : url,
         type: "POST",
         data:{
             'applicant_id'     : applicant_id,
+            'requestor_ticket_id'     : requestor_ticket_id,
         },
         success: function(data)
         {   

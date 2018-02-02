@@ -192,10 +192,7 @@
         </div>
     </div>
 </main>
-<!-- <input type="hidden" name="" value="" id="ticket-id" placeholder="">
-<input type="hidden" name="" value="" id="requestor-id" placeholder="">
-<input type="hidden" name="" value="" id="applicant-id" placeholder="">
-<input type="hidden" name="" value="" id="approval-type" placeholder=""> -->
+
 
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/new-js/admin_ticket_complete.js'); ?>"></script>
