@@ -75,6 +75,7 @@ class Encoder extends CI_Controller {
 			$row[] = $app->service;
 			$row[] = $app->status;
 			$row[] = $app->created_at;
+			
 			if($app->approve_from_admin == 1){
 				$row[] = '
 					<button class="btn waves-effect waves-light applicant-update" type="button" data-id="'.$app->id.'">Update
