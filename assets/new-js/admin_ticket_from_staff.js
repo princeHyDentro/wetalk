@@ -45,6 +45,58 @@ $(document).ready(function() {
 function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
+    admin_pending_ticket_notification();
+}
+
+
+function admin_pending_ticket_notification(){
+        var arr   = [];
+        $.ajax({
+            url : "administrator_get_notify",
+            type: "POST",
+            data:{
+                'requestor_id' : "",
+            },
+            success: function(data)
+            {
+                result = $.parseJSON(data)
+                if(data)
+                {
+                   if(result.length > 0){
+                        $('.new-notification-admin').html(result.length);   
+                        var $toastContent = $('<span>Ticket Recieved</span>');
+                        Materialize.toast($toastContent, 1000);
+
+                        $.each(result, function(index, val) {
+                            title = (val.request_for == 'update') ? "Request For Applicant Update" : "Request For Applicant Delete";
+                            data = [
+                                    '<li>',
+                                        '<a href="ticket_complete_information/'+val.id+'"><i class="material-icons">',
+                                    ' assignment </i> Ticket '+title+'</a></li>'
+                                ].join('');
+                            arr.push(data);
+                        });  
+
+                        head = ['<li><h5> NOTIFICATIONS <span style="float: right;" data-badge-caption="unread" class="new badge">'+result.length+'</span></h5></li></li><li class="divider"></li>'].join('');
+                        result = arr.join('');
+                        $('.notify-collection').html(head+result);      
+                    }else{
+                        head = ['<li><h5> NOTIFICATIONS <span style="float: right;" data-badge-caption="unread" class="new badge">0</span></h5></li></li><li class="divider"></li>'].join('');
+                        $('.notify-collection').html(head);  
+                    }
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                swal({   title: "Error deleting data!",   
+                     text: "I will close in 2 seconds.",   
+                     timer: 2000,  
+                     icon: "error", 
+                     type: "error",
+                     showConfirmButton: false 
+                });
+            }
+        });
 }
 
 

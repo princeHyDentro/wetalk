@@ -76,54 +76,6 @@
 	.swal-title{
 		font-size: 15px;
 	}
-	#chat-out{
-	    width: 300px !important;
-	    right: 0px;
-	   	white-space: inherit !important;
-	    top: 63px !important;
-	}
-	#email-list {
-		padding: 0;
-	}
-	#email-list .collection {
-		margin: 0;
-	}
-	#email-list .collection .collection-item.avatar {
-		height: auto;
-		padding-left: 12px;
-		position: relative;
-	}
-	#email-list .collection .collection-item.selected {
-	    background: #e1f5fe;
-	    border-left: 4px solid #29b6f6;
-	}
-	#email-list .collection .collection-item.avatar {
-	    height: auto;
-	    position: relative;
-	}
-	.dropdown-content li> .email-title{
-		padding: 1px;
-	}
-	.collection .collection-item.avatar {
-	     min-height: auto;
-	    padding-left: 72px;
-	    position: relative;
-	}
-	.notify-collection{
-		padding-bottom: 0px;
-	}
-	#chat-out .collapsible-header {
-	    background-color: transparent;
-	    border: none;
-	    height: 45px;
-	    font-weight: 400;
-	}
-	#email-list{
-		margin: 0px;
-	}
-	.email-title{
-		font-size: 14px !important;
-	}
 </style>
 </body>
 	<!--Import jQuery before materialize.js-->
@@ -151,6 +103,7 @@
 <?php if($is_logged_in['user_rights'] == "sales" || $is_logged_in['user_rights'] == "encoder") : ?>
 <script>
 	$(document).ready(function($) {
+
 		notification();
 		setInterval(function(){ 
 			notification();
@@ -159,8 +112,22 @@
 </script>
 <?php endif; ?>
 
+<?php if($is_logged_in['user_rights'] == "super" || $is_logged_in['user_rights'] == "office-admin") : ?>
 <script>
 	$(document).ready(function($) {
+
+		admin_pending_ticket_notification();
+		setInterval(function(){
+			admin_pending_ticket_notification();
+		}, 30000);
+	});
+</script>
+<?php endif; ?>
+
+<script>
+	$(document).ready(function($) {
+		
+
 		$('.dropdown-button').dropdown({
 		      inDuration: 300,
 		      outDuration: 225,
@@ -176,6 +143,7 @@
 		$(".side-nav-collapse").sideNav();
 		
 		$.datetimepicker.setLocale('en');
+
 		$('.datepicker').datetimepicker({
 			onGenerate:function( ct ){
 				$(this).css({'background': '#009688', 'padding':0, 'padding-top': '10px'});
@@ -221,6 +189,58 @@
 		});
 	});
 
+
+	function admin_pending_ticket_notification(){
+		url       = "<?php echo base_url('ticket/administrator_get_notify'); ?>";
+		var arr   = [];
+		$.ajax({
+            url : url,
+            type: "POST",
+            data:{
+                'requestor_id' : "",
+            },
+            success: function(data)
+            {
+            	result = $.parseJSON(data)
+                if(data)
+                {
+                	if(result.length > 0){
+                		$('.new-notification-admin').html(result.length);   
+                		var $toastContent = $('<span>Ticket Recieved</span>');
+						Materialize.toast($toastContent, 2000);
+
+                		$.each(result, function(index, val) {
+	                		title = (val.request_for == 'update') ? "Request For Applicant Update" : "Request For Applicant Delete";
+	                		data = [
+	                				'<li>',
+	                					'<a href="<?php echo base_url("ticket/ticket_complete_information/"); ?>'+val.id+'"><i class="material-icons">',
+	                				' assignment </i> Ticket '+title+'</a></li>'
+                            	].join('');
+                            arr.push(data);
+	                	});  
+	                	head = ['<li><h5> NOTIFICATIONS <span style="float: right;" data-badge-caption="unread" class="new badge">'+result.length+'</span></h5></li></li><li class="divider"></li>'].join('');
+	                	result = arr.join('');
+	                	$('.notify-collection').html(head+result);      
+                	}else{
+                		head = ['<li><h5> NOTIFICATIONS <span style="float: right;" data-badge-caption="unread" class="new badge">0</span></h5></li><li class="divider"></li>'].join('');
+                		$('.notify-collection').html(head);  
+                	}
+                	
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                swal({   title: "Error deleting data!",   
+                     text: "I will close in 2 seconds.",   
+                     timer: 2000,  
+                     icon: "error", 
+                     type: "error",
+                     showConfirmButton: false 
+                });
+            }
+        });
+	}
+
 	function notification(){
 		url           = "<?php echo base_url('ticket/pg_get_notify'); ?>";
 		requestor_id  = "<?php echo $is_logged_in['user_id']; ?>";
@@ -234,35 +254,36 @@
             success: function(data)
             {
             	result = $.parseJSON(data)
-                if(data)
-                {
+            	
+            	$(".inquire-notification-span").text(result.no_inquire);
+				$(".enroll-notification-span").text(result.no_enrolled);
+				$(".main-notification-span").text(result.total_notify);
+                
+            	if(result.data.length > 0){
+            		
+            		var $toastContent = $('<span>Check For Notification Recieved</span>');
+							Materialize.toast($toastContent, 10000);
 
-                	if(result.length > 0){
-                		var $toastContent = $('<span>New Notification Recieved</span>');
-								Materialize.toast($toastContent, 10000);
-                		$.each(result, function(index, val) {
-	                		title = (val.request_for_type == 'update') ? "Request For Applicant Update "+val.approval_type+"!" : "Request For Applicant Delete "+val.approval_type+"!";
-	                		data = [
-		                		'<li class="collection-item avatar email-unread" data-key="'+val.id+'">',
-			                		'<span class="email-title">'+title+'</span>',
-			                		'<p class="">Administrator Reason :</p>',
-			                		'<p class="truncate grey-text ultra-small">Hay Joe, we have next project for this summer.</p>',
-		                		'</li>'
-                            	].join('');
-                            arr.push(data);
-	                	});  
-                	}else{
+					$.each(result.data, function(index, val) {
+                		title = (val.request_for_type == 'update') ? "Request For Applicant Update "+val.approval_type+"!" : "Request For Applicant Delete "+val.approval_type+"!";
                 		data = [
-	                		'<li class="collection-item avatar selected">',
-		                		'<span class="email-title">0 Notification</span>',
-	                		'</li>'
+                				'<li class="email-unread" data-key="'+val.id+'">',
+                					'<a href="#"><i class="material-icons">',
+                				' assignment </i> Ticket '+title+'</a></li>'
                         	].join('');
                         arr.push(data);
-                	}
+                	});  
 
+                	head = ['<li><h5> NOTIFICATIONS <span style="float: right;" data-badge-caption="unread" class="new badge">'+result.length+'</span></h5></li></li><li class="divider"></li>'].join('');
                 	result = arr.join('');
-                	$('.notify-collection').html(result);      
-                }
+
+                	$('.notify-collection').html(head+result); 
+
+            	}else{
+            		head = ['<li><h5> NOTIFICATIONS <span style="float: right;" data-badge-caption="unread" class="new badge">0</span></h5></li></li><li class="divider"></li>'].join('');
+                    $('.notify-collection').html(head);  
+            	} 
+          
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -281,7 +302,6 @@
 		event.preventDefault();
 		var id 			= $(this).attr('data-key');
 		var base_url	= "<?php echo base_url('ticket/administrator_reason/')?>"+id;
-		//alert(base_url)
 		window.location = base_url;
 	});
 	

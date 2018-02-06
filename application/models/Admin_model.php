@@ -198,9 +198,73 @@ class Admin_model extends CI_Model {
     }
 
     public function notify_status($id){      
+        $enrolled_arr  = array();
+        $inquire_arr   = array();
+        $enrolled      = 0; 
+        $inquire       = 0;
         $this->db->where("deleted_at", NULL);
         $this->db->where("requestor_id", $id);
         $this->db->from('stream_notification_callback');
+
+        $query = $this->db->get()->result_array();
+    
+    
+        if(isset($query)){
+
+            foreach ($query as $ticket) {
+
+                $num_results_enrolled = $this->db->where("id", $ticket['applicant_id']);
+                $num_results_enrolled = $this->db->where("requestor_ticket_id", $ticket['requestor_id']);
+                $num_results_enrolled = $this->db->where("deleted_at", NULL);
+                $num_results_enrolled = $this->db->where("status", "Enrolled");
+                $num_results_enrolled = $this->db->from('applicant');
+
+                $num_results_enrolled = $this->db->count_all_results();
+
+                if ($num_results_enrolled > 0)
+                {
+                    $enrolled_arr[] =  $num_results_enrolled;
+                }else{
+                    $enrolled_arr[] =  0;
+                }
+
+                $num_results = $this->db->where("id", $ticket['applicant_id']);
+                $num_results = $this->db->where("requestor_ticket_id", $ticket['requestor_id']);
+                $num_results = $this->db->where("deleted_at", NULL);
+                $num_results = $this->db->where("status", "Inquired");
+                $num_results = $this->db->from('applicant');
+
+                $num_result  = $this->db->count_all_results();
+
+                if ($num_result > 0)
+                {
+                    $inquire_arr[] =  $num_result;
+                }else{
+                    $inquire_arr[] =  0;
+                }
+            }
+            $query['data'] = $query; 
+            $inquire  = array_sum($inquire_arr);
+            $enrolled = array_sum($enrolled_arr);
+
+            $query['no_enrolled'] =  $enrolled;
+            $query['no_inquire']  =  $inquire;
+            $query['total_notify'] = $inquire + $enrolled;
+
+            return $query;
+
+        }else{
+            return "empty";
+        }
+        
+       
+        
+    }
+
+    public function administrator_notify_status(){      
+        $this->db->where("deleted_at", NULL);
+        $this->db->where("status", 'New');
+        $this->db->from('admin_tickets');
         $query = $this->db->get()->result_array();
         return $query;
     }

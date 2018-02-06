@@ -340,6 +340,12 @@ class Ticket extends CI_Controller {
         echo json_encode($notify);
     }
 
+    public function administrator_get_notify(){
+        $this->load->model("Admin_model");
+        $notify          = $this->Admin_model->administrator_notify_status();
+        echo json_encode($notify);
+    }
+
     public function administrator_reason(){
         $this->load->model("Admin_model");
         $administrator_reason = $this->uri->segment(2);

@@ -31,6 +31,7 @@ nav .button-collapse{
     z-index: 1000;
     border-top: 1px solid rgba(0,0,0,0.14);
 }
+
 </style>
 
 <header>
@@ -40,7 +41,7 @@ nav .button-collapse{
                 <div class="nav-wrapper"> <a href="<?php echo base_url('dashboard') ?>" class="page-title">
                     <img  src="<?php echo base_url('assets/logo/logo2.png'); ?>" style="height: 56px;margin-top: 5px;" alt="" class="responsive-img valign profile-image-login"></a>
                     <ul class="right hide-on-med-and-down">
-                        <li>
+                        <!-- <li>
                             <a href="#" class="dropdown-button  waves-effect waves-light open" data-activates='chat-out'>
                                 <i class="material-icons">notifications</i>
                                 <div class="notification"></div>
@@ -48,30 +49,24 @@ nav .button-collapse{
                             <ul id="chat-out" class="dropdown-content right-aligned ps-container ps-active-y">
                                 <li class="active">
                                     <div class="collapsible-header teal white-text active"><i class="mdi-social-whatshot"></i>Recent Activity</div>
-                                </li>
-                                <li class="li-hover">
-                                 <div id="email-list" class="col s12 card-panel z-depth-1">
-                                    <ul class="collection notify-collection"></ul>
-                                </div>
-                                </li>
-                            </ul>
-                           <!--  <ul id='dropdown1' class='dropdown-content chat-out' >
-                                <li class="active">
-                                    <div class="collapsible-header teal white-text active "><i class="mdi-social-whatshot"></i>Notification Menu</div>
-                                    <div class="collapsible-body recent-activity" style="display: block;">
-                                      
-                                        <div class="recent-activity-list chat-out-list row">
-                                            <div class="col s3 recent-activity-list-icon"><i class="mdi-device-airplanemode-on"></i>
-                                            </div>
-                                            <div class="col s12 recent-activity-list-text">
-                                                <a href="#">Yesterday</a>
-                                                <p>Your Next flight for USA will be on 15th August 2015.</p>
-                                            </div>
-                                        </div>
+
+                                    <div id="email-list" class="col s12 card-panel z-depth-1">
+                                        <ul class="collection notify-collection"></ul>
                                     </div>
                                 </li>
-                          </ul> -->
+                            </ul>
+                        </li> -->
+                        <li>
+                            <a href="#" data-beloworigin="true" data-constrainwidth="false" data-activates='chat-out' class="waves-effect waves-light dropdown-button">
+                                <i class="material-icons">notifications</i>
+                                <div class="notification"></div>
+                            </a>
+                            <ul id="chat-out" class="dropdown-content notification-content notify-collection" style="white-space: initial; opacity: 1; left: 715.141px; position: absolute; top: 65px;">
+                               
+                            </ul>
                         </li>
+
+                       
                         <li style="border-bottom: 1px solid #00897b;border-bottom: none;">
                            <span class="material-icons">person_pin</span> <span class="white-text email" style="font-size: medium;">Welcome : <?php echo $is_logged_in['user_full_name']; ?></span>
                             <!-- <a href="#" class="waves-effect waves-light"> <i class="material-icons">mail</i>
@@ -133,10 +128,10 @@ nav .button-collapse{
            <?php if($is_logged_in['user_rights'] == 'super' || $is_logged_in['user_rights'] == 'office-admin'): ?>
             <li>
                 <ul class="collapsible collapsible-accordion">
-                    <li> <a class="collapsible-header padding-32"><i class="material-icons">assignment</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                    <li> <a class="collapsible-header padding-32"><i class="material-icons">assignment</i>Tickets <i class="material-icons right">arrow_drop_down</i> <span class="new badge new-notification-admin" style="float: right;">0</span></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="<?php  echo base_url('ticket/pending_tickets'); ?>">Pending Tickets</a> </li>
+                                <li><a href="<?php  echo base_url('ticket/pending_tickets'); ?>">Pending Tickets <span class="new badge new-notification-admin" style="float: right;">0</span></a> </li>
                                 <li><a href="<?php  echo base_url('ticket/completed_tickets'); ?>">Completed Tickets</a> </li>
                             </ul>
                         </div>
@@ -239,11 +234,27 @@ nav .button-collapse{
                 </li>
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i></a>
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i> 
+                            <span class="new badge main-notification-span" data-badge-caption="notification(s)" style="float: right;">4</span></a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="<?php  echo base_url('sales/view_enrolled_applicant'); ?>">View Enrolled Applicants</a> </li>
-                                    <li><a href="<?php  echo base_url('sales/view_inquire_applicant'); ?>">View Inquire Applicants</a> </li>
+                                    <li>
+                                        <a class="collapsible-header padding-32" href="<?php  echo base_url('sales/view_enrolled_applicant'); ?>">
+                                            <i class="material-icons"></i>
+                                            View Enrolled Applicants
+                                            <span class="new badge enroll-notification-span" style="float: right;">4</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="collapsible-header padding-32" href="<?php  echo base_url('sales/view_inquire_applicant'); ?>">
+                                            <i class="material-icons"></i>
+                                            View Inquire Applicants
+                                            <span class="new badge inquire-notification-span" style="float: right;">4</span>
+                                        </a>
+                                    </li>
+                                    <!-- <li><a href="<?php  echo base_url('sales/view_enrolled_applicant'); ?>">View Enrolled Applicants 
+                                        </a> <span class="new badge"  style="float: right;">4</span></li>
+                                    <li><a href="<?php  echo base_url('sales/view_inquire_applicant'); ?>">View Inquire Applicants</a> </li> -->
                                 </ul>
                             </div>
                         </li>
