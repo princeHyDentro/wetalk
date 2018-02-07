@@ -100,6 +100,17 @@
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <?php $is_logged_in   = $this->session->userdata('is_logged_in'); ?>
+<?php if($is_logged_in['user_rights'] == "encoder") : ?>
+<script>
+	$(document).ready(function($) {
+		new_notification_encoder_sales();
+		setInterval(function(){ 
+			new_notification_encoder_sales();
+		}, 30000);
+	});
+</script>
+<?php endif; ?>
+
 <?php if($is_logged_in['user_rights'] == "sales" || $is_logged_in['user_rights'] == "encoder") : ?>
 <script>
 	$(document).ready(function($) {
@@ -284,6 +295,41 @@
                     $('.notify-collection').html(head);  
             	} 
           
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                swal({   title: "Error deleting data!",   
+                     text: "I will close in 2 seconds.",   
+                     timer: 2000,  
+                     icon: "error", 
+                     type: "error",
+                     showConfirmButton: false 
+                });
+            }
+        });
+	}
+
+
+	function new_notification_encoder_sales(){
+		url           = "<?php echo base_url('ticket/encoder_get_notify'); ?>";
+		requestor_id  = "<?php echo $is_logged_in['user_id']; ?>";
+		var arr = [];
+		$.ajax({
+            url : url,
+            type: "POST",
+            data:{
+                'requestor_id' : requestor_id,
+            },
+            success: function(data)
+            {
+            	result = $.parseJSON(data)
+
+            	if(result.length > 0){
+            		var $toastContent = $('<span>Check For Pending Tickets!</span>');
+					Materialize.toast($toastContent, 6000);
+					$(".new-notification-encoder").text(result.length);
+            	}
+            	
             },
             error: function (jqXHR, textStatus, errorThrown)
             {

@@ -346,6 +346,13 @@ class Ticket extends CI_Controller {
         echo json_encode($notify);
     }
 
+    public function encoder_get_notify(){
+        $this->load->model("Admin_model");
+        $requestor_id    = $this->input->post('requestor_id');
+        $notify          = $this->Admin_model->encoder_notify_status($requestor_id);
+        echo json_encode($notify);
+    }
+
     public function administrator_reason(){
         $this->load->model("Admin_model");
         $administrator_reason = $this->uri->segment(2);

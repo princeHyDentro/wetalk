@@ -256,9 +256,16 @@ class Admin_model extends CI_Model {
         }else{
             return "empty";
         }
-        
-       
-        
+    }
+
+    public function encoder_notify_status($id){
+        $this->db->where("encoder_id", $id);
+        $this->db->where("deleted_at", NULL);
+        $this->db->where("status", "Pending");
+        $this->db->from('encoder_assign_tickets');
+
+        $query = $this->db->get()->result_array();
+        return $query;
     }
 
     public function administrator_notify_status(){      

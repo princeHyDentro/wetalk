@@ -193,7 +193,7 @@ nav .button-collapse{
             <?php if( $is_logged_in['user_rights'] === 'encoder'): ?>
                 <li>
                     <ul class="collapsible collapsible-accordion">
-                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i></a>
+                        <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Tickets<i class="material-icons right">arrow_drop_down</i>  <span class="new badge new-notification-encoder"  data-badge-caption="Pending" style="float: right;">0</span></a>
                             <div class="collapsible-body">
                                 <ul>
                                     <li><a href="<?php  echo base_url('ticket/encoder_pending_tickets'); ?>">Pending Tickets</a> </li>
