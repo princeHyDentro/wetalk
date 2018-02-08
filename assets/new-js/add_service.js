@@ -145,7 +145,6 @@ function edit_service(id)
         dataType: "JSON",
         success: function(data)
         {
-            console.log(data);
             $('[name="id"]').val(data[0].id);
             $('[name="service-name"]').val(data[0].service_name);
             $('[name="service-description"]').val(data[0].service_desc);
@@ -192,9 +191,23 @@ function save()
                 $('#modal_form').modal('close');
                 reload_table();
                 if(save_method == 'add') {
-                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
+                    swal({   title: "Succesfully Added!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
                 } else {
-                    Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
+                    swal({   title: "Succesfully Updated!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
                 }
             }
             else

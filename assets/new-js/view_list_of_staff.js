@@ -228,9 +228,25 @@ function save()
                     $('#modal_form').modal('close');
                     reload_table();
                     if(save_method == 'add') {
-                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
+                        swal({   title: "Succesfully Added!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
+                        //Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
                     } else {
-                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
+                        swal({   title: "Succesfully Updated!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
+                        //Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
                     }
                 }
                 else

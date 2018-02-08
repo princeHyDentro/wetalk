@@ -74,7 +74,6 @@ $(document).ready(function() {
 function add_person()
 {
     save_method = 'add';
-    //$('#form')[0].reset(); // reset form on modals
     var form = document.getElementById("form");
     clearForm(form);
     $('.form-group').removeClass('has-error'); // clear error class
@@ -156,9 +155,24 @@ function save()
                     $('#modal_form').modal('close');
                     reload_table();
                     if(save_method == 'add') {
-                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
+                        swal({   title: "Succesfully Added!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
+
                     } else {
-                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
+                        swal({   title: "Succesfully Updated!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
                     }
                 }
                 else
@@ -217,10 +231,25 @@ function save()
                 {
                     $('#modal_form').modal('close');
                     reload_table();
-                    if(save_method == 'add') {
-                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Added!', 3000, 'rounded')
+                   if(save_method == 'add') {
+                        swal({   title: "Succesfully Added!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
+
                     } else {
-                        Materialize.toast('<i class="material-icons">notifications</i> Succesfully Updated!', 3000, 'rounded')
+                        swal({   title: "Succesfully Updated!",   
+                           text: "I will close in 2 seconds.",   
+                           timer: 2000,  
+                           icon: "success", 
+                           type: "success",
+                           showConfirmButton: false 
+                        }).then(function() {
+                        });
                     }
                 }
                 else
