@@ -56,27 +56,28 @@
                                     	<center><h5>Page Under Construction!</h5></center>
                                         <!-- <div class="row">
                                             <div class="input-field col s12 m6 l6 ">
-                                                
                                                 <input class="validate" id="search_service" placeholder="Search for (ID ,Service Name)" type='search'>
-                                            
                                             </div>
-
                                         </div> -->
                                     </li>   
                                    <div class="table-responsive">
-                                       <!--  <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="service-table" width="100%">
+                                       <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="deleted-table" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Ticket ID</th>
-                                                    <th>Requestor Name</th>
-                                                    <th>Subject By Service</th>
-                                                    <th>Description</th>
+                                                    <th>ID</th>
+                                                    <th aria-sort="ascending" class="sorting_asc">Applicant Name</th>
+                                                    <th>Encoded By</th>
+                                                    <th>Contact</th>
+                                                    <th>Address</th>
+                                                    <th>Email</th>
+                                                    <th>Service</th>
                                                     <th>Status</th>
-                                                    <th>Date Created</th>
+                                                    <th>Date Deleted</th>
+                                                    <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
-                                        </table> -->
+                                        </table>
                                     </div>
                                 </ul>
                             </div>
@@ -90,3 +91,54 @@
 </main>
 
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
+<script>
+var save_method; //for save method string
+var table;
+ 
+$(document).ready(function() {
+    
+    table = $('#deleted-table').DataTable({ 
+        
+        "processing": true,
+        "serverSide": true,
+        "order": [],
+        "ajax": {
+            "url": "<?php echo base_url('applicant/get_all_deleted_applicant_ajax');?>",
+            "type": "POST",
+
+        },
+        "columnDefs": [
+            { 
+                "targets": [ -1 ],
+                "orderable": false,
+            },
+        ],
+        dom: '<"toolbar">Bfrtip',
+        buttons: [
+                    {
+                        text: '<i class="fa fa-refresh"></i> Reload List',
+                        action: function ( e, dt, node, config ) {
+                           reload_table();
+                        }
+                    },
+                ]
+    });
+    
+
+    $('#admin_search_privilege').on('change' , function(){
+        table.search( this.value ).draw();
+    });
+    $('#search_register_account_by_name').on('keyup' , function(){
+        table.search( this.value ).draw();
+    });
+    $('#admin_search_status').on('change' , function(){
+        table.search( this.value ).draw();
+    });
+
+});
+
+function reload_table()
+{
+    table.ajax.reload(null,false); //reload datatable ajax 
+}
+</script>

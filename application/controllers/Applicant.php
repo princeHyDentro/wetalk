@@ -46,4 +46,114 @@ class Applicant extends CI_Controller {
 		}	
 	}
     /***********************************************END OF VIEW********************************/
+    public function get_all_enrolled_applicant_ajax(){
+
+		$this->load->model("Admin_model");
+		$this->load->helper('date');
+		$is_logged_in   = $this->session->userdata('is_logged_in');
+		$list   = $this->Admin_model->admin_all_enroll_applicants();
+		$data   = array();
+		$no     = $_POST['start'];
+
+		foreach ($list as $app) {
+			$no++;
+			$row = array();
+
+			$row[] = $app->id;
+			$row[] = $app->name;
+			$row[] = $app->encoder_name;
+			$row[] = $app->contact;
+			$row[] = $app->address;
+			$row[] = $app->email;
+			$row[] = $app->service;
+			$row[] = $app->status;
+			$row[] = $app->created_at;
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw"              => $_POST['draw'],
+			"recordsTotal"      => $this->Admin_model->admin_count_all_enroll_applicants(),
+			"recordsFiltered"   => $this->Admin_model->admin_count_filtered_enroll_applicants(),
+			"data"              => $data,
+		);
+
+		echo json_encode($output);
+	}
+
+	/*---------------------------FOR INQUIRE APPLICANT--------------------*/
+	public function get_all_inquire_applicant_ajax(){
+
+		$this->load->model("Admin_model");
+		$this->load->helper('date');
+		$is_logged_in   = $this->session->userdata('is_logged_in');
+		$list   = $this->Admin_model->admin_all_inquire_applicants();
+		$data   = array();
+
+		$no     = $_POST['start'];
+
+		foreach ($list as $app) {
+			$no++;
+			$row = array();
+
+			$row[] = $app->id;
+			$row[] = $app->name;
+			$row[] = $app->encoder_name;
+			$row[] = $app->contact;
+			$row[] = $app->address;
+			$row[] = $app->email;
+			$row[] = $app->service;
+			$row[] = $app->status;
+			$row[]  = $app->created_at;
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw"              => $_POST['draw'],
+			"recordsTotal"      => $this->Admin_model->admin_count_all_inquire_applicants(),
+			"recordsFiltered"   => $this->Admin_model->admin_count_filtered_inquire_applicants(),
+			"data"              => $data,
+		);
+
+		echo json_encode($output);
+	}
+
+	/*---------------------------END FOR INQUIRE APPLICANT--------------------*/
+
+	/*---------------------------FOR DELETED APPLICANT--------------------*/
+	public function get_all_deleted_applicant_ajax(){
+
+		$this->load->model("Admin_model");
+		$this->load->helper('date');
+		$is_logged_in   = $this->session->userdata('is_logged_in');
+		$list   	    = $this->Admin_model->admin_all_delete_applicants();
+		$data   		= array();
+		$no     		= $_POST['start'];
+
+		foreach ($list as $app) {
+			$no++;
+			$row = array();
+
+			$row[] = $app->id;
+			$row[] = $app->name;
+			$row[] = $app->encoder_name;
+			$row[] = $app->contact;
+			$row[] = $app->address;
+			$row[] = $app->email;
+			$row[] = $app->service;
+			$row[] = $app->status;
+			$row[]  = $app->deleted_at;
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw"              => $_POST['draw'],
+			"recordsTotal"      => $this->Admin_model->admin_count_all_delete_applicants(),
+			"recordsFiltered"   => $this->Admin_model->admin_count_filtered_inquire_applicants(),
+			"data"              => $data,
+		);
+
+		echo json_encode($output);
+	}
+	/*---------------------------END FOR DELETED APPLICANT--------------------*/
 }

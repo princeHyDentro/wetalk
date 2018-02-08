@@ -9,6 +9,11 @@ class Admin_model extends CI_Model {
     var $column_search_ticket  = array('id','service_name','requestor_name', 'desc', 'status', 'request_for', 'created_at');
     var $order_ticket          = array('id' => 'desc');
 
+    var $table_applicant       = 'applicant';
+    var $col_applicant          = array('id','name', 'encoder_name',' contact', 'address' , 'email' , 'service', 'status' , 'created_at', 'deleted_at'); 
+    var $col_search_applicant   = array('id','name', 'encoder_name',' contact', 'address' , 'email' , 'service', 'status' , 'created_at' , 'deleted_at');
+    var $order_applicant        = array('id' => 'desc');
+
     public function __construct()
     {
         parent::__construct();
@@ -275,4 +280,198 @@ class Admin_model extends CI_Model {
         $query = $this->db->get()->result_array();
         return $query;
     }
+
+
+
+    /*---------------------------FOR ENROLLED APPLICANT--------------------*/
+
+    public function admin_all_enroll_applicants(){
+
+        $this->admin_all_enroll_applicant_data();
+        if($_POST['length'] != -1)
+            $this->db->limit($_POST['length'], $_POST['start']);
+            $query = $this->db->get();
+        return $query->result();
+    }
+
+    private function admin_all_enroll_applicant_data(){
+
+        $this->db->where("status", 'Enrolled'); 
+        $this->db->where("deleted_at", NULL);
+        $this->db->from($this->table_applicant);
+
+        $i = 0;
+
+        foreach ($this->col_search_applicant as $item){
+
+            if($_POST['search']['value'])
+            {
+
+                    if($i===0)
+                    {
+                        $this->db->group_start();
+                        $this->db->like($item, $_POST['search']['value']);
+                    }else{
+                        $this->db->or_like($item, $_POST['search']['value']);
+                    }
+
+                    if(count($this->col_search_applicant) - 1 == $i)
+                
+                       $this->db->group_end();
+            }
+                    $i++;
+        }
+
+        if(isset($_POST['order']))
+        {
+            $this->db->order_by($this->col_applicant[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        }elseif(isset($this->order_applicant)){
+            $order = $this->order_applicant;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+
+    public function admin_count_all_enroll_applicants()
+    {
+        $this->db->where("status", 'Enrolled');
+        $this->db->where("deleted_at", NULL);
+        $this->db->from($this->table_applicant);
+        return $this->db->count_all_results();
+    }
+
+    public function admin_count_filtered_enroll_applicants()
+    {
+        $this->admin_all_enroll_applicant_data();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    /*---------------------------END FOR ENROLLED APPLICANT--------------------*/
+
+    /*---------------------------FOR INQUIRED APPLICANT--------------------*/
+
+    public function admin_all_inquire_applicants(){
+
+        $this->admin_all_inquire_applicant_data();
+        if($_POST['length'] != -1)
+            $this->db->limit($_POST['length'], $_POST['start']);
+            $query = $this->db->get();
+        return $query->result();
+    }
+
+    private function admin_all_inquire_applicant_data(){
+
+
+        $this->db->where("status", 'Inquired');
+        $this->db->where("deleted_at", NULL);
+        $this->db->from($this->table_applicant);
+
+        $i = 0;
+
+        foreach ($this->col_search_applicant as $item){
+
+            if($_POST['search']['value'])
+            {
+
+                    if($i===0)
+                    {
+                        $this->db->group_start();
+                        $this->db->like($item, $_POST['search']['value']);
+                    }else{
+                        $this->db->or_like($item, $_POST['search']['value']);
+                    }
+
+                    if(count($this->col_search_applicant) - 1 == $i)
+                
+                       $this->db->group_end();
+            }
+                    $i++;
+        }
+
+        if(isset($_POST['order']))
+        {
+            $this->db->order_by($this->col_applicant[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        }elseif(isset($this->order_applicant)){
+            $order = $this->order_applicant;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+
+    public function admin_count_all_inquire_applicants()
+    {
+        $this->db->where("status", 'Inquired');
+        $this->db->where("deleted_at", NULL);
+        $this->db->from($this->table_applicant);
+        return $this->db->count_all_results();
+    }
+
+    public function admin_count_filtered_inquire_applicants()
+    {
+        $this->admin_all_inquire_applicant_data();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    
+    /*---------------------------END FOR INQUIRED APPLICANT--------------------*/
+
+    /*---------------------------FOR DELETED APPLICANT--------------------*/
+    public function admin_all_delete_applicants(){
+
+        $this->admin_all_delete_applicant_data();
+        if($_POST['length'] != -1)
+            $this->db->limit($_POST['length'], $_POST['start']);
+            $query = $this->db->get();
+        return $query->result();
+    }
+
+    private function admin_all_delete_applicant_data(){
+
+
+        $this->db->where('deleted_at IS NOT NULL', null, false);
+        $this->db->from($this->table_applicant);
+
+        $i = 0;
+
+        foreach ($this->col_search_applicant as $item){
+
+            if($_POST['search']['value'])
+            {
+
+                    if($i===0)
+                    {
+                        $this->db->group_start();
+                        $this->db->like($item, $_POST['search']['value']);
+                    }else{
+                        $this->db->or_like($item, $_POST['search']['value']);
+                    }
+
+                    if(count($this->col_search_applicant) - 1 == $i)
+                
+                       $this->db->group_end();
+            }
+                    $i++;
+        }
+
+        if(isset($_POST['order']))
+        {
+            $this->db->order_by($this->col_applicant[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        }elseif(isset($this->order_applicant)){
+            $order = $this->order_applicant;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+
+    public function admin_count_all_delete_applicants()
+    {
+        $this->db->where('deleted_at IS NOT NULL', null, false);
+        $this->db->from($this->table_applicant);
+        return $this->db->count_all_results();
+    }
+
+    public function admin_count_filtered_delete_applicants()
+    {
+        $this->admin_all_delete_applicant_data();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    /*---------------------------END FOR DELETED APPLICANT--------------------*/
 }
