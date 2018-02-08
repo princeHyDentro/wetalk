@@ -217,9 +217,8 @@
                 {
                 	if(result.length > 0){
                 		$('.new-notification-admin').html(result.length);   
-                		var $toastContent = $('<span>Ticket Recieved</span>');
-						Materialize.toast($toastContent, 2000);
-
+                		Materialize.toast('<i class="material-icons">notifications</i> Ticket Recieved!', 3000, 'rounded');
+              
                 		$.each(result, function(index, val) {
 	                		title = (val.request_for == 'update') ? "Request For Applicant Update" : "Request For Applicant Delete";
 	                		data = [
@@ -271,10 +270,8 @@
 				$(".main-notification-span").text(result.total_notify);
                 
             	if(result.data.length > 0){
+            		Materialize.toast('<i class="material-icons">notifications</i> Check For Notification Recieved!', 3000, 'rounded');
             		
-            		var $toastContent = $('<span>Check For Notification Recieved</span>');
-							Materialize.toast($toastContent, 10000);
-
 					$.each(result.data, function(index, val) {
                 		title = (val.request_for_type == 'update') ? "Request For Applicant Update "+val.approval_type+"!" : "Request For Applicant Delete "+val.approval_type+"!";
                 		data = [
@@ -325,8 +322,7 @@
             	result = $.parseJSON(data)
 
             	if(result.length > 0){
-            		var $toastContent = $('<span>Check For Pending Tickets!</span>');
-					Materialize.toast($toastContent, 6000);
+            		Materialize.toast('<i class="material-icons">notifications</i> Check For Pending Tickets!', 3000, 'rounded');
 					$(".new-notification-encoder").text(result.length);
             	}
             	

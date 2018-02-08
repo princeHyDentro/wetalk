@@ -63,9 +63,8 @@ function admin_pending_ticket_notification(){
                 if(data)
                 {
                    if(result.length > 0){
-                        $('.new-notification-admin').html(result.length);   
-                        var $toastContent = $('<span>Ticket Recieved</span>');
-                        Materialize.toast($toastContent, 1000);
+                        $('.new-notification-admin').html(result.length);  
+                        Materialize.toast('<i class="material-icons">notifications</i> Ticket Recieved!', 3000, 'rounded'); 
 
                         $.each(result, function(index, val) {
                             title = (val.request_for == 'update') ? "Request For Applicant Update" : "Request For Applicant Delete";

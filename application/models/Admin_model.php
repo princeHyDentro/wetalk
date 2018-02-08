@@ -474,4 +474,11 @@ class Admin_model extends CI_Model {
         return $query->num_rows();
     }
     /*---------------------------END FOR DELETED APPLICANT--------------------*/
+
+    public function resotore_by_id($id)
+    {
+        $data  = array('deleted_at' => NULL );
+        $this->db->where('id', $id);
+        $this->db->update($this->table_applicant, $data);
+    }
 }

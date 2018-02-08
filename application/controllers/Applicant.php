@@ -68,6 +68,8 @@ class Applicant extends CI_Controller {
 			$row[] = $app->service;
 			$row[] = $app->status;
 			$row[] = $app->created_at;
+			
+
 			$data[] = $row;
 		}
 
@@ -120,6 +122,7 @@ class Applicant extends CI_Controller {
 
 	/*---------------------------END FOR INQUIRE APPLICANT--------------------*/
 
+
 	/*---------------------------FOR DELETED APPLICANT--------------------*/
 	public function get_all_deleted_applicant_ajax(){
 
@@ -134,15 +137,18 @@ class Applicant extends CI_Controller {
 			$no++;
 			$row = array();
 
-			$row[] = $app->id;
-			$row[] = $app->name;
-			$row[] = $app->encoder_name;
-			$row[] = $app->contact;
-			$row[] = $app->address;
-			$row[] = $app->email;
-			$row[] = $app->service;
-			$row[] = $app->status;
+			$row[]  = $app->id;
+			$row[]  = $app->name;
+			$row[]  = $app->encoder_name;
+			$row[]  = $app->contact;
+			$row[]  = $app->address;
+			$row[]  = $app->email;
+			$row[]  = $app->service;
+			$row[]  = $app->status;
 			$row[]  = $app->deleted_at;
+			$row[] = '
+				<a class="btn-floating waves-effect waves-light blue" onclick="restore('.$app->id.')" href="javascript:void(0)" title="restore applicant"><i class="material-icons">restore</i></a>
+			';
 			$data[] = $row;
 		}
 
@@ -156,4 +162,10 @@ class Applicant extends CI_Controller {
 		echo json_encode($output);
 	}
 	/*---------------------------END FOR DELETED APPLICANT--------------------*/
+	public function ajax_restore_applicant($id)
+    {
+    	$this->load->model("Admin_model");
+        $this->Admin_model->resotore_by_id($id);
+        echo json_encode(array("status" => TRUE));
+    }
 }

@@ -53,11 +53,14 @@
                             <div class="collapsible-body teal lighten-5" style="display: none;">
                                 <ul class="collection">
                                     <li>
-                                        <!-- <div class="row">
-                                            <div class="input-field col s12 m6 l6 ">
-                                                <input class="validate" id="search_service" placeholder="Search for (ID ,Service Name)" type='search'>
+                                        <div class="row">
+                                            <div class="input-field col s12 m12 l12 ">
+                                                <label class="active"><h5>Search Field : </h5></label>
                                             </div>
-                                        </div> -->
+                                            <div class="input-field col s12 m6 l6 ">
+                                                <input class="validate" id="applicant_inquire" placeholder="Search for (ID ,Service, Encoder, Applicant, Email ,Date created)" type='search'>
+                                            </div>
+                                        </div>   
                                     </li>   
                                    <div class="table-responsive">
                                         <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="inquire-table" width="100%">
@@ -124,16 +127,9 @@ $(document).ready(function() {
     });
     
 
-    $('#admin_search_privilege').on('change' , function(){
+    $('#applicant_inquire').on('keyup' , function(){
         table.search( this.value ).draw();
     });
-    $('#search_register_account_by_name').on('keyup' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#admin_search_status').on('change' , function(){
-        table.search( this.value ).draw();
-    });
-
 });
 
 function reload_table()

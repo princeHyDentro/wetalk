@@ -53,12 +53,14 @@
                             <div class="collapsible-body teal lighten-5" style="display: none;">
                                 <ul class="collection">
                                     <li>
-                                    	<center><h5>Page Under Construction!</h5></center>
-                                        <!-- <div class="row">
-                                            <div class="input-field col s12 m6 l6 ">
-                                                <input class="validate" id="search_service" placeholder="Search for (ID ,Service Name)" type='search'>
+                                       <div class="row">
+                                            <div class="input-field col s12 m12 l12 ">
+                                                <label class="active"><h5>Search Field : </h5></label>
                                             </div>
-                                        </div> -->
+                                            <div class="input-field col s12 m6 l6 ">
+                                                <input class="validate" id="applicant_deleted" placeholder="Search for (ID ,Service, Encoder, Applicant, Email ,Date deleted)" type='search'>
+                                            </div>
+                                        </div>   
                                     </li>   
                                    <div class="table-responsive">
                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="deleted-table" width="100%">
@@ -73,7 +75,7 @@
                                                     <th>Service</th>
                                                     <th>Status</th>
                                                     <th>Date Deleted</th>
-                                                    <!-- <th>Action</th> -->
+                                                    <th>Restore</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -125,20 +127,49 @@ $(document).ready(function() {
     });
     
 
-    $('#admin_search_privilege').on('change' , function(){
+    $('#applicant_deleted').on('keyup' , function(){
         table.search( this.value ).draw();
     });
-    $('#search_register_account_by_name').on('keyup' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#admin_search_status').on('change' , function(){
-        table.search( this.value ).draw();
-    });
+
 
 });
 
 function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
+}
+
+
+function restore(id){
+    swal({
+        title: "Are you sure restore this data?",
+        text: "Once restored, you will not see this applicant on deleted page!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+                $.ajax({
+                    url : "<?php echo base_url('applicant/ajax_restore_applicant');?>/"+id,
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function(data)
+                    {
+                        swal("Poof! Applicant data has been restored!", {
+                            icon: "success",
+                        });
+                        reload_table();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert('Error deleting data');
+                    }
+                });
+           
+        } else {
+            swal("Restore action has been cancelled!");
+        }
+    });
 }
 </script>
