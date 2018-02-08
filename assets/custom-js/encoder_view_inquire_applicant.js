@@ -31,10 +31,7 @@ $(document).ready(function() {
                 ]
     });
 
-    $('#admin_search_status').on('change' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#search_register_account_by_name').on('keyup' , function(){
+    $('#search_inquire_applicant').on('keyup' , function(){
         table.search( this.value ).draw();
     });
 

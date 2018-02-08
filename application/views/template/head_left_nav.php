@@ -235,21 +235,21 @@ nav .button-collapse{
                 <li>
                     <ul class="collapsible collapsible-accordion">
                         <li> <a class="collapsible-header padding-32"><i class="material-icons">folder_open</i>Applicant<i class="material-icons right">arrow_drop_down</i> 
-                            <span class="new badge main-notification-span" data-badge-caption="notification(s)" style="float: right;">4</span></a>
+                            <span class="new badge main-notification-span" data-badge-caption="notification(s)" style="float: right;">0</span></a>
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
                                         <a class="collapsible-header padding-32" href="<?php  echo base_url('sales/view_enrolled_applicant'); ?>">
                                             <i class="material-icons"></i>
                                             View Enrolled Applicants
-                                            <span class="new badge enroll-notification-span" style="float: right;">4</span>
+                                            <span class="new badge enroll-notification-span" style="float: right;">0</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="collapsible-header padding-32" href="<?php  echo base_url('sales/view_inquire_applicant'); ?>">
                                             <i class="material-icons"></i>
                                             View Inquire Applicants
-                                            <span class="new badge inquire-notification-span" style="float: right;">4</span>
+                                            <span class="new badge inquire-notification-span" style="float: right;">0</span>
                                         </a>
                                     </li>
                                     <!-- <li><a href="<?php  echo base_url('sales/view_enrolled_applicant'); ?>">View Enrolled Applicants 

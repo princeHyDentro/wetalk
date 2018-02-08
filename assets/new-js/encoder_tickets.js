@@ -33,7 +33,6 @@ $(document).ready(function() {
     });
     
     $('#filter-status').on('change' , function(){
-        // alert(this.value)
         table.search( this.value ).draw();
     });
     $('#search_tickets').on('keyup' , function(){

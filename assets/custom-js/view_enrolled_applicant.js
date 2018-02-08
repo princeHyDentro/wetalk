@@ -35,17 +35,11 @@ $(document).ready(function() {
 
     });
     
-    // $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
 
-    $('#admin_search_privilege').on('change' , function(){
+    $('#search_enroll_applicant').on('keyup' , function(){
         table.search( this.value ).draw();
     });
-    $('#search_register_account_by_name').on('keyup' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#admin_search_status').on('change' , function(){
-        table.search( this.value ).draw();
-    });
+
 
     //set input/textarea/select event when change value, remove class error and remove text help block 
     $("input").change(function(){

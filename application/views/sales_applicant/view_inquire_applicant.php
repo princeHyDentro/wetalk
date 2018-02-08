@@ -14,7 +14,7 @@
     padding-bottom     : 7px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-} 
+}
 
 .filter{
     margin-left        : 30px;
@@ -165,18 +165,13 @@ th{
                                 <ul class="collection">
                                     <li>
                                         <div class="row">
-                                            <div class="input-field col s6">
-                                                <input class="validate" id="search_register_account_by_name" placeholder="Search" type='search'>
+                                            <div class="input-field col s12 m12 l12 ">
+                                                <label class="active"><h5>Search Field : </h5></label>
                                             </div>
-                                            <div class="input-field col s6">
-                                                <select aria-controls="myTable" class="validate" id="admin_search_status" name="myTable_length">
-                                                     <option value="" disabled selected>Search your option</option>
-                                                    <option value="">All</option>
-                                                    <option value="Inquired">Inquired</option>
-                                                    <option value="Enrolled">Enrolled</option>
-                                                </select>
+                                            <div class="input-field col s12 m6 l6 ">
+                                                <input class="validate" id="search_inquire_applicant" placeholder="Search for (ID ,Service, Encoder, Applicant, Email ,Date created)" type='search'>
                                             </div>
-                                        </div>
+                                        </div> 
                                     </li>   
                                    <div class="table-responsive">
                                         <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="sales-table" width="100%">

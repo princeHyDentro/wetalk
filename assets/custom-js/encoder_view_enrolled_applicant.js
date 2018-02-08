@@ -32,13 +32,7 @@ $(document).ready(function() {
     });
     
 
-    $('#admin_search_privilege').on('change' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#search_register_account_by_name').on('keyup' , function(){
-        table.search( this.value ).draw();
-    });
-    $('#admin_search_status').on('change' , function(){
+    $('#search_enrolled_applicant').on('keyup' , function(){
         table.search( this.value ).draw();
     });
 
@@ -47,10 +41,12 @@ $(document).ready(function() {
         $(this).parent().parent().removeClass('has-error');
         $(this).next().empty();
     });
+
     $("textarea").change(function(){
         $(this).parent().parent().removeClass('has-error');
         $(this).next().empty();
     });
+
     $("select").change(function(){
         $(this).parent().parent().removeClass('has-error');
         $(this).next().empty();

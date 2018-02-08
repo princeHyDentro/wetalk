@@ -135,11 +135,7 @@ th{
 </style>
 
 <?php require_once(realpath(APPPATH.'views/template/head_left_nav.php')); ?>
-<?php $is_logged_in = $this->session->userdata('is_logged_in');
-// echo "<pre>";
-// print_r($is_logged_in);
-// echo "</pre>";
-?>
+<?php $is_logged_in = $this->session->userdata('is_logged_in');?>
 <main>
     <p></p>
     <div class="container">
@@ -158,6 +154,14 @@ th{
                                 <ul class="collection">
                                     <li>
                                         <div class="row">
+                                            <div class="input-field col s12 m12 l12 ">
+                                                <label class="active"><h5>Search Field : </h5></label>
+                                            </div>
+                                            <div class="input-field col s12 m6 l6 ">
+                                                <input class="validate" id="search_tickets" placeholder="Search for (ID ,Service, status, Date Created)" type='search'>
+                                            </div>
+                                        </div>  
+                                       <!--  <div class="row">
                                             <div class="input-field col s6">
                                                 <input class="validate" id="search_tickets" placeholder="Search " type='search'>
                                             </div>
@@ -169,7 +173,7 @@ th{
                                                     <option value="Complete">Complete</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </li>   
                                    <div class="table-responsive">
                                         <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="sales-table" width="100%">
