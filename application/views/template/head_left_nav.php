@@ -116,7 +116,7 @@ nav .button-collapse{
                 </div>
             </li> -->
             <li>
-                <a href="#"><i class="material-icons">face</i>Profile</a>
+                <a href="<?php echo base_url('profile'); ?>"><i class="material-icons">face</i>Profile</a>
             </li>
 
             <li>
