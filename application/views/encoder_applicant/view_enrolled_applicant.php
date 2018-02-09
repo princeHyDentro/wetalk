@@ -169,7 +169,7 @@ th{
                                         </div> 
                                     </li>   
                                    <div class="table-responsive">
-                                        <table cellspacing="0" class=" teal  bordered highlight striped responsive-table no-footer" id="sales-table" width="100%">
+                                        <table cellspacing="0" style="border: 1px solid black !important;" class=" teal  bordered highlight striped responsive-table no-footer" id="sales-table" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>

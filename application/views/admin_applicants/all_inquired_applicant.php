@@ -123,6 +123,52 @@ $(document).ready(function() {
                            reload_table();
                         }
                     },
+                    {
+                        extend: 'print',
+                        header: true,
+                        footer: false,
+                        text: 'Print Report',
+                        autoPrint: true,
+                        exportOptions: {
+                            columns: ':visible',
+                        },
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ],
+                        },
+                        messageTop: function () {
+                            return '<div style="text-align:right;"><img src="http://localhost/wetalk/assets/logo/logo2.png" style="height: 56px;margin-top: 5px;" alt="" class="responsive-img valign profile-image-login"></div>';
+                        },
+                        customize: function (win) {
+                            $(win.document.body).find('table').addClass('display').css('font-size', '12px');
+                            $(win.document.body).find('tr:nth-child(odd) td').each(function(index){
+                                $(this).css('background-color','#D0D0D0');
+                            });
+                            
+                            $(win.document.body).find('h1').css('text-align','center');
+                            $(win.document.body).find('h1').text('TLC WETALK REPORT');
+                            $(win.document.body).find('h1').addClass('display').css('font-variant', 'all-petite-caps');
+                            $(win.document.body).find('h1').addClass('display').css('font-weight', '500');
+
+
+                        },
+                        messageBottom: null
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Download Excel Report',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ],
+                        },
+                        messageTop: 'TLC WETALK REPORT'
+
+                    },
+                    {
+                        extend: 'copy',
+                        text: 'Copy Data',
+                        exportOptions: {
+                           columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ],
+                        },
+                    }
                 ]
     });
     
