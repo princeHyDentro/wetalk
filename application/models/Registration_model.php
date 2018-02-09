@@ -14,6 +14,17 @@ class Registration_model extends CI_Model {
         $this->load->database();
     }
 
+    public function insert_file($filename, $title)
+    {
+        $data = array(
+            'filename'      => $filename,
+            'title'         => $title
+        );
+        $this->db->insert('files', $data);
+        return $this->db->insert_id();
+    }
+
+
     public function _tableStafServices(){
         $query = $this->db->query('SELECT * FROM services');
 
@@ -212,5 +223,8 @@ class Registration_model extends CI_Model {
         $data  = array('deleted_by' => NULL , 'deleted_at' => NULL );
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
+    }
+    public function updateProfile(){
+        
     }
 }

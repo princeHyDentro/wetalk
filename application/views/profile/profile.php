@@ -106,15 +106,26 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 </style>
 
 <?php require_once(realpath(APPPATH.'views/template/head_left_nav.php')); ?>
+<link rel="stylesheet" href="<?php echo base_url('assets/dropify/css/dropify.css'); ?>">
 <div class="container profile-main-container">
 	<div class="row">
 		<div class="col s4">
 			<div class="card">
 				<div class="cover-image card-image waves-effect waves-block waves-light">
-					<img class="activator" src="http://i.pravatar.cc/200">
+					<?php if($user_information['user_info'][0]['profile_picture']):?>
+						<img src="<?php echo base_url('assets/profile_picture/').''.$user_information['user_info'][0]['profile_picture']; ?>" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
+					<?php else:?>
+						<img class="activator" src="http://i.pravatar.cc/200">
+					<?php endif;?>
+					
 				</div>
 				<figure class="profile-picture">
-					<img src="http://i.pravatar.cc/200" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
+					<?php if($user_information['user_info'][0]['profile_picture']):?>
+						<img src="<?php echo base_url('assets/profile_picture/').''.$user_information['user_info'][0]['profile_picture']; ?>" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
+					<?php else:?>
+						<img src="http://i.pravatar.cc/200" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
+					<?php endif;?>
+					
 				</figure>
 				<div class="card-content profile-content">
 					<span class="card-title grey-text text-darken-4 center-align"> <?php echo $is_logged_in['user_full_name'] ?></span>
@@ -123,7 +134,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 			<div class="divider"></div>
 			<div class="card">
 				<ul class="fomr-div" style="transform: translateX(0px);">
-					<li><a href="#"><i class="material-icons">perm_media</i> &nbsp;Upload Profile Picture</a></li>
+					<li><a href="#" class="upload-prof-pic"><i class="material-icons">perm_media</i> &nbsp;Upload Profile Picture</a></li>
 					<li><a href="<?php echo base_url('dashboard'); ?>"><i class="material-icons">arrow_back</i> &nbsp;Back to Dashboard</a></li>
 				</ul>
 			</div>
@@ -325,10 +336,81 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 		</div>
 	</div>
 </div>
+<div id="upload-picture" class="modal">
+	<div class="modal-content">
+		<h4>Upload Profile Picture</h4>
+		<input type="file" id="file" class="dropify" />
+		<div class="modal-footer">
+		<button class="btn modal-action waves-effect waves-green" id="upload" type="button">Upload</button>
+		<button class="btn modal-action modal-close waves-effect waves-green" id="upload" type="button">Cancel</button>
+	</div>
+	</div>
+	
+</div>
+
 
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
+<script src="<?php echo base_url('assets/dropify/js/dropify.js'); ?>"></script>
+
 <script>
+
+
 	$(document).ready(function(){
+		$('.dropify').dropify();
+		$('.modal').modal();
+
+		$('#upload').on('click', function () {
+
+            var file_data = $('#file').prop('files')[0];
+            var form_data = new FormData();
+            var user_id = "<?php echo $user_information['user_info'][0]['id']; ?>";
+            form_data.append('file', file_data);
+            $.ajax({
+                url: '<?php echo base_url('profile/do_upload') ?>/'+user_id, // point to server-side controller method
+                dataType: 'text', // what to expect back from the server
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function (response) {
+
+                	$("#upload-picture").modal('close');
+
+                	swal({   title: "Succesfully uploaded!",   
+	                   text: "I will close in 2 seconds.",   
+	                   timer: 2000,  
+	                   icon: "success", 
+	                   type: "success",
+	                   showConfirmButton: false 
+	                }).then(function() {
+	                   location.reload()
+	                });
+                   // $('#msg').html(response); // display success response from the server
+                },
+                error: function (response) {
+
+                	swal({   title: response,   
+	                   text: "I will close in 2 seconds.",   
+	                   timer: 2000,  
+	                   icon: "warning", 
+	                   type: "warning",
+	                   showConfirmButton: false 
+	                }).then(function() {
+	                   location.reload()
+	                });
+                  //  $('#msg').html(response); // display error response from the server
+                }
+            });
+        });
+
+		$('body').on('click', '.upload-prof-pic', function(event){
+			event.preventDefault();
+			 $('#upload-picture').modal('open');
+		});
+
+
+
 		$('body').on('click', '.edit-button', function(){
 			$(this).closest('.hoverable').find('p').show(); 
 			$(this).parent().hide();
