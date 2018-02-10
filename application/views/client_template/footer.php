@@ -1,54 +1,151 @@
-        </div>
 
-        <!-- End Page Container -->
-    </div>
-<footer class="w3-container w3-teal w3-center w3-margin-top">
-	<p>Find me on social media.</p>
-	<i class="fa fa-facebook-official w3-hover-opacity"></i>
-	<i class="fa fa-instagram w3-hover-opacity"></i>
-	<i class="fa fa-snapchat w3-hover-opacity"></i>
-	<i class="fa fa-pinterest-p w3-hover-opacity"></i>
-	<i class="fa fa-twitter w3-hover-opacity"></i>
-	<i class="fa fa-linkedin w3-hover-opacity"></i>
-	<!-- <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> --></p>
-</footer>
-<script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+	<a class="scroll-to-top rounded" href="#page-top">
+		<i class="fa fa-angle-up"></i>
+	</a>
+	<!-- Logout Modal-->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary modal-action modal-close" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="<?php echo base_url('login/logout') ?>">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<!--update password -->
+	<div class="modal fade" id="resetPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+				</div>
+				<div class="modal-body">
+					<form action="#" method="get" accept-charset="utf-8">
+						<?php $is_logged_in = $this->session->userdata('is_logged_in'); ?>
+
+						<input type="hidden" class="user-email" value="<?php echo $is_logged_in['user_email']; ?>" name="user-email"/> 
+						<input type="hidden" class="user-id" value="<?php echo $is_logged_in['user_id']; ?>" name="user-id"/> 
+						<div class="col-sm-12 custom-border">
+							<div class="success-text" style="display: none;"></div>                     
+
+							<div class="form-group hide-form">
+								<label>New Password</label>
+								<input type="password" name="new_password" name="new_password" id="new_password" placeholder="Enter your new password here.." class="form-control">
+								<div class="help-block-new"></div>
+							</div>
+							<div class="form-group hide-form">
+								<label>Confirm Password</label>
+								<input type="password" name="confirm_password" name="confirm_password" id="confirm_password" placeholder="Confirm password here.." class="form-control">
+								<div class="help-block-new"></div>
+							</div>  
+							<div class="alert alert-warning error-same-pass" style="display: none;"></div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary modal-action modal-close" id="close-form " type="button">Cancel</button>
+							<button class="btn btn-primary" type="button" id="change-password" data-dismiss="">Send</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<style type="text/css" media="screen">
+	.swal-title{
+		font-size: 15px;
+	}
+</style>
 </body>
-</html>
+	<!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
+		
+		<script type="text/javascript" src="<?php echo base_url('assets/js/materialize.min.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/js/moment.js'); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url('assets/js/prism.js'); ?>"></script>
 
 
-<!-- <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/materialize/prism.js'); ?>"></script> -->
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/jquery.dataTables.min.js'); ?>"></script>
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/dataTables.buttons.min.js');?>"></script>
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/buttons.flash.min.js');?>"></script>
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/jszip.min.js');?>"></script>
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/pdfmake.min.js');?>"></script>
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/vfs_fonts.js');?>"></script>
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/buttons.html5.min.js');?>"></script>
+		<script type="text/javascript" language="javascript" src="<?php echo base_url('assets/datatables/buttons.print.min.js');?>"></script>
+		<script src="<?php echo base_url('assets/datetimepicker/build/jquery.datetimepicker.full.min.js'); ?>"></script>
+		<script src="<?php echo base_url('assets/custom-js/login-and-registration.js'); ?>"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
-$(".onclick-link").click(function(e){
-	e.preventDefault();
-	var base_url = window.location.origin;
-	var host   = window.location.host;
-	var redirect = $(this).data('id');
-	if(redirect == 0){
-		window.location.href = base_url+"/wetalk/client_pm";
-	}else if(redirect == 1){
-		window.location.href = base_url+"/wetalk/client_pm/messages/3";
-	}else if(redirect == 2){
-		window.location.href = base_url+"/wetalk/client_pm/messages/2";
-	}else if(redirect == 4){
-		window.location.href = base_url+"/wetalk/client_pm/send";
-	}
-});
-// Toggle between showing and hiding the sidebar when clicking the menu icon
-var mySidebar = document.getElementById("mySidebar");
+	$(document).ready(function($) {
+		
 
-function w3_open() {
-	if (mySidebar.style.display === 'block') {
-		mySidebar.style.display = 'none';
-	} else {
-		mySidebar.style.display = 'block';
-	}
-}
+		$('.dropdown-button').dropdown({
+		      inDuration: 300,
+		      outDuration: 225,
+		      constrainWidth: false,
+		      // hover: true,
+		      gutter: 0,
+		      belowOrigin: false,
+		      alignment: 'left',
+		      stopPropagation: false
+		    }
+		  );
 
-// Close the sidebar with the close button
-function w3_close() {
-	mySidebar.style.display = "none";
-}
+		$(".side-nav-collapse").sideNav();
+		
+		$.datetimepicker.setLocale('en');
+
+		$('.datepicker').datetimepicker({
+			onGenerate:function( ct ){
+				$(this).css({'background': '#009688', 'padding':0, 'padding-top': '10px'});
+				$(this).find('.xdsoft_label').css({'background': '#009688'});
+				$(this).find('.xdsoft_calendar').css({'background': '#fff'});
+				$(this).find('.xdsoft_datepicker').css({'margin-left': 0,'width': '275px'});
+				$(this).find('th').css({'background': '#009688', 'color': '#fff', 'border-color': '#009688'});
+				$(this).find('.xdsoft_date > div').css({'padding': '7px'});
+				$(this).find('.xdsoft_current ').css({'background': '#009688'});
+			},
+
+			closeOnDateSelect: true,
+			timepicker: false,
+			format: 'Y-m-d',
+			mask:true,
+			scrollInput: false
+		});
+
+		$('select').material_select();
+
+		$('.modal').modal({
+			dismissible: true,
+			opacity: .5,
+			inDuration: 300,
+			outDuration: 200,
+			startingTop: '4%',
+			endingTop: '10%',
+			ready: function(modal, trigger) {
+			},
+			complete: function() {
+				$('#services option:selected').each(function(i, sel){ 
+					$(sel).attr('data-id',''); 
+				});
+				$('#services option:not(:selected)').each(function(i, sel){ 
+					$(sel).attr('data-id',''); 
+				});
+			}
+		});
+
+		$.each($(':checkbox'), function(k, v) {
+		    var label = $(this).closest('label');
+		    $(this).insertBefore(label);
+		});
+	});
+
 </script>
+
+</html>

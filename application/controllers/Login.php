@@ -51,20 +51,24 @@ class Login extends CI_Controller {
 			}
 			echo "succeeded-admin";
 		}else{
-			echo "failed";
+			$client_result = $this->login_model->user_login($user_name,$user_password);
+			if($client_result){
+				$sess_array = array();
+				foreach($client_result as $row){
+					$sess_array = array(
+						'user_rights'	=> "applicant",
+						'user_name' 	=> $row->username,
+						'user_email' 	=> $row->email,
+						'user_full_name'=> $row->name,
+						'user_id' 		=> $row->id
+					);
+					$this->session->set_userdata('is_logged_in', $sess_array);
+				}
+				echo "succeeded-client";
+			}else{
+				echo "failed";
+			}
 		}
-		// else{
-		// 	$client_result = $this->login_model->user_login($user_name,$user_password);
-		// 	if($client_result){
-		// 		$sess_array = array();
-		// 		foreach($client_result as $row){
-		// 			$this->session->set_userdata('is_logged_in', $row);
-		// 		}
-		// 		echo "succeeded-client";
-		// 	}else{
-		// 		echo "failed";
-		// 	}
-		// }
 	}
 	
 	public function logout(){

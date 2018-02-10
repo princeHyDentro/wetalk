@@ -115,7 +115,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 					<?php if($user_information['user_info'][0]['profile_picture']):?>
 						<img src="<?php echo base_url('assets/profile_picture/').''.$user_information['user_info'][0]['profile_picture']; ?>" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
 					<?php else:?>
-						<img class="activator" src="http://i.pravatar.cc/200">
+						<img class="activator" src="<?php echo base_url('assets/logo/myAvatar.png'); ?>">
 					<?php endif;?>
 					
 				</div>
@@ -123,18 +123,22 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 					<?php if($user_information['user_info'][0]['profile_picture']):?>
 						<img src="<?php echo base_url('assets/profile_picture/').''.$user_information['user_info'][0]['profile_picture']; ?>" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
 					<?php else:?>
-						<img src="http://i.pravatar.cc/200" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
+						<img src="<?php echo base_url('assets/logo/myAvatar200.png'); ?>" alt="profile picture" class="profile-responsive-image circle z-depth-2 activator">
 					<?php endif;?>
-					
 				</figure>
 				<div class="card-content profile-content">
-					<span class="card-title grey-text text-darken-4 center-align"> <?php echo $is_logged_in['user_full_name'] ?></span>
+					<span class="card-title grey-text text-darken-4 center-align"> 
+						<?php 
+							echo $user_information['user_info'][0]['fname'].' '.$user_information['user_info'][0]['middle'].' '.$user_information['user_info'][0]['lname'];
+						?>
+					</span>
 				</div>
 			</div>
 			<div class="divider"></div>
 			<div class="card">
 				<ul class="fomr-div" style="transform: translateX(0px);">
 					<li><a href="#" class="upload-prof-pic"><i class="material-icons">perm_media</i> &nbsp;Upload Profile Picture</a></li>
+					<li><a href="#exampleModal" class="modal-trigger"><i class="material-icons">keyboard_tab</i>Log Out</a></li>
 					<li><a href="<?php echo base_url('dashboard'); ?>"><i class="material-icons">arrow_back</i> &nbsp;Back to Dashboard</a></li>
 				</ul>
 			</div>
@@ -144,6 +148,72 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 				<li class="collection-header teal darken-3"><h5 class="white-text"> <i class="material-icons"> perm_identity </i> Personal Information</h5> </li>
 				<li class="collection-item has-reavel">
 					<ul>
+						<li>
+							<div class="row">
+								<div class="col s3">
+									<h6>  <i class="fa fa-birthday-cake"> </i>  <strong> First Name </strong></h6>
+								</div>
+								<div class="col s6 hoverable">
+									<h6> 
+										<?php if($user_information['user_info'][0]['fname']):?>
+										<?php echo $user_information['user_info'][0]['fname'];?>
+										<?php else:?>
+											Not set
+										<?php endif;?>
+										<i class="material-icons right blue-text text-darken 2 edit-button"> create </i> 
+									</h6>
+									<p class="not-visible">
+										<input placeholder="Placeholder" id="fname" value="<?php echo $user_information['user_info'][0]['fname'];?>" name="fname" type="text" class="validate">
+										<i class="material-icons right red-text text-darken 2 close-button"> close </i> 
+										<i class="material-icons right teal-text text-darken 2 save-button"> save </i> 
+									</p>
+								</div>
+							</div> 
+						</li>
+						<li>
+							<div class="row">
+								<div class="col s3">
+									<h6>  <i class="fa fa-birthday-cake"> </i>  <strong> Middle Name </strong></h6>
+								</div>
+								<div class="col s6 hoverable">
+									<h6> 
+										<?php if($user_information['user_info'][0]['middle']):?>
+										<?php echo $user_information['user_info'][0]['middle'];?>
+										<?php else:?>
+											Not set
+										<?php endif;?>
+										<i class="material-icons right blue-text text-darken 2 edit-button"> create </i> 
+									</h6>
+									<p class="not-visible">
+										<input placeholder="Placeholder" id="middle" value="<?php echo $user_information['user_info'][0]['middle'];?>" name="middle" type="text" class="validate">
+										<i class="material-icons right red-text text-darken 2 close-button"> close </i> 
+										<i class="material-icons right teal-text text-darken 2 save-button"> save </i> 
+									</p>
+								</div>
+							</div> 
+						</li>
+						<li>
+							<div class="row">
+								<div class="col s3">
+									<h6>  <i class="fa fa-birthday-cake"> </i>  <strong> Middle Name </strong></h6>
+								</div>
+								<div class="col s6 hoverable">
+									<h6> 
+										<?php if($user_information['user_info'][0]['lname']):?>
+										<?php echo $user_information['user_info'][0]['lname'];?>
+										<?php else:?>
+											Not set
+										<?php endif;?>
+										<i class="material-icons right blue-text text-darken 2 edit-button"> create </i> 
+									</h6>
+									<p class="not-visible">
+										<input placeholder="Placeholder" id="lname" value="<?php echo $user_information['user_info'][0]['lname'];?>" name="lname" type="text" class="validate">
+										<i class="material-icons right red-text text-darken 2 close-button"> close </i> 
+										<i class="material-icons right teal-text text-darken 2 save-button"> save </i> 
+									</p>
+								</div>
+							</div> 
+						</li>
 						<li>
 							<div class="row">
 								<div class="col s3">
@@ -159,11 +229,10 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 										<i class="material-icons right blue-text text-darken 2 edit-button"> create </i> 
 									</h6>
 									<p class="not-visible">
-										<input placeholder="Placeholder" id="birth_date" value="{{$user->birth_date}}" name="birth_date" type="text" class="validate datepicker">
+										<input placeholder="Placeholder" id="birth_date" value="<?php echo $user_information['user_info'][0]['birth_date'];?>" name="birth_date" type="text" class="validate datepicker">
 										<i class="material-icons right red-text text-darken 2 close-button"> close </i> 
 										<i class="material-icons right teal-text text-darken 2 save-button"> save </i> 
 									</p>
-									
 								</div>
 							</div> 
 						</li>
@@ -331,6 +400,39 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 					</ul>
 					
 				</li>
+
+				<li class="collection-header teal darken-3"><h5 class="white-text"> <i class="material-icons"> person_pin </i> Credentials</h5></li>
+				<li class="collection-item">
+					<ul>
+						<li>
+							<div class="row">
+								<div class="col s3">
+									<h6>  <i class="fa fa-phone"> </i>  <strong> Username </strong></h6>
+								</div>
+								<div class="col s6 hoverable">
+									<h6> 
+										<?php if($user_information['user_info'][0]['username']):?>
+										<?php echo $user_information['user_info'][0]['username'];?>
+										<?php else:?>
+											Not set
+										<?php endif;?>
+										<i class="material-icons right blue-text text-darken 2 edit-button"> create </i>
+									</h6>
+									<p class="not-visible">
+										<?php if($user_information['user_info'][0]['username']):?>
+										<input type="text" id="username" name="username" value="<?php echo $user_information['user_info'][0]['username'];?>" class="validate">
+										<?php else:?>
+											<input type="text" id="username" name="username" value="" class="validate">
+										<?php endif;?>
+										
+										<i class="material-icons right red-text text-darken 2 close-button"> close </i>
+										<i class="material-icons right teal-text text-darken 2 save-button"> save </i>
+									</p>
+								</div>
+							</div> 
+						</li>
+					</ul>
+				</li>
 				
 			</ul>
 		</div>
@@ -422,9 +524,9 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 		});
 
 		$('body').on('click', '.save-button', function(){
-			var parent = $( this ).parent();
-			var text = parent.siblings('h6');
-			var data = $( this ).siblings('input');
+			var parent 	= $( this ).parent();
+			var text 	= parent.siblings('h6');
+			var data 	= $( this ).siblings('input');
 			var user_id = "<?php echo $user_information['user_info'][0]['id']; ?>";
 
 			if( data.length < 1 ){
@@ -441,13 +543,14 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 		        success: function(data)
 		        {
 		        	
-		            if(data)
-		            {
-		            	var button = text.find('i');
-		            	parent.fadeOut('slow');
-		            	text.html(data).append(button).fadeIn('slow');
-		            	location.reload();		                
-		            }
+		        	console.log(data)
+		            // if(data)
+		            // {
+		            // 	var button = text.find('i');
+		            // 	parent.fadeOut('slow');
+		            // 	text.html(data).append(button).fadeIn('slow');
+		            // 	location.reload();		                
+		            // }
 		        },
 		        error: function (jqXHR, textStatus, errorThrown)
 		        {

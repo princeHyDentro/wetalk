@@ -61,6 +61,7 @@ $(document).ready(function() {
 		}
 	});
 });
+
 function clear_form(){
 	$('.form-group').show();
 	$('.success-text').hide();
@@ -94,7 +95,7 @@ function login_auth(user_name,user_password){
 				window.location.href = "dashboard";
 			}
 			if(data == 'succeeded-client'){
-				window.location.href = "profile";
+				window.location.href = "profile/applicant_profile";
 			}
 			return false;
 		 }

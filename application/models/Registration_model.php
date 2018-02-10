@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registration_model extends CI_Model {
-
+    var $applicant      = 'applicant';
     var $table          = 'users';
     var $column_order   = array('id','full_name','username','email','roles','created_at','updated_at'); 
     var $column_search  = array('id','full_name','middle','username','roles');
@@ -194,6 +194,20 @@ class Registration_model extends CI_Model {
         $this->db->from('assign_staff_service');
         $this->db->where('_userID',$id);
         $query['services'] = $this->db->get()->result_array();
+        
+        return $query; 
+    }
+    public function applicant_profile($id)
+    {
+        $data = array();
+
+        $this->db->from($this->applicant);
+        $this->db->where('id',$id);
+        $query['applicant_info'] = $this->db->get()->result_array()[0];
+       
+        // $this->db->from('assign_staff_service');
+        // $this->db->where('_userID',$id);
+        // $query['services'] = $this->db->get()->result_array();
         
         return $query; 
     }
