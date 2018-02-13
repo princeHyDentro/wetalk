@@ -13,5 +13,28 @@ class Dashboard_model extends CI_Model {
 
 		return $result;
 	}
+
+	public function chart_js_data(){
+
+		$this->db->select("created_at , status, COUNT(id) as total");
+        $this->db->from('applicant');
+        $this->db->where("Year(created_at)", date("Y"));
+        $this->db->group_by(array("Month(created_at)","Year(created_at)" , "status")); 
+        $this->db->order_by("Month(created_at)", "asc");
+
+        $data = $this->db->get()->result_array();
+        return $data;
+	}
+
+	public function chart_js_weeks(){
+		$this->db->select("created_at , status, COUNT(id) as total");
+        $this->db->from('applicant');
+        $this->db->where("Year(created_at)", date("Y"));
+        $this->db->group_by(array("Week(created_at)","Year(created_at)" , "status")); 
+        $this->db->order_by("Week(created_at)", "asc");
+
+        $data = $this->db->get()->result_array();
+        return $data;
+	}
   
 }

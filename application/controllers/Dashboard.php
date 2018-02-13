@@ -22,6 +22,62 @@ class Dashboard extends CI_Controller {
         }	
     }
 
+    public function chart_js_months(){
+        $this->load->model("Dashboard_model");
+        $list    = $this->Dashboard_model->chart_js_data();
+        $data    = array();
+        $enroll  = array();
+        $inquire = array();
+
+        foreach ($list as $key => $row) {
+            if($row['status'] == "Enrolled"){
+                $enroll[] = (int)$row['total'];
+            }
+
+            if($row['status'] == "Inquired"){
+                $inquire[] = (int)$row['total'];
+            }
+        }
+
+        $data['enroll']     = $enroll;
+        $data['inquire']    = $inquire;
+        $data['title']      = "TLC WETALK (".date("Y")." Result)";
+        echo json_encode($data);
+    }
+
+    public function chart_js_weeks(){
+        // $list    = $this->Dashboard_model->chart_js_weeks();
+  
+        $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
+        $friday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+
+
+        // $this->db->select("created_at , status, COUNT(id) as total");
+        // $this->db->from('applicant');
+        // $this->db->where("Year(created_at)", date("Y"));
+        // $this->db->group_by(array("created_at","Year(created_at)" , "status")); 
+        // $this->db->order_by("Month(created_at)", "asc");
+        
+       // $query = $this->db->query('SELECT id, status  FROM applicant WHERE created_at BETWEEN subdate(curdate(),dayofweek(curdate())+5) AND subdate(curdate(),dayofweek(curdate())-1)');
+       // $this->db->where("created_at >= DATE_SUB(NOW(),INTERVAL 1 HOUR)", NULL, FALSE);
+       // $data = $query->result();
+        
+ 
+        echo "<pre>";
+        print_r($data);
+
+        // foreach ($data as $key => $value) {
+        //            echo "<pre>";
+        //             print_r($value);
+        //         if($value['created_at'] === $monday){
+                 
+        //         }
+        // }
+
+ 
+        // return $today;
+    }
+
     public function password_reset(){
         $this->load->library('email');
 
