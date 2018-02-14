@@ -16,7 +16,7 @@ class Dashboard_model extends CI_Model {
 
 	public function chart_js_data(){
 
-		$this->db->select("created_at , status, COUNT(id) as total");
+		$this->db->select("MONTHNAME(created_at) as monthName , created_at , status, COUNT(id) as total");
         $this->db->from('applicant');
         $this->db->where("Year(created_at)", date("Y"));
         $this->db->group_by(array("Month(created_at)","Year(created_at)" , "status")); 
@@ -26,12 +26,12 @@ class Dashboard_model extends CI_Model {
         return $data;
 	}
 
-	public function chart_js_weeks(){
-		$this->db->select("created_at , status, COUNT(id) as total");
+	public function chart_js_yearly(){
+		$this->db->select("Year(created_at) as yearName , created_at , status, COUNT(id) as total");
         $this->db->from('applicant');
         $this->db->where("Year(created_at)", date("Y"));
-        $this->db->group_by(array("Week(created_at)","Year(created_at)" , "status")); 
-        $this->db->order_by("Week(created_at)", "asc");
+        $this->db->group_by(array("Year(created_at)","Year(created_at)" , "status")); 
+        $this->db->order_by("Year(created_at)", "asc");
 
         $data = $this->db->get()->result_array();
         return $data;

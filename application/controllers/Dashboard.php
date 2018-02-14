@@ -29,11 +29,517 @@ class Dashboard extends CI_Controller {
         $enroll  = array();
         $inquire = array();
 
-        foreach ($list as $key => $row) {
+       
+        $january    = 0;
+        $february   = 0;
+        $march      = 0;
+        $april      = 0;
+        $may        = 0;
+        $june       = 0;
+        $july       = 0;
+        $august     = 0;
+        $september  = 0;
+        $october    = 0;
+        $november   = 0;
+        $decembe    = 0;
+
+        $january1    = 0;
+        $february1   = 0;
+        $march1      = 0;
+        $april1      = 0;
+        $may1        = 0;
+        $june1       = 0;
+        $july1       = 0;
+        $august1     = 0;
+        $september1  = 0;
+        $october1    = 0;
+        $november1   = 0;
+        $decembe1    = 0;
+
+        if(COUNT($list) > 0){
+            foreach ($list as $key => $row) {
+
+                if($row['status'] == "Enrolled"){
+                    if($row['monthName'] == "January"){
+                        $january1    = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "February"){
+                        $february1   = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "March"){
+                        $march1      = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "April"){
+                        $april1      = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "May"){
+                        $may1        = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "June"){
+                        $june1       = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "July"){
+                        $july1       = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "August"){
+                        $august1     = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "September"){
+                        $september1  = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "October"){
+                        $october1    = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "November"){
+                        $november1   = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "December"){
+                        $decembe1    = (int)$row['total'];
+                    }
+
+                    $enroll = array(
+                        $january1    ,
+                        $february1   ,
+                        $march1      ,
+                        $april1      ,
+                        $may1        ,
+                        $june1       ,
+                        $july1       ,
+                        $august1     ,
+                        $september1  ,
+                        $october1    ,
+                        $november1   ,
+                        $decembe1    ,
+                    );
+                }
+
+                if($row['status'] == "Inquired"){
+                    
+                    if($row['monthName'] == "January"){
+                        $january    = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "February"){
+                        $february   = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "March"){
+                        $march      = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "April"){
+                        $april      = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "May"){
+                        $may        = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "June"){
+                        $june       = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "July"){
+                        $july       = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "August"){
+                        $august     = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "September"){
+                        $september  = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "October"){
+                        $october    = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "November"){
+                        $november   = (int)$row['total'];
+                    }
+                    if($row['monthName'] == "December"){
+                        $decembe    = (int)$row['total'];
+                    }
+
+                    $inquire = array(
+                        $january    ,
+                        $february   ,
+                        $march      ,
+                        $april      ,
+                        $may        ,
+                        $june       ,
+                        $july       ,
+                        $august     ,
+                        $september  ,
+                        $october    ,
+                        $november   ,
+                        $decembe    ,
+                    );
+                }
+            }
+        }else{
+
+            $enroll = array(
+                        $january1    ,
+                        $february1   ,
+                        $march1      ,
+                        $april1      ,
+                        $may1        ,
+                        $june1       ,
+                        $july1       ,
+                        $august1     ,
+                        $september1  ,
+                        $october1    ,
+                        $november1   ,
+                        $decembe1    ,
+                    );
+
+            $inquire = array(
+                        $january    ,
+                        $february   ,
+                        $march      ,
+                        $april      ,
+                        $may        ,
+                        $june       ,
+                        $july       ,
+                        $august     ,
+                        $september  ,
+                        $october    ,
+                        $november   ,
+                        $decembe    ,
+                    );
+
+        }
+        
+
+        $data['enroll']     = $enroll;
+        $data['inquire']    = $inquire;
+
+        $data['title']      = "TLC WETALK (".date("Y")." Monthly Results)";
+        echo json_encode($data);
+    }
+
+    public function chart_js_weeks(){
+        // $list    = $this->Dashboard_model->chart_js_weeks();
+        $monday     = date( 'Y-m-d', strtotime( 'monday this week' ) );
+        $tuesday    = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
+        $wednesday  = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
+        $thursday   = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
+        $friday     = date( 'Y-m-d', strtotime( 'thursday this week' ) );
+        $sturday    = date( 'Y-m-d', strtotime( 'sturday this week' ) );
+        $sunday     = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+
+        $enroll_total  = 0;
+        $inquire_total = 0;
+
+        if($monday){
+           
+            $monday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
+            $monday_data = $this->db->from('applicant');
+            $monday_data = $this->db->where("DATE(created_at)" , DATE($monday));
+            $monday_data = $this->db->group_by(array("Days" , "status")); 
+            $monday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
+            $monday_data = $this->db->get()->result_array();
+
+            if(COUNT($monday_data) > 0){
+                $monday_inquire        = 'Inquired';
+                $monday_enroll         = 'Enrolled';
+                $monday_inquire_total  = 0;
+                $monday_enroll_total   = 0;
+
+                if($monday_data[0]['status'] == 'Inquired'){
+
+                    $monday_inquire        = $monday_data[0]['status'];
+                    $monday_inquire_total  = $monday_data[0]['total'];
+
+                }elseif(isset($monday_data[1]['status']) == 'Inquired'){
+
+                    $monday_inquire_total  = $monday_data[1]['total'];
+                    $monday_inquire        = $monday_data[1]['status'];
+
+                }
+
+                if($monday_data[0]['status'] == 'Enrolled'){
+                    $monday_enroll_total   = $monday_data[0]['total'];
+                    $monday_enroll         = $monday_data[0]['status'];
+                }elseif(isset($monday_data[1]['status']) == 'Enrolled'){
+                    $monday_enroll_total   = $monday_data[1]['total'];
+                    $monday_enroll         = $monday_data[1]['status'];
+                }
+
+                $monday_data = array(
+                                array('total' => $monday_inquire_total , 'status' => $monday_inquire),
+                                array('total' => $monday_enroll_total , 'status' => $monday_enroll)
+                            );
+            }else{
+                $monday_data = array(
+                    array('total' => $enroll_total , 'status' => 'Enrolled'),
+                    array('total' => $inquire_total , 'status' => 'Inquired')
+                );
+            }
+        }
+        
+
+        if($tuesday){
+            $tuesday_data = $this->db->select('COUNT(id) as total ,status, DAYNAME(created_at) as Days');
+            $tuesday_data = $this->db->from('applicant');
+            $tuesday_data = $this->db->where("DATE(created_at)" , DATE($tuesday));
+            $tuesday_data = $this->db->group_by(array("Days" , "status")); 
+            $tuesday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
+            $tuesday_data = $this->db->get()->result_array();
+
+            if(COUNT($tuesday_data) > 0){
+                $tuesday_inquire        = 'Inquired';
+                $tuesday_enroll         = 'Enrolled';
+                $tuesday_inquire_total  = 0;
+                $tuesday_enroll_total   = 0;
+
+                if($tuesday_data[0]['status'] == 'Inquired'){
+                    $tuesday_inquire        = $tuesday_data[0]['status'];
+                    $tuesday_inquire_total  = $tuesday_data[0]['total'];
+                }elseif(isset($tuesday_data[1]['status']) == 'Inquired'){
+                    $tuesday_inquire_total  = $tuesday_data[1]['total'];
+                    $tuesday_inquire        = $tuesday_data[1]['status'];
+                }
+
+                if($tuesday_data[0]['status'] == 'Enrolled'){
+                    $tuesday_enroll_total   = $tuesday_data[0]['total'];
+                    $tuesday_enroll         = $tuesday_data[0]['status'];
+                }elseif(isset($tuesday_data[1]['status']) == 'Enrolled'){
+                    $tuesday_enroll_total   = $tuesday_data[1]['total'];
+                    $tuesday_enroll         = $tuesday_data[1]['status'];
+                }
+
+                $tuesday_data = array(
+                                array('total' => $tuesday_inquire_total , 'status' => $tuesday_inquire),
+                                array('total' => $tuesday_enroll_total , 'status' => $tuesday_enroll)
+                            );
+            }else{
+                $tuesday_data = array(
+                    array('total' => $enroll_total , 'status' => 'Enrolled'),
+                    array('total' => $inquire_total , 'status' => 'Inquired')
+                );
+            }
+        }
+
+   
+       
+
+        if($wednesday){
+            $wednesday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
+            $wednesday_data = $this->db->from('applicant');
+            $wednesday_data = $this->db->where("DATE(created_at)" , DATE($wednesday));
+            $wednesday_data = $this->db->group_by(array("Days" , "status")); 
+            $wednesday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
+            $wednesday_data = $this->db->get()->result_array();
+
+            if(COUNT($wednesday_data) > 0){
+                $wednesday_inquire        = 'Inquired';
+                $wednesday_enroll         = 'Enrolled';
+                $wednesday_inquire_total  = 0;
+                $wednesday_enroll_total   = 0;
+
+                if($wednesday_data[0]['status'] == 'Inquired'){
+
+                    $wednesday_inquire        = $wednesday_data[0]['status'];
+                    $wednesday_inquire_total  = $wednesday_data[0]['total'];
+                    $wednesday_inquire_created_at     = $wednesday_data[0]['created_at'];
+
+                }elseif(isset($wednesday_data[1]['status']) == 'Inquired'){
+                    $wednesday_inquire_total  = $wednesday_data[1]['total'];
+                    $wednesday_inquire        = $wednesday_data[1]['status'];
+                }
+
+                if($wednesday_data[0]['status'] == 'Enrolled'){
+                    $wednesday_enroll_total   = $wednesday_data[0]['total'];
+                    $wednesday_enroll         = $wednesday_data[0]['status'];
+                }elseif(isset($wednesday_data[1]['status']) == 'Enrolled'){
+                    $wednesday_enroll_total   = $wednesday_data[1]['total'];
+                    $wednesday_enroll         = $wednesday_data[1]['status'];
+                }
+
+
+                $wednesday_data = array(
+                                array('total' => $wednesday_inquire_total , 'status' => $wednesday_inquire),
+                                array('total' => $wednesday_enroll_total , 'status' => $wednesday_enroll)
+                            );
+            }else{
+                $wednesday_data = array(
+                    array('total' => $enroll_total , 'status' => 'Enrolled' ),
+                    array('total' => $inquire_total , 'status' => 'Inquired' )
+                );
+            }
+        }
+
+        if($thursday){
+            $thursday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
+            $thursday_data = $this->db->from('applicant');
+            $thursday_data = $this->db->where("DATE(created_at)" , DATE($thursday));
+            $thursday_data = $this->db->group_by(array("Days" , "status")); 
+            $thursday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
+            $thursday_data = $this->db->get()->result_array();
+
+            if(COUNT($thursday_data) > 0){
+                $thursday_inquire        = 'Inquired';
+                $thursday_enroll         = 'Enrolled';
+                $thursday_inquire_total  = 0;
+                $thursday_enroll_total   = 0;
+
+                if($thursday_data[0]['status'] == 'Inquired'){
+                    $thursday_inquire        = $thursday_data[0]['status'];
+                    $thursday_inquire_total  = $thursday_data[0]['total'];
+                }elseif(isset($thursday_data[1]['status']) == 'Inquired'){
+                    $thursday_inquire_total  = $thursday_data[1]['total'];
+                    $thursday_inquire        = $thursday_data[1]['status'];
+                }
+
+                if($thursday_data[0]['status'] == 'Enrolled'){
+                    $thursday_enroll_total   = $thursday_data[0]['total'];
+                    $thursday_enroll         = $thursday_data[0]['status'];
+                }elseif(isset($thursday_data[1]['status']) == 'Enrolled'){
+                    $thursday_enroll_total   = $thursday_data[1]['total'];
+                    $thursday_enroll         = $thursday_data[1]['status'];
+                }
+
+                $thursday_data = array(
+                                array('total' => $thursday_inquire_total , 'status' => $thursday_inquire),
+                                array('total' => $thursday_enroll_total , 'status' => $thursday_enroll)
+                            );
+            }else{
+                $thursday_data = array(
+                    array('total' => $enroll_total , 'status' => 'Enrolled'),
+                    array('total' => $inquire_total , 'status' => 'Inquired')
+                );
+            }
+        }
+
+        if($friday){
+            $friday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
+            $friday_data = $this->db->from('applicant');
+            $friday_data = $this->db->where("DATE(created_at)" , DATE($friday));
+            $friday_data = $this->db->group_by(array("Days" , "status")); 
+            $friday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
+            $friday_data = $this->db->get()->result_array();
+
+            if(COUNT($friday_data) > 0){
+                $thursday_inquire        = 'Inquired';
+                $thursday_enroll         = 'Enrolled';
+                $thursday_inquire_total  = 0;
+                $thursday_enroll_total   = 0;
+
+                if($friday_data[0]['status'] == 'Inquired'){
+                    $thursday_inquire        = $friday_data[0]['status'];
+                    $thursday_inquire_total  = $friday_data[0]['total'];
+                }elseif(isset($friday_data[1]['status']) == 'Inquired'){
+                    $thursday_inquire_total  = $friday_data[1]['total'];
+                    $thursday_inquire        = $friday_data[1]['status'];
+                }
+
+                if($friday_data[0]['status'] == 'Enrolled'){
+                    $thursday_enroll_total   = $friday_data[0]['total'];
+                    $thursday_enroll         = $friday_data[0]['status'];
+                }elseif(isset($friday_data[1]['status']) == 'Enrolled'){
+                    $thursday_enroll_total   = $friday_data[1]['total'];
+                    $thursday_enroll         = $friday_data[1]['status'];
+                }
+
+                $friday_data = array(
+                                array('total' => $thursday_inquire_total , 'status' => $thursday_inquire),
+                                array('total' => $thursday_enroll_total , 'status' => $thursday_enroll)
+                            );
+            }else{
+                $friday_data = array(
+                    array('total' => $enroll_total , 'status' => 'Enrolled'),
+                    array('total' => $inquire_total , 'status' => 'Inquired')
+                );
+            }
+        }
+
+        if($sturday){
+            $sturday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
+            $sturday_data = $this->db->from('applicant');
+            $sturday_data = $this->db->where("DATE(created_at)" , DATE($sturday));
+            $sturday_data = $this->db->group_by(array("Days" , "status")); 
+            $sturday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
+            $sturday_data = $this->db->get()->result_array();
+
+            if(COUNT($sturday_data) > 0){
+                $thursday_inquire        = 'Inquired';
+                $thursday_enroll         = 'Enrolled';
+                $thursday_inquire_total  = 0;
+                $thursday_enroll_total   = 0;
+
+                if($sturday_data[0]['status'] == 'Inquired'){
+                    $thursday_inquire        = $sturday_data[0]['status'];
+                    $thursday_inquire_total  = $sturday_data[0]['total'];
+                }elseif(isset($sturday_data[1]['status']) == 'Inquired'){
+                    $thursday_inquire_total  = $sturday_data[1]['total'];
+                    $thursday_inquire        = $sturday_data[1]['status'];
+                }
+
+                if($sturday_data[0]['status'] == 'Enrolled'){
+                    $thursday_enroll_total   = $sturday_data[0]['total'];
+                    $thursday_enroll         = $sturday_data[0]['status'];
+                }elseif(isset($sturday_data[1]['status']) == 'Enrolled'){
+                    $thursday_enroll_total   = $sturday_data[1]['total'];
+                    $thursday_enroll         = $sturday_data[1]['status'];
+                }
+
+                $sturday_data = array(
+                                array('total' => $thursday_inquire_total , 'status' => $thursday_inquire),
+                                array('total' => $thursday_enroll_total , 'status' => $thursday_enroll)
+                            );
+            }else{
+                $sturday_data = array(
+                    array('total' => $enroll_total , 'status' => 'Enrolled'),
+                    array('total' => $inquire_total , 'status' => 'Inquired')
+                );
+            }
+        }
+
+        if($sunday){
+            $sunday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
+            $sunday_data = $this->db->from('applicant');
+            $sunday_data = $this->db->where("DATE(created_at)" , DATE($sunday));
+            $sunday_data = $this->db->group_by(array("Days" , "status")); 
+            $sunday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
+            $sunday_data = $this->db->get()->result_array();
+
+            if(COUNT($sunday_data) > 0){
+                $thursday_inquire        = 'Inquired';
+                $thursday_enroll         = 'Enrolled';
+                $thursday_inquire_total  = 0;
+                $thursday_enroll_total   = 0;
+
+                if($sunday_data[0]['status'] == 'Inquired'){
+                    $thursday_inquire        = $sunday_data[0]['status'];
+                    $thursday_inquire_total  = $sunday_data[0]['total'];
+                }elseif(isset($sunday_data[1]['status']) == 'Inquired'){
+                    $thursday_inquire_total  = $sunday_data[1]['total'];
+                    $thursday_inquire        = $sunday_data[1]['status'];
+                }
+
+                if($sunday_data[0]['status'] == 'Enrolled'){
+                    $thursday_enroll_total   = $sunday_data[0]['total'];
+                    $thursday_enroll         = $sunday_data[0]['status'];
+                }elseif(isset($sunday_data[1]['status']) == 'Enrolled'){
+                    $thursday_enroll_total   = $sunday_data[1]['total'];
+                    $thursday_enroll         = $sunday_data[1]['status'];
+                }
+
+                $sunday_data = array(
+                                array('total' => $thursday_inquire_total , 'status' => $thursday_inquire),
+                                array('total' => $thursday_enroll_total , 'status'  => $thursday_enroll)
+                            );
+            }else{
+                $sunday_data = array(
+                    array('total' => $enroll_total , 'status' => 'Enrolled'),
+                    array('total' => $inquire_total , 'status' => 'Inquired')
+                );
+            }
+        }
+
+        $weeks = array_merge($monday_data , $tuesday_data , $wednesday_data , $thursday_data , $friday_data , $sturday_data , $sunday_data);
+
+        $data    = array();
+        $enroll  = array();
+        $inquire = array();
+
+        foreach ($weeks as $key => $row) {
             if($row['status'] == "Enrolled"){
                 $enroll[] = (int)$row['total'];
             }
-
             if($row['status'] == "Inquired"){
                 $inquire[] = (int)$row['total'];
             }
@@ -41,41 +547,34 @@ class Dashboard extends CI_Controller {
 
         $data['enroll']     = $enroll;
         $data['inquire']    = $inquire;
-        $data['title']      = "TLC WETALK (".date("Y")." Result)";
+
+        $data['title']      = "TLC WETALK (".date("Y")." Daily and Weekly Results)";
         echo json_encode($data);
     }
 
-    public function chart_js_weeks(){
-        // $list    = $this->Dashboard_model->chart_js_weeks();
-  
-        $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
-        $friday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+    public function chart_js_yearly(){
 
+        $this->load->model("Dashboard_model");
 
-        // $this->db->select("created_at , status, COUNT(id) as total");
-        // $this->db->from('applicant');
-        // $this->db->where("Year(created_at)", date("Y"));
-        // $this->db->group_by(array("created_at","Year(created_at)" , "status")); 
-        // $this->db->order_by("Month(created_at)", "asc");
+        $list    = $this->Dashboard_model->chart_js_yearly();
+
+        $data    = array();
+        $enroll  = array();
+        $inquire = array();
+
+        if(COUNT($list) > 0){
+            foreach ($list as $key => $row) {
+                $enroll[] = (int)$row['total'];
+            }
+        }else{
+            $enroll = array(0,0);
+        }
         
-       // $query = $this->db->query('SELECT id, status  FROM applicant WHERE created_at BETWEEN subdate(curdate(),dayofweek(curdate())+5) AND subdate(curdate(),dayofweek(curdate())-1)');
-       // $this->db->where("created_at >= DATE_SUB(NOW(),INTERVAL 1 HOUR)", NULL, FALSE);
-       // $data = $query->result();
-        
- 
-        echo "<pre>";
-        print_r($data);
+        $data['result'] = $enroll;
 
-        // foreach ($data as $key => $value) {
-        //            echo "<pre>";
-        //             print_r($value);
-        //         if($value['created_at'] === $monday){
-                 
-        //         }
-        // }
 
- 
-        // return $today;
+        $data['title']      = "TLC WETALK (".date("Y")." Yearly Results)";
+        echo json_encode($data);
     }
 
     public function password_reset(){
