@@ -17,14 +17,17 @@ class Dashboard extends CI_Controller {
             redirect('login', 'refresh');
             die();
         }else{
+
+            $this->load->model("Dashboard_model");
+            $data['services'] = $this->Dashboard_model->services();
             $this->load->view('template/header');
-            $this->load->view('dashboard/dashboard');
+            $this->load->view('dashboard/dashboard', $data);
         }	
     }
 
-    public function chart_js_months(){
+    public function chart_js_months($selected){
         $this->load->model("Dashboard_model");
-        $list    = $this->Dashboard_model->chart_js_data();
+        $list    = $this->Dashboard_model->chart_js_data($selected);
         $data    = array();
         $enroll  = array();
         $inquire = array();
@@ -210,7 +213,7 @@ class Dashboard extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function chart_js_weeks(){
+    public function chart_js_weeks($selected){
         // $list    = $this->Dashboard_model->chart_js_weeks();
         $monday     = date( 'Y-m-d', strtotime( 'monday this week' ) );
         $tuesday    = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
@@ -227,6 +230,9 @@ class Dashboard extends CI_Controller {
            
             $monday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
             $monday_data = $this->db->from('applicant');
+            if($selected !== "All"){
+            $this->db->where("service_id", $selected);
+            }
             $monday_data = $this->db->where("DATE(created_at)" , DATE($monday));
             $monday_data = $this->db->group_by(array("Days" , "status")); 
             $monday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
@@ -274,6 +280,9 @@ class Dashboard extends CI_Controller {
         if($tuesday){
             $tuesday_data = $this->db->select('COUNT(id) as total ,status, DAYNAME(created_at) as Days');
             $tuesday_data = $this->db->from('applicant');
+            if($selected !== "All"){
+            $this->db->where("service_id", $selected);
+            }
             $tuesday_data = $this->db->where("DATE(created_at)" , DATE($tuesday));
             $tuesday_data = $this->db->group_by(array("Days" , "status")); 
             $tuesday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
@@ -313,12 +322,12 @@ class Dashboard extends CI_Controller {
             }
         }
 
-   
-       
-
         if($wednesday){
             $wednesday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
             $wednesday_data = $this->db->from('applicant');
+            if($selected !== "All"){
+            $this->db->where("service_id", $selected);
+            }
             $wednesday_data = $this->db->where("DATE(created_at)" , DATE($wednesday));
             $wednesday_data = $this->db->group_by(array("Days" , "status")); 
             $wednesday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
@@ -365,6 +374,9 @@ class Dashboard extends CI_Controller {
         if($thursday){
             $thursday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
             $thursday_data = $this->db->from('applicant');
+            if($selected !== "All"){
+            $this->db->where("service_id", $selected);
+            }
             $thursday_data = $this->db->where("DATE(created_at)" , DATE($thursday));
             $thursday_data = $this->db->group_by(array("Days" , "status")); 
             $thursday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
@@ -407,6 +419,9 @@ class Dashboard extends CI_Controller {
         if($friday){
             $friday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
             $friday_data = $this->db->from('applicant');
+            if($selected !== "All"){
+            $this->db->where("service_id", $selected);
+            }
             $friday_data = $this->db->where("DATE(created_at)" , DATE($friday));
             $friday_data = $this->db->group_by(array("Days" , "status")); 
             $friday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
@@ -449,6 +464,9 @@ class Dashboard extends CI_Controller {
         if($sturday){
             $sturday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
             $sturday_data = $this->db->from('applicant');
+            if($selected !== "All"){
+            $this->db->where("service_id", $selected);
+            }
             $sturday_data = $this->db->where("DATE(created_at)" , DATE($sturday));
             $sturday_data = $this->db->group_by(array("Days" , "status")); 
             $sturday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
@@ -491,6 +509,9 @@ class Dashboard extends CI_Controller {
         if($sunday){
             $sunday_data = $this->db->select('COUNT(id) as total ,status, created_at, DAYNAME(created_at) as Days');
             $sunday_data = $this->db->from('applicant');
+            if($selected !== "All"){
+            $this->db->where("service_id", $selected);
+            }
             $sunday_data = $this->db->where("DATE(created_at)" , DATE($sunday));
             $sunday_data = $this->db->group_by(array("Days" , "status")); 
             $sunday_data = $this->db->order_by("WEEKDAY(created_at)", "asc");
@@ -552,11 +573,11 @@ class Dashboard extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function chart_js_yearly(){
+    public function chart_js_yearly($selected){
 
         $this->load->model("Dashboard_model");
 
-        $list    = $this->Dashboard_model->chart_js_yearly();
+        $list    = $this->Dashboard_model->chart_js_yearly($selected);
 
         $data    = array();
         $enroll  = array();
