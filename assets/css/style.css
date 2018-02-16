@@ -20,7 +20,7 @@ header, main, section, footer, aside {
     display: block;
 }
 body {
-    background: #efefef;
+    background-color:#e8e8e8;
     display: flex;
     min-height: 100vh;
     flex-direction: column;

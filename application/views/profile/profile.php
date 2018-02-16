@@ -117,7 +117,6 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 					<?php else:?>
 						<img class="activator" src="<?php echo base_url('assets/logo/myAvatar.png'); ?>">
 					<?php endif;?>
-					
 				</div>
 				<figure class="profile-picture">
 					<?php if($user_information['user_info'][0]['profile_picture']):?>

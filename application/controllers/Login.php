@@ -45,6 +45,7 @@ class Login extends CI_Controller {
 					'user_mname'	=> $row->middle,
 					'user_email'	=> $row->email,
 					'user_rights'	=> $row->roles,
+					'profile'	 	=> $row->profile_picture,
 					'user_id' 		=> $row->id
 				);
 				$this->session->set_userdata('is_logged_in', $sess_array);
@@ -60,7 +61,8 @@ class Login extends CI_Controller {
 						'user_name' 	=> $row->username,
 						'user_email' 	=> $row->email,
 						'user_full_name'=> $row->name,
-						'user_id' 		=> $row->id
+						'user_id' 		=> $row->id,
+						'profile'	 	=> $row->profile_picture,
 					);
 					$this->session->set_userdata('is_logged_in', $sess_array);
 				}

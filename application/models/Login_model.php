@@ -11,6 +11,7 @@ class Login_model extends CI_Model {
             users.username,
             users.full_name,
             users.email,
+            users.profile_picture,
             users.roles')
         ->from('users')
         ->where("(users.email = '$username' OR users.username = '$username')")
@@ -28,6 +29,7 @@ class Login_model extends CI_Model {
             applicant.id,
             applicant.username,
             applicant.email,
+            applicant.applicant_profile_picture,
             applicant.name')
         ->from('applicant')
         ->where("(applicant.email = '$username' OR applicant.username = '$username')")

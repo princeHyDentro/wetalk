@@ -10,6 +10,9 @@
 /*=====================================================================================
     1. General
 ======================================================================================*/
+main, footer {
+    padding-left: 300px;
+}
 html{
     font-size: 13px;
 }
@@ -129,7 +132,7 @@ nav.top-nav ul li a .notification {
     padding: 0 !important;
 }
 #left-side-nav {
-     top: 64px; 
+     top: 65px; 
     /* overflow: hidden; */
 }
 #horizontal-nav {
