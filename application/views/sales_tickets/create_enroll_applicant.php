@@ -24,6 +24,33 @@ th{
 .dataTables_filter{
     display: none !important;
 }
+.input-field.col label{
+    font-size: 1.3rem;
+}
+.select-wrapper+label{
+    top:-31px;
+}
+select {
+    background-color: transparent;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-radius: 2px;
+    height: 3rem;
+    border-bottom: 1px solid #9e9e9e;
+}
+.input-field div.error {
+    position: relative;
+    top: -1rem;
+    left: 0rem;
+    font-size: 0.8rem;
+    color: red;
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%);
+    font-style: oblique;
+}
 </style>
 
 <?php require_once(realpath(APPPATH.'views/template/head_left_nav.php')); ?>
@@ -36,13 +63,13 @@ th{
                 <div class="panel panel-default">
                     <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
                         <li class="active">
-                            <div class="collapsible-header teal white-text task-list-data active" data-id="{{ $task_group['id']}}">
+                            <div class="collapsible-header white-text task-list-data active" data-id="{{ $task_group['id']}}">
                                 <i class="material-icons more">keyboard_arrow_right</i>
                                 <i class="material-icons less" style="display: none">keyboard_arrow_down</i>
                                 <span class="right">Enroll Applicant List</span>
                             </div>
 
-                            <div class="collapsible-body teal lighten-5" style="display: none;">
+                            <div class="collapsible-body" style="display: none;">
                                 <ul class="collection">
                                     <li>
                                         <div class="row">
@@ -88,35 +115,7 @@ th{
         </div>
     </div>
 </main>
-<style type="text/css">
-   .input-field.col label{
-        font-size: 1.3rem;
-   }
-   .select-wrapper+label{
-        top:-31px;
-   }
-   select {
-        background-color: transparent;
-        width: 100%;
-        padding: 5px;
-        border: none;
-        border-radius: 2px;
-        height: 3rem;
-        border-bottom: 1px solid #9e9e9e;
-    }
-    .input-field div.error {
-        position: relative;
-        top: -1rem;
-        left: 0rem;
-        font-size: 0.8rem;
-        color: red;
-        -webkit-transform: translateY(0%);
-        -ms-transform: translateY(0%);
-        -o-transform: translateY(0%);
-        transform: translateY(0%);
-        font-style: oblique;
-    }
-</style>
+
 <div class="modal fade" id="modal_enroll" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -231,6 +230,7 @@ th{
                             <button class="btn btn-primary " id="btnSave"  type="submit">Save</button>
                             <button class="btn btn-danger modal-action modal-close"  type="button">Cancel</button>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>

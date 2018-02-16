@@ -151,12 +151,12 @@ th{
                 <div class="panel panel-default">
                     <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
                         <li class="active">
-                            <div class="collapsible-header teal white-text task-list-data active" data-id="{{ $task_group['id']}}">
+                            <div class="collapsible-header white-text task-list-data active" data-id="{{ $task_group['id']}}">
                                 <i class="material-icons more">keyboard_arrow_right</i>
                                 <i class="material-icons less" style="display: none">keyboard_arrow_down</i>
                                 <span class="right">Enroll Applicant List</span>
                             </div>
-                            <div class="collapsible-body teal lighten-5" style="display: none;">
+                            <div class="collapsible-body" style="display: none;">
                                 <ul class="collection">
                                     <li>
                                         <div class="row">

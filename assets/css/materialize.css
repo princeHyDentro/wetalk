@@ -3227,7 +3227,7 @@ nav ul a span.badge {
 }
 nav {
     color: #fff;
-    background-color: #ee6e73;
+    background-color: #2e7d32;
     width: 100%;
     height: 56px;
     line-height: 56px
@@ -4486,7 +4486,7 @@ button.btn-floating {
     -webkit-tap-highlight-color: transparent;
     line-height: 1.5;
     padding: 1rem;
-    background-color: #fff;
+    background-color: #2e7d32;
     border-bottom: 1px solid #ddd
 }
 .collapsible-header i {

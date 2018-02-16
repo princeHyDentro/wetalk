@@ -39,7 +39,7 @@ nav .button-collapse{
 ?>
 <header>
     <div class="navbar-fixed">
-        <nav class="top-nav teal darken-1">
+        <nav class="top-nav">
             <div class="container">
                 <div class="nav-wrapper">
                 	<a href="<?php echo base_url('dashboard') ?>" class="page-title">

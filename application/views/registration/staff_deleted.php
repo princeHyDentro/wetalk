@@ -42,7 +42,7 @@ th{
                                 <span class="right">Staff List</span>
                             </div>
 
-                            <div class="collapsible-body teal lighten-5" style="display: none;">
+                            <div class="collapsible-body lighten-5" style="display: none;">
                                 <ul class="collection">
                                     <li>
                                         <div class="row">
