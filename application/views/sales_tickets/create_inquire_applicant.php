@@ -186,7 +186,7 @@ select {
         </div>
     </div>
 </div>
-
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/custom-js/sales_inquire_applicant.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.validate-1-17-0.js'); ?>"></script>

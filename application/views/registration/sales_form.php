@@ -173,5 +173,6 @@ th{
         </div>
     </div>
 </div>
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/custom-js/adding_sales.js'); ?>"></script>

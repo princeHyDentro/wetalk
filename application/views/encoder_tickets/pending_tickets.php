@@ -209,7 +209,7 @@ th{
         top:-31px;
    }
 </style>
-
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/new-js/encoder_tickets.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/button-dropdown.js'); ?>"></script>

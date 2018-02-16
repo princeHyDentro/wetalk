@@ -94,6 +94,7 @@
 </main>
 
 <?php echo base_url('ajax_enrolled_applicant_list_for_encoder');?>
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script>
 var save_method; //for save method string

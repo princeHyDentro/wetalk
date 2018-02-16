@@ -1,21 +1,3 @@
-		<!-- <footer class="page-footer grey lighten-4 black-text " style="padding-top: 0;border-top: 1px solid #ccc;">
-			
-			<div class="footer-copyright black-text ">
-				<div class="container">
-					© 2017 People Management Group
-				</div>
-			</div>
-		</footer> -->
-
-<!-- <footer  class="page-footer grey lighten-4 black-text " style="padding-top: 0;border-top: 1px solid #ccc;" >
-	<div class="container">
-		<div class="text-center">
-			<small>Copyright © We Talk INC 2017</small>
-		</div>
-	</div>
-</footer> -->
-<!-- Scroll to Top Button-->
-
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fa fa-angle-up"></i>
 	</a>

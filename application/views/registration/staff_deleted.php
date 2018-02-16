@@ -36,7 +36,7 @@ th{
 
                     <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
                         <li class="active">
-                            <div class="collapsible-header teal white-text task-list-data active" data-id="{{ $task_group['id']}}">
+                            <div class="collapsible-header white-text task-list-data active" data-id="{{ $task_group['id']}}">
                                 <i class="material-icons more">keyboard_arrow_right</i>
                                 <i class="material-icons less" style="display: none">keyboard_arrow_down</i>
                                 <span class="right">Staff List</span>
@@ -90,5 +90,6 @@ th{
         </div>
     </div>
 </main>
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/new-js/restore_staff.js'); ?>"></script>

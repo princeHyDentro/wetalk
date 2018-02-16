@@ -236,6 +236,8 @@ select {
         </div>
     </div>
 </div>
+
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 
 <script src="<?php echo base_url('assets/custom-js/sales_enroll_applicant.js'); ?>"></script>

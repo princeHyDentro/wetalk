@@ -307,6 +307,7 @@ th{
         </div>
     </div>
 </div>
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/js/button-dropdown.js'); ?>"></script>
 <script src="<?php echo base_url('assets/custom-js/encoder_view_inquire_applicant.js'); ?>"></script>

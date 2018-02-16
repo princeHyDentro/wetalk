@@ -90,7 +90,7 @@
         </div>
     </div>
 </main>
-
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 
 <script>

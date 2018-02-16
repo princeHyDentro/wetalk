@@ -179,6 +179,7 @@ th{
         </div>
     </div>
 </div>
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/js/jquery.validate-1-17-0.js'); ?>"></script>
 <script src="<?php echo base_url('assets/new-js/adding_staff.js'); ?>"></script>

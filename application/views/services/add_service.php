@@ -140,6 +140,7 @@ span.badge.new {
         <button class="modal-action modal-close waves-effect waves-green btn-flat"  type="button">Close</button>
     </div>
 </div>
+<?php require_once(realpath(APPPATH.'views/template/_footer.php')); ?>
 <?php require_once(realpath(APPPATH.'views/template/footer.php')); ?>
 <script src="<?php echo base_url('assets/new-js/add_service.js'); ?>"></script>
 <script>
